@@ -36,3 +36,6 @@ codex-agent-skills/
 - Addy Osmani `agent-skills`: https://github.com/addyosmani/agent-skills
 - Codex plugin manifest scaffold: `.codex-plugin/plugin.json`
 
+## Installation
+
+See [docs/INSTALL.md](docs/INSTALL.md).

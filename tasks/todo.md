@@ -10,4 +10,4 @@
 - [ ] Task 8: Vendor or adapt required skills
 - [ ] Task 9: Add reference checklists and persona adaptation
 - [ ] Task 10: Create throwaway smoke fixtures
-- [ ] Task 11: Decide local installation path
+- [x] Task 11: Decide local installation path

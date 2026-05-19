@@ -273,8 +273,8 @@ Description: Decide whether to add this plugin to `~/.agents/plugins/marketplace
 
 Acceptance criteria:
 
-- [ ] Installation path is documented.
-- [ ] No marketplace entry is added without explicit approval.
+- [x] Installation path is documented.
+- [x] No local `~/.agents/plugins/marketplace.json` entry is added without explicit approval.
 
 Verification:
 
@@ -310,4 +310,3 @@ Estimated scope: S
 - Do we want this as a private plugin only, or eventually publishable?
 - Should the first build copy from local installed skills or clone the upstream repo at a pinned commit?
 - Should the seven entry skills use short names only (`spec`) or namespaced aliases as well (`agent-spec`) to avoid conflicts?
-

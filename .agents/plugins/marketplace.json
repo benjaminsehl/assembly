@@ -1,0 +1,20 @@
+{
+  "name": "codex-agent-skills",
+  "interface": {
+    "displayName": "Codex Agent Skills"
+  },
+  "plugins": [
+    {
+      "name": "codex-agent-skills",
+      "source": {
+        "source": "local",
+        "path": "."
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
