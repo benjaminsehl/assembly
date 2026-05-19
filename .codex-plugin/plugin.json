@@ -1,0 +1,40 @@
+{
+  "name": "codex-agent-skills",
+  "version": "0.1.0",
+  "description": "Load-bearing engineering workflows for Codex, organized around seven small lifecycle entry points.",
+  "author": {
+    "name": "Sai",
+    "email": "",
+    "url": ""
+  },
+  "homepage": "",
+  "repository": "",
+  "license": "UNLICENSED",
+  "keywords": [
+    "codex",
+    "agent-skills",
+    "software-engineering",
+    "workflow"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex Agent Skills",
+    "shortDescription": "Seven disciplined workflows for building, testing, reviewing, and shipping with Codex.",
+    "longDescription": "A Codex-native adaptation of lifecycle-oriented engineering skills. The plugin keeps a small command-like entry surface while loading deeper skills for specs, planning, implementation, testing, review, simplification, and shipping.",
+    "developerName": "Sai",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "",
+    "privacyPolicyURL": "",
+    "termsOfServiceURL": "",
+    "defaultPrompt": [
+      "Use spec to define this feature before coding.",
+      "Use build to implement the next planned slice.",
+      "Use ship to decide whether this change is ready."
+    ],
+    "brandColor": "#2563EB"
+  }
+}
