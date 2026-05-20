@@ -140,10 +140,9 @@ Never:
 - Validation scripts catch missing skills, broken mappings, malformed frontmatter, and accidental entry-skill bloat.
 - A manual smoke test proves each entry skill can be invoked by Codex in a clean project context.
 
-## Open Questions
+## Decisions
 
-- Should this plugin vendor Addy's upstream skills directly, adapt them, or treat the local `/Users/sai/.agents/skills` copies as the starting source?
-- Should `ship` use Codex subagents by default when the user explicitly authorizes parallel agent work, or should it default to a sequential local audit because current Codex instructions restrict subagent use unless requested?
-- Should we add a local marketplace entry immediately, or keep this project as a manually referenced plugin until the first working version is proven?
-- What license should the private plugin use if it includes adapted upstream MIT content?
-
+- The plugin is self-contained: underlying workflow skills are copied into `skills/`.
+- `ship` defaults to local audit and uses subagents only when the user explicitly authorizes parallel agent work.
+- The repo includes marketplace metadata, but no active user-level Codex config entry is edited by the plugin itself.
+- The repo remains private and `UNLICENSED`; upstream MIT license text is preserved for vendored upstream material.

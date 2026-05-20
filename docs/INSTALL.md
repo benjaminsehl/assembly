@@ -1,6 +1,6 @@
 # Install and Use
 
-This plugin is currently a planning scaffold. It can be registered with Codex now, but it will not provide the seven workflow skills until the implementation tasks are complete.
+This plugin can be registered with Codex as a private local marketplace. It provides seven command-like entry skills backed by a self-contained workflow skill library.
 
 ## Register the Marketplace
 
@@ -45,6 +45,12 @@ Use code-simplify on the changed files.
 Use ship to make a go/no-go release decision.
 ```
 
+When a GitHub marketplace copy is already registered and this repo receives updates, refresh it with:
+
+```bash
+codex plugin marketplace upgrade codex-agent-skills
+```
+
 ## Development Loop
 
 While building this plugin:
@@ -54,10 +60,7 @@ cd /Users/sai/codex-agent-skills
 python3 -m json.tool .codex-plugin/plugin.json >/dev/null
 ```
 
-Later validation commands:
-
 ```bash
 python3 scripts/validate_plugin.py
 python3 scripts/validate_skill_graph.py
 ```
-
