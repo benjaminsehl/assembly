@@ -62,7 +62,7 @@ For deterministic project scaffolding from this checkout:
 python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
 
-For a peer project at the repo boundary:
+For a subproject:
 
 ```bash
 python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name" --slug project-name
@@ -73,15 +73,9 @@ For a child project inside an existing project workspace:
 ```bash
 python3 scripts/scaffold_project.py \
   --root /path/to/repo \
-  --parent docs/project \
+  --parent docs \
   --name "Agent Layer" \
   --slug agent-layer
-```
-
-For a project whose code already has its own subdirectory, place the docs there:
-
-```bash
-python3 scripts/scaffold_project.py --root /path/to/repo/ios/Hyper --name "iOS Client"
 ```
 
 When a GitHub marketplace copy is already registered and this repo receives updates, refresh it with:

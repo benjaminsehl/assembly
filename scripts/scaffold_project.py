@@ -281,7 +281,7 @@ Save launch checklists, ship decisions, rollout notes, rollback plans, and post-
 
 Use this folder for nested projects that belong inside this project boundary.
 
-Create a child project here when the work is part of this project and does not have a better co-located code directory. If the child has its own clear code boundary, prefer placing its `docs/project/` beside that code instead.
+Create a child project here when the work needs its own proposal, prototype, build, and release trail.
 """,
     }
 
@@ -316,7 +316,7 @@ def main() -> int:
         "--parent",
         default="",
         help=(
-            "Existing project workspace to nest under, for example docs/project. "
+            "Existing project workspace to nest under, for example docs. "
             "Requires --slug and creates <parent>/projects/<slug>/."
         ),
     )
@@ -343,7 +343,7 @@ def main() -> int:
     elif args.slug.strip():
         project_dir = root / "docs" / "projects" / slug
     else:
-        project_dir = root / "docs" / "project"
+        project_dir = root / "docs"
 
     result: dict[str, object] = write_files(
         template_files(project_name, project_dir, root), root, args.force

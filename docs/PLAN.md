@@ -318,10 +318,11 @@ Estimated scope: S
 - [x] Added `new-project` to scaffold a project workspace and proposal gate.
 - [x] Added `prototype` to create throwaway tangible artifacts before production build.
 - [x] Added `project-status` to answer current phase, missing artifacts, next gate, and next skills.
-- [x] Added `scripts/scaffold_project.py` for deterministic `docs/project/` and `docs/projects/<slug>/` scaffolds.
+- [x] Added `scripts/scaffold_project.py` for deterministic `docs/` and `docs/projects/<slug>/` scaffolds.
 - [x] Added project phase, project kernel, Matt Pocock skills, and Hyper retrofit references.
 - [x] Extended validators, command contract, install docs, smoke tests, source notes, and manifest metadata.
-- [x] Clarified recursive projects, co-located docs, child project scaffolds, and Chesterton's fence paper-trail expectations.
+- [x] Clarified recursive projects, root `docs/` as the project workspace, child project scaffolds, and Chesterton's fence paper-trail expectations.
+- [x] Simplified the scaffold convention from `docs/project/` to root `docs/` and updated the README into a user guide.
 
 ## Decisions
 

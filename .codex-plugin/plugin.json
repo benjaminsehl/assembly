@@ -1,6 +1,6 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A personal product-building operating system for Codex, spanning project setup, product discovery, prototypes, business viability, design, engineering, QA, and launch.",
   "author": {
     "name": "Sai",
@@ -20,6 +20,7 @@
     "business-model",
     "project-lifecycle",
     "prototype",
+    "app-factory",
     "workflow"
   ],
   "skills": "./skills/",

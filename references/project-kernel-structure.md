@@ -1,17 +1,17 @@
-# Project Kernel Structure
+# Project Docs Structure
 
 This is a project-focused adaptation of the agent-kernel idea: small, inspectable markdown files that let a future agent restart with less drift. It is not a long-running-agent memory system.
 
-Projects are recursive. A whole repo can be a project, and a client, agent layer, release, or feature inside it can also be a project with its own proposal, prototype, build, and release trail.
+Projects are recursive. A whole repo can be a project, and an agent layer, native client, release, or feature inside it can also be a project with its own proposal, prototype, build, and release trail.
 
-Keep docs co-located with the closest sensible project boundary. The point is Chesterton's fence: future work should find the original reasoning before changing or removing a structure.
+Use one root docs tree. The point is Chesterton's fence: future work should find the original reasoning before changing or removing a structure.
 
-## Default Root Project
+## Root Project
 
-Use this shape for a single-purpose repo:
+Use this shape for the main project in a repo:
 
 ```text
-docs/project/
+docs/
 |-- README.md
 |-- status.md
 |-- phases/
@@ -32,45 +32,38 @@ docs/project/
 |   `-- README.md
 |-- prototypes/
 |   `-- README.md
-|-- projects/
-|   `-- README.md
 |-- research/
 |   `-- README.md
 |-- qa/
 |   `-- README.md
-`-- release/
+|-- release/
+|   `-- README.md
+`-- projects/
     `-- README.md
 ```
 
 ## Subprojects
 
-If the subproject has its own code boundary, scaffold inside that boundary:
-
-```text
-repo/
-`-- ios/Hyper/
-    `-- docs/project/
-        `-- same files as docs/project/
-```
-
-If the subproject belongs inside an existing project and does not have a clearer code directory, nest it under that project's `projects/` folder:
-
-```text
-docs/project/projects/<project-slug>/
-`-- same files as docs/project/
-```
-
-The older flat form is still acceptable for peer projects at the repo boundary:
+Use this shape for a subproject:
 
 ```text
 docs/projects/<project-slug>/
-`-- same files as docs/project/
+`-- same files as docs/
 ```
+
+Use this shape for a nested subproject:
+
+```text
+docs/projects/<parent-slug>/projects/<child-slug>/
+`-- same files as docs/
+```
+
+Prefer a single root `docs/` tree over package-level docs. Only use a different docs root when the work is genuinely in a different repo or the user explicitly chooses that boundary.
 
 ## What Belongs Where
 
 - `status.md`: current phase, evidence, next gate, next skills, and one next action.
-- `phases/proposal.md`: outcomes, assumptions, principles, risks, and what good looks like.
+- `phases/proposal.md`: outcomes, assumptions, principles, risks, existing constraints, and what good looks like.
 - `phases/prototype.md`: prototype question, artifacts, findings, and verdict.
 - `phases/build.md`: approved direction, slices, acceptance criteria, verification, and risks.
 - `phases/release.md`: QA, polish, ship decision, grading, and follow-up work.
@@ -87,32 +80,30 @@ docs/projects/<project-slug>/
 
 ## Scaffold Command
 
-Root project in a repo or code boundary:
+Root project:
 
 ```bash
 python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
 
-Peer project at the repo boundary:
-
-```bash
-python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name" --slug project-name
-```
-
-Child project inside an existing project workspace:
+Subproject:
 
 ```bash
 python3 scripts/scaffold_project.py \
   --root /path/to/repo \
-  --parent docs/project \
+  --parent docs \
   --name "Agent Layer" \
   --slug agent-layer
 ```
 
-Co-located project inside a code subdirectory:
+Nested subproject:
 
 ```bash
-python3 scripts/scaffold_project.py --root /path/to/repo/ios/Hyper --name "iOS Client"
+python3 scripts/scaffold_project.py \
+  --root /path/to/repo \
+  --parent docs/projects/agent-layer \
+  --name "Agent Evals" \
+  --slug evals
 ```
 
 The script skips existing files by default. Use `--force` only when intentionally regenerating scaffold files.

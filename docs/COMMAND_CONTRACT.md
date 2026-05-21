@@ -577,7 +577,7 @@ Stop conditions:
 
 ## `new-project`
 
-Purpose: Scaffold a resumable, co-located project workspace and proposal gate for a new project, subproject, or major project slice.
+Purpose: Scaffold a resumable project-docs workspace and proposal gate for a new project, subproject, or major project slice.
 
 Triggers:
 
@@ -590,7 +590,7 @@ Triggers:
 Inputs:
 
 - Project name or working title
-- Target repo, nearest project boundary, and whether this is whole-repo work or a subproject slice
+- Target repo and whether this is root-project work or a subproject slice
 - Raw idea, desired outcomes, or existing notes
 
 Underlying skills:
@@ -604,7 +604,7 @@ Underlying skills:
 
 Required outputs:
 
-- Project workspace under `docs/project/`, `docs/projects/<slug>/`, or a parent project's `projects/<slug>/`
+- Project workspace under `docs/`, `docs/projects/<slug>/`, or a parent project's `projects/<slug>/`
 - Proposal, prototype, build, and release phase files
 - Product vision, principles, decisions, tech-design, specs, plans, prototypes, QA, and release folders
 - Child `projects/` folder for nested project paper trails
@@ -669,7 +669,7 @@ Triggers:
 
 Inputs:
 
-- Repo, nearest project boundary, or project folder
+- Repo, project folder, or subproject folder
 - Status files, phase docs, specs, plans, decisions, open tasks, recent commits, and notes
 
 Underlying skills:

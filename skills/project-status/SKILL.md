@@ -23,8 +23,8 @@ Orient a returning session. Determine which project or subproject is active, whe
 
 ## Workflow
 
-1. State that `project-status` is active and identify the repo, nearest code boundary, and project folder being assessed.
-2. Inspect co-located project workspaces first: `docs/project/status.md`, `docs/projects/*/status.md`, nested `projects/*/status.md`, phase files, `docs/plans`, `docs/specs`, ADRs, open tasks, recent commits, and relevant `.agents` notes.
+1. State that `project-status` is active and identify the repo plus the project or subproject folder being assessed.
+2. Inspect the root docs tree first: `docs/status.md`, `docs/projects/*/status.md`, nested `projects/*/status.md`, phase files, `docs/plans`, `docs/specs`, ADRs, open tasks, recent commits, and relevant `.agents` notes.
 3. Read `references/project-phases.md` for phase gates and `references/hyper-project-notes.md` when retrofitting a scattered project like Hyper.
 4. Use `context-engineering` to map the current artifacts and avoid re-reading unrelated docs.
 5. Apply Chesterton's fence: before recommending removal or replacement, identify the decision, principle, or historical artifact that explains why the current shape exists.

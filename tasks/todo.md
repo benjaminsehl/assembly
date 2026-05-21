@@ -19,4 +19,5 @@
 - [x] Task 17: Add project lifecycle entry skills for new-project, prototype, and project-status
 - [x] Task 18: Add deterministic project scaffold script and project lifecycle references
 - [x] Task 19: Update validators, docs, source notes, and smoke tests for the personal project stack
-- [x] Task 20: Support recursive projects, co-located docs, child project scaffolds, and decision paper trails
+- [x] Task 20: Support recursive projects, root docs, child project scaffolds, and decision paper trails
+- [x] Task 21: Simplify project docs convention to root `docs/` and expand README user guide
