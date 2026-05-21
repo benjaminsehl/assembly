@@ -9,9 +9,11 @@ Each entry skill must stay small. It may route, sequence, enforce gates, and sum
 Every entry skill must:
 
 - Name the active workflow and the reason it applies.
+- Identify the current project phase when project docs are available.
 - Load the smallest relevant context before acting.
 - Prefer existing project conventions over generic process.
 - Produce evidence, not vibes.
+- Warn when the user asks to skip missing phase prerequisites, recommend the right double-back skill, and record skipped gates if the user insists.
 - Stop and ask when the next step would cross an `Ask first` boundary in `docs/SPEC.md`.
 
 Every entry skill must not:
@@ -19,7 +21,10 @@ Every entry skill must not:
 - Invent project commands that are not in the target repo.
 - Mark work complete without verification evidence.
 - Hide failures or skipped checks.
+- Overwrite an existing `AGENTS.md` while scaffolding.
 - Continue into a different lifecycle phase unless the user asked for that phase.
+
+If a prompt is unclear, the entry skill should state the inferred task, current phase, and recommended next skill, then ask a concise verification question before acting.
 
 ## `spec`
 
@@ -608,6 +613,8 @@ Required outputs:
 - Proposal, prototype, build, and release phase files
 - Product vision, principles, decisions, tech-design, specs, plans, prototypes, QA, and release folders
 - Child `projects/` folder for nested project paper trails
+- `docs/agent-guidance.md`
+- Root `AGENTS.md` when absent, or a manual-merge notice when it already exists
 - Initial status file with current phase and next recommended skills
 - Open questions where alignment is missing
 
@@ -690,6 +697,7 @@ Required outputs:
 - Evidence for the phase verdict
 - Historical decisions or principles that explain the current shape
 - Missing required artifacts
+- Missing phase prerequisites and skipped-gate risks
 - Next decision gate
 - Next recommended skills
 - One concrete next action

@@ -53,6 +53,7 @@ The underlying skills remain separate so the entry surface stays small and the d
 
 The following files are original to this Codex adaptation:
 
+- `AGENTS.md`
 - `.codex-plugin/plugin.json`
 - `.agents/plugins/marketplace.json`
 - `skills/spec/SKILL.md`
@@ -88,6 +89,8 @@ The following files are original to this Codex adaptation:
 - `references/project-kernel-structure.md`
 - `references/matt-pocock-skills-notes.md`
 - `references/hyper-project-notes.md`
+- `references/agent-operating-protocol.md`
+- `templates/AGENTS.md`
 
 ## Public License
 

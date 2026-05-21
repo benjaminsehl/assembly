@@ -10,6 +10,9 @@ from datetime import date
 from pathlib import Path
 
 
+PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+
+
 def slugify(value: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
     return slug or "project"
@@ -38,7 +41,19 @@ def resolve_parent_project(value: str, root: Path) -> Path:
     return parent
 
 
-def template_files(project_name: str, project_dir: Path, root: Path) -> dict[Path, str]:
+def load_required_text(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        raise SystemExit(f"Required scaffold template is missing: {path}")
+
+
+def template_files(
+    project_name: str,
+    project_dir: Path,
+    root: Path,
+    protocol_text: str,
+) -> dict[Path, str]:
     today = date.today().isoformat()
     status_path = rel(project_dir / "status.md", root)
 
@@ -54,6 +69,7 @@ Start here:
 - Decisions: `decisions/`
 - Product vision: `product/vision.md`
 - Tech design: `tech-design/`
+- Agent guidance: `agent-guidance.md`
 - Child projects: `projects/`
 """,
         project_dir / "status.md": f"""# Project Status: {project_name}
@@ -81,6 +97,7 @@ Current phase: proposal
 - What does good look like at release?
 - Which assumptions are riskiest?
 """,
+        project_dir / "agent-guidance.md": protocol_text,
         project_dir / "phases" / "proposal.md": """# Proposal Phase
 
 ## What Becomes 10x Better
@@ -335,6 +352,8 @@ def main() -> int:
 
     project_name = args.name.strip() or args.slug.strip() or "Project"
     slug = slugify(args.slug.strip() or project_name)
+    protocol_text = load_required_text(PLUGIN_ROOT / "references" / "agent-operating-protocol.md")
+    agents_template = load_required_text(PLUGIN_ROOT / "templates" / "AGENTS.md")
     if args.parent.strip():
         if not args.slug.strip():
             raise SystemExit("--parent requires --slug so the child project has a stable path")
@@ -345,11 +364,22 @@ def main() -> int:
     else:
         project_dir = root / "docs"
 
+    files = template_files(project_name, project_dir, root, protocol_text)
+    agents_path = root / "AGENTS.md"
+    agents_exists = agents_path.exists()
+    if not agents_exists:
+        files[agents_path] = agents_template
+
     result: dict[str, object] = write_files(
-        template_files(project_name, project_dir, root), root, args.force
+        files, root, args.force
     )
     result["project_dir"] = rel(project_dir, root)
     result["name"] = project_name
+    if agents_exists:
+        result["skipped"].append("AGENTS.md")
+        result["manual_merge"] = [
+            "AGENTS.md already exists; merge templates/AGENTS.md manually if needed."
+        ]
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 

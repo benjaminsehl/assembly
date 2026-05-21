@@ -42,6 +42,8 @@ Projects are recursive. A repo can be a project, and clients, agent layers, rele
 
 Docs should live in one obvious root `docs/` tree. Its default shape is `docs/` for the root project, `docs/projects/<slug>/` for subprojects, and `docs/projects/<parent>/projects/<slug>/` for nested subprojects. This preserves a paper trail so future agents can respect Chesterton's fence before replacing decisions they do not yet understand.
 
+Agent behavior is part of the product. New projects should receive root `AGENTS.md` instructions when safe, plus `docs/agent-guidance.md` copied from the canonical protocol. The protocol requires phase detection, skill routing, warning on missing prerequisites, and proceeding after user insistence only when hard safety boundaries are not crossed.
+
 ## Tech Stack
 
 - Codex local plugin manifest: `.codex-plugin/plugin.json`
@@ -82,6 +84,7 @@ skills/<entry>/SKILL.md         # Command-like orchestrator skills
 skills/<workflow>/SKILL.md      # Underlying reusable workflow skills
 skills/<persona>/SKILL.md       # Optional reviewer personas, if Codex skill shape is the right fit
 references/*.md                 # Checklists loaded only when needed
+templates/AGENTS.md             # Downstream project agent-instructions template
 scripts/scaffold_project.py     # Deterministic project workspace scaffold
 scripts/validate_plugin.py      # Shape validation
 scripts/validate_skill_graph.py # Orchestrator mapping validation
@@ -164,6 +167,7 @@ Never:
 - Product/company entry skills exist and route to the correct deeper workflows.
 - Project lifecycle entry skills exist for scaffolding, prototyping, and status orientation.
 - `scripts/scaffold_project.py` can create `docs/`, `docs/projects/<slug>/`, or nested child project workspaces without overwriting existing files by default.
+- New scaffolds include `docs/agent-guidance.md` and create root `AGENTS.md` only when one does not already exist.
 - The underlying skills needed by those entry points are present in the plugin.
 - Validation scripts catch missing skills, broken mappings, malformed frontmatter, and accidental entry-skill bloat.
 - A manual smoke test proves each entry skill can be invoked by Codex in a clean project context.
@@ -176,3 +180,4 @@ Never:
 - The repo is public and MIT licensed; upstream MIT attribution is preserved for vendored upstream material.
 - GStack is cited as methodology inspiration only; no GStack code is vendored in this pass.
 - Matt Pocock's `skills` and `agent-kernel` are cited as methodology and structure inspiration only; new project lifecycle skills are original Codex-native adaptations.
+- Root `AGENTS.md`, `templates/AGENTS.md`, and `references/agent-operating-protocol.md` are load-bearing guidance surfaces for the phase-aware workflow.

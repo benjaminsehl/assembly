@@ -28,10 +28,12 @@ Create a lightweight project workspace in the repo's `docs/` tree that keeps pro
 6. Treat projects as recursive: a repo can be a project, and features, clients, agent layers, or releases inside it can be subprojects.
 7. Preserve the paper trail for Chesterton's fence: record why decisions exist before changing or removing them.
 8. Read `references/project-phases.md` and `references/project-kernel-structure.md` for the phase model and folder contract.
-9. Run `scripts/scaffold_project.py` from this plugin when a deterministic scaffold is useful, passing the target root, project name, slug, and optional parent project workspace.
-10. Fill the proposal phase with known outcomes, assumptions, principles, and what should become 10x better.
-11. Save unknowns as explicit open questions instead of pretending alignment exists.
-12. Recommend the next skill: usually `product-discovery`, `spec`, `prototype`, or `plan`.
+9. Read `references/agent-operating-protocol.md` when the project needs agent behavior guidance.
+10. Run `scripts/scaffold_project.py` from this plugin when a deterministic scaffold is useful, passing the target root, project name, slug, and optional parent project workspace.
+11. If `AGENTS.md` already exists and the scaffold skips it, tell the user to merge `templates/AGENTS.md` manually instead of overwriting local instructions.
+12. Fill the proposal phase with known outcomes, assumptions, principles, and what should become 10x better.
+13. Save unknowns as explicit open questions instead of pretending alignment exists.
+14. Recommend the next skill: usually `product-discovery`, `spec`, `prototype`, or `plan`.
 
 ## Verification
 
@@ -39,6 +41,7 @@ Create a lightweight project workspace in the repo's `docs/` tree that keeps pro
 - Proposal, prototype, build, and release phase files exist.
 - Product vision, decisions, tech design, specs, plans, QA, and release folders exist.
 - A child `projects/` folder exists so subprojects can carry their own paper trail.
+- `docs/agent-guidance.md` exists, and root `AGENTS.md` exists or was explicitly skipped for manual merge.
 - Current phase and next recommended skills are visible in project status.
 
 ## Stop Conditions

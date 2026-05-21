@@ -62,6 +62,8 @@ For deterministic project scaffolding from this checkout:
 python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
 
+This creates `docs/agent-guidance.md` from the canonical protocol and creates root `AGENTS.md` from `templates/AGENTS.md` only when the target repo does not already have one.
+
 For a subproject:
 
 ```bash
@@ -77,6 +79,8 @@ python3 scripts/scaffold_project.py \
   --name "Agent Layer" \
   --slug agent-layer
 ```
+
+If `AGENTS.md` already exists, the scaffold reports a manual merge notice instead of overwriting it. Review `templates/AGENTS.md` and merge the phase-aware protocol into the existing project instructions by hand.
 
 When a GitHub marketplace copy is already registered and this repo receives updates, refresh it with:
 

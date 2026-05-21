@@ -34,9 +34,11 @@ The root project workspace is `docs/`. Subprojects live under `docs/projects/<sl
 
 ```text
 my-app/
+|-- AGENTS.md
 |-- README.md
 |-- docs/
 |   |-- README.md
+|   |-- agent-guidance.md
 |   |-- status.md
 |   |-- phases/
 |   |   |-- proposal.md
@@ -78,9 +80,23 @@ my-app/
 Why this shape:
 
 - Agents get one obvious place to start: `docs/status.md`.
+- Agents get operating rules in `AGENTS.md` and `docs/agent-guidance.md`.
 - Project reasoning is centralized instead of scattered across package folders.
 - Subprojects still get their own paper trail.
 - Chesterton's fence is visible: before changing something important, inspect nearby decisions, principles, plans, and phase notes.
+
+## How Agents Should Work Through A Project
+
+Agents should not jump straight into implementation unless the project is already in the right phase with the right context.
+
+1. Read `docs/status.md` and the nearest matching subproject status.
+2. Identify the current phase: proposal, prototype, build, or release.
+3. Choose the matching skill from the phase table below.
+4. If the prompt is unclear, state the inferred task and verify before acting.
+5. If the prompt is clear but phase prerequisites are missing, warn once and recommend the right double-back skill.
+6. If the user insists, proceed while naming the skipped gate and risk. Do not override privacy, destructive-operation, credential, money-movement, external-message, or explicit-confirmation boundaries.
+
+The canonical version of this protocol lives in `references/agent-operating-protocol.md`. New projects receive a copy at `docs/agent-guidance.md`.
 
 ## The Workflow
 
@@ -128,6 +144,8 @@ python3 scripts/scaffold_project.py \
 ```
 
 The script skips existing files by default. Use `--force` only when intentionally regenerating scaffold files.
+
+If the target repo already has `AGENTS.md`, the scaffold will not overwrite it. Merge `templates/AGENTS.md` manually when you want the project to adopt the phase-aware protocol.
 
 ## Toward An App Factory
 

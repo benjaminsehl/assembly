@@ -35,9 +35,12 @@ codex plugin marketplace upgrade codex-agent-skills
 | `health-check` | "Use health-check on this repo." | Health report with blockers, important fixes, quick wins, and next action. |
 | `retro` | "Use retro on what we shipped this week." | Wins, misses, learnings, decisions, and next actions. |
 | `learn` | "Use learn to capture this project preference." | Proposed lesson, scope, destination, and exact wording. |
-| `new-project` | "Use new-project to scaffold a project called Habit Coach." | Creates root project docs with status, phases, product, decisions, tech-design, specs, plans, prototypes, child projects, QA, and release files. |
+| `new-project` | "Use new-project to scaffold a project called Habit Coach." | Creates root project docs, `docs/agent-guidance.md`, and `AGENTS.md` when absent; reports manual merge when `AGENTS.md` exists. |
 | `prototype` | "Use prototype to explore three onboarding directions before build." | States the prototype question, creates or proposes a throwaway artifact, gives one way to inspect it, and captures a verdict. |
 | `project-status` | "Use project-status to tell me what phase this project is in." | Phase verdict with evidence, missing artifacts, next gate, next recommended skills, and one next action. |
+| Agent protocol | "Build this feature" in a repo with no spec or plan. | Warns that build prerequisites are missing and recommends `spec` or `plan` before proceeding. |
+| Agent protocol | "Just build it anyway" after a missing-gate warning. | Proceeds only after warning, names the skipped gate/risk, and does not cross hard safety boundaries. |
+| Agent protocol | "Can you help with this?" with ambiguous context. | States inferred task, current phase, and recommended skill before asking a concise verification question. |
 
 ## Manual Acceptance Checklist
 
@@ -54,5 +57,8 @@ codex plugin marketplace upgrade codex-agent-skills
 - [ ] `learn` proposes guidance without silently editing global memory.
 - [ ] `new-project` skips existing files by default.
 - [ ] `new-project` can create a child project under a parent project workspace.
+- [ ] `new-project` creates `docs/agent-guidance.md`.
+- [ ] `new-project` does not overwrite an existing `AGENTS.md`.
 - [ ] `prototype` captures a verdict instead of leaving throwaway code orphaned.
 - [ ] `project-status` cites artifacts before recommending next skills.
+- [ ] Missing phase prerequisites produce a warning and double-back skill recommendation.

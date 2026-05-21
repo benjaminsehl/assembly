@@ -71,6 +71,7 @@ REQUIRED_REFERENCES = {
     "project-kernel-structure.md",
     "matt-pocock-skills-notes.md",
     "hyper-project-notes.md",
+    "agent-operating-protocol.md",
 }
 REQUIRED_PERSONAS = {
     "code-reviewer.md",
@@ -244,6 +245,11 @@ def validate_support_files() -> None:
     scaffold_script = ROOT / "scripts" / "scaffold_project.py"
     if not scaffold_script.is_file():
         fail("Missing required scaffold script: scripts/scaffold_project.py")
+
+    if not (ROOT / "AGENTS.md").is_file():
+        fail("Missing required root agent guidance: AGENTS.md")
+    if not (ROOT / "templates" / "AGENTS.md").is_file():
+        fail("Missing required downstream agent template: templates/AGENTS.md")
 
 
 def main() -> int:

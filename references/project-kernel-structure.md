@@ -11,8 +11,10 @@ Use one root docs tree. The point is Chesterton's fence: future work should find
 Use this shape for the main project in a repo:
 
 ```text
+AGENTS.md
 docs/
 |-- README.md
+|-- agent-guidance.md
 |-- status.md
 |-- phases/
 |   |-- proposal.md
@@ -63,6 +65,7 @@ Prefer a single root `docs/` tree over package-level docs. Only use a different 
 ## What Belongs Where
 
 - `status.md`: current phase, evidence, next gate, next skills, and one next action.
+- `agent-guidance.md`: project-visible copy of the phase-aware agent operating protocol.
 - `phases/proposal.md`: outcomes, assumptions, principles, risks, existing constraints, and what good looks like.
 - `phases/prototype.md`: prototype question, artifacts, findings, and verdict.
 - `phases/build.md`: approved direction, slices, acceptance criteria, verification, and risks.
@@ -85,6 +88,8 @@ Root project:
 ```bash
 python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
+
+This creates `AGENTS.md` only when it does not already exist. Existing project instructions must be merged manually.
 
 Subproject:
 
