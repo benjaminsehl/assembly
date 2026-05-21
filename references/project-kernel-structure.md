@@ -2,6 +2,13 @@
 
 This is a project-focused adaptation of the agent-kernel idea: small, inspectable markdown files that let a future agent restart with less drift. It is not a long-running-agent memory system.
 
+## Contents
+
+- Root project
+- Subprojects
+- What belongs where
+- Why root docs
+
 Projects are recursive. A whole repo can be a project, and an agent layer, native client, release, or feature inside it can also be a project with its own proposal, prototype, build, and release trail.
 
 Use one root docs tree. The point is Chesterton's fence: future work should find the original reasoning before changing or removing a structure.

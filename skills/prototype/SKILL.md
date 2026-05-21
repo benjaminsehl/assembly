@@ -9,25 +9,25 @@ description: Use when a project needs a throwaway tangible artifact before build
 
 Answer a risky product, UX, technical, or business question with the smallest tangible artifact that lets the user feel or inspect the direction before production build work.
 
-## Underlying skills
+## References
 
-- `idea-refine`
-- `frontend-ui-engineering`
-- `business-model-evaluation`
-- `documentation-and-adrs`
+- `references/design-quality-checklist.md`: UI quality and AI-slop checks.
+- `references/business-model-checklist.md`: pricing, offer, or demand-test prototypes.
+- `references/workflows/product-strategy.md`: prototype and design-plan modes.
+- `references/project-phases.md`: prototype phase evidence and exit gate.
 
 ## Workflow
 
 1. State that `prototype` is active and write the exact question the prototype must answer.
-2. Use `idea-refine` to narrow the prototype to one learning goal.
+2. Narrow the prototype to one learning goal.
 3. Choose the branch:
    - Product or UI feel: build a small interactive UI or several sharply different variants.
    - Logic, state, or workflow: build a minimal runnable model that exposes state after each action.
-   - Business or pricing: use `business-model-evaluation` to create a testable offer, landing copy, pricing strawman, or validation script.
+   - Business or pricing: create a testable offer, landing copy, pricing strawman, or validation script.
 4. Keep prototype code obviously temporary, close to the relevant app surface or under the project `prototypes/` folder.
 5. Provide one command or URL to run it.
 6. Avoid persistence unless persistence is the question; use scratch data when needed.
-7. Capture the verdict in the project prototype phase file, an ADR, or a short note through `documentation-and-adrs`.
+7. Capture the verdict in the project prototype phase file, an ADR, or a short project note.
 8. Recommend delete, absorb into build, or continue prototyping.
 
 ## Verification

@@ -19,5 +19,5 @@ Use these ideas as methodology inspiration, not copied runtime behavior.
 
 - `prototype` adapts the throwaway-question pattern into the four-phase project lifecycle.
 - `project-status` covers much of the "handoff" and "zoom out" need by identifying phase, evidence, missing artifacts, and next skills.
-- `new-project` uses the documentation discipline from grill-with-docs but stores it in a project workspace rather than a single `CONTEXT.md`.
-- Existing `learn`, `retro`, and `documentation-and-adrs` keep durable lessons and decisions from becoming scattered notes.
+- `project-status` scaffold mode uses the documentation discipline from grill-with-docs but stores it in a project workspace rather than a single `CONTEXT.md`.
+- Project lifecycle references keep durable lessons and decisions from becoming scattered notes without exposing separate `learn` or `retro` skills.

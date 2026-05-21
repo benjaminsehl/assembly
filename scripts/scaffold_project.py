@@ -86,8 +86,6 @@ Current phase: proposal
 ## Next Recommended Skills
 
 - `product-discovery`
-- `founder-review`
-- `business-model-review`
 - `spec`
 
 ## Open Questions

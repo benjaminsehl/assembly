@@ -23,3 +23,5 @@
 - [x] Task 21: Simplify project docs convention to root `docs/` and expand README user guide
 - [x] Task 22: Add phase-aware AGENTS guidance and scaffold support
 - [x] Task 23: Add introspect workflow audit and status repair skill
+- [x] Task 24: Shrink public skill surface and move support workflows to references
+- [x] Task 25: Add user skill conflict guidance and audit script

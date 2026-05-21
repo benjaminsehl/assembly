@@ -2,6 +2,17 @@
 
 Use this protocol at the start of meaningful project work and whenever the user returns after time away.
 
+## Contents
+
+- Orient first
+- Phase prerequisites
+- Skill routing
+- Status escalation
+- Prompt clarity
+- Missing prerequisites
+- Hard boundaries
+- Output expectations
+
 ## Orient First
 
 1. Read `docs/status.md` if it exists.
@@ -42,13 +53,8 @@ Release needs:
 
 ## Skill Routing
 
-- Unknown phase or returning session: use `project-status`.
-- Project shape unclear, missed steps suspected, or recovery needed: use `introspect` after `project-status`.
-- New app, project, or subproject: use `new-project`.
-- Raw idea: use `product-discovery`.
-- Product ambition or scope concern: use `founder-review`.
-- Business viability concern: use `business-model-review`.
-- Planned UI or UX before implementation: use `design-plan-review`.
+- Unknown phase, returning session, scaffold, recovery, retro, or durable project learning: use `project-status`.
+- Raw idea, product ambition, business viability, or planned UX critique: use `product-discovery`.
 - Tangible learning before production build: use `prototype`.
 - Requirements before coding: use `spec`.
 - Task breakdown after spec: use `plan`.
@@ -56,13 +62,12 @@ Release needs:
 - Verification: use `test` or `qa`.
 - Pre-merge quality: use `review` or `code-simplify`.
 - Release decision: use `ship`.
-- After shipping or stopping: use `retro` and `learn`.
 
 ## Status Escalation
 
-`project-status` is the first stop. It should answer the phase and next skill when the paper trail is clear.
+`project-status` is the first stop. It should answer the phase and next skill when the paper trail is clear, and switch into repair mode when it is not.
 
-Escalate to `introspect` when:
+Use repair mode when:
 
 - The current phase is ambiguous.
 - Required artifacts for the apparent phase are missing or contradictory.

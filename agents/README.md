@@ -14,7 +14,7 @@ Three layers, each with a distinct job:
 
 | Layer | What it is | Example | Composition role |
 |-------|-----------|---------|------------------|
-| **Skill** | A workflow with steps and exit criteria | `code-review-and-quality` | The *how* — invoked from inside a persona or command |
+| **Skill** | A workflow with steps and exit criteria | `review` | The *how* — invoked from inside a persona or command |
 | **Persona** | A role with a perspective and an output format | `code-reviewer` | The *who* — adopts a viewpoint, produces a report |
 | **Command** | A user-facing entry point | `/review`, `/ship` | The *when* — composes personas and skills |
 
@@ -33,7 +33,7 @@ Pick this when you want one perspective on the current change and the user is in
 Pick this when there's a repeatable workflow you'd otherwise re-explain every time.
 
 - `/review` → wraps `code-reviewer` with the project's review skill
-- `/test` → wraps `test-engineer` with TDD skill
+- `/test` → wraps `test-engineer` with the plugin's `test` workflow
 
 ### Slash command (orchestrator — fan-out)
 Pick this only when **independent** investigations can run in parallel and produce reports that a single agent then merges.

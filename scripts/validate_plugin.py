@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENTRY_SKILLS = {
+PUBLIC_SKILLS = {
     "spec",
     "plan",
     "build",
@@ -19,45 +19,9 @@ ENTRY_SKILLS = {
     "code-simplify",
     "ship",
     "product-discovery",
-    "founder-review",
-    "business-model-review",
-    "design-plan-review",
     "qa",
-    "health-check",
-    "retro",
-    "learn",
-    "new-project",
     "prototype",
     "project-status",
-    "introspect",
-}
-LIBRARY_SKILLS = {
-    "using-agent-skills",
-    "interview-me",
-    "idea-refine",
-    "spec-driven-development",
-    "planning-and-task-breakdown",
-    "incremental-implementation",
-    "test-driven-development",
-    "context-engineering",
-    "source-driven-development",
-    "doubt-driven-development",
-    "frontend-ui-engineering",
-    "api-and-interface-design",
-    "browser-testing-with-devtools",
-    "debugging-and-error-recovery",
-    "code-review-and-quality",
-    "code-simplification",
-    "security-and-hardening",
-    "performance-optimization",
-    "git-workflow-and-versioning",
-    "ci-cd-and-automation",
-    "deprecation-and-migration",
-    "documentation-and-adrs",
-    "shipping-and-launch",
-    "founder-product-critique",
-    "business-model-evaluation",
-    "live-qa-methodology",
 }
 REQUIRED_REFERENCES = {
     "accessibility-checklist.md",
@@ -73,6 +37,10 @@ REQUIRED_REFERENCES = {
     "matt-pocock-skills-notes.md",
     "hyper-project-notes.md",
     "agent-operating-protocol.md",
+    "workflows/project-lifecycle.md",
+    "workflows/product-strategy.md",
+    "workflows/engineering-delivery.md",
+    "workflows/qa-and-release.md",
 }
 REQUIRED_PERSONAS = {
     "code-reviewer.md",
@@ -194,19 +162,22 @@ def validate_skill(path: Path) -> None:
     description = metadata.get("description", "")
     if not description or len(description) < 30:
         fail(f"{rel} must include a useful description")
+    if len(description.split()) > 45:
+        fail(f"{rel} description is too broad; keep trigger text concise")
     if "[TODO" in body or "[TODO" in description:
         fail(f"{rel} contains unresolved TODO placeholder text")
     if len(body.split()) < 25:
         fail(f"{rel} body is too short to be a useful workflow")
 
-    if skill_dir in ENTRY_SKILLS:
-        for heading in ("## Purpose", "## Workflow", "## Verification"):
-            if heading not in body:
-                fail(f"{rel} entry skill is missing {heading}")
-        if "## Stop Conditions" not in body:
-            fail(f"{rel} entry skill is missing ## Stop Conditions")
-        if len(body.splitlines()) > 180:
-            fail(f"{rel} entry skill is too large; keep command skills thin")
+    for heading in ("## Purpose", "## References", "## Workflow", "## Verification"):
+        if heading not in body:
+            fail(f"{rel} public skill is missing {heading}")
+    if "## Stop Conditions" not in body:
+        fail(f"{rel} public skill is missing ## Stop Conditions")
+    if "## Underlying skills" in body:
+        fail(f"{rel} must use references, not triggerable underlying skills")
+    if len(body.splitlines()) > 120:
+        fail(f"{rel} is too large; keep public skills thin")
 
 
 def validate_skills() -> None:
@@ -214,9 +185,13 @@ def validate_skills() -> None:
     skill_files = sorted(skills_dir.glob("*/SKILL.md"))
     names = {path.parent.name for path in skill_files}
 
-    missing = sorted((ENTRY_SKILLS | LIBRARY_SKILLS) - names)
+    missing = sorted(PUBLIC_SKILLS - names)
     if missing:
         fail(f"Missing required skills: {', '.join(missing)}")
+
+    unexpected = sorted(names - PUBLIC_SKILLS)
+    if unexpected:
+        fail(f"Unexpected triggerable skills: {', '.join(unexpected)}")
 
     for path in skill_files:
         validate_skill(path)
@@ -230,11 +205,40 @@ def validate_skills() -> None:
 
 def validate_support_files() -> None:
     references_dir = ROOT / "references"
-    missing_refs = sorted(
-        name for name in REQUIRED_REFERENCES if not (references_dir / name).is_file()
-    )
+    missing_refs = sorted(name for name in REQUIRED_REFERENCES if not (references_dir / name).is_file())
     if missing_refs:
         fail(f"Missing required references: {', '.join(missing_refs)}")
+
+    for path in sorted(references_dir.rglob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        rel = path.relative_to(ROOT)
+        if len(text.splitlines()) > 100 and "## Contents" not in text and "## Table of Contents" not in text:
+            fail(f"{rel} is over 100 lines and must include a ## Contents section")
+
+    install_text = (ROOT / "docs" / "INSTALL.md").read_text(encoding="utf-8")
+    for required in (
+        "Existing Skill Conflicts",
+        "Replacing A Loose Skill Set",
+        "disable",
+        "rename",
+        "entry skills",
+        "spec",
+        "plan",
+        "build",
+        "test",
+        "review",
+        "ship",
+    ):
+        if required not in install_text:
+            fail(f"docs/INSTALL.md must document skill-conflict guidance: {required}")
+
+    readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
+    if "de-duplicate" not in readme_text or "lifecycle" not in readme_text:
+        fail("README.md must include lifecycle de-duplication guidance")
+
+    template_text = (ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
+    if "Codex Agent Skills" not in template_text or "lifecycle" not in template_text:
+        fail("templates/AGENTS.md must identify Codex Agent Skills as lifecycle owner")
 
     agents_dir = ROOT / "agents"
     missing_personas = sorted(

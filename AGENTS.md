@@ -18,7 +18,7 @@ When working on this repo, follow the same protocol the plugin teaches:
 
 - Identify whether the change is proposal, prototype, build, or release work.
 - Use the relevant skill surface before editing.
-- Use `project-status` first when the phase is unclear; use `introspect` only when status shows the project needs a deeper audit, recovery plan, or status repair.
+- Use `project-status` first when the phase is unclear, docs need scaffolding, or status needs repair.
 - If a user asks to skip prerequisites, warn once, name the missing gate, then proceed if they insist unless a hard safety boundary applies.
 - Preserve the paper trail for decisions that future agents will need.
 
@@ -36,6 +36,7 @@ Run before finalizing changes:
 ```bash
 python3 scripts/validate_plugin.py
 python3 scripts/validate_skill_graph.py
-python3 -m py_compile scripts/validate_plugin.py scripts/validate_skill_graph.py scripts/scaffold_project.py
+python3 scripts/audit_skill_conflicts.py
+python3 -m py_compile scripts/validate_plugin.py scripts/validate_skill_graph.py scripts/scaffold_project.py scripts/audit_skill_conflicts.py
 git diff --check
 ```

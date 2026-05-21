@@ -4,6 +4,14 @@ Reference catalog of agent orchestration patterns this repo endorses, plus anti-
 
 The governing rule: **the user (or a slash command) is the orchestrator. Personas do not invoke other personas.** Skills are mandatory hops inside a persona's workflow.
 
+## Contents
+
+- Endorsed patterns
+- Claude Code mapping
+- Agent Teams
+- Anti-patterns
+- Decision checklist
+
 ---
 
 ## Endorsed patterns
@@ -32,7 +40,7 @@ user → code-reviewer → report → user
 A slash command that wraps one persona with the project's skills. Saves the user from re-explaining the workflow every time.
 
 ```
-/review → code-reviewer (with code-review-and-quality skill) → report
+/review -> code-reviewer (with review workflow) -> report
 ```
 
 **Use when:** the same single-persona invocation happens repeatedly with the same setup.

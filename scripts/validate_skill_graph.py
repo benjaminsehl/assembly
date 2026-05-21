@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate entry-skill orchestration references."""
+"""Validate public skill references."""
 
 from __future__ import annotations
 
@@ -9,122 +9,63 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-SKILL_GRAPH = {
+SKILL_REFERENCES = {
     "spec": [
-        "interview-me",
-        "idea-refine",
-        "spec-driven-development",
+        "references/workflows/engineering-delivery.md",
+        "references/product-discovery-checklist.md",
+        "references/project-phases.md",
     ],
     "plan": [
-        "planning-and-task-breakdown",
-        "context-engineering",
+        "references/workflows/engineering-delivery.md",
+        "references/project-phases.md",
     ],
     "build": [
-        "incremental-implementation",
-        "test-driven-development",
-        "debugging-and-error-recovery",
-        "git-workflow-and-versioning",
+        "references/workflows/engineering-delivery.md",
+        "references/testing-patterns.md",
     ],
     "test": [
-        "test-driven-development",
-        "browser-testing-with-devtools",
-        "debugging-and-error-recovery",
+        "references/workflows/engineering-delivery.md",
+        "references/testing-patterns.md",
+        "references/qa-checklist.md",
     ],
     "review": [
-        "code-review-and-quality",
-        "security-and-hardening",
-        "performance-optimization",
+        "references/workflows/engineering-delivery.md",
+        "references/security-checklist.md",
+        "references/performance-checklist.md",
+        "references/accessibility-checklist.md",
     ],
     "code-simplify": [
-        "code-simplification",
-        "code-review-and-quality",
-        "test-driven-development",
+        "references/workflows/engineering-delivery.md",
+        "references/testing-patterns.md",
     ],
     "ship": [
-        "shipping-and-launch",
-        "ci-cd-and-automation",
-        "security-and-hardening",
-        "performance-optimization",
-        "documentation-and-adrs",
-        "deprecation-and-migration",
-        "code-review-and-quality",
+        "references/workflows/qa-and-release.md",
+        "references/security-checklist.md",
+        "references/performance-checklist.md",
+        "references/testing-patterns.md",
     ],
     "product-discovery": [
-        "interview-me",
-        "idea-refine",
-        "founder-product-critique",
-        "spec-driven-development",
-    ],
-    "founder-review": [
-        "founder-product-critique",
-        "idea-refine",
-        "planning-and-task-breakdown",
-    ],
-    "business-model-review": [
-        "business-model-evaluation",
-        "idea-refine",
-        "documentation-and-adrs",
-    ],
-    "design-plan-review": [
-        "frontend-ui-engineering",
-        "founder-product-critique",
-        "performance-optimization",
+        "references/product-discovery-checklist.md",
+        "references/business-model-checklist.md",
+        "references/design-quality-checklist.md",
+        "references/workflows/product-strategy.md",
     ],
     "qa": [
-        "live-qa-methodology",
-        "browser-testing-with-devtools",
-        "test-driven-development",
-        "debugging-and-error-recovery",
-    ],
-    "health-check": [
-        "code-review-and-quality",
-        "performance-optimization",
-        "security-and-hardening",
-        "documentation-and-adrs",
-        "test-driven-development",
-    ],
-    "retro": [
-        "documentation-and-adrs",
-        "code-review-and-quality",
-        "business-model-evaluation",
-        "founder-product-critique",
-    ],
-    "learn": [
-        "documentation-and-adrs",
-        "context-engineering",
-        "retro",
-    ],
-    "new-project": [
-        "product-discovery",
-        "founder-review",
-        "business-model-review",
-        "spec-driven-development",
-        "planning-and-task-breakdown",
-        "documentation-and-adrs",
+        "references/qa-checklist.md",
+        "references/testing-patterns.md",
+        "references/workflows/qa-and-release.md",
     ],
     "prototype": [
-        "idea-refine",
-        "frontend-ui-engineering",
-        "business-model-evaluation",
-        "documentation-and-adrs",
+        "references/design-quality-checklist.md",
+        "references/business-model-checklist.md",
+        "references/workflows/product-strategy.md",
+        "references/project-phases.md",
     ],
     "project-status": [
-        "context-engineering",
-        "documentation-and-adrs",
-        "product-discovery",
-        "prototype",
-        "build",
-        "qa",
-        "ship",
-        "retro",
-        "learn",
-    ],
-    "introspect": [
-        "project-status",
-        "context-engineering",
-        "documentation-and-adrs",
-        "founder-product-critique",
-        "business-model-evaluation",
+        "references/project-phases.md",
+        "references/project-kernel-structure.md",
+        "references/agent-operating-protocol.md",
+        "references/workflows/project-lifecycle.md",
     ],
 }
 
@@ -149,32 +90,33 @@ def read_skill(name: str) -> str:
 
 
 def validate_graph() -> None:
-    for entry, dependencies in SKILL_GRAPH.items():
+    for entry, references in SKILL_REFERENCES.items():
         text = read_skill(entry)
-        if "Underlying skills" not in text:
-            fail(f"{entry} must include an Underlying skills section")
-        if entry in dependencies:
-            fail(f"{entry} must not depend on itself")
+        if "## References" not in text:
+            fail(f"{entry} must include a References section")
+        if "## Underlying skills" in text:
+            fail(f"{entry} must not reference triggerable underlying skills")
 
-        for dependency in dependencies:
-            if not skill_path(dependency).exists():
-                fail(f"{entry} references missing skill {dependency}")
-            if f"`{dependency}`" not in text and f"- {dependency}" not in text:
-                fail(f"{entry} does not mention required dependency {dependency}")
+        for reference in references:
+            if not (ROOT / reference).exists():
+                fail(f"{entry} references missing file {reference}")
+            if reference not in text:
+                fail(f"{entry} does not mention required reference {reference}")
 
-        if len(text.splitlines()) > 180:
-            fail(f"{entry} is too large; entry skills should stay thin")
+        if len(text.splitlines()) > 120:
+            fail(f"{entry} is too large; public skills should stay thin")
 
 
 def validate_no_missing_orphans() -> None:
     available = {path.parent.name for path in (ROOT / "skills").glob("*/SKILL.md")}
-    required = set(SKILL_GRAPH)
-    for dependencies in SKILL_GRAPH.values():
-        required.update(dependencies)
+    required = set(SKILL_REFERENCES)
 
     missing = sorted(required - available)
     if missing:
-        fail(f"Missing required graph skills: {', '.join(missing)}")
+        fail(f"Missing required public skills: {', '.join(missing)}")
+    unexpected = sorted(available - required)
+    if unexpected:
+        fail(f"Unexpected triggerable skills: {', '.join(unexpected)}")
 
 
 def main() -> int:
@@ -184,7 +126,7 @@ def main() -> int:
     except ValidationError as exc:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 1
-    print("OK: skill graph is valid")
+    print("OK: skill references are valid")
     return 0
 
 

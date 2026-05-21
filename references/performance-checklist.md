@@ -1,6 +1,6 @@
 # Performance Checklist
 
-Quick reference checklist for web application performance. Use alongside the `performance-optimization` skill.
+Quick reference checklist for web application performance. Use from `review`, `ship`, or UI-heavy `build` work when performance risk is in scope.
 
 ## Table of Contents
 

@@ -325,6 +325,8 @@ Estimated scope: S
 - [x] Simplified the scaffold convention from `docs/project/` to root `docs/` and updated the README into a user guide.
 - [x] Added phase-aware AGENTS guidance, downstream template, canonical operating protocol, scaffold support, and validator coverage.
 - [x] Added `introspect` as the deeper workflow audit and status-repair skill behind `project-status`.
+- [x] Shrunk the public skill surface to 11 lifecycle skills and moved support workflows behind references.
+- [x] Added install conflict guidance and advisory local skill conflict audit.
 
 ## Decisions
 
@@ -332,3 +334,4 @@ Estimated scope: S
 - The first build copied workflow skills from local installed skills and copied support material from upstream commit `f17c6e88c904dc747381c374312c2d58e10647ae`.
 - Entry skills use short names only for the first version.
 - Matt Pocock's `skills` and `agent-kernel` are cited as inspiration only; this layer is an original Codex-native project lifecycle adaptation.
+- Version `0.7.0` makes a pre-install breaking cleanup: lifecycle skills stay public, support workflows move to references, and existing user-skill conflicts are documented as a migration concern.

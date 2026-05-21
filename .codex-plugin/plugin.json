@@ -1,7 +1,7 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.6.0",
-  "description": "A personal product-building operating system for Codex, spanning project setup, product discovery, prototypes, business viability, design, engineering, QA, and launch.",
+  "version": "0.7.0",
+  "description": "A compact personal product-building stack for Codex, spanning project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
   "author": {
     "name": "Sai",
     "email": "",
@@ -20,7 +20,6 @@
     "business-model",
     "project-lifecycle",
     "project-status",
-    "introspection",
     "prototype",
     "app-factory",
     "agents-md",
@@ -29,8 +28,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Codex Agent Skills",
-    "shortDescription": "Project lifecycle, product, design, business, QA, and engineering workflows for building lovable apps with Codex.",
-    "longDescription": "A Codex-native product-building system. The plugin keeps a small command-like entry surface while loading deeper skills for new project setup, phase/status orientation, introspection and recovery, discovery, prototypes, founder review, business-model review, design review, specs, planning, implementation, QA, health checks, launch, retro, and learning.",
+    "shortDescription": "Compact lifecycle workflows for building lovable, viable, well-engineered apps with Codex.",
+    "longDescription": "A Codex-native product-building stack with a deliberately small public skill surface: project status/scaffold/repair, product discovery, prototypes, specs, planning, implementation, tests, QA, review, simplification, and ship decisions. Detailed guidance lives in references so agents load only the context they need.",
     "developerName": "Sai",
     "category": "Developer Tools",
     "capabilities": [
@@ -41,7 +40,7 @@
     "privacyPolicyURL": "",
     "termsOfServiceURL": "",
     "defaultPrompt": [
-      "Use new-project to scaffold this project.",
+      "Use project-status to scaffold this project.",
       "Use project-status to tell me what phase we are in.",
       "Use prototype before we build this direction."
     ],

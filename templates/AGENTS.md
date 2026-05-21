@@ -11,7 +11,7 @@ Before meaningful work, read:
 - `docs/agent-guidance.md`
 - Relevant files under `docs/phases/`, `docs/product/`, `docs/decisions/`, `docs/specs/`, and `docs/plans/`
 
-If these files do not exist yet, use `new-project` to scaffold them.
+If these files do not exist yet, use `project-status` scaffold mode.
 
 ## Phase Awareness
 
@@ -22,15 +22,14 @@ Always identify the current project phase before choosing a workflow:
 - Build: implement approved specs in verified slices.
 - Release: QA, polish, ship or hold, grade against proposal, and capture follow-up learning.
 
-Use `project-status` when returning to a project or when the phase is unclear. If `project-status` finds an unclear phase, stale status, skipped gates, or missing core context, use `introspect` before proceeding. Do not start with `introspect` unless the user explicitly asks for it.
+Use `project-status` when returning to a project, scaffolding missing docs, repairing stale status, or when the phase is unclear.
 
 ## Skill Routing
 
-- New project or subproject: `new-project`
-- Raw idea: `product-discovery`
-- Scope or ambition review: `founder-review`
-- Business viability: `business-model-review`
-- UX before build: `design-plan-review`
+- These route names refer to the Codex Agent Skills plugin's phase-aware lifecycle workflows.
+- If another installed skill has the same name, prefer Codex Agent Skills for project lifecycle decisions in this repo.
+- New project, subproject, status, repair, retro, or project learning: `project-status`
+- Raw idea, scope, ambition, business viability, or UX before build: `product-discovery`
 - Tangible proof: `prototype`
 - Requirements: `spec`
 - Task breakdown: `plan`
@@ -38,7 +37,6 @@ Use `project-status` when returning to a project or when the phase is unclear. I
 - Tests and runtime verification: `test` or `qa`
 - Quality pass: `review` or `code-simplify`
 - Release decision: `ship`
-- Afterward: `retro` and `learn`
 
 ## Unclear Prompts
 

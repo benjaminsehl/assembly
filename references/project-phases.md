@@ -2,6 +2,14 @@
 
 Projects and substantial project slices move through four phases. A phase is not a ceremony; it is a confidence gate.
 
+## Contents
+
+- Proposal
+- Prototype
+- Build
+- Release
+- Status output shape
+
 Projects can be nested. Use the same phase model for a whole repo, an app surface, an agent layer, a native client, or a single important feature. Keep the phase docs near the work they explain.
 
 ## 1. Proposal
@@ -20,10 +28,8 @@ Required evidence:
 
 Recommended skills:
 
-- `new-project`
+- `project-status`
 - `product-discovery`
-- `founder-review`
-- `business-model-review`
 - `spec`
 
 Exit gate: the user can judge future work against explicit outcomes, assumptions, principles, and success criteria.
@@ -42,9 +48,7 @@ Required evidence:
 Recommended skills:
 
 - `prototype`
-- `design-plan-review`
-- `founder-review`
-- `business-model-review`
+- `product-discovery`
 - `spec`
 
 Exit gate: the prototype proves, changes, or rejects the direction clearly enough to plan production work.
@@ -67,7 +71,6 @@ Recommended skills:
 - `test`
 - `review`
 - `code-simplify`
-- `health-check`
 
 Exit gate: production behavior is implemented, verified, and ready for release QA and polish.
 
@@ -88,10 +91,7 @@ Recommended skills:
 
 - `qa`
 - `review`
-- `health-check`
 - `ship`
-- `retro`
-- `learn`
 
 Exit gate: the work has shipped or been held intentionally, the result is graded against the proposal, and future learning is captured.
 
@@ -106,4 +106,4 @@ When asked what phase a project is in, answer with:
 - Next recommended skills.
 - One concrete next action.
 
-If this cannot be answered with confidence, recommend `introspect` for a deeper audit, `docs/status.md` repair, and recovery plan.
+If this cannot be answered with confidence, use `project-status` repair mode for a deeper audit, `docs/status.md` repair, and recovery plan.
