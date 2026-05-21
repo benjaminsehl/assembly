@@ -2,6 +2,8 @@
 
 Projects and substantial project slices move through four phases. A phase is not a ceremony; it is a confidence gate.
 
+Projects can be nested. Use the same phase model for a whole repo, an app surface, an agent layer, a native client, or a single important feature. Keep the phase docs near the work they explain.
+
 ## 1. Proposal
 
 Goal: align on why the project matters before optimizing how to build it.
@@ -14,6 +16,7 @@ Required evidence:
 - Key assumptions.
 - Principles that should guide trade-offs.
 - Major risks and non-goals.
+- Existing decisions or constraints that should not be removed casually.
 
 Recommended skills:
 

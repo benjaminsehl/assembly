@@ -38,7 +38,9 @@ Every full project or major project slice follows four phases:
 3. **Build:** implement approved slices with specs, plans, tests, reviews, and tech-design updates.
 4. **Release:** run QA and polish, decide go/no-go, ship or hold intentionally, grade the result against the proposal, and capture follow-up learning.
 
-The project workspace is inspired by `agent-kernel`'s inspectable markdown pattern, but adapted away from long-running-agent memory. Its default shape is `docs/project/` for a single-purpose repo or `docs/projects/<slug>/` for project slices inside a larger app.
+Projects are recursive. A repo can be a project, and clients, agent layers, releases, or features inside it can be subprojects with their own phase trail. The project workspace is inspired by `agent-kernel`'s inspectable markdown pattern, but adapted away from long-running-agent memory.
+
+Docs should be co-located with the closest sensible project boundary. Its default shape is `docs/project/` for a repo or code boundary, `docs/projects/<slug>/` for peer projects at the repo boundary, and `<parent-project>/projects/<slug>/` for child projects inside an existing project workspace. This preserves a paper trail so future agents can respect Chesterton's fence before replacing decisions they do not yet understand.
 
 ## Tech Stack
 
@@ -161,7 +163,7 @@ Never:
 - The original engineering entry skills exist and route to the correct deeper workflows.
 - Product/company entry skills exist and route to the correct deeper workflows.
 - Project lifecycle entry skills exist for scaffolding, prototyping, and status orientation.
-- `scripts/scaffold_project.py` can create `docs/project/` or `docs/projects/<slug>/` without overwriting existing files by default.
+- `scripts/scaffold_project.py` can create `docs/project/`, `docs/projects/<slug>/`, or child project workspaces without overwriting existing files by default.
 - The underlying skills needed by those entry points are present in the plugin.
 - Validation scripts catch missing skills, broken mappings, malformed frontmatter, and accidental entry-skill bloat.
 - A manual smoke test proves each entry skill can be invoked by Codex in a clean project context.

@@ -22,6 +22,22 @@ def rel(path: Path, root: Path) -> str:
         return str(path)
 
 
+def resolve_parent_project(value: str, root: Path) -> Path:
+    parent = Path(value).expanduser()
+    if not parent.is_absolute():
+        parent = root / parent
+    parent = parent.resolve()
+    if not parent.exists():
+        raise SystemExit(f"Parent project workspace does not exist: {parent}")
+    if not parent.is_dir():
+        raise SystemExit(f"Parent project workspace is not a directory: {parent}")
+    if not (parent / "status.md").is_file():
+        raise SystemExit(
+            f"Parent project workspace must contain status.md: {parent}"
+        )
+    return parent
+
+
 def template_files(project_name: str, project_dir: Path, root: Path) -> dict[Path, str]:
     today = date.today().isoformat()
     status_path = rel(project_dir / "status.md", root)
@@ -38,6 +54,7 @@ Start here:
 - Decisions: `decisions/`
 - Product vision: `product/vision.md`
 - Tech design: `tech-design/`
+- Child projects: `projects/`
 """,
         project_dir / "status.md": f"""# Project Status: {project_name}
 
@@ -260,6 +277,12 @@ Save QA plans, tested flows, bugs, repro steps, evidence, and regression recomme
 
 Save launch checklists, ship decisions, rollout notes, rollback plans, and post-release grading here.
 """,
+        project_dir / "projects" / "README.md": """# Child Projects
+
+Use this folder for nested projects that belong inside this project boundary.
+
+Create a child project here when the work is part of this project and does not have a better co-located code directory. If the child has its own clear code boundary, prefer placing its `docs/project/` beside that code instead.
+""",
     }
 
 
@@ -290,6 +313,14 @@ def main() -> int:
         help="Project slug. If provided, files are created under docs/projects/<slug>/.",
     )
     parser.add_argument(
+        "--parent",
+        default="",
+        help=(
+            "Existing project workspace to nest under, for example docs/project. "
+            "Requires --slug and creates <parent>/projects/<slug>/."
+        ),
+    )
+    parser.add_argument(
         "--force",
         action="store_true",
         help="Overwrite existing scaffold files.",
@@ -304,7 +335,15 @@ def main() -> int:
 
     project_name = args.name.strip() or args.slug.strip() or "Project"
     slug = slugify(args.slug.strip() or project_name)
-    project_dir = root / "docs" / "projects" / slug if args.slug.strip() else root / "docs" / "project"
+    if args.parent.strip():
+        if not args.slug.strip():
+            raise SystemExit("--parent requires --slug so the child project has a stable path")
+        parent_project = resolve_parent_project(args.parent.strip(), root)
+        project_dir = parent_project / "projects" / slug
+    elif args.slug.strip():
+        project_dir = root / "docs" / "projects" / slug
+    else:
+        project_dir = root / "docs" / "project"
 
     result: dict[str, object] = write_files(
         template_files(project_name, project_dir, root), root, args.force

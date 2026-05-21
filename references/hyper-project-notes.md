@@ -14,7 +14,10 @@ This is useful context, but it creates a resume problem: a future session can fi
 ## Retrofit Approach
 
 1. Use `project-status` first. Do not move files before understanding which project slice is being assessed.
-2. Create `docs/projects/<project-slug>/status.md` and phase files for the specific slice, not necessarily the whole app.
+2. Create phase docs at the closest project boundary:
+   - Whole app: `/Users/sai/hyper/docs/project/`.
+   - Cross-cutting app slice: `/Users/sai/hyper/docs/project/projects/<slug>/` or `/Users/sai/hyper/docs/projects/<slug>/`.
+   - Clear code subdirectory, such as an iOS client: the subdirectory's own `docs/project/`.
 3. Link existing artifacts instead of copying them:
    - Product/design docs into proposal.
    - Existing specs and dated plans into build.
@@ -26,7 +29,7 @@ This is useful context, but it creates a resume problem: a future session can fi
    - Assumptions and principles.
    - Prototype verdict, if no prototype phase existed.
    - Release grading and follow-up learning.
-5. Keep `.agents/` as broader durable agent context if the repo already uses it. The project workspace should not replace it; it should make a slice resumable.
+5. Keep `.agents/` as broader durable agent context if the repo already uses it. The project workspace should not replace it; it should make a slice resumable and preserve the reason decisions exist.
 
 ## Retrofit Output
 

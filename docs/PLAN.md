@@ -321,6 +321,7 @@ Estimated scope: S
 - [x] Added `scripts/scaffold_project.py` for deterministic `docs/project/` and `docs/projects/<slug>/` scaffolds.
 - [x] Added project phase, project kernel, Matt Pocock skills, and Hyper retrofit references.
 - [x] Extended validators, command contract, install docs, smoke tests, source notes, and manifest metadata.
+- [x] Clarified recursive projects, co-located docs, child project scaffolds, and Chesterton's fence paper-trail expectations.
 
 ## Decisions
 

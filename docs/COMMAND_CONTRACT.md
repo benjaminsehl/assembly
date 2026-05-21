@@ -577,19 +577,20 @@ Stop conditions:
 
 ## `new-project`
 
-Purpose: Scaffold a resumable project workspace and proposal gate for a new project or major project slice.
+Purpose: Scaffold a resumable, co-located project workspace and proposal gate for a new project, subproject, or major project slice.
 
 Triggers:
 
 - "Use new-project"
 - "Start a new project"
+- "Start a subproject"
 - "Scaffold project docs"
 - "Set up this project slice"
 
 Inputs:
 
 - Project name or working title
-- Target repo and whether this is whole-repo work or a subproject slice
+- Target repo, nearest project boundary, and whether this is whole-repo work or a subproject slice
 - Raw idea, desired outcomes, or existing notes
 
 Underlying skills:
@@ -603,9 +604,10 @@ Underlying skills:
 
 Required outputs:
 
-- Project workspace under `docs/project/` or `docs/projects/<slug>/`
+- Project workspace under `docs/project/`, `docs/projects/<slug>/`, or a parent project's `projects/<slug>/`
 - Proposal, prototype, build, and release phase files
 - Product vision, principles, decisions, tech-design, specs, plans, prototypes, QA, and release folders
+- Child `projects/` folder for nested project paper trails
 - Initial status file with current phase and next recommended skills
 - Open questions where alignment is missing
 
@@ -655,7 +657,7 @@ Stop conditions:
 
 ## `project-status`
 
-Purpose: Determine the current project phase and recommend the next skills.
+Purpose: Determine the current project or subproject phase and recommend the next skills.
 
 Triggers:
 
@@ -667,7 +669,7 @@ Triggers:
 
 Inputs:
 
-- Repo or project folder
+- Repo, nearest project boundary, or project folder
 - Status files, phase docs, specs, plans, decisions, open tasks, recent commits, and notes
 
 Underlying skills:
@@ -686,6 +688,7 @@ Required outputs:
 
 - Current phase: proposal, prototype, build, or release
 - Evidence for the phase verdict
+- Historical decisions or principles that explain the current shape
 - Missing required artifacts
 - Next decision gate
 - Next recommended skills

@@ -10,14 +10,16 @@ Usable public plugin. The plugin contains project lifecycle, product, prototype,
 
 ## Project Lifecycle
 
-Every project or major project slice should be resumable through four phases:
+Every project or major project slice should be resumable through four phases. Projects can be recursive: a repo can be a project, an agent layer or iOS client inside it can be a subproject, and a specific feature inside that client can be another subproject.
 
 1. **Proposal:** define what becomes 10x better, what good looks like, outcomes, assumptions, and principles.
 2. **Prototype:** create tangible proof so the direction can be felt or tested before full build.
 3. **Build:** implement approved slices with tests, reviews, and tech-design updates.
 4. **Release:** QA, polish, ship or hold, grade against the proposal, and capture follow-up learning.
 
-Use `new-project` to scaffold `docs/project/` or `docs/projects/<slug>/`, `prototype` to create throwaway proof, and `project-status` when returning to a repo and asking what phase it is in.
+Use `new-project` to scaffold co-located docs at the closest sensible project boundary, `prototype` to create throwaway proof, and `project-status` when returning to a repo and asking what phase it is in. The default shapes are `docs/project/`, `docs/projects/<slug>/`, or `<parent-project>/projects/<slug>/`.
+
+The paper trail is part of the product. Before changing or removing something, the project docs should make it easy to find why it exists.
 
 ## Lenses
 
