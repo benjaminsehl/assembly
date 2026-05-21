@@ -11,3 +11,8 @@
 - [x] Task 9: Add reference checklists and persona adaptation
 - [x] Task 10: Create throwaway smoke fixtures
 - [x] Task 11: Decide local installation path
+- [x] Task 12: Add product, design, QA, health, retro, and learn entry skills
+- [x] Task 13: Add business, founder, and live QA support skills
+- [x] Task 14: Add product/business/design/QA references
+- [x] Task 15: Extend validators and skill graph
+- [x] Task 16: Update public docs, source notes, smoke tests, and license

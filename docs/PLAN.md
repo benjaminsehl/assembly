@@ -2,11 +2,11 @@
 
 ## Overview
 
-Build the plugin in careful layers: first lock the command contract, then add validation, then add the seven entry skills, then vendor or adapt the underlying skills, then run smoke tests in a throwaway project. The command layer is load-bearing, so every phase should leave us with a reviewable artifact and a clear verification checkpoint.
+Build the plugin in careful layers: first lock the command contract, then add validation, then add the engineering entry skills, then vendor or adapt the underlying skills, then add the product/business/design layer and run smoke tests in a throwaway project. The command layer is load-bearing, so every phase should leave us with a reviewable artifact and a clear verification checkpoint.
 
 ## Architecture Decisions
 
-- The seven command-like workflows are Codex skills, not slash commands. Codex plugin manifests expose `skills`, and the local spec does not define a `.codex/commands` equivalent.
+- The command-like workflows are Codex skills, not slash commands. Codex plugin manifests expose `skills`, and the local spec does not define a `.codex/commands` equivalent.
 - Entry skills stay thin. They orchestrate and route, while detailed workflows live in deeper skills.
 - The plugin should be self-contained. Depending on `/Users/sai/.agents/skills` would make it fragile across machines and Codex sessions.
 - Validation is part of the product. A broken skill graph is a product bug, not a documentation typo.
@@ -16,7 +16,7 @@ Build the plugin in careful layers: first lock the command contract, then add va
 
 ### Task 1: Finalize Plugin Manifest
 
-Description: Make `.codex-plugin/plugin.json` valid and intentional for a private local developer-tools plugin.
+Description: Make `.codex-plugin/plugin.json` valid and intentional for a public developer-tools plugin.
 
 Acceptance criteria:
 
@@ -34,13 +34,13 @@ Files likely touched:
 
 Estimated scope: XS
 
-### Task 2: Lock the Seven Entry-Skill Contract
+### Task 2: Lock the Initial Entry-Skill Contract
 
-Description: Create `docs/COMMAND_CONTRACT.md` defining each entry skill's trigger, inputs, required outputs, underlying skills, and refusal or stop conditions.
+Description: Create `docs/COMMAND_CONTRACT.md` defining each initial entry skill's trigger, inputs, required outputs, underlying skills, and refusal or stop conditions.
 
 Acceptance criteria:
 
-- [x] All seven entry skills have explicit responsibilities.
+- [x] All initial entry skills have explicit responsibilities.
 - [x] Each entry skill has success evidence.
 - [x] The contract names what the entry skill must not do.
 
@@ -86,7 +86,7 @@ Estimated scope: M
 
 ### Task 4: Add Skill Graph Validator
 
-Description: Add a validator for the seven-entry mapping and underlying skill references.
+Description: Add a validator for the entry-skill mapping and underlying skill references.
 
 Acceptance criteria:
 
@@ -185,17 +185,17 @@ Files likely touched:
 
 Estimated scope: M
 
-### Checkpoint: Entry Surface
+### Checkpoint: Initial Entry Surface
 
-- [x] All seven entry skills exist.
-- [x] All seven entry skills pass graph validation.
+- [x] All initial entry skills exist.
+- [x] All initial entry skills pass graph validation.
 - [x] Entry skills remain thin.
 
 ## Phase 4: Underlying Skill Library
 
 ### Task 8: Vendor or Adapt Required Skills
 
-Description: Bring in the deeper skill library needed by the seven entry points.
+Description: Bring in the deeper skill library needed by the entry points.
 
 Acceptance criteria:
 
@@ -291,7 +291,7 @@ Estimated scope: S
 
 - [x] Validators pass.
 - [x] Smoke checklist is documented for real project verification.
-- [x] The seven entry skills are ready for real project use.
+- [x] The entry skills are ready for real project use.
 - [x] Remaining open questions are documented.
 
 ## Risks and Mitigations
@@ -305,8 +305,16 @@ Estimated scope: S
 | Validation gives false confidence | Medium | Pair scripts with manual smoke tests |
 | Plugin depends on this machine's global skills | High | Vendor/adapt required skills into plugin |
 
-## Open Questions
+## Follow-Up Layer
 
-- This is private for now; publication would require an explicit license decision.
+- [x] Added product-discovery, founder-review, business-model-review, design-plan-review, qa, health-check, retro, and learn.
+- [x] Added founder-product-critique, business-model-evaluation, and live-qa-methodology support skills.
+- [x] Added product, business, design, and QA references.
+- [x] Extended validators and smoke docs for the full entry-skill set.
+- [x] Added public MIT license metadata.
+
+## Decisions
+
+- This is public and MIT licensed.
 - The first build copied workflow skills from local installed skills and copied support material from upstream commit `f17c6e88c904dc747381c374312c2d58e10647ae`.
-- The seven entry skills use short names only for the first version.
+- Entry skills use short names only for the first version.

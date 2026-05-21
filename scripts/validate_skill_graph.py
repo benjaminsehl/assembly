@@ -49,6 +49,51 @@ SKILL_GRAPH = {
         "deprecation-and-migration",
         "code-review-and-quality",
     ],
+    "product-discovery": [
+        "interview-me",
+        "idea-refine",
+        "founder-product-critique",
+        "spec-driven-development",
+    ],
+    "founder-review": [
+        "founder-product-critique",
+        "idea-refine",
+        "planning-and-task-breakdown",
+    ],
+    "business-model-review": [
+        "business-model-evaluation",
+        "idea-refine",
+        "documentation-and-adrs",
+    ],
+    "design-plan-review": [
+        "frontend-ui-engineering",
+        "founder-product-critique",
+        "performance-optimization",
+    ],
+    "qa": [
+        "live-qa-methodology",
+        "browser-testing-with-devtools",
+        "test-driven-development",
+        "debugging-and-error-recovery",
+    ],
+    "health-check": [
+        "code-review-and-quality",
+        "performance-optimization",
+        "security-and-hardening",
+        "documentation-and-adrs",
+        "test-driven-development",
+    ],
+    "retro": [
+        "documentation-and-adrs",
+        "code-review-and-quality",
+        "business-model-evaluation",
+        "founder-product-critique",
+    ],
+    "learn": [
+        "documentation-and-adrs",
+        "context-engineering",
+        "retro",
+    ],
 }
 
 
@@ -113,4 +158,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

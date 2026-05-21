@@ -1,6 +1,6 @@
 # Skills
 
-This directory contains the seven command-like entry skills:
+This directory contains command-like entry skills:
 
 - `spec`
 - `plan`
@@ -9,5 +9,13 @@ This directory contains the seven command-like entry skills:
 - `review`
 - `code-simplify`
 - `ship`
+- `product-discovery`
+- `founder-review`
+- `business-model-review`
+- `design-plan-review`
+- `qa`
+- `health-check`
+- `retro`
+- `learn`
 
-It also contains the 23 underlying workflow skills used by those entry points.
+It also contains the underlying workflow skills used by those entry points.

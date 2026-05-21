@@ -1,6 +1,6 @@
 # Install and Use
 
-This plugin can be registered with Codex as a private local marketplace. It provides seven command-like entry skills backed by a self-contained workflow skill library.
+This plugin can be registered with Codex as a public GitHub marketplace or local marketplace. It provides product, design, business, QA, engineering, launch, retro, and learning entry skills backed by a self-contained workflow skill library.
 
 ## Register the Marketplace
 
@@ -43,6 +43,14 @@ Use test to prove this bug and guard against regression.
 Use review to check the current diff.
 Use code-simplify on the changed files.
 Use ship to make a go/no-go release decision.
+Use product-discovery on this idea.
+Use founder-review on this plan.
+Use business-model-review on this product concept.
+Use design-plan-review before we build this UI.
+Use qa on this local app.
+Use health-check on this repo.
+Use retro on what we shipped this week.
+Use learn to capture this project preference.
 ```
 
 When a GitHub marketplace copy is already registered and this repo receives updates, refresh it with:

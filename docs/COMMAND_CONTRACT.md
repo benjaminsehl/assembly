@@ -1,6 +1,6 @@
 # Command Contract
 
-This contract defines the seven command-like entry skills. These are the stable interface humans will use; the deeper skills are implementation details.
+This contract defines the command-like entry skills. These are the stable interface humans will use; the deeper skills are implementation details.
 
 Each entry skill must stay small. It may route, sequence, enforce gates, and summarize evidence. It must not duplicate the full deeper workflow.
 
@@ -286,3 +286,291 @@ Stop conditions:
 - Critical security, data-loss, or migration risk is unresolved
 - Required verification is unavailable and the user has not accepted the risk
 
+## `product-discovery`
+
+Purpose: Pressure-test a raw product idea before spec work.
+
+Triggers:
+
+- "Use product-discovery"
+- "Think through this idea"
+- "Is this worth building?"
+- A vague product idea where user pain, wedge, or evidence is unclear
+
+Inputs:
+
+- Product idea or opportunity
+- Known user, market, or workflow context
+- Any existing user feedback or personal pain evidence
+
+Underlying skills:
+
+- `interview-me`
+- `idea-refine`
+- `founder-product-critique`
+- `spec-driven-development`
+
+Required outputs:
+
+- Target user and painful moment
+- Current workaround or alternative
+- Narrow lovable wedge
+- Main risks and assumptions
+- Next evidence step
+
+Stop conditions:
+
+- The user, pain, and urgency cannot be stated concretely
+- The request is ready for implementation rather than discovery
+- The next step would require spec or build work without user approval
+
+## `founder-review`
+
+Purpose: Review an idea, spec, or plan as a founder/CEO.
+
+Triggers:
+
+- "Use founder-review"
+- "Give this a CEO review"
+- "Challenge this plan"
+- "What is the 10-star version?"
+
+Inputs:
+
+- Idea, spec, plan, roadmap, or feature proposal
+- Target user and success criteria when available
+
+Underlying skills:
+
+- `founder-product-critique`
+- `idea-refine`
+- `planning-and-task-breakdown`
+
+Required outputs:
+
+- Verdict: Expand, Narrow, Hold scope, or Stop
+- User-love opportunity
+- Scope recommendation
+- Riskiest assumption
+- Next evidence step
+
+Stop conditions:
+
+- The artifact has no clear user or objective
+- The review would silently change approved scope
+- The issue is primarily engineering risk and should go through `review` or `health-check`
+
+## `business-model-review`
+
+Purpose: Evaluate whether a product or feature can become a viable business.
+
+Triggers:
+
+- "Use business-model-review"
+- "Can this be a business?"
+- "Review the pricing/distribution"
+- "What business model fits this?"
+
+Inputs:
+
+- Product concept, feature, or roadmap
+- Known users, buyers, alternatives, pricing, or distribution assumptions
+
+Underlying skills:
+
+- `business-model-evaluation`
+- `idea-refine`
+- `documentation-and-adrs`
+
+Required outputs:
+
+- ICP and buyer
+- Willingness-to-pay hypothesis
+- Distribution hypothesis
+- Retention loop
+- Biggest business risk
+- Next validation step
+
+Stop conditions:
+
+- No plausible buyer, user, or strategic value is visible
+- The request needs user discovery before business-model review
+- The business assumption is being treated as proven without evidence
+
+## `design-plan-review`
+
+Purpose: Review planned UX before implementation.
+
+Triggers:
+
+- "Use design-plan-review"
+- "Review this UI plan"
+- "Check this design before building"
+- A user-facing UI or workflow is planned but not implemented yet
+
+Inputs:
+
+- Spec, plan, design doc, screenshot, wireframe, or existing UI convention
+- Target user and primary workflow
+
+Underlying skills:
+
+- `frontend-ui-engineering`
+- `founder-product-critique`
+- `performance-optimization`
+
+Required outputs:
+
+- Design verdict
+- Must-fix UX issues
+- Recommended improvements
+- Approved build shape or stop reason
+
+Stop conditions:
+
+- There is no user flow or artifact to review
+- Product intent is too unclear for UI critique
+- The user asked for live UI testing, which belongs in `qa`
+
+## `qa`
+
+Purpose: Test the product like a real user after implementation.
+
+Triggers:
+
+- "Use qa"
+- "QA this app"
+- "Test this local app"
+- "Find product bugs"
+
+Inputs:
+
+- Runnable app, URL, feature, or build instructions
+- Known test account, setup state, or user flow when needed
+
+Underlying skills:
+
+- `live-qa-methodology`
+- `browser-testing-with-devtools`
+- `test-driven-development`
+- `debugging-and-error-recovery`
+
+Required outputs:
+
+- Tested flows
+- Bugs with severity and repro steps
+- Evidence collected
+- Fix/re-test status
+- Regression recommendations
+
+Stop conditions:
+
+- No runnable target is available
+- Auth or private data blocks safe testing
+- The user asked for report-only QA and fixing would mutate code
+
+## `health-check`
+
+Purpose: Audit project health across product and engineering readiness.
+
+Triggers:
+
+- "Use health-check"
+- "Audit this repo"
+- "How healthy is this project?"
+- "What is blocking confidence?"
+
+Inputs:
+
+- Repo, app, release candidate, or product area
+- Project commands and docs
+
+Underlying skills:
+
+- `code-review-and-quality`
+- `performance-optimization`
+- `security-and-hardening`
+- `documentation-and-adrs`
+- `test-driven-development`
+
+Required outputs:
+
+- Health verdict
+- Blockers and important fixes
+- Product, engineering, and business-readiness risks
+- Next recommended action
+
+Stop conditions:
+
+- The repo or target surface is not accessible
+- Required checks would cause unsafe side effects
+- The audit scope is too broad to be honest
+
+## `retro`
+
+Purpose: Capture what shipped, what users learned, what broke, and what should improve.
+
+Triggers:
+
+- "Use retro"
+- "Run a retro"
+- "What did we learn from this launch?"
+- End of project, release, sprint, or work period
+
+Inputs:
+
+- Shipped changes, feedback, incidents, metrics, test/build health, or notes
+
+Underlying skills:
+
+- `documentation-and-adrs`
+- `code-review-and-quality`
+- `business-model-evaluation`
+- `founder-product-critique`
+
+Required outputs:
+
+- Wins, misses, learnings, decisions, and next actions
+- Product, engineering, and business lessons separated
+- Durable guidance candidates
+
+Stop conditions:
+
+- There is no release, period, or artifact to review
+- Private data needed for the retro is unavailable
+- The user wants a memory update but has not explicitly requested it
+
+## `learn`
+
+Purpose: Capture durable project guidance without replacing Codex memory.
+
+Triggers:
+
+- "Use learn"
+- "Remember this pattern"
+- "Capture this project preference"
+- "Make this reusable guidance"
+
+Inputs:
+
+- Lesson, preference, repeated pitfall, retro output, or project convention
+
+Underlying skills:
+
+- `documentation-and-adrs`
+- `context-engineering`
+- `retro`
+
+Required outputs:
+
+- Proposed lesson
+- Scope
+- Destination
+- Exact wording
+- Whether a formal memory update is needed
+
+Stop conditions:
+
+- The lesson is speculative or one-off
+- The destination is unclear
+- The user asks to edit Codex memory without explicitly requesting a memory update

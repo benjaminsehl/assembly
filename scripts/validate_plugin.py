@@ -18,6 +18,14 @@ ENTRY_SKILLS = {
     "review",
     "code-simplify",
     "ship",
+    "product-discovery",
+    "founder-review",
+    "business-model-review",
+    "design-plan-review",
+    "qa",
+    "health-check",
+    "retro",
+    "learn",
 }
 LIBRARY_SKILLS = {
     "using-agent-skills",
@@ -43,12 +51,19 @@ LIBRARY_SKILLS = {
     "deprecation-and-migration",
     "documentation-and-adrs",
     "shipping-and-launch",
+    "founder-product-critique",
+    "business-model-evaluation",
+    "live-qa-methodology",
 }
 REQUIRED_REFERENCES = {
     "accessibility-checklist.md",
     "performance-checklist.md",
     "security-checklist.md",
     "testing-patterns.md",
+    "product-discovery-checklist.md",
+    "business-model-checklist.md",
+    "design-quality-checklist.md",
+    "qa-checklist.md",
 }
 REQUIRED_PERSONAS = {
     "code-reviewer.md",
@@ -110,6 +125,10 @@ def validate_manifest() -> None:
         fail("Manifest name must match the plugin folder name")
     if manifest.get("skills") != "./skills/":
         fail('Manifest must set "skills" to "./skills/"')
+    if manifest.get("license") != "MIT":
+        fail('Public plugin manifest must set "license" to "MIT"')
+    if not (ROOT / "LICENSE").is_file():
+        fail("Public plugin must include a root LICENSE file")
 
     skills_dir = resolve_plugin_path(manifest["skills"])
     if not skills_dir.is_dir():

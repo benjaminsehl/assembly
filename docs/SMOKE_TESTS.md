@@ -1,6 +1,6 @@
 # Smoke Tests
 
-These smoke tests verify that the seven entry skills route correctly. They are designed for throwaway projects so the workflows can be exercised without risking real work.
+These smoke tests verify that the entry skills route correctly. They are designed for throwaway projects so the workflows can be exercised without risking real work.
 
 ## Prerequisites
 
@@ -27,6 +27,14 @@ codex plugin marketplace upgrade codex-agent-skills
 | `review` | "Use review on the current diff." | Findings first, file/line references when issues exist, and test gaps. |
 | `code-simplify` | "Use code-simplify on the changed files." | Behavior-preserving cleanup with verification evidence. |
 | `ship` | "Use ship to decide whether this is ready to release." | GO/NO-GO, blockers, risks, evidence, and rollback procedure. |
+| `product-discovery` | "Use product-discovery on an app that summarizes my meetings." | Discovery brief with user pain, wedge, alternatives, risks, and evidence needed. |
+| `founder-review` | "Use founder-review on this product plan." | Expand/Narrow/Hold/Stop verdict with user-love and scope recommendations. |
+| `business-model-review` | "Use business-model-review on this product concept." | ICP, willingness-to-pay, distribution, retention, and validation step. |
+| `design-plan-review` | "Use design-plan-review before we build this dashboard." | UX verdict with must-fix issues and approved build shape. |
+| `qa` | "Use qa on this local app." | Tested flows, bug repro steps, evidence, and regression recommendations. |
+| `health-check` | "Use health-check on this repo." | Health report with blockers, important fixes, quick wins, and next action. |
+| `retro` | "Use retro on what we shipped this week." | Wins, misses, learnings, decisions, and next actions. |
+| `learn` | "Use learn to capture this project preference." | Proposed lesson, scope, destination, and exact wording. |
 
 ## Manual Acceptance Checklist
 
@@ -37,4 +45,7 @@ codex plugin marketplace upgrade codex-agent-skills
 - [ ] `review` leads with findings instead of a summary.
 - [ ] `code-simplify` preserves behavior.
 - [ ] `ship` does not use subagents unless explicitly authorized.
-
+- [ ] `product-discovery` does not drift into implementation.
+- [ ] `business-model-review` separates usefulness from viability.
+- [ ] `qa` reports reproducible bugs and respects report-only mode.
+- [ ] `learn` proposes guidance without silently editing global memory.

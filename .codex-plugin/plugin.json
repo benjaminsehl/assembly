@@ -1,39 +1,43 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.1.0",
-  "description": "Load-bearing engineering workflows for Codex, organized around seven small lifecycle entry points.",
+  "version": "0.2.0",
+  "description": "A personal product-building operating system for Codex, spanning product discovery, business viability, design, engineering, QA, and launch.",
   "author": {
     "name": "Sai",
     "email": "",
     "url": ""
   },
-  "homepage": "",
-  "repository": "",
-  "license": "UNLICENSED",
+  "homepage": "https://github.com/benjaminsehl/codex-agent-skills",
+  "repository": "https://github.com/benjaminsehl/codex-agent-skills",
+  "license": "MIT",
   "keywords": [
     "codex",
     "agent-skills",
+    "product-development",
     "software-engineering",
+    "startup",
+    "design",
+    "business-model",
     "workflow"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Codex Agent Skills",
-    "shortDescription": "Seven disciplined workflows for building, testing, reviewing, and shipping with Codex.",
-    "longDescription": "A Codex-native adaptation of lifecycle-oriented engineering skills. The plugin keeps a small command-like entry surface while loading deeper skills for specs, planning, implementation, testing, review, simplification, and shipping.",
+    "shortDescription": "Product, design, business, QA, and engineering workflows for building lovable apps with Codex.",
+    "longDescription": "A Codex-native product-building system. The plugin keeps a small command-like entry surface while loading deeper skills for discovery, founder review, business-model review, design review, specs, planning, implementation, QA, health checks, launch, retro, and learning.",
     "developerName": "Sai",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
       "Write"
     ],
-    "websiteURL": "",
+    "websiteURL": "https://github.com/benjaminsehl/codex-agent-skills",
     "privacyPolicyURL": "",
     "termsOfServiceURL": "",
     "defaultPrompt": [
-      "Use spec to define this feature before coding.",
-      "Use build to implement the next planned slice.",
-      "Use ship to decide whether this change is ready."
+      "Use product-discovery on this idea.",
+      "Use design-plan-review before we build this UI.",
+      "Use ship to decide whether this is ready."
     ],
     "brandColor": "#2563EB"
   }

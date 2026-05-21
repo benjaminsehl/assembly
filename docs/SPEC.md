@@ -2,9 +2,9 @@
 
 ## Objective
 
-Build a Codex plugin that gives us a small, reliable command-like workflow surface for everyday engineering work. The plugin should be the backbone for how future projects are specified, planned, built, tested, reviewed, simplified, and shipped.
+Build a Codex plugin that gives us a small, reliable command-like workflow surface for full product development. The plugin should be the backbone for how future projects are discovered, pressure-tested, specified, planned, designed, built, QAed, reviewed, launched, retroed, and improved.
 
-The upstream pattern comes from Addy Osmani's `agent-skills`: seven lifecycle commands map into a larger set of structured skills. Codex does not expose the same `.claude/commands/*.md` slash-command primitive in the local plugin spec we inspected, so this plugin will implement those seven commands as first-class Codex skills:
+The upstream engineering pattern comes from Addy Osmani's `agent-skills`: seven lifecycle commands map into a larger set of structured skills. The product/company layer is inspired by Garry Tan's GStack sprint model and specialist-role approach. Codex does not expose the same `.claude/commands/*.md` slash-command primitive in the local plugin spec we inspected, so this plugin implements command-like entry points as first-class Codex skills:
 
 | Entry skill | Job | Underlying skills |
 | --- | --- | --- |
@@ -15,8 +15,16 @@ The upstream pattern comes from Addy Osmani's `agent-skills`: seven lifecycle co
 | `review` | Review current changes before merge | `code-review-and-quality`, `security-and-hardening`, `performance-optimization` |
 | `code-simplify` | Reduce complexity without changing behavior | `code-simplification`, `code-review-and-quality`, `test-driven-development` |
 | `ship` | Produce a go/no-go launch decision | `shipping-and-launch`, `ci-cd-and-automation`, `security-and-hardening`, `documentation-and-adrs`, `deprecation-and-migration` |
+| `product-discovery` | Pressure-test raw ideas before spec work | `interview-me`, `idea-refine`, `founder-product-critique`, `spec-driven-development` |
+| `founder-review` | Challenge ambition, focus, scope, and user delight | `founder-product-critique`, `idea-refine`, `planning-and-task-breakdown` |
+| `business-model-review` | Evaluate business viability and evidence needed | `business-model-evaluation`, `idea-refine`, `documentation-and-adrs` |
+| `design-plan-review` | Review planned UX before implementation | `frontend-ui-engineering`, `founder-product-critique`, `performance-optimization` |
+| `qa` | Test the product like a user after implementation | `live-qa-methodology`, `browser-testing-with-devtools`, `test-driven-development`, `debugging-and-error-recovery` |
+| `health-check` | Audit project readiness and maintainability | `code-review-and-quality`, `performance-optimization`, `security-and-hardening`, `documentation-and-adrs`, `test-driven-development` |
+| `retro` | Capture shipped outcomes and durable lessons | `documentation-and-adrs`, `code-review-and-quality`, `business-model-evaluation`, `founder-product-critique` |
+| `learn` | Propose reusable guidance without replacing Codex memory | `documentation-and-adrs`, `context-engineering`, `retro` |
 
-Success means a future Codex session can invoke one of these entry skills by name, load only the necessary deeper workflows, and produce consistent evidence without relying on memory of previous sessions.
+Success means a future Codex session can invoke one of these entry skills by name, load only the necessary deeper workflows, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
 
 ## Tech Stack
 
@@ -102,7 +110,7 @@ This plugin is mostly instruction surface, so tests should validate structure, r
 
 - Manifest validation: `plugin.json` is valid JSON and references existing paths.
 - Skill anatomy validation: every skill has `name`, `description`, `Purpose`, `Workflow`, and `Verification`.
-- Entry-skill mapping validation: the seven entry skills reference the expected underlying skills.
+- Entry-skill mapping validation: entry skills reference the expected underlying skills.
 - Drift validation: source-derived skills preserve their workflow intent when adapted.
 - Manual Codex smoke test: install or expose the plugin locally, invoke each entry skill in a throwaway repo, and verify it loads the intended workflow.
 
@@ -110,7 +118,7 @@ This plugin is mostly instruction surface, so tests should validate structure, r
 
 Always:
 
-- Keep the seven entry skills thin and deterministic.
+- Keep entry skills thin and deterministic.
 - Keep underlying workflow skills self-contained so the plugin works outside this machine.
 - Prefer progressive disclosure: entry skills route; deeper skills carry detailed process.
 - Include verification gates in every skill.
@@ -120,7 +128,7 @@ Ask first:
 
 - Adding MCP servers, app connectors, hooks, or marketplace installation entries.
 - Publishing the plugin, adding a remote repository, or choosing a public license.
-- Changing the seven-entry command surface.
+- Changing the entry-skill command surface.
 - Vendoring upstream content verbatim versus adapting it into our own words.
 
 Never:
@@ -135,7 +143,8 @@ Never:
 
 - The plugin has a valid `.codex-plugin/plugin.json`.
 - The project contains a reviewed spec and plan.
-- The seven entry skills exist and route to the correct deeper workflows.
+- The original engineering entry skills exist and route to the correct deeper workflows.
+- Product/company entry skills exist and route to the correct deeper workflows.
 - The underlying skills needed by those entry points are present in the plugin.
 - Validation scripts catch missing skills, broken mappings, malformed frontmatter, and accidental entry-skill bloat.
 - A manual smoke test proves each entry skill can be invoked by Codex in a clean project context.
@@ -145,4 +154,5 @@ Never:
 - The plugin is self-contained: underlying workflow skills are copied into `skills/`.
 - `ship` defaults to local audit and uses subagents only when the user explicitly authorizes parallel agent work.
 - The repo includes marketplace metadata, but no active user-level Codex config entry is edited by the plugin itself.
-- The repo remains private and `UNLICENSED`; upstream MIT license text is preserved for vendored upstream material.
+- The repo is public and MIT licensed; upstream MIT attribution is preserved for vendored upstream material.
+- GStack is cited as methodology inspiration only; no GStack code is vendored in this pass.
