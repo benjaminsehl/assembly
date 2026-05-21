@@ -1,6 +1,6 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A personal product-building operating system for Codex, spanning project setup, product discovery, prototypes, business viability, design, engineering, QA, and launch.",
   "author": {
     "name": "Sai",
@@ -19,6 +19,8 @@
     "design",
     "business-model",
     "project-lifecycle",
+    "project-status",
+    "introspection",
     "prototype",
     "app-factory",
     "agents-md",
@@ -28,7 +30,7 @@
   "interface": {
     "displayName": "Codex Agent Skills",
     "shortDescription": "Project lifecycle, product, design, business, QA, and engineering workflows for building lovable apps with Codex.",
-    "longDescription": "A Codex-native product-building system. The plugin keeps a small command-like entry surface while loading deeper skills for new project setup, phase/status orientation, discovery, prototypes, founder review, business-model review, design review, specs, planning, implementation, QA, health checks, launch, retro, and learning.",
+    "longDescription": "A Codex-native product-building system. The plugin keeps a small command-like entry surface while loading deeper skills for new project setup, phase/status orientation, introspection and recovery, discovery, prototypes, founder review, business-model review, design review, specs, planning, implementation, QA, health checks, launch, retro, and learning.",
     "developerName": "Sai",
     "category": "Developer Tools",
     "capabilities": [

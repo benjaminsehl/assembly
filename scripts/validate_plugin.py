@@ -29,6 +29,7 @@ ENTRY_SKILLS = {
     "new-project",
     "prototype",
     "project-status",
+    "introspect",
 }
 LIBRARY_SKILLS = {
     "using-agent-skills",

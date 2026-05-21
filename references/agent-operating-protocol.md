@@ -43,6 +43,7 @@ Release needs:
 ## Skill Routing
 
 - Unknown phase or returning session: use `project-status`.
+- Project shape unclear, missed steps suspected, or recovery needed: use `introspect` after `project-status`.
 - New app, project, or subproject: use `new-project`.
 - Raw idea: use `product-discovery`.
 - Product ambition or scope concern: use `founder-review`.
@@ -56,6 +57,18 @@ Release needs:
 - Pre-merge quality: use `review` or `code-simplify`.
 - Release decision: use `ship`.
 - After shipping or stopping: use `retro` and `learn`.
+
+## Status Escalation
+
+`project-status` is the first stop. It should answer the phase and next skill when the paper trail is clear.
+
+Escalate to `introspect` when:
+
+- The current phase is ambiguous.
+- Required artifacts for the apparent phase are missing or contradictory.
+- The user asks "what should we do?" and the answer depends on repairing project context.
+- The project has skipped gates that should be recorded before more work continues.
+- `docs/status.md` is stale, absent, or no longer matches the actual work.
 
 ## Prompt Clarity
 

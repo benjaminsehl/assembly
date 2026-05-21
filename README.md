@@ -23,6 +23,7 @@ Then invoke skills in natural language:
 ```text
 Use new-project to scaffold this project.
 Use project-status to tell me what phase we are in and what skills to use next.
+Use introspect to audit this project and get it back on track.
 Use product-discovery on this idea.
 Use prototype before we build this direction.
 Use ship to decide whether this is ready.
@@ -90,11 +91,13 @@ Why this shape:
 Agents should not jump straight into implementation unless the project is already in the right phase with the right context.
 
 1. Read `docs/status.md` and the nearest matching subproject status.
-2. Identify the current phase: proposal, prototype, build, or release.
-3. Choose the matching skill from the phase table below.
-4. If the prompt is unclear, state the inferred task and verify before acting.
-5. If the prompt is clear but phase prerequisites are missing, warn once and recommend the right double-back skill.
-6. If the user insists, proceed while naming the skipped gate and risk. Do not override privacy, destructive-operation, credential, money-movement, external-message, or explicit-confirmation boundaries.
+2. Use `project-status` when the phase or next skill is not obvious.
+3. Use `introspect` only when `project-status` finds stale status, missing core context, skipped gates, or an unclear recovery path.
+4. Identify the current phase: proposal, prototype, build, or release.
+5. Choose the matching skill from the phase table below.
+6. If the prompt is unclear, state the inferred task and verify before acting.
+7. If the prompt is clear but phase prerequisites are missing, warn once and recommend the right double-back skill.
+8. If the user insists, proceed while naming the skipped gate and risk. Do not override privacy, destructive-operation, credential, money-movement, external-message, or explicit-confirmation boundaries.
 
 The canonical version of this protocol lives in `references/agent-operating-protocol.md`. New projects receive a copy at `docs/agent-guidance.md`.
 
@@ -119,7 +122,7 @@ The canonical version of this protocol lives in `references/agent-operating-prot
 
 | Phase | Main question | Skills |
 | --- | --- | --- |
-| Orient | Where are we and what is next? | `project-status`, `learn` |
+| Orient | Where are we and what is next? | `project-status`, `introspect`, `learn` |
 | Proposal | Is this worth doing, and what must be true? | `new-project`, `product-discovery`, `founder-review`, `business-model-review`, `spec` |
 | Prototype | Can we feel or prove the direction? | `prototype`, `design-plan-review`, `founder-review` |
 | Build | Can we implement this well? | `plan`, `build`, `test`, `review`, `code-simplify`, `health-check` |

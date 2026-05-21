@@ -17,5 +17,9 @@ This directory contains command-like entry skills:
 - `health-check`
 - `retro`
 - `learn`
+- `new-project`
+- `prototype`
+- `project-status`
+- `introspect`
 
 It also contains the underlying workflow skills used by those entry points.

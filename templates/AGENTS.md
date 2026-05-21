@@ -22,7 +22,7 @@ Always identify the current project phase before choosing a workflow:
 - Build: implement approved specs in verified slices.
 - Release: QA, polish, ship or hold, grade against proposal, and capture follow-up learning.
 
-Use `project-status` when returning to a project or when the phase is unclear.
+Use `project-status` when returning to a project or when the phase is unclear. If `project-status` finds an unclear phase, stale status, skipped gates, or missing core context, use `introspect` before proceeding. Do not start with `introspect` unless the user explicitly asks for it.
 
 ## Skill Routing
 

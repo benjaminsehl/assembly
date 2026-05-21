@@ -698,6 +698,7 @@ Required outputs:
 - Historical decisions or principles that explain the current shape
 - Missing required artifacts
 - Missing phase prerequisites and skipped-gate risks
+- Recommendation to use `introspect` when the phase, status, skipped gates, or recovery path are unclear
 - Next decision gate
 - Next recommended skills
 - One concrete next action
@@ -706,4 +707,48 @@ Stop conditions:
 
 - No accessible artifact trail exists
 - Multiple active project slices exist and choosing one would be arbitrary
+- Private external systems are required to know the current state
+
+## `introspect`
+
+Purpose: Run a deeper project audit after `project-status` when the paper trail is unclear, stale, incomplete, or out of phase with the user's intended next work.
+
+Triggers:
+
+- "Use introspect"
+- "What should we do?"
+- "What state is this project in?"
+- "Are we on track?"
+- "Get this project back on track"
+- `project-status` recommends a deeper audit
+
+Inputs:
+
+- Repo, project folder, or subproject folder
+- `docs/status.md` and nearest subproject status
+- Phase docs, product docs, specs, plans, decisions, prototypes, QA notes, release notes, recent commits, tasks, and PR or issue notes
+
+Underlying skills:
+
+- `project-status`
+- `context-engineering`
+- `documentation-and-adrs`
+- `founder-product-critique`
+- `business-model-evaluation`
+
+Required outputs:
+
+- Current phase and confidence
+- Conformity verdict: on track, thin but usable, off track, or blocked
+- Evidence checked
+- Missing or weak artifacts
+- Skipped gates or Chesterton's-fence risks
+- `docs/status.md` update summary, or reason the status file was not updated
+- Recovery plan with next gate, next skills, and first concrete action
+
+Stop conditions:
+
+- No accessible repo, project folder, or artifact trail exists
+- Multiple active project slices exist and choosing one would be arbitrary
+- Updating status would overwrite unrelated user work or project-doc edits are out of scope
 - Private external systems are required to know the current state

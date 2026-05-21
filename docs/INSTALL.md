@@ -50,6 +50,7 @@ Use design-plan-review before we build this UI.
 Use new-project to scaffold this project.
 Use prototype to explore this direction before build.
 Use project-status to tell me what phase we are in and what skills to use next.
+Use introspect to audit this project and get it back on track.
 Use qa on this local app.
 Use health-check on this repo.
 Use retro on what we shipped this week.

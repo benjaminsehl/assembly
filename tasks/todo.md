@@ -22,3 +22,4 @@
 - [x] Task 20: Support recursive projects, root docs, child project scaffolds, and decision paper trails
 - [x] Task 21: Simplify project docs convention to root `docs/` and expand README user guide
 - [x] Task 22: Add phase-aware AGENTS guidance and scaffold support
+- [x] Task 23: Add introspect workflow audit and status repair skill

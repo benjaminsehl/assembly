@@ -324,6 +324,7 @@ Estimated scope: S
 - [x] Clarified recursive projects, root `docs/` as the project workspace, child project scaffolds, and Chesterton's fence paper-trail expectations.
 - [x] Simplified the scaffold convention from `docs/project/` to root `docs/` and updated the README into a user guide.
 - [x] Added phase-aware AGENTS guidance, downstream template, canonical operating protocol, scaffold support, and validator coverage.
+- [x] Added `introspect` as the deeper workflow audit and status-repair skill behind `project-status`.
 
 ## Decisions
 

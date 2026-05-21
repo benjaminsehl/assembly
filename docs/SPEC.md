@@ -26,8 +26,9 @@ The upstream engineering pattern comes from Addy Osmani's `agent-skills`: seven 
 | `new-project` | Scaffold a project workspace and proposal gate | `product-discovery`, `founder-review`, `business-model-review`, `spec-driven-development`, `planning-and-task-breakdown`, `documentation-and-adrs` |
 | `prototype` | Build a throwaway tangible artifact before production build | `idea-refine`, `frontend-ui-engineering`, `business-model-evaluation`, `documentation-and-adrs` |
 | `project-status` | Determine current phase and next recommended skills | `context-engineering`, `documentation-and-adrs`, `product-discovery`, `prototype`, `build`, `qa`, `ship`, `retro`, `learn` |
+| `introspect` | Audit project workflow conformity and repair status | `project-status`, `context-engineering`, `documentation-and-adrs`, `founder-product-critique`, `business-model-evaluation` |
 
-Success means a future Codex session can invoke one of these entry skills by name, load only the necessary deeper workflows, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable. It should also be able to answer "what phase are we in?" from project artifacts and recommend the next skills.
+Success means a future Codex session can invoke one of these entry skills by name, load only the necessary deeper workflows, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable. It should also be able to answer "what phase are we in?" from project artifacts, recommend the next skills, and use `introspect` to repair stale or incomplete status when the paper trail falls behind the work.
 
 ## Project Phase Model
 

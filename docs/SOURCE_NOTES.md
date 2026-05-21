@@ -81,6 +81,7 @@ The following files are original to this Codex adaptation:
 - `skills/new-project/SKILL.md`
 - `skills/prototype/SKILL.md`
 - `skills/project-status/SKILL.md`
+- `skills/introspect/SKILL.md`
 - `skills/founder-product-critique/SKILL.md`
 - `skills/business-model-evaluation/SKILL.md`
 - `skills/live-qa-methodology/SKILL.md`

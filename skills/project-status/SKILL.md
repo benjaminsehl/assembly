@@ -1,6 +1,6 @@
 ---
 name: project-status
-description: Use when returning to a project to determine the current phase, missing artifacts, next decision gate, and the next Codex skills to invoke.
+description: Use when returning to a project for lightweight phase orientation, missing artifact detection, next decision gate, and next Codex skills.
 ---
 
 # Project Status
@@ -8,6 +8,8 @@ description: Use when returning to a project to determine the current phase, mis
 ## Purpose
 
 Orient a returning session. Determine which project or subproject is active, whether it is in proposal, prototype, build, or release, then recommend the next skills and next action from evidence.
+
+Keep this workflow lightweight. If the phase, paper trail, or recovery path is unclear, recommend `introspect` for the deeper audit and status repair pass.
 
 ## Underlying skills
 
@@ -35,7 +37,8 @@ Orient a returning session. Determine which project or subproject is active, whe
    - Release: built work needs QA, polish, ship decision, grading, and follow-up capture.
 7. Use `documentation-and-adrs` to propose status-file updates when the repo has a project workspace.
 8. Evaluate missing phase prerequisites and whether the user is trying to skip a gate.
-9. Output current phase, evidence, missing artifacts, skipped-gate risks, next gate, next recommended skills, and one concrete next action.
+9. If the phase is unclear, core artifacts are missing, or the project seems off track, recommend `introspect` before proceeding with build or release work.
+10. Output current phase, evidence, missing artifacts, skipped-gate risks, next gate, next recommended skills, and one concrete next action.
 
 ## Verification
 
@@ -43,6 +46,7 @@ Orient a returning session. Determine which project or subproject is active, whe
 - Missing artifacts are separated from optional polish.
 - Skipped gates and their risks are named when the user asks to move ahead anyway.
 - Recommended skills match the current phase and blockers.
+- `introspect` is recommended when the project needs a deeper workflow-conformity audit or status update.
 - The user can resume with one clear next action.
 
 ## Stop Conditions

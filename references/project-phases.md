@@ -105,3 +105,5 @@ When asked what phase a project is in, answer with:
 - Next decision gate.
 - Next recommended skills.
 - One concrete next action.
+
+If this cannot be answered with confidence, recommend `introspect` for a deeper audit, `docs/status.md` repair, and recovery plan.

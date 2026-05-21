@@ -119,6 +119,13 @@ SKILL_GRAPH = {
         "retro",
         "learn",
     ],
+    "introspect": [
+        "project-status",
+        "context-engineering",
+        "documentation-and-adrs",
+        "founder-product-critique",
+        "business-model-evaluation",
+    ],
 }
 
 
