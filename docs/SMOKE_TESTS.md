@@ -35,6 +35,9 @@ codex plugin marketplace upgrade codex-agent-skills
 | `health-check` | "Use health-check on this repo." | Health report with blockers, important fixes, quick wins, and next action. |
 | `retro` | "Use retro on what we shipped this week." | Wins, misses, learnings, decisions, and next actions. |
 | `learn` | "Use learn to capture this project preference." | Proposed lesson, scope, destination, and exact wording. |
+| `new-project` | "Use new-project to scaffold a project called Habit Coach." | Creates `docs/project/` or `docs/projects/<slug>/` with status, phases, product, decisions, tech-design, specs, plans, prototypes, QA, and release files. |
+| `prototype` | "Use prototype to explore three onboarding directions before build." | States the prototype question, creates or proposes a throwaway artifact, gives one way to inspect it, and captures a verdict. |
+| `project-status` | "Use project-status to tell me what phase this project is in." | Phase verdict with evidence, missing artifacts, next gate, next recommended skills, and one next action. |
 
 ## Manual Acceptance Checklist
 
@@ -49,3 +52,6 @@ codex plugin marketplace upgrade codex-agent-skills
 - [ ] `business-model-review` separates usefulness from viability.
 - [ ] `qa` reports reproducible bugs and respects report-only mode.
 - [ ] `learn` proposes guidance without silently editing global memory.
+- [ ] `new-project` skips existing files by default.
+- [ ] `prototype` captures a verdict instead of leaving throwaway code orphaned.
+- [ ] `project-status` cites artifacts before recommending next skills.

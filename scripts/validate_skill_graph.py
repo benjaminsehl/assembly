@@ -94,6 +94,31 @@ SKILL_GRAPH = {
         "context-engineering",
         "retro",
     ],
+    "new-project": [
+        "product-discovery",
+        "founder-review",
+        "business-model-review",
+        "spec-driven-development",
+        "planning-and-task-breakdown",
+        "documentation-and-adrs",
+    ],
+    "prototype": [
+        "idea-refine",
+        "frontend-ui-engineering",
+        "business-model-evaluation",
+        "documentation-and-adrs",
+    ],
+    "project-status": [
+        "context-engineering",
+        "documentation-and-adrs",
+        "product-discovery",
+        "prototype",
+        "build",
+        "qa",
+        "ship",
+        "retro",
+        "learn",
+    ],
 }
 
 

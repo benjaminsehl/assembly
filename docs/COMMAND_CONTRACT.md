@@ -574,3 +574,125 @@ Stop conditions:
 - The lesson is speculative or one-off
 - The destination is unclear
 - The user asks to edit Codex memory without explicitly requesting a memory update
+
+## `new-project`
+
+Purpose: Scaffold a resumable project workspace and proposal gate for a new project or major project slice.
+
+Triggers:
+
+- "Use new-project"
+- "Start a new project"
+- "Scaffold project docs"
+- "Set up this project slice"
+
+Inputs:
+
+- Project name or working title
+- Target repo and whether this is whole-repo work or a subproject slice
+- Raw idea, desired outcomes, or existing notes
+
+Underlying skills:
+
+- `product-discovery`
+- `founder-review`
+- `business-model-review`
+- `spec-driven-development`
+- `planning-and-task-breakdown`
+- `documentation-and-adrs`
+
+Required outputs:
+
+- Project workspace under `docs/project/` or `docs/projects/<slug>/`
+- Proposal, prototype, build, and release phase files
+- Product vision, principles, decisions, tech-design, specs, plans, prototypes, QA, and release folders
+- Initial status file with current phase and next recommended skills
+- Open questions where alignment is missing
+
+Stop conditions:
+
+- The target project slice is ambiguous
+- There is no concrete outcome or user problem yet
+- Existing docs conflict with the scaffold and need human choice before merging
+
+## `prototype`
+
+Purpose: Create a throwaway tangible artifact before production build work.
+
+Triggers:
+
+- "Use prototype"
+- "Prototype this"
+- "Let me play with it"
+- "Try a few directions"
+- "Sanity-check this workflow"
+
+Inputs:
+
+- Prototype question
+- Repo conventions and runnable commands
+- Product, UI, technical, or business risk to test
+
+Underlying skills:
+
+- `idea-refine`
+- `frontend-ui-engineering`
+- `business-model-evaluation`
+- `documentation-and-adrs`
+
+Required outputs:
+
+- Clear prototype question
+- Small runnable artifact, route, mock, model, or validation artifact
+- One command, URL, or file path to inspect it
+- Captured verdict: delete, continue, or absorb into build
+
+Stop conditions:
+
+- The question is too unclear to choose an artifact
+- The user is actually asking for production implementation
+- The prototype would require unsafe data or live integrations without approval
+
+## `project-status`
+
+Purpose: Determine the current project phase and recommend the next skills.
+
+Triggers:
+
+- "Use project-status"
+- "What phase are we in?"
+- "Where did we leave off?"
+- "What skills should we use next?"
+- "Help me resume this project"
+
+Inputs:
+
+- Repo or project folder
+- Status files, phase docs, specs, plans, decisions, open tasks, recent commits, and notes
+
+Underlying skills:
+
+- `context-engineering`
+- `documentation-and-adrs`
+- `product-discovery`
+- `prototype`
+- `build`
+- `qa`
+- `ship`
+- `retro`
+- `learn`
+
+Required outputs:
+
+- Current phase: proposal, prototype, build, or release
+- Evidence for the phase verdict
+- Missing required artifacts
+- Next decision gate
+- Next recommended skills
+- One concrete next action
+
+Stop conditions:
+
+- No accessible artifact trail exists
+- Multiple active project slices exist and choosing one would be arbitrary
+- Private external systems are required to know the current state

@@ -14,6 +14,18 @@ It also takes methodology inspiration from Garry Tan's GStack:
 - Public docs inspected: `README.md` and `docs/skills.md`
 - No GStack code is vendored in this pass; the product/company layer is an original Codex-native adaptation of the sprint and specialist-role ideas.
 
+It also takes methodology inspiration from Matt Pocock's `skills`:
+
+- Repository: https://github.com/mattpocock/skills
+- Public docs inspected: `README.md`, `skills/engineering/prototype/SKILL.md`, `skills/productivity/handoff/SKILL.md`, `skills/engineering/grill-with-docs/SKILL.md`, and `skills/engineering/zoom-out/SKILL.md`
+- No Matt Pocock code is vendored in this pass; `prototype`, `project-status`, and project documentation conventions are original Codex-native adaptations of the small, composable workflow ideas.
+
+The project scaffold is structurally inspired by Benjamin Sehl's public `agent-kernel` reference:
+
+- Repository: https://github.com/benjaminsehl/agent-kernel
+- Public docs inspected: `README.md`
+- The new scaffold adapts the small markdown workspace idea for finite product projects and project slices rather than a long-running agent memory kernel.
+
 ## Vendored Content
 
 The 23 underlying workflow skills were copied from the locally installed `/Users/sai/.agents/skills` versions that correspond to the Addy-style skill pack already available in this Codex environment.
@@ -65,9 +77,17 @@ The following files are original to this Codex adaptation:
 - `skills/health-check/SKILL.md`
 - `skills/retro/SKILL.md`
 - `skills/learn/SKILL.md`
+- `skills/new-project/SKILL.md`
+- `skills/prototype/SKILL.md`
+- `skills/project-status/SKILL.md`
 - `skills/founder-product-critique/SKILL.md`
 - `skills/business-model-evaluation/SKILL.md`
 - `skills/live-qa-methodology/SKILL.md`
+- `scripts/scaffold_project.py`
+- `references/project-phases.md`
+- `references/project-kernel-structure.md`
+- `references/matt-pocock-skills-notes.md`
+- `references/hyper-project-notes.md`
 
 ## Public License
 

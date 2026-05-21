@@ -26,6 +26,9 @@ ENTRY_SKILLS = {
     "health-check",
     "retro",
     "learn",
+    "new-project",
+    "prototype",
+    "project-status",
 }
 LIBRARY_SKILLS = {
     "using-agent-skills",
@@ -64,6 +67,10 @@ REQUIRED_REFERENCES = {
     "business-model-checklist.md",
     "design-quality-checklist.md",
     "qa-checklist.md",
+    "project-phases.md",
+    "project-kernel-structure.md",
+    "matt-pocock-skills-notes.md",
+    "hyper-project-notes.md",
 }
 REQUIRED_PERSONAS = {
     "code-reviewer.md",
@@ -233,6 +240,10 @@ def validate_support_files() -> None:
     )
     if missing_personas:
         fail(f"Missing required personas: {', '.join(missing_personas)}")
+
+    scaffold_script = ROOT / "scripts" / "scaffold_project.py"
+    if not scaffold_script.is_file():
+        fail("Missing required scaffold script: scripts/scaffold_project.py")
 
 
 def main() -> int:

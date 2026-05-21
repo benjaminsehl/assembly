@@ -313,8 +313,18 @@ Estimated scope: S
 - [x] Extended validators and smoke docs for the full entry-skill set.
 - [x] Added public MIT license metadata.
 
+## Personal Project Stack Layer
+
+- [x] Added `new-project` to scaffold a project workspace and proposal gate.
+- [x] Added `prototype` to create throwaway tangible artifacts before production build.
+- [x] Added `project-status` to answer current phase, missing artifacts, next gate, and next skills.
+- [x] Added `scripts/scaffold_project.py` for deterministic `docs/project/` and `docs/projects/<slug>/` scaffolds.
+- [x] Added project phase, project kernel, Matt Pocock skills, and Hyper retrofit references.
+- [x] Extended validators, command contract, install docs, smoke tests, source notes, and manifest metadata.
+
 ## Decisions
 
 - This is public and MIT licensed.
 - The first build copied workflow skills from local installed skills and copied support material from upstream commit `f17c6e88c904dc747381c374312c2d58e10647ae`.
 - Entry skills use short names only for the first version.
+- Matt Pocock's `skills` and `agent-kernel` are cited as inspiration only; this layer is an original Codex-native project lifecycle adaptation.

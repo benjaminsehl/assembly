@@ -1,7 +1,7 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.2.0",
-  "description": "A personal product-building operating system for Codex, spanning product discovery, business viability, design, engineering, QA, and launch.",
+  "version": "0.3.0",
+  "description": "A personal product-building operating system for Codex, spanning project setup, product discovery, prototypes, business viability, design, engineering, QA, and launch.",
   "author": {
     "name": "Sai",
     "email": "",
@@ -18,13 +18,15 @@
     "startup",
     "design",
     "business-model",
+    "project-lifecycle",
+    "prototype",
     "workflow"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Codex Agent Skills",
-    "shortDescription": "Product, design, business, QA, and engineering workflows for building lovable apps with Codex.",
-    "longDescription": "A Codex-native product-building system. The plugin keeps a small command-like entry surface while loading deeper skills for discovery, founder review, business-model review, design review, specs, planning, implementation, QA, health checks, launch, retro, and learning.",
+    "shortDescription": "Project lifecycle, product, design, business, QA, and engineering workflows for building lovable apps with Codex.",
+    "longDescription": "A Codex-native product-building system. The plugin keeps a small command-like entry surface while loading deeper skills for new project setup, phase/status orientation, discovery, prototypes, founder review, business-model review, design review, specs, planning, implementation, QA, health checks, launch, retro, and learning.",
     "developerName": "Sai",
     "category": "Developer Tools",
     "capabilities": [
@@ -35,9 +37,9 @@
     "privacyPolicyURL": "",
     "termsOfServiceURL": "",
     "defaultPrompt": [
-      "Use product-discovery on this idea.",
-      "Use design-plan-review before we build this UI.",
-      "Use ship to decide whether this is ready."
+      "Use new-project to scaffold this project.",
+      "Use project-status to tell me what phase we are in.",
+      "Use prototype before we build this direction."
     ],
     "brandColor": "#2563EB"
   }

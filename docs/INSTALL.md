@@ -1,6 +1,6 @@
 # Install and Use
 
-This plugin can be registered with Codex as a public GitHub marketplace or local marketplace. It provides product, design, business, QA, engineering, launch, retro, and learning entry skills backed by a self-contained workflow skill library.
+This plugin can be registered with Codex as a public GitHub marketplace or local marketplace. It provides project lifecycle, product, prototype, design, business, QA, engineering, launch, retro, and learning entry skills backed by a self-contained workflow skill library.
 
 ## Register the Marketplace
 
@@ -47,10 +47,25 @@ Use product-discovery on this idea.
 Use founder-review on this plan.
 Use business-model-review on this product concept.
 Use design-plan-review before we build this UI.
+Use new-project to scaffold this project.
+Use prototype to explore this direction before build.
+Use project-status to tell me what phase we are in and what skills to use next.
 Use qa on this local app.
 Use health-check on this repo.
 Use retro on what we shipped this week.
 Use learn to capture this project preference.
+```
+
+For deterministic project scaffolding from this checkout:
+
+```bash
+python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
+```
+
+For a subproject inside a larger app:
+
+```bash
+python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name" --slug project-name
 ```
 
 When a GitHub marketplace copy is already registered and this repo receives updates, refresh it with:

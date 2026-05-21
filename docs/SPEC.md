@@ -2,7 +2,7 @@
 
 ## Objective
 
-Build a Codex plugin that gives us a small, reliable command-like workflow surface for full product development. The plugin should be the backbone for how future projects are discovered, pressure-tested, specified, planned, designed, built, QAed, reviewed, launched, retroed, and improved.
+Build a Codex plugin that gives us a small, reliable command-like workflow surface for full product development. The plugin should be the backbone for how future projects are started, oriented, discovered, prototyped, pressure-tested, specified, planned, designed, built, QAed, reviewed, launched, retroed, and improved.
 
 The upstream engineering pattern comes from Addy Osmani's `agent-skills`: seven lifecycle commands map into a larger set of structured skills. The product/company layer is inspired by Garry Tan's GStack sprint model and specialist-role approach. Codex does not expose the same `.claude/commands/*.md` slash-command primitive in the local plugin spec we inspected, so this plugin implements command-like entry points as first-class Codex skills:
 
@@ -23,8 +23,22 @@ The upstream engineering pattern comes from Addy Osmani's `agent-skills`: seven 
 | `health-check` | Audit project readiness and maintainability | `code-review-and-quality`, `performance-optimization`, `security-and-hardening`, `documentation-and-adrs`, `test-driven-development` |
 | `retro` | Capture shipped outcomes and durable lessons | `documentation-and-adrs`, `code-review-and-quality`, `business-model-evaluation`, `founder-product-critique` |
 | `learn` | Propose reusable guidance without replacing Codex memory | `documentation-and-adrs`, `context-engineering`, `retro` |
+| `new-project` | Scaffold a project workspace and proposal gate | `product-discovery`, `founder-review`, `business-model-review`, `spec-driven-development`, `planning-and-task-breakdown`, `documentation-and-adrs` |
+| `prototype` | Build a throwaway tangible artifact before production build | `idea-refine`, `frontend-ui-engineering`, `business-model-evaluation`, `documentation-and-adrs` |
+| `project-status` | Determine current phase and next recommended skills | `context-engineering`, `documentation-and-adrs`, `product-discovery`, `prototype`, `build`, `qa`, `ship`, `retro`, `learn` |
 
-Success means a future Codex session can invoke one of these entry skills by name, load only the necessary deeper workflows, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
+Success means a future Codex session can invoke one of these entry skills by name, load only the necessary deeper workflows, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable. It should also be able to answer "what phase are we in?" from project artifacts and recommend the next skills.
+
+## Project Phase Model
+
+Every full project or major project slice follows four phases:
+
+1. **Proposal:** define what becomes 10x better, what good looks like, outcomes, assumptions, principles, risks, and non-goals.
+2. **Prototype:** create tangible proof or playable artifacts before committing to production build direction.
+3. **Build:** implement approved slices with specs, plans, tests, reviews, and tech-design updates.
+4. **Release:** run QA and polish, decide go/no-go, ship or hold intentionally, grade the result against the proposal, and capture follow-up learning.
+
+The project workspace is inspired by `agent-kernel`'s inspectable markdown pattern, but adapted away from long-running-agent memory. Its default shape is `docs/project/` for a single-purpose repo or `docs/projects/<slug>/` for project slices inside a larger app.
 
 ## Tech Stack
 
@@ -62,10 +76,11 @@ python3 -m json.tool .codex-plugin/plugin.json >/dev/null
 docs/SPEC.md                    # This specification
 docs/PLAN.md                    # Implementation plan
 tasks/todo.md                   # Task checklist used by build workflow
-skills/<entry>/SKILL.md         # Seven command-like orchestrator skills
+skills/<entry>/SKILL.md         # Command-like orchestrator skills
 skills/<workflow>/SKILL.md      # Underlying reusable workflow skills
 skills/<persona>/SKILL.md       # Optional reviewer personas, if Codex skill shape is the right fit
 references/*.md                 # Checklists loaded only when needed
+scripts/scaffold_project.py     # Deterministic project workspace scaffold
 scripts/validate_plugin.py      # Shape validation
 scripts/validate_skill_graph.py # Orchestrator mapping validation
 assets/                         # Optional plugin UI assets
@@ -145,6 +160,8 @@ Never:
 - The project contains a reviewed spec and plan.
 - The original engineering entry skills exist and route to the correct deeper workflows.
 - Product/company entry skills exist and route to the correct deeper workflows.
+- Project lifecycle entry skills exist for scaffolding, prototyping, and status orientation.
+- `scripts/scaffold_project.py` can create `docs/project/` or `docs/projects/<slug>/` without overwriting existing files by default.
 - The underlying skills needed by those entry points are present in the plugin.
 - Validation scripts catch missing skills, broken mappings, malformed frontmatter, and accidental entry-skill bloat.
 - A manual smoke test proves each entry skill can be invoked by Codex in a clean project context.
@@ -156,3 +173,4 @@ Never:
 - The repo includes marketplace metadata, but no active user-level Codex config entry is edited by the plugin itself.
 - The repo is public and MIT licensed; upstream MIT attribution is preserved for vendored upstream material.
 - GStack is cited as methodology inspiration only; no GStack code is vendored in this pass.
+- Matt Pocock's `skills` and `agent-kernel` are cited as methodology and structure inspiration only; new project lifecycle skills are original Codex-native adaptations.

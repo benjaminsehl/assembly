@@ -16,3 +16,6 @@
 - [x] Task 14: Add product/business/design/QA references
 - [x] Task 15: Extend validators and skill graph
 - [x] Task 16: Update public docs, source notes, smoke tests, and license
+- [x] Task 17: Add project lifecycle entry skills for new-project, prototype, and project-status
+- [x] Task 18: Add deterministic project scaffold script and project lifecycle references
+- [x] Task 19: Update validators, docs, source notes, and smoke tests for the personal project stack
