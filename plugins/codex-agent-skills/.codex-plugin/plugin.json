@@ -1,6 +1,6 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "A compact personal product-building stack for Codex, spanning contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
   "author": {
     "name": "Sai",

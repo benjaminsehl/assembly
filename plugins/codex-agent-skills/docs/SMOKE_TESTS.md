@@ -14,6 +14,8 @@ If the plugin was already registered:
 codex plugin marketplace upgrade codex-agent-skills
 ```
 
+After enabling and restarting Codex, confirm `Codex Agent Skills` appears in the active plugin list and that a cache bundle exists under `~/.codex/plugins/cache/codex-agent-skills/codex-agent-skills/`.
+
 ## Test Matrix
 
 | Public skill | Smoke prompt | Expected evidence |
@@ -40,5 +42,5 @@ codex plugin marketplace upgrade codex-agent-skills
 - [ ] `project-status` handles scaffold, status, and repair without separate `new-project` or `introspect` skills.
 - [ ] `product-discovery` handles founder, business, and design-plan lenses without separate review skills.
 - [ ] Public skills load references conditionally and do not name deleted support skills as dependencies.
-- [ ] `scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
+- [ ] `plugins/codex-agent-skills/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
 - [ ] Missing phase prerequisites produce a warning and double-back skill recommendation.

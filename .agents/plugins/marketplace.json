@@ -8,7 +8,7 @@
       "name": "codex-agent-skills",
       "source": {
         "source": "local",
-        "path": "."
+        "path": "./plugins/codex-agent-skills"
       },
       "policy": {
         "installation": "AVAILABLE",

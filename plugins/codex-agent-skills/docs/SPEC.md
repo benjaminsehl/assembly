@@ -38,13 +38,13 @@ Projects are recursive. A repo can be a project, and clients, agent layers, rele
 
 ## Validation
 
-Required commands:
+Required commands from the repository root:
 
 ```bash
-python3 scripts/validate_plugin.py
-python3 scripts/validate_skill_graph.py
-python3 scripts/audit_skill_conflicts.py
-python3 -m py_compile scripts/validate_plugin.py scripts/validate_skill_graph.py scripts/scaffold_project.py scripts/audit_skill_conflicts.py
+python3 plugins/codex-agent-skills/scripts/validate_plugin.py
+python3 plugins/codex-agent-skills/scripts/validate_skill_graph.py
+python3 plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
+python3 -m py_compile plugins/codex-agent-skills/scripts/validate_plugin.py plugins/codex-agent-skills/scripts/validate_skill_graph.py plugins/codex-agent-skills/scripts/scaffold_project.py plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
 git diff --check
 ```
 

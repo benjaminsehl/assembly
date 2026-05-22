@@ -9,7 +9,13 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = (
+    PLUGIN_ROOT.parents[1]
+    if PLUGIN_ROOT.parent.name == "plugins"
+    else PLUGIN_ROOT
+)
+PLUGIN_NAME = PLUGIN_ROOT.name
 PUBLIC_SKILLS = {
     "next",
     "spec",
@@ -62,25 +68,34 @@ def load_json(path: Path) -> dict:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        fail(f"Missing required file: {path.relative_to(ROOT)}")
+        fail(f"Missing required file: {rel(path)}")
     except json.JSONDecodeError as exc:
-        fail(f"Invalid JSON in {path.relative_to(ROOT)}: {exc}")
+        fail(f"Invalid JSON in {rel(path)}: {exc}")
+
+
+def rel(path: Path) -> str:
+    for root in (PLUGIN_ROOT, REPO_ROOT):
+        try:
+            return str(path.relative_to(root))
+        except ValueError:
+            continue
+    return str(path)
 
 
 def resolve_plugin_path(value: str) -> Path:
     if not value.startswith("./"):
         fail(f"Manifest path must be relative and start with ./, got {value!r}")
-    return (ROOT / value[2:]).resolve()
+    return (PLUGIN_ROOT / value[2:]).resolve()
 
 
 def parse_frontmatter(path: Path) -> tuple[dict[str, str], str]:
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
-        fail(f"{path.relative_to(ROOT)} must start with YAML frontmatter")
+        fail(f"{rel(path)} must start with YAML frontmatter")
 
     end = text.find("\n---", 4)
     if end == -1:
-        fail(f"{path.relative_to(ROOT)} is missing closing frontmatter marker")
+        fail(f"{rel(path)} is missing closing frontmatter marker")
 
     raw = text[4:end].strip()
     body = text[end + len("\n---") :].strip()
@@ -96,17 +111,17 @@ def parse_frontmatter(path: Path) -> tuple[dict[str, str], str]:
 
 
 def validate_manifest() -> None:
-    manifest_path = ROOT / ".codex-plugin" / "plugin.json"
+    manifest_path = PLUGIN_ROOT / ".codex-plugin" / "plugin.json"
     manifest = load_json(manifest_path)
 
-    if manifest.get("name") != ROOT.name:
+    if manifest.get("name") != PLUGIN_NAME:
         fail("Manifest name must match the plugin folder name")
     if manifest.get("skills") != "./skills/":
         fail('Manifest must set "skills" to "./skills/"')
     if manifest.get("license") != "MIT":
         fail('Public plugin manifest must set "license" to "MIT"')
-    if not (ROOT / "LICENSE").is_file():
-        fail("Public plugin must include a root LICENSE file")
+    if not (PLUGIN_ROOT / "LICENSE").is_file():
+        fail("Public plugin bundle must include a LICENSE file")
 
     skills_dir = resolve_plugin_path(manifest["skills"])
     if not skills_dir.is_dir():
@@ -127,24 +142,25 @@ def validate_manifest() -> None:
 
 
 def validate_marketplace() -> None:
-    path = ROOT / ".agents" / "plugins" / "marketplace.json"
+    path = REPO_ROOT / ".agents" / "plugins" / "marketplace.json"
     marketplace = load_json(path)
-    if marketplace.get("name") != ROOT.name:
+    if marketplace.get("name") != PLUGIN_NAME:
         fail("Marketplace name must match the plugin name")
 
     entries = marketplace.get("plugins")
     if not isinstance(entries, list) or not entries:
         fail("Marketplace must contain at least one plugin entry")
 
-    matching = [entry for entry in entries if entry.get("name") == ROOT.name]
+    matching = [entry for entry in entries if entry.get("name") == PLUGIN_NAME]
     if len(matching) != 1:
         fail("Marketplace must contain exactly one codex-agent-skills entry")
 
     entry = matching[0]
     if entry.get("source", {}).get("source") != "local":
         fail("Marketplace entry source must be local")
-    if entry.get("source", {}).get("path") != ".":
-        fail('Marketplace entry source.path must be "." for this repo-root marketplace')
+    expected_path = f"./plugins/{PLUGIN_NAME}"
+    if entry.get("source", {}).get("path") != expected_path:
+        fail(f'Marketplace entry source.path must be "{expected_path}"')
     if entry.get("policy", {}).get("installation") != "AVAILABLE":
         fail("Marketplace installation policy must be AVAILABLE")
     if entry.get("policy", {}).get("authentication") != "ON_INSTALL":
@@ -155,34 +171,34 @@ def validate_marketplace() -> None:
 
 def validate_skill(path: Path) -> None:
     metadata, body = parse_frontmatter(path)
-    rel = path.relative_to(ROOT)
+    rel_path = rel(path)
     skill_dir = path.parent.name
 
     if metadata.get("name") != skill_dir:
-        fail(f"{rel} frontmatter name must match directory name {skill_dir!r}")
+        fail(f"{rel_path} frontmatter name must match directory name {skill_dir!r}")
     description = metadata.get("description", "")
     if not description or len(description) < 30:
-        fail(f"{rel} must include a useful description")
+        fail(f"{rel_path} must include a useful description")
     if len(description.split()) > 45:
-        fail(f"{rel} description is too broad; keep trigger text concise")
+        fail(f"{rel_path} description is too broad; keep trigger text concise")
     if "[TODO" in body or "[TODO" in description:
-        fail(f"{rel} contains unresolved TODO placeholder text")
+        fail(f"{rel_path} contains unresolved TODO placeholder text")
     if len(body.split()) < 25:
-        fail(f"{rel} body is too short to be a useful workflow")
+        fail(f"{rel_path} body is too short to be a useful workflow")
 
     for heading in ("## Purpose", "## References", "## Workflow", "## Verification"):
         if heading not in body:
-            fail(f"{rel} public skill is missing {heading}")
+            fail(f"{rel_path} public skill is missing {heading}")
     if "## Stop Conditions" not in body:
-        fail(f"{rel} public skill is missing ## Stop Conditions")
+        fail(f"{rel_path} public skill is missing ## Stop Conditions")
     if "## Underlying skills" in body:
-        fail(f"{rel} must use references, not triggerable underlying skills")
+        fail(f"{rel_path} must use references, not triggerable underlying skills")
     if len(body.splitlines()) > 120:
-        fail(f"{rel} is too large; keep public skills thin")
+        fail(f"{rel_path} is too large; keep public skills thin")
 
 
 def validate_skills() -> None:
-    skills_dir = ROOT / "skills"
+    skills_dir = PLUGIN_ROOT / "skills"
     skill_files = sorted(skills_dir.glob("*/SKILL.md"))
     names = {path.parent.name for path in skill_files}
 
@@ -205,18 +221,18 @@ def validate_skills() -> None:
 
 
 def validate_support_files() -> None:
-    references_dir = ROOT / "references"
+    references_dir = PLUGIN_ROOT / "references"
     missing_refs = sorted(name for name in REQUIRED_REFERENCES if not (references_dir / name).is_file())
     if missing_refs:
         fail(f"Missing required references: {', '.join(missing_refs)}")
 
     for path in sorted(references_dir.rglob("*.md")):
         text = path.read_text(encoding="utf-8")
-        rel = path.relative_to(ROOT)
+        rel_path = rel(path)
         if len(text.splitlines()) > 100 and "## Contents" not in text and "## Table of Contents" not in text:
-            fail(f"{rel} is over 100 lines and must include a ## Contents section")
+            fail(f"{rel_path} is over 100 lines and must include a ## Contents section")
 
-    install_text = (ROOT / "docs" / "INSTALL.md").read_text(encoding="utf-8")
+    install_text = (PLUGIN_ROOT / "docs" / "INSTALL.md").read_text(encoding="utf-8")
     for required in (
         "Existing Skill Conflicts",
         "Replacing A Loose Skill Set",
@@ -234,28 +250,28 @@ def validate_support_files() -> None:
         if required not in install_text:
             fail(f"docs/INSTALL.md must document skill-conflict guidance: {required}")
 
-    readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     if "de-duplicate" not in readme_text or "lifecycle" not in readme_text:
         fail("README.md must include lifecycle de-duplication guidance")
 
-    template_text = (ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
+    template_text = (PLUGIN_ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
     if "Codex Agent Skills" not in template_text or "lifecycle" not in template_text:
         fail("templates/AGENTS.md must identify Codex Agent Skills as lifecycle owner")
 
-    agents_dir = ROOT / "agents"
+    agents_dir = PLUGIN_ROOT / "agents"
     missing_personas = sorted(
         name for name in REQUIRED_PERSONAS if not (agents_dir / name).is_file()
     )
     if missing_personas:
         fail(f"Missing required personas: {', '.join(missing_personas)}")
 
-    scaffold_script = ROOT / "scripts" / "scaffold_project.py"
+    scaffold_script = PLUGIN_ROOT / "scripts" / "scaffold_project.py"
     if not scaffold_script.is_file():
         fail("Missing required scaffold script: scripts/scaffold_project.py")
 
-    if not (ROOT / "AGENTS.md").is_file():
-        fail("Missing required root agent guidance: AGENTS.md")
-    if not (ROOT / "templates" / "AGENTS.md").is_file():
+    if not (PLUGIN_ROOT / "AGENTS.md").is_file():
+        fail("Missing required plugin agent guidance: AGENTS.md")
+    if not (PLUGIN_ROOT / "templates" / "AGENTS.md").is_file():
         fail("Missing required downstream agent template: templates/AGENTS.md")
 
 

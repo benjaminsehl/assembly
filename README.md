@@ -2,7 +2,7 @@
 
 A compact personal product-building stack for Codex: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
 
-The plugin intentionally exposes a small public skill surface. Detailed guidance lives in `references/` so agents load it only when needed.
+The plugin intentionally exposes a small public skill surface. Detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
 
 ## Quick Start
 
@@ -95,35 +95,35 @@ Why this shape:
 6. If prerequisites are missing, warn once and recommend the right double-back skill.
 7. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
 
-The canonical agent protocol lives in `references/agent-operating-protocol.md`. New projects receive a copy at `docs/agent-guidance.md`.
+The canonical agent protocol lives in [references/agent-operating-protocol.md](plugins/codex-agent-skills/references/agent-operating-protocol.md). New projects receive a copy at `docs/agent-guidance.md`.
 
 ## Scaffolding
 
 From this plugin checkout, scaffold a root project:
 
 ```bash
-python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
+python3 plugins/codex-agent-skills/scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
 
 Scaffold a subproject:
 
 ```bash
-python3 scripts/scaffold_project.py \
+python3 plugins/codex-agent-skills/scripts/scaffold_project.py \
   --root /path/to/repo \
   --parent docs \
   --name "Agent Layer" \
   --slug agent-layer
 ```
 
-The script skips existing files by default. If the target repo already has `AGENTS.md`, the scaffold will not overwrite it; merge `templates/AGENTS.md` manually.
+The script skips existing files by default. If the target repo already has `AGENTS.md`, the scaffold will not overwrite it; merge [templates/AGENTS.md](plugins/codex-agent-skills/templates/AGENTS.md) manually.
 
 ## Validation
 
 ```bash
-python3 scripts/validate_plugin.py
-python3 scripts/validate_skill_graph.py
-python3 scripts/audit_skill_conflicts.py
-python3 -m py_compile scripts/validate_plugin.py scripts/validate_skill_graph.py scripts/scaffold_project.py scripts/audit_skill_conflicts.py
+python3 plugins/codex-agent-skills/scripts/validate_plugin.py
+python3 plugins/codex-agent-skills/scripts/validate_skill_graph.py
+python3 plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
+python3 -m py_compile plugins/codex-agent-skills/scripts/validate_plugin.py plugins/codex-agent-skills/scripts/validate_skill_graph.py plugins/codex-agent-skills/scripts/scaffold_project.py plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
 ```
 
 ## Source References
@@ -132,5 +132,5 @@ python3 -m py_compile scripts/validate_plugin.py scripts/validate_skill_graph.py
 - Garry Tan `gstack`: https://github.com/garrytan/gstack
 - Matt Pocock `skills`: https://github.com/mattpocock/skills
 - Benjamin Sehl `agent-kernel`: https://github.com/benjaminsehl/agent-kernel
-- Install details: [docs/INSTALL.md](docs/INSTALL.md)
-- Source notes: [docs/SOURCE_NOTES.md](docs/SOURCE_NOTES.md)
+- Install details: [docs/INSTALL.md](plugins/codex-agent-skills/docs/INSTALL.md)
+- Source notes: [docs/SOURCE_NOTES.md](plugins/codex-agent-skills/docs/SOURCE_NOTES.md)
