@@ -18,6 +18,7 @@ codex plugin marketplace upgrade codex-agent-skills
 
 | Public skill | Smoke prompt | Expected evidence |
 | --- | --- | --- |
+| `next` | "Use next to do the next normal thing." | Reads project status, names phase/evidence, runs the next unambiguous skill or asks one concise question. |
 | `project-status` | "Use project-status to tell me what phase this project is in." | Phase verdict with evidence, missing artifacts, next gate, next skills, and one action. |
 | `project-status` | "Use project-status to scaffold a project called Habit Coach." | Creates project docs and reports skipped files or manual `AGENTS.md` merge. |
 | `project-status` | "Use project-status to get this stale project back on track." | Conformity verdict, status update or skip reason, recovery plan, and next action. |
@@ -34,7 +35,8 @@ codex plugin marketplace upgrade codex-agent-skills
 
 ## Manual Acceptance Checklist
 
-- [ ] Only the 11 public skills are triggerable from this plugin.
+- [ ] Only the 12 public skills are triggerable from this plugin.
+- [ ] `next` dispatches to the next evidence-backed action and does not guess when status is ambiguous.
 - [ ] `project-status` handles scaffold, status, and repair without separate `new-project` or `introspect` skills.
 - [ ] `product-discovery` handles founder, business, and design-plan lenses without separate review skills.
 - [ ] Public skills load references conditionally and do not name deleted support skills as dependencies.

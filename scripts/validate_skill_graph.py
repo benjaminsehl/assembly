@@ -10,6 +10,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 SKILL_REFERENCES = {
+    "next": [
+        "references/project-phases.md",
+        "references/agent-operating-protocol.md",
+        "references/workflows/project-lifecycle.md",
+    ],
     "spec": [
         "references/workflows/engineering-delivery.md",
         "references/product-discovery-checklist.md",

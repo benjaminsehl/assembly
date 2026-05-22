@@ -1,7 +1,7 @@
 {
   "name": "codex-agent-skills",
-  "version": "0.7.0",
-  "description": "A compact personal product-building stack for Codex, spanning project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
+  "version": "0.7.1",
+  "description": "A compact personal product-building stack for Codex, spanning contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
   "author": {
     "name": "Sai",
     "email": "",
@@ -20,6 +20,7 @@
     "business-model",
     "project-lifecycle",
     "project-status",
+    "next",
     "prototype",
     "app-factory",
     "agents-md",
@@ -29,7 +30,7 @@
   "interface": {
     "displayName": "Codex Agent Skills",
     "shortDescription": "Compact lifecycle workflows for building lovable, viable, well-engineered apps with Codex.",
-    "longDescription": "A Codex-native product-building stack with a deliberately small public skill surface: project status/scaffold/repair, product discovery, prototypes, specs, planning, implementation, tests, QA, review, simplification, and ship decisions. Detailed guidance lives in references so agents load only the context they need.",
+    "longDescription": "A Codex-native product-building stack with a deliberately small public skill surface: contextual next action, project status/scaffold/repair, product discovery, prototypes, specs, planning, implementation, tests, QA, review, simplification, and ship decisions. Detailed guidance lives in references so agents load only the context they need.",
     "developerName": "Sai",
     "category": "Developer Tools",
     "capabilities": [
@@ -40,9 +41,9 @@
     "privacyPolicyURL": "",
     "termsOfServiceURL": "",
     "defaultPrompt": [
+      "Use next to do the next normal thing.",
       "Use project-status to scaffold this project.",
-      "Use project-status to tell me what phase we are in.",
-      "Use prototype before we build this direction."
+      "Use project-status to tell me what phase we are in."
     ],
     "brandColor": "#2563EB"
   }

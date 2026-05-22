@@ -33,7 +33,7 @@ enabled = true
 
 This plugin is intended to own lifecycle entry skills. Public entry skills:
 
-`project-status`, `product-discovery`, `prototype`, `spec`, `plan`, `build`, `test`, `qa`, `review`, `code-simplify`, `ship`.
+`next`, `project-status`, `product-discovery`, `prototype`, `spec`, `plan`, `build`, `test`, `qa`, `review`, `code-simplify`, `ship`.
 
 If you already have skills with these names, choose one owner before enabling this plugin:
 
@@ -53,7 +53,7 @@ Suggested migration:
 
 1. Register and enable `codex-agent-skills`.
 2. Restart Codex and confirm the public entry skills appear.
-3. In a throwaway repo, run `Use project-status...` and `Use spec...`.
+3. In a throwaway repo, run `Use next...`, `Use project-status...`, and `Use spec...`.
 4. Disable, remove, or rename older lifecycle skills that collide with this plugin's entry names.
 5. Keep specialized non-overlapping skills.
 6. In project `AGENTS.md`, state that lifecycle routing should use Codex Agent Skills.
@@ -63,6 +63,7 @@ Suggested migration:
 Codex does not need Claude-style slash commands. Use the public skill names in natural language:
 
 ```text
+Use next to do the next normal thing.
 Use project-status to tell me what phase we are in and what skills to use next.
 Use project-status to scaffold this project.
 Use product-discovery on this idea.

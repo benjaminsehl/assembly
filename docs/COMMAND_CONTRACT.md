@@ -27,6 +27,7 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 
 | Skill | Purpose | Main references |
 | --- | --- | --- |
+| `next` | Continue through the normal process by choosing and running the next unambiguous action | `project-phases`, `agent-operating-protocol`, `workflows/project-lifecycle` |
 | `project-status` | Orient, scaffold, repair status, and recommend next skills | `project-phases`, `project-kernel-structure`, `agent-operating-protocol`, `workflows/project-lifecycle` |
 | `product-discovery` | Shape raw ideas and product direction | `product-discovery-checklist`, `business-model-checklist`, `design-quality-checklist`, `workflows/product-strategy` |
 | `prototype` | Build throwaway tangible proof before production build | `design-quality-checklist`, `business-model-checklist`, `workflows/product-strategy`, `project-phases` |
@@ -41,6 +42,7 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 
 ## Gateway Policy
 
+- `next` is the continuation gateway. It reads project state, uses `project-status` repair behavior when state is stale, and proceeds only when the next normal action is specific and evidence-backed.
 - `project-status` is the project gateway. It covers new project scaffolding, phase status, stale docs, recovery plans, retro capture, and durable project learning.
 - `product-discovery` is the product gateway. It covers raw ideas, founder critique, business-model pressure tests, and planned UX critique before specs.
 - The engineering spine is `spec` -> `plan` -> `build` -> `test` -> `review` -> `code-simplify` -> `ship`.
@@ -48,6 +50,7 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 
 ## Trigger Examples
 
+- `next`: "Next", "Continue", "Do the next thing", "Do the next normal thing."
 - `project-status`: "What phase are we in?", "Scaffold this project", "Get this project back on track", "What should we do next?"
 - `product-discovery`: "I have an idea", "Pressure-test this", "Is this viable?", "Do a founder/business/design critique."
 - `prototype`: "Build a throwaway prototype", "Can we feel this before committing?"

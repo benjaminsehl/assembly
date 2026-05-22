@@ -7,7 +7,7 @@
 - Repair and introspection
 - Retro and learning
 
-Use this reference from `project-status`. It keeps project-control behavior behind one public gateway so users do not need to remember separate `new-project`, `introspect`, `retro`, or `learn` commands.
+Use this reference from `project-status` and `next`. It keeps project-control behavior behind a small public gateway so users do not need to remember separate `new-project`, `introspect`, `retro`, or `learn` commands.
 
 ## Start Or Scaffold
 
@@ -51,6 +51,8 @@ Answer with:
 - Next gate.
 - Next skills.
 - One concrete next action.
+
+For `next`, continue past the status answer only when that one concrete action is unambiguous and inside the user's requested scope. If two or more actions are plausible, ask one concise verification question.
 
 ## Repair And Introspection
 

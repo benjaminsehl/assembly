@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_SKILLS = {
+    "next",
     "spec",
     "plan",
     "build",
@@ -222,6 +223,7 @@ def validate_support_files() -> None:
         "disable",
         "rename",
         "entry skills",
+        "next",
         "spec",
         "plan",
         "build",

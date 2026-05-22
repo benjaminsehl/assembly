@@ -53,6 +53,7 @@ Release needs:
 
 ## Skill Routing
 
+- User says "next", "continue", or "do the next normal thing": use `next`.
 - Unknown phase, returning session, scaffold, recovery, retro, or durable project learning: use `project-status`.
 - Raw idea, product ambition, business viability, or planned UX critique: use `product-discovery`.
 - Tangible learning before production build: use `prototype`.

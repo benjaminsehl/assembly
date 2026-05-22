@@ -2,7 +2,7 @@
 
 ## Objective
 
-Build a compact Codex plugin that acts as a personal product-building stack. It should help future agents orient a project, shape product direction, prototype, specify, plan, build, test, QA, review, simplify, and ship with evidence.
+Build a compact Codex plugin that acts as a personal product-building stack. It should help future agents continue to the next contextual step, orient a project, shape product direction, prototype, specify, plan, build, test, QA, review, simplify, and ship with evidence.
 
 The public surface is intentionally small. Detailed workflow knowledge lives in `references/` so Codex can load it only when needed and avoid conflicts with users' existing skills.
 
@@ -10,6 +10,7 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 
 | Public skill | Job | Key references |
 | --- | --- | --- |
+| `next` | Continue through the normal process by choosing the next evidence-backed action | `project-phases`, `agent-operating-protocol`, `workflows/project-lifecycle` |
 | `project-status` | Project gateway for status, scaffold, repair, retro, and next-skill routing | `project-phases`, `project-kernel-structure`, `agent-operating-protocol`, `workflows/project-lifecycle` |
 | `product-discovery` | Product gateway for ideas, founder critique, business viability, and design-plan critique | `product-discovery-checklist`, `business-model-checklist`, `design-quality-checklist`, `workflows/product-strategy` |
 | `prototype` | Create tangible throwaway evidence before production build | `workflows/product-strategy`, `project-phases` |
@@ -49,7 +50,7 @@ git diff --check
 
 Validation must ensure:
 
-- Only the 11 public skills are triggerable from this plugin.
+- Only the 12 public skills are triggerable from this plugin.
 - Public skills have concise descriptions, required sections, and direct reference links.
 - Public skills do not list deleted support skills as dependencies.
 - Required references, templates, personas, and scaffold scripts exist.

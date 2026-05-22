@@ -18,6 +18,7 @@ When working on this repo, follow the same protocol the plugin teaches:
 
 - Identify whether the change is proposal, prototype, build, or release work.
 - Use the relevant skill surface before editing.
+- Use `next` when the user asks to continue through the normal process from current project context.
 - Use `project-status` first when the phase is unclear, docs need scaffolding, or status needs repair.
 - If a user asks to skip prerequisites, warn once, name the missing gate, then proceed if they insist unless a hard safety boundary applies.
 - Preserve the paper trail for decisions that future agents will need.

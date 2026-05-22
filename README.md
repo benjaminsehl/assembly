@@ -1,6 +1,6 @@
 # Codex Agent Skills
 
-A compact personal product-building stack for Codex: project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
+A compact personal product-building stack for Codex: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
 
 The plugin intentionally exposes a small public skill surface. Detailed guidance lives in `references/` so agents load it only when needed.
 
@@ -21,6 +21,7 @@ codex plugin marketplace upgrade codex-agent-skills
 Then invoke public skills in natural language:
 
 ```text
+Use next to do the next normal thing.
 Use project-status to tell me what phase we are in and what skills to use next.
 Use project-status to scaffold this project.
 Use product-discovery on this idea.
@@ -35,12 +36,13 @@ Use code-simplify on the changed files.
 Use ship to decide whether this is ready.
 ```
 
-If you already have personal lifecycle skills installed, treat this plugin as the owner of that surface. Keep specialized platform skills, but de-duplicate older lifecycle skills named `spec`, `plan`, `build`, `test`, `review`, `ship`, `qa`, `prototype`, `product-discovery`, or `project-status`.
+If you already have personal lifecycle skills installed, treat this plugin as the owner of that surface. Keep specialized platform skills, but de-duplicate older lifecycle skills named `next`, `spec`, `plan`, `build`, `test`, `review`, `ship`, `qa`, `prototype`, `product-discovery`, or `project-status`.
 
 ## Public Skills
 
 | Skill | Job |
 | --- | --- |
+| `next` | Contextual continuation: inspect project state, choose the next normal action, and proceed when unambiguous |
 | `project-status` | Project gateway for status, scaffolding, repair, retro, and next-skill routing |
 | `product-discovery` | Product gateway for raw ideas, founder critique, business viability, and design-plan pressure tests |
 | `prototype` | Tangible proof before production build |
@@ -85,12 +87,13 @@ Why this shape:
 
 ## How Agents Should Work Through A Project
 
-1. Read `docs/status.md` and nearest subproject status.
-2. Use `project-status` when the phase, scaffold, repair path, or next skill is not obvious.
-3. Use `product-discovery` when product direction, user love, or business viability is unclear.
-4. Choose the matching lifecycle skill for the current phase.
-5. If prerequisites are missing, warn once and recommend the right double-back skill.
-6. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
+1. Use `next` when the user asks to continue through the normal process.
+2. Read `docs/status.md` and nearest subproject status.
+3. Use `project-status` when the phase, scaffold, repair path, or next skill is not obvious.
+4. Use `product-discovery` when product direction, user love, or business viability is unclear.
+5. Choose the matching lifecycle skill for the current phase.
+6. If prerequisites are missing, warn once and recommend the right double-back skill.
+7. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
 
 The canonical agent protocol lives in `references/agent-operating-protocol.md`. New projects receive a copy at `docs/agent-guidance.md`.
 

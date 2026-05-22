@@ -327,6 +327,7 @@ Estimated scope: S
 - [x] Added `introspect` as the deeper workflow audit and status-repair skill behind `project-status`.
 - [x] Shrunk the public skill surface to 11 lifecycle skills and moved support workflows behind references.
 - [x] Added install conflict guidance and advisory local skill conflict audit.
+- [x] Added `next` as a narrow contextual continuation entry skill that dispatches only from evidence-backed project state.
 
 ## Decisions
 
@@ -335,3 +336,4 @@ Estimated scope: S
 - Entry skills use short names only for the first version.
 - Matt Pocock's `skills` and `agent-kernel` are cited as inspiration only; this layer is an original Codex-native project lifecycle adaptation.
 - Version `0.7.0` makes a pre-install breaking cleanup: lifecycle skills stay public, support workflows move to references, and existing user-skill conflicts are documented as a migration concern.
+- Version `0.7.1` adds `next` because the one-word continuation command is itself a useful product interface, while keeping the heavy status and lifecycle logic in references.

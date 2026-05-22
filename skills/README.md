@@ -3,6 +3,7 @@
 This directory contains the public command-like skills exposed by the plugin:
 
 - `project-status`
+- `next`
 - `product-discovery`
 - `prototype`
 - `spec`

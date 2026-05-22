@@ -28,6 +28,7 @@ Required evidence:
 
 Recommended skills:
 
+- `next`
 - `project-status`
 - `product-discovery`
 - `spec`
@@ -47,6 +48,7 @@ Required evidence:
 
 Recommended skills:
 
+- `next`
 - `prototype`
 - `product-discovery`
 - `spec`
@@ -66,6 +68,7 @@ Required evidence:
 
 Recommended skills:
 
+- `next`
 - `plan`
 - `build`
 - `test`
@@ -89,6 +92,7 @@ Required evidence:
 
 Recommended skills:
 
+- `next`
 - `qa`
 - `review`
 - `ship`

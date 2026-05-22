@@ -25,3 +25,4 @@
 - [x] Task 23: Add introspect workflow audit and status repair skill
 - [x] Task 24: Shrink public skill surface and move support workflows to references
 - [x] Task 25: Add user skill conflict guidance and audit script
+- [x] Task 26: Add `next` as the contextual continuation entry skill

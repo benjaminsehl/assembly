@@ -20,11 +20,12 @@ No GStack, Matt Pocock, or agent-kernel code is vendored.
 
 Codex does not expose Claude-style `.claude/commands/*.md` as the plugin primitive. This repo therefore implements natural-language lifecycle workflows as Codex skills.
 
-Earlier versions vendored many underlying workflow skills as triggerable skill directories. Version `0.7.0` intentionally shrinks the public surface and moves detailed workflow guidance into references to reduce context load and avoid collisions with users' existing skills.
+Earlier versions vendored many underlying workflow skills as triggerable skill directories. Version `0.7.0` intentionally shrinks the public surface and moves detailed workflow guidance into references to reduce context load and avoid collisions with users' existing skills. Version `0.7.1` adds `next` as a small continuation dispatcher without expanding the support-skill surface.
 
 Public skills:
 
 - `project-status`
+- `next`
 - `product-discovery`
 - `prototype`
 - `spec`

@@ -23,11 +23,13 @@ Always identify the current project phase before choosing a workflow:
 - Release: QA, polish, ship or hold, grade against proposal, and capture follow-up learning.
 
 Use `project-status` when returning to a project, scaffolding missing docs, repairing stale status, or when the phase is unclear.
+Use `next` when the user asks to continue through the normal process and the next action should be selected from project context.
 
 ## Skill Routing
 
 - These route names refer to the Codex Agent Skills plugin's phase-aware lifecycle workflows.
 - If another installed skill has the same name, prefer Codex Agent Skills for project lifecycle decisions in this repo.
+- Contextual continuation: `next`
 - New project, subproject, status, repair, retro, or project learning: `project-status`
 - Raw idea, scope, ambition, business viability, or UX before build: `product-discovery`
 - Tangible proof: `prototype`
