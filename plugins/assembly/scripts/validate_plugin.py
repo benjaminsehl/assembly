@@ -253,6 +253,21 @@ def validate_support_files() -> None:
     readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     if "de-duplicate" not in readme_text or "lifecycle" not in readme_text:
         fail("README.md must include lifecycle de-duplication guidance")
+    for required in (
+        "explicit user authorization",
+        "unresolved review threads",
+    ):
+        if required not in readme_text:
+            fail(f"README.md must document GitHub handoff behavior: {required}")
+
+    command_contract_text = (PLUGIN_ROOT / "docs" / "COMMAND_CONTRACT.md").read_text(encoding="utf-8")
+    for required in (
+        "ask before ready-for-review",
+        "PR review feedback",
+        "explicit user authorization",
+    ):
+        if required not in command_contract_text:
+            fail(f"docs/COMMAND_CONTRACT.md must document GitHub handoff behavior: {required}")
 
     template_text = (PLUGIN_ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
     if "Assembly" not in template_text or "lifecycle" not in template_text:
@@ -293,6 +308,30 @@ def validate_support_files() -> None:
             fail(f"scaffold_project.py must create {required}")
     if 'project_dir / "agent-guidance.md"' in scaffold_text:
         fail("scaffold_project.py must not create docs/agent-guidance.md")
+
+    engineering_text = (
+        PLUGIN_ROOT / "references" / "workflows" / "engineering-delivery.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "PR Review Feedback",
+        "git switch <topic-branch> || git switch -c <topic-branch>",
+        "gh pr edit",
+        "handoff is blocked",
+        "explicit user authorization",
+        "Reply to review threads and mark them resolved only when the user explicitly asks",
+    ):
+        if required not in engineering_text:
+            fail(f"engineering-delivery.md must document GitHub handoff behavior: {required}")
+
+    build_text = (PLUGIN_ROOT / "skills" / "build" / "SKILL.md").read_text(encoding="utf-8")
+    if "handoff is blocked" not in build_text:
+        fail("build skill must document blocked GitHub handoff fallback")
+
+    qa_release_text = (
+        PLUGIN_ROOT / "references" / "workflows" / "qa-and-release.md"
+    ).read_text(encoding="utf-8")
+    if "Ask before marking ready" not in qa_release_text or "explicitly authorizes" not in qa_release_text:
+        fail("qa-and-release.md must require explicit authorization before gh pr ready")
 
     if not (PLUGIN_ROOT / "AGENTS.md").is_file():
         fail("Missing required plugin agent guidance: AGENTS.md")

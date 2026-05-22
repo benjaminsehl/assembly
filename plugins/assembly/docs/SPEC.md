@@ -25,7 +25,7 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 
 Success means a future Codex session can invoke one of these skills by name, load only the necessary references, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
 
-For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, draft PR, self-review, simplification pass, verification evidence, and ready-for-review only after those gates pass.
+For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, draft PR, self-review, simplification pass, verification evidence, and ready-for-review only after those gates pass and the user explicitly authorizes it.
 
 ## Project Phase Model
 
@@ -59,7 +59,7 @@ Validation must ensure:
 - Public skills do not list deleted support skills as dependencies.
 - Required references, templates, personas, and scaffold scripts exist.
 - Install docs explain existing skill conflicts and replacement guidance.
-- GitHub handoff guidance explains `gh` usage, draft PRs, self-review, code simplification, and ready-for-review gates.
+- GitHub handoff guidance explains `gh` usage, draft PRs, existing-PR updates, blocked-handoff fallback, self-review, code simplification, PR review feedback, and ask-first ready-for-review gates.
 - Scaffolds create `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/`, and `reference/` while avoiding `docs/agent-guidance.md`.
 - References over 100 lines include a `## Contents` section.
 

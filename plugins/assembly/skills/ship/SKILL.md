@@ -22,7 +22,7 @@ Decide whether a change is ready to release. A `GO` decision requires verificati
 2. Gather the diff, test/build/CI status, deployment path, feature flags, migrations, docs, and rollback mechanism.
 3. Check current changes for launch blockers across correctness, security, performance, data, migration, and docs.
 4. Use health-check mode from `references/workflows/qa-and-release.md` only for broad periodic readiness, not ordinary diff review.
-5. For GitHub-backed work, use PR readiness mode from `references/workflows/qa-and-release.md`: confirm draft PR, checks, self-review, simplification pass, and final verification before marking ready.
+5. For GitHub-backed work, use PR readiness mode from `references/workflows/qa-and-release.md`: confirm draft PR, checks, self-review, simplification pass, final verification, and explicit user authorization before marking ready.
 6. If the user explicitly authorized subagents or parallel agent work, run specialist review in parallel and merge the reports. Otherwise perform the audit locally and say fan-out was not used.
 7. Produce a single `GO` or `NO-GO` decision with blockers, recommended fixes, acknowledged risks, rollback triggers, rollback procedure, evidence, and post-release learning capture.
 
@@ -31,7 +31,7 @@ Decide whether a change is ready to release. A `GO` decision requires verificati
 - Test, build, CI, or manual verification status is named.
 - Blockers are separated from recommended fixes.
 - Rollback trigger conditions and procedure are present.
-- PR state is named, and draft PRs are marked ready only after review and simplification gates pass.
+- PR state is named, and draft PRs are marked ready only after review, simplification, verification, and explicit user authorization.
 - Any accepted risk is explicit.
 
 ## Stop Conditions

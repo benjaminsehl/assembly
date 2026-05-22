@@ -52,7 +52,7 @@ Use this before marking a draft PR ready for review.
 - Fix important findings and rerun relevant checks.
 - Update the PR body with final summary, verification, risk, and follow-up.
 - Confirm the PR body explains why the work matters, the principles behind the change, and how the agent approached it.
-- Mark ready with `gh pr ready` only after the self-review and simplification pass are complete.
+- Ask before marking ready. Run `gh pr ready` only after the self-review and simplification pass are complete and the user explicitly authorizes the ready-for-review transition.
 - Keep the PR draft if unresolved blockers, failing checks, missing verification, or user-requested hold remain.
 
 ## Post-Release Learning

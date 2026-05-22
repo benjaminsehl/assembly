@@ -30,6 +30,7 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 | `plan` | "Use plan on the approved spec and create implementation tasks." | Task list with dependencies, acceptance criteria, and verification steps. |
 | `build` | "Use build to implement the first task." | One slice implemented with changed files and verification. |
 | `build` | "Use build, then push this up." | Focused commit, pushed topic branch, descriptive draft PR created with `gh`, and why/principles/approach/verification in the PR body. |
+| `build` | "Use build to address the unresolved PR review comments on PR #1." | Thread-aware comment read, traceable fixes, pushed update, replies and resolution only when explicitly requested. |
 | `test` | "Use test to prove blank input returns blank output." | Failing or targeted test evidence, then passing result. |
 | `qa` | "Use qa on this local app." | Tested flows, repro steps for bugs, evidence, and regression recommendations. |
 | `review` | "Use review on the current diff." | Findings first, file/line references when issues exist, and test gaps. |
@@ -47,3 +48,7 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 - [ ] `plugins/assembly/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
 - [ ] Missing phase prerequisites produce a warning and double-back skill recommendation.
 - [ ] Material GitHub-backed work uses `gh` for descriptive draft PR handoff and marks ready only after verification, self-review, and code simplification.
+- [ ] Draft PRs are marked ready only after explicit user authorization.
+- [ ] Existing PR branches use idempotent branch switching and `gh pr edit` rather than create-only flows.
+- [ ] Blocked GitHub handoff reports the blocker, local work, verification status, and recovery step instead of looping.
+- [ ] PR review comments are addressed with thread-aware reads, pushed fixes, replies, and resolution when requested.

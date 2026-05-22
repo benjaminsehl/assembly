@@ -117,8 +117,9 @@ Assembly expects agents to leave real work reviewable:
 - Push the branch.
 - Open or update a descriptive draft PR with `gh`.
 - Explain why the PR exists, the first principles behind the change, and how the agent approached it.
-- Run `review` and `code-simplify` before marking ready.
-- Mark the PR ready with `gh pr ready` only after verification, self-review, and simplification pass.
+- Run `review` and `code-simplify` before asking to mark ready.
+- Mark the PR ready with `gh pr ready` only after verification, self-review, simplification, and explicit user authorization.
+- When addressing PR comments, inspect unresolved review threads, implement traceable fixes, push updates, and reply/resolve threads only when the user asks for that GitHub write action.
 - Do not merge, deploy, or create non-draft PRs without explicit direction.
 
 The canonical agent protocol lives in [references/agent-operating-protocol.md](plugins/assembly/references/agent-operating-protocol.md). New projects receive a copy at `.agents/AGENT-GUIDANCE.md`.
