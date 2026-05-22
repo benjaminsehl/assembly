@@ -5,6 +5,7 @@
 - Live QA
 - Health check
 - Ship
+- PR readiness
 - Post-release learning
 
 Use this reference from `qa` and `ship`.
@@ -37,7 +38,22 @@ Output blockers, important fixes, quick wins, and one next action.
 - Decide `GO` or `NO-GO`.
 - Separate blockers from accepted risks and nice-to-have fixes.
 - Name rollback triggers and rollback procedure.
+- For GitHub-backed work, confirm PR state, CI/check status, review status, and whether the PR is draft or ready.
 - Do not use subagents unless the user explicitly authorized parallel agent work.
+
+## PR Readiness
+
+Use this before marking a draft PR ready for review.
+
+- Confirm the branch is pushed and the PR exists.
+- Confirm targeted and broad verification has passed or clearly document accepted gaps.
+- Run `review` against the final diff or PR.
+- Run `code-simplify` on the changed files when simplification risk is reasonable.
+- Fix important findings and rerun relevant checks.
+- Update the PR body with final summary, verification, risk, and follow-up.
+- Confirm the PR body explains why the work matters, the principles behind the change, and how the agent approached it.
+- Mark ready with `gh pr ready` only after the self-review and simplification pass are complete.
+- Keep the PR draft if unresolved blockers, failing checks, missing verification, or user-requested hold remain.
 
 ## Post-Release Learning
 

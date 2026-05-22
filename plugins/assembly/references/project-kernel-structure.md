@@ -5,6 +5,7 @@ This is a project-focused adaptation of the agent-kernel idea: small, inspectabl
 ## Contents
 
 - Root project
+- Agent-only workspace
 - Subprojects
 - What belongs where
 - Why root docs
@@ -19,9 +20,13 @@ Use this shape for the main project in a repo:
 
 ```text
 AGENTS.md
+.agents/
+|-- AGENT-GUIDANCE.md
+|-- log.md
+`-- notes/
+    `-- README.md
 docs/
 |-- README.md
-|-- agent-guidance.md
 |-- status.md
 |-- phases/
 |   |-- proposal.md
@@ -49,7 +54,17 @@ docs/
 |   `-- README.md
 `-- projects/
     `-- README.md
+reference/
+`-- README.md
 ```
+
+## Agent-Only Workspace
+
+Keep `AGENTS.md` at the repo root so agents have an obvious entrypoint. Put other agent-only operating material under `.agents/`.
+
+Instruction-like project files use uppercase names, such as `.agents/AGENT-GUIDANCE.md`. Records and working context use lowercase names, such as `.agents/log.md` and `.agents/notes/`.
+
+Do not put agent-only control files in `docs/`. `docs/` is the durable project paper trail; `.agents/` is the agent operating layer.
 
 ## Subprojects
 
@@ -71,8 +86,12 @@ Prefer a single root `docs/` tree over package-level docs. Only use a different 
 
 ## What Belongs Where
 
+- `AGENTS.md`: top-level entrypoint for agent behavior in the repo.
+- `.agents/AGENT-GUIDANCE.md`: project-visible copy of the phase-aware agent operating protocol.
+- `.agents/log.md`: append-only agent handoff events, skipped gates, recovery notes, and project-operation changes.
+- `.agents/notes/`: temporary agent working notes and open loops.
+- `reference/`: raw source material, imports, screenshots, transcripts, datasets, vendor docs, and evidence that should stay close to the project.
 - `status.md`: current phase, evidence, next gate, next skills, and one next action.
-- `agent-guidance.md`: project-visible copy of the phase-aware agent operating protocol.
 - `phases/proposal.md`: outcomes, assumptions, principles, risks, existing constraints, and what good looks like.
 - `phases/prototype.md`: prototype question, artifacts, findings, and verdict.
 - `phases/build.md`: approved direction, slices, acceptance criteria, verification, and risks.
@@ -97,6 +116,8 @@ python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
 
 This creates `AGENTS.md` only when it does not already exist. Existing project instructions must be merged manually.
+
+The scaffold also creates `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/README.md`, and `reference/README.md` when absent.
 
 Subproject:
 

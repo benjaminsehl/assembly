@@ -5,7 +5,8 @@ Use this when retrofitting a project that already has many useful notes but did 
 The inspected Hyper checkout showed valuable artifacts spread across:
 
 - Top-level product and design docs.
-- `.agents/` kernel-style notes, knowledge files, and decisions.
+- `.agents/` kernel-style notes, logs, knowledge files, and decisions.
+- Raw source material that should become `reference/` instead of project docs.
 - `docs/plans/` dated specs and implementation plans.
 - API docs and migration plans.
 
@@ -22,14 +23,15 @@ This is useful context, but it creates a resume problem: a future session can fi
    - Product/design docs into proposal.
    - Existing specs and dated plans into build.
    - QA evidence and release decisions into release.
-   - `.agents/decisions` or ADRs into decisions.
+   - `.agents/decisions` or ADRs into `docs/decisions/`.
+   - Raw Ladder-style imports, screenshots, transcripts, and vendor materials into `reference/`.
 4. Fill gaps with explicit "missing" entries, especially:
    - What becomes 10x better.
    - What good looks like.
    - Assumptions and principles.
    - Prototype verdict, if no prototype phase existed.
    - Release grading and follow-up learning.
-5. Keep `.agents/` as broader durable agent context if the repo already uses it. The docs workspace should not replace it; it should make a slice resumable and preserve the reason decisions exist.
+5. Keep `.agents/` for agent-only operating context if the repo already uses it. Promote durable product, technical, or decision context into `docs/`; keep raw source material in `reference/`.
 
 ## Retrofit Output
 

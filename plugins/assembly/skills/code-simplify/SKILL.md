@@ -23,12 +23,14 @@ Reduce code complexity without changing behavior. Simplification is only success
 5. Apply simplifications in small steps, verifying after each meaningful step.
 6. Review the final diff for accidental behavior changes or readability regressions.
 7. Revert or abandon any simplification that cannot be verified.
+8. If working in a GitHub PR handoff, push simplification commits and update PR verification notes.
 
 ## Verification
 
 - Behavior is covered by existing or newly added tests where practical.
 - Targeted checks pass after each meaningful simplification.
 - Final diff is smaller or clearer for a concrete reason.
+- GitHub PR handoffs include pushed simplification commits when simplification changed code.
 - Any unverified behavior is disclosed.
 
 ## Stop Conditions

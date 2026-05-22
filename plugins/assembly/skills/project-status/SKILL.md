@@ -22,7 +22,7 @@ This is also the gateway for project start, scaffold, and repair. Do not route t
 ## Workflow
 
 1. State that `project-status` is active and identify the repo plus project or subproject.
-2. Inspect `docs/status.md`, nearest `docs/projects/**/status.md`, phase files, product docs, decisions, specs, plans, QA/release notes, open tasks, and recent commits.
+2. Inspect `docs/status.md`, nearest `docs/projects/**/status.md`, phase files, product docs, decisions, specs, plans, QA/release notes, `.agents/log.md`, relevant `.agents/notes/`, `reference/`, open tasks, and recent commits.
 3. If project docs are missing and the user is starting or restarting work, use scaffold mode from `references/workflows/project-lifecycle.md` and `scripts/scaffold_project.py`.
 4. Classify the phase:
    - Proposal: outcomes, assumptions, principles, or success criteria are not aligned.

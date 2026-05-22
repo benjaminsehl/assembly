@@ -56,6 +56,7 @@ def template_files(
 ) -> dict[Path, str]:
     today = date.today().isoformat()
     status_path = rel(project_dir / "status.md", root)
+    agent_guidance_path = rel(root / ".agents" / "AGENT-GUIDANCE.md", root)
 
     return {
         project_dir / "README.md": f"""# {project_name}
@@ -69,7 +70,7 @@ Start here:
 - Decisions: `decisions/`
 - Product vision: `product/vision.md`
 - Tech design: `tech-design/`
-- Agent guidance: `agent-guidance.md`
+- Agent guidance: top-level `AGENTS.md` and `{agent_guidance_path}`
 - Child projects: `projects/`
 """,
         project_dir / "status.md": f"""# Project Status: {project_name}
@@ -95,7 +96,27 @@ Current phase: proposal
 - What does good look like at release?
 - Which assumptions are riskiest?
 """,
-        project_dir / "agent-guidance.md": protocol_text,
+        root / ".agents" / "AGENT-GUIDANCE.md": protocol_text,
+        root / ".agents" / "log.md": f"""# Agent Log
+
+Append meaningful agent handoff events, skipped gates, recovery notes, and project-operation changes here.
+
+## {today}
+
+- Project workspace scaffolded for `{project_name}`.
+""",
+        root / ".agents" / "notes" / "README.md": """# Agent Notes
+
+Use dated notes for temporary agent working context, open loops, and handoff breadcrumbs.
+
+Promote durable product, technical, or decision context into `docs/`. Keep source material in `reference/`.
+""",
+        root / "reference" / "README.md": """# Reference
+
+Store raw source material, imports, screenshots, transcripts, datasets, vendor docs, and other evidence that should remain close to the project but should not be rewritten as project documentation.
+
+When a reference changes a decision, summarize the durable conclusion in `docs/decisions/`, `docs/research/`, or the relevant phase file.
+""",
         project_dir / "phases" / "proposal.md": """# Proposal Phase
 
 ## What Becomes 10x Better
@@ -376,7 +397,8 @@ def main() -> int:
     if agents_exists:
         result["skipped"].append("AGENTS.md")
         result["manual_merge"] = [
-            "AGENTS.md already exists; merge templates/AGENTS.md manually if needed."
+            "AGENTS.md already exists; merge templates/AGENTS.md manually if needed.",
+            ".agents/AGENT-GUIDANCE.md contains the reusable operating protocol unless it was also skipped.",
         ]
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

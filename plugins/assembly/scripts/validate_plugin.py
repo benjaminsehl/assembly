@@ -257,8 +257,22 @@ def validate_support_files() -> None:
     template_text = (PLUGIN_ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
     if "Assembly" not in template_text or "lifecycle" not in template_text:
         fail("templates/AGENTS.md must identify Assembly as lifecycle owner")
+    if ".agents/AGENT-GUIDANCE.md" not in template_text:
+        fail("templates/AGENTS.md must point to .agents/AGENT-GUIDANCE.md")
 
-    agents_dir = PLUGIN_ROOT / "agents"
+    project_structure_text = (PLUGIN_ROOT / "references" / "project-kernel-structure.md").read_text(encoding="utf-8")
+    for required in (
+        ".agents/AGENT-GUIDANCE.md",
+        ".agents/log.md",
+        ".agents/notes/",
+        "reference/",
+    ):
+        if required not in project_structure_text:
+            fail(f"project-kernel-structure.md must document scaffold path: {required}")
+
+    agents_dir = PLUGIN_ROOT / ".agents" / "personas"
+    if not (agents_dir / "README.md").is_file():
+        fail("Missing required persona docs: .agents/personas/README.md")
     missing_personas = sorted(
         name for name in REQUIRED_PERSONAS if not (agents_dir / name).is_file()
     )
@@ -268,6 +282,17 @@ def validate_support_files() -> None:
     scaffold_script = PLUGIN_ROOT / "scripts" / "scaffold_project.py"
     if not scaffold_script.is_file():
         fail("Missing required scaffold script: scripts/scaffold_project.py")
+    scaffold_text = scaffold_script.read_text(encoding="utf-8")
+    for required in (
+        '.agents" / "AGENT-GUIDANCE.md"',
+        '.agents" / "log.md"',
+        '.agents" / "notes"',
+        '"reference" / "README.md"',
+    ):
+        if required not in scaffold_text:
+            fail(f"scaffold_project.py must create {required}")
+    if 'project_dir / "agent-guidance.md"' in scaffold_text:
+        fail("scaffold_project.py must not create docs/agent-guidance.md")
 
     if not (PLUGIN_ROOT / "AGENTS.md").is_file():
         fail("Missing required plugin agent guidance: AGENTS.md")

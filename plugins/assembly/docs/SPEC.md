@@ -25,6 +25,8 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 
 Success means a future Codex session can invoke one of these skills by name, load only the necessary references, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
 
+For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, draft PR, self-review, simplification pass, verification evidence, and ready-for-review only after those gates pass.
+
 ## Project Phase Model
 
 Every full project or substantial project slice follows four phases:
@@ -35,6 +37,8 @@ Every full project or substantial project slice follows four phases:
 4. **Release:** run QA and polish, decide go/no-go, ship or hold intentionally, grade against proposal, and capture follow-up learning.
 
 Projects are recursive. A repo can be a project, and clients, agent layers, releases, or features inside it can be subprojects with their own phase trail under `docs/projects/<slug>/`.
+
+Agent-only operating material belongs under `.agents/`, with root `AGENTS.md` kept as the visible entrypoint. The scaffold writes the reusable operating protocol to `.agents/AGENT-GUIDANCE.md` and keeps raw source material in top-level `reference/`.
 
 ## Validation
 
@@ -55,6 +59,8 @@ Validation must ensure:
 - Public skills do not list deleted support skills as dependencies.
 - Required references, templates, personas, and scaffold scripts exist.
 - Install docs explain existing skill conflicts and replacement guidance.
+- GitHub handoff guidance explains `gh` usage, draft PRs, self-review, code simplification, and ready-for-review gates.
+- Scaffolds create `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/`, and `reference/` while avoiding `docs/agent-guidance.md`.
 - References over 100 lines include a `## Contents` section.
 
 ## Boundaries
@@ -66,11 +72,13 @@ Always:
 - Put detailed guidance in `references/`.
 - Preserve a decision paper trail.
 - Validate before calling the plugin install-ready.
+- Use draft PRs for material GitHub-backed work unless the user asks for local-only changes.
 
 Ask first:
 
 - Before overwriting existing `AGENTS.md`.
 - Before destructive operations, external messaging, money movement, credential use, or privacy-sensitive work.
+- Before merging PRs, deploying, deleting branches, or creating non-draft public review surfaces.
 - Before skipping phase gates when risk materially changes.
 
 Never:

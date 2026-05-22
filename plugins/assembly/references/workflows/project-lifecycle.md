@@ -15,8 +15,11 @@ Use this mode when project docs are missing, the user is restarting a project, o
 
 - Default docs root: `docs/`.
 - Default subproject root: `docs/projects/<slug>/`.
+- Default agent-only root: `.agents/`.
+- Default source-material root: `reference/`.
 - Use `scripts/scaffold_project.py` for deterministic scaffolds.
 - Never overwrite an existing `AGENTS.md`; report that `templates/AGENTS.md` must be merged manually.
+- Keep `AGENTS.md` as the root entrypoint and put copied operating protocol in `.agents/AGENT-GUIDANCE.md`.
 - Fill known proposal context: product vision, principles, outcomes, assumptions, what good looks like, risks, non-goals, and next skills.
 - Save unknowns as open questions instead of pretending alignment exists.
 
@@ -24,6 +27,7 @@ Recommended output:
 
 - Scaffold path created or reused.
 - Files created/skipped.
+- Agent-only guidance path and any manual `AGENTS.md` merge note.
 - Current phase.
 - Missing proposal prerequisites.
 - Next skill, usually `product-discovery`, `prototype`, `spec`, or `plan`.

@@ -8,7 +8,7 @@ Before meaningful work, read:
 
 - `docs/status.md`
 - The nearest matching `docs/projects/**/status.md`, if working in a subproject
-- `docs/agent-guidance.md`
+- `.agents/AGENT-GUIDANCE.md`
 - Relevant files under `docs/phases/`, `docs/product/`, `docs/decisions/`, `docs/specs/`, and `docs/plans/`
 
 If these files do not exist yet, use `project-status` scaffold mode.
