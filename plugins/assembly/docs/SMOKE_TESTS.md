@@ -5,16 +5,16 @@ These smoke tests verify that the public skills route correctly and do not rely 
 ## Prerequisites
 
 ```bash
-codex plugin marketplace add benjaminsehl/codex-agent-skills
+codex plugin marketplace add benjaminsehl/assembly
 ```
 
 If the plugin was already registered:
 
 ```bash
-codex plugin marketplace upgrade codex-agent-skills
+codex plugin marketplace upgrade assembly
 ```
 
-After enabling and restarting Codex, confirm `Codex Agent Skills` appears in the active plugin list and that a cache bundle exists under `~/.codex/plugins/cache/codex-agent-skills/codex-agent-skills/`.
+After enabling and restarting Codex, confirm `Assembly` appears in the active plugin list and that a cache bundle exists under `~/.codex/plugins/cache/assembly/assembly/`.
 
 ## Test Matrix
 
@@ -42,5 +42,5 @@ After enabling and restarting Codex, confirm `Codex Agent Skills` appears in the
 - [ ] `project-status` handles scaffold, status, and repair without separate `new-project` or `introspect` skills.
 - [ ] `product-discovery` handles founder, business, and design-plan lenses without separate review skills.
 - [ ] Public skills load references conditionally and do not name deleted support skills as dependencies.
-- [ ] `plugins/codex-agent-skills/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
+- [ ] `plugins/assembly/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
 - [ ] Missing phase prerequisites produce a warning and double-back skill recommendation.

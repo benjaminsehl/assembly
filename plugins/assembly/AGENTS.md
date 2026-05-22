@@ -1,4 +1,4 @@
-# Codex Agent Skills
+# Assembly
 
 This repo builds the reusable Codex plugin for phase-aware product development.
 

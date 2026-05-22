@@ -1,4 +1,4 @@
-# Spec: Codex Agent Skills Plugin
+# Spec: Assembly Plugin
 
 ## Objective
 
@@ -41,10 +41,10 @@ Projects are recursive. A repo can be a project, and clients, agent layers, rele
 Required commands from the repository root:
 
 ```bash
-python3 plugins/codex-agent-skills/scripts/validate_plugin.py
-python3 plugins/codex-agent-skills/scripts/validate_skill_graph.py
-python3 plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
-python3 -m py_compile plugins/codex-agent-skills/scripts/validate_plugin.py plugins/codex-agent-skills/scripts/validate_skill_graph.py plugins/codex-agent-skills/scripts/scaffold_project.py plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
+python3 plugins/assembly/scripts/validate_plugin.py
+python3 plugins/assembly/scripts/validate_skill_graph.py
+python3 plugins/assembly/scripts/audit_skill_conflicts.py
+python3 -m py_compile plugins/assembly/scripts/validate_plugin.py plugins/assembly/scripts/validate_skill_graph.py plugins/assembly/scripts/scaffold_project.py plugins/assembly/scripts/audit_skill_conflicts.py
 git diff --check
 ```
 

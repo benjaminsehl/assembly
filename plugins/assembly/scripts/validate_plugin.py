@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Codex Agent Skills plugin shape."""
+"""Validate the Assembly plugin shape."""
 
 from __future__ import annotations
 
@@ -153,7 +153,7 @@ def validate_marketplace() -> None:
 
     matching = [entry for entry in entries if entry.get("name") == PLUGIN_NAME]
     if len(matching) != 1:
-        fail("Marketplace must contain exactly one codex-agent-skills entry")
+        fail(f"Marketplace must contain exactly one {PLUGIN_NAME} entry")
 
     entry = matching[0]
     if entry.get("source", {}).get("source") != "local":
@@ -255,8 +255,8 @@ def validate_support_files() -> None:
         fail("README.md must include lifecycle de-duplication guidance")
 
     template_text = (PLUGIN_ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
-    if "Codex Agent Skills" not in template_text or "lifecycle" not in template_text:
-        fail("templates/AGENTS.md must identify Codex Agent Skills as lifecycle owner")
+    if "Assembly" not in template_text or "lifecycle" not in template_text:
+        fail("templates/AGENTS.md must identify Assembly as lifecycle owner")
 
     agents_dir = PLUGIN_ROOT / "agents"
     missing_personas = sorted(

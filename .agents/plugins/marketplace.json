@@ -1,14 +1,14 @@
 {
-  "name": "codex-agent-skills",
+  "name": "assembly",
   "interface": {
-    "displayName": "Codex Agent Skills"
+    "displayName": "Assembly"
   },
   "plugins": [
     {
-      "name": "codex-agent-skills",
+      "name": "assembly",
       "source": {
         "source": "local",
-        "path": "./plugins/codex-agent-skills"
+        "path": "./plugins/assembly"
       },
       "policy": {
         "installation": "AVAILABLE",

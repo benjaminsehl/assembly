@@ -1,4 +1,4 @@
-# Codex Agent Skills
+# Assembly
 
 This repo builds the reusable Codex plugin for phase-aware product development.
 
@@ -7,10 +7,10 @@ This repo builds the reusable Codex plugin for phase-aware product development.
 Before changing the plugin, inspect:
 
 - `README.md` for user-facing workflow guidance
-- `docs/SPEC.md` for the plugin contract
-- `docs/COMMAND_CONTRACT.md` for entry-skill behavior
-- `references/agent-operating-protocol.md` for phase-aware agent behavior
-- `scripts/validate_plugin.py` and `scripts/validate_skill_graph.py` for validation rules
+- `plugins/assembly/docs/SPEC.md` for the plugin contract
+- `plugins/assembly/docs/COMMAND_CONTRACT.md` for entry-skill behavior
+- `plugins/assembly/references/agent-operating-protocol.md` for phase-aware agent behavior
+- `plugins/assembly/scripts/validate_plugin.py` and `plugins/assembly/scripts/validate_skill_graph.py` for validation rules
 
 ## Phase-Aware Workflow
 
@@ -35,9 +35,9 @@ When working on this repo, follow the same protocol the plugin teaches:
 Run before finalizing changes:
 
 ```bash
-python3 scripts/validate_plugin.py
-python3 scripts/validate_skill_graph.py
-python3 scripts/audit_skill_conflicts.py
-python3 -m py_compile scripts/validate_plugin.py scripts/validate_skill_graph.py scripts/scaffold_project.py scripts/audit_skill_conflicts.py
+python3 plugins/assembly/scripts/validate_plugin.py
+python3 plugins/assembly/scripts/validate_skill_graph.py
+python3 plugins/assembly/scripts/audit_skill_conflicts.py
+python3 -m py_compile plugins/assembly/scripts/validate_plugin.py plugins/assembly/scripts/validate_skill_graph.py plugins/assembly/scripts/scaffold_project.py plugins/assembly/scripts/audit_skill_conflicts.py
 git diff --check
 ```

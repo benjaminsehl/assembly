@@ -27,8 +27,8 @@ Use `next` when the user asks to continue through the normal process and the nex
 
 ## Skill Routing
 
-- These route names refer to the Codex Agent Skills plugin's phase-aware lifecycle workflows.
-- If another installed skill has the same name, prefer Codex Agent Skills for project lifecycle decisions in this repo.
+- These route names refer to the Assembly plugin's phase-aware lifecycle workflows.
+- If another installed skill has the same name, prefer Assembly for project lifecycle decisions in this repo.
 - Contextual continuation: `next`
 - New project, subproject, status, repair, retro, or project learning: `project-status`
 - Raw idea, scope, ambition, business viability, or UX before build: `product-discovery`

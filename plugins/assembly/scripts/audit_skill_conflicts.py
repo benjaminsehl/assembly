@@ -40,7 +40,11 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    plugin_cache_roots = sorted((Path.home() / ".codex" / "plugins" / "cache").glob("*/*/*/skills"))
+    plugin_cache_roots = [
+        root
+        for root in sorted((Path.home() / ".codex" / "plugins" / "cache").glob("*/*/*/skills"))
+        if root.parts[-4:-2] != ("assembly", "assembly")
+    ]
     roots = [
         Path.home() / ".agents" / "skills",
         Path.home() / ".codex" / "skills",
@@ -49,7 +53,7 @@ def main() -> int:
     ]
 
     found = False
-    print("Codex Agent Skills public lifecycle names:")
+    print("Assembly public lifecycle names:")
     print(", ".join(sorted(PUBLIC_SKILLS)))
     print()
 
@@ -66,7 +70,7 @@ def main() -> int:
 
     if found:
         print()
-        print("Recommendation: make codex-agent-skills the owner of lifecycle skills.")
+        print("Recommendation: make assembly the owner of lifecycle skills.")
         print("Disable, rename, or avoid older overlapping lifecycle skills before installing.")
     return 0
 

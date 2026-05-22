@@ -2,32 +2,39 @@
 
 This plugin can be registered with Codex as a public GitHub marketplace or local marketplace. It is intended to replace loose lifecycle skills with one coherent product-building stack.
 
-The repository root is the marketplace. The installable plugin bundle lives at `plugins/codex-agent-skills/`, matching Codex's `./plugins/<plugin-name>` marketplace layout.
+The repository root is the marketplace. The installable plugin bundle lives at `plugins/assembly/`, matching Codex's `./plugins/<plugin-name>` marketplace layout.
 
 ## Register the Marketplace
 
 From this local checkout:
 
 ```bash
-codex plugin marketplace add /Users/sai/codex-agent-skills
+codex plugin marketplace add /Users/sai/assembly
 ```
 
 From GitHub:
 
 ```bash
-codex plugin marketplace add benjaminsehl/codex-agent-skills
+codex plugin marketplace add benjaminsehl/assembly
 ```
 
-The marketplace name is `codex-agent-skills`.
+The marketplace name is `assembly`.
+
+If you previously installed the plugin under its old `codex-agent-skills` name, remove that marketplace first:
+
+```bash
+codex plugin marketplace remove codex-agent-skills
+codex plugin marketplace add benjaminsehl/assembly
+```
 
 ## Enable the Plugin
 
-Enable `Codex Agent Skills` from the plugin picker after adding the marketplace, then restart Codex so the skill list refreshes.
+Enable `Assembly` from the plugin picker after adding the marketplace, then restart Codex so the skill list refreshes.
 
 If enabling manually through config is needed, the expected config key shape is:
 
 ```toml
-[plugins."codex-agent-skills@codex-agent-skills"]
+[plugins."assembly@assembly"]
 enabled = true
 ```
 
@@ -46,19 +53,19 @@ If you already have skills with these names, choose one owner before enabling th
 Run the advisory conflict audit:
 
 ```bash
-python3 plugins/codex-agent-skills/scripts/audit_skill_conflicts.py
+python3 plugins/assembly/scripts/audit_skill_conflicts.py
 ```
 
 ## Replacing A Loose Skill Set
 
 Suggested migration:
 
-1. Register and enable `codex-agent-skills`.
+1. Register and enable `assembly`.
 2. Restart Codex and confirm the public entry skills appear.
 3. In a throwaway repo, run `Use next...`, `Use project-status...`, and `Use spec...`.
 4. Disable, remove, or rename older lifecycle skills that collide with this plugin's entry names.
 5. Keep specialized non-overlapping skills.
-6. In project `AGENTS.md`, state that lifecycle routing should use Codex Agent Skills.
+6. In project `AGENTS.md`, state that lifecycle routing should use Assembly.
 
 ## Invocation Pattern
 
@@ -85,17 +92,17 @@ Use ship to make a go/no-go release decision.
 For deterministic project scaffolding from this checkout:
 
 ```bash
-python3 plugins/codex-agent-skills/scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
+python3 plugins/assembly/scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 ```
 
 For a child project inside an existing project workspace:
 
 ```bash
-python3 plugins/codex-agent-skills/scripts/scaffold_project.py \
+python3 plugins/assembly/scripts/scaffold_project.py \
   --root /path/to/repo \
   --parent docs \
   --name "Agent Layer" \
   --slug agent-layer
 ```
 
-If `AGENTS.md` already exists, the scaffold reports a manual merge notice instead of overwriting it. Review `plugins/codex-agent-skills/templates/AGENTS.md` and merge the phase-aware protocol into the existing project instructions by hand.
+If `AGENTS.md` already exists, the scaffold reports a manual merge notice instead of overwriting it. Review `plugins/assembly/templates/AGENTS.md` and merge the phase-aware protocol into the existing project instructions by hand.

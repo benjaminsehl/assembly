@@ -1,4 +1,4 @@
-# Implementation Plan: Codex Agent Skills Plugin
+# Implementation Plan: Assembly Plugin
 
 ## Overview
 
