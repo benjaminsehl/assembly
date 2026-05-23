@@ -311,21 +311,6 @@ def validate_support_files() -> None:
     scaffold_script = PLUGIN_ROOT / "scripts" / "scaffold_project.py"
     if not scaffold_script.is_file():
         fail("Missing required scaffold script: scripts/scaffold_project.py")
-    scaffold_text = scaffold_script.read_text(encoding="utf-8")
-    for required in (
-        '.agents" / "AGENT-GUIDANCE.md"',
-        '.agents" / "log.md"',
-        '.agents" / "notes"',
-        '"reference" / "README.md"',
-        "agent_notes_readme_path",
-        "reference_readme_path",
-        "append_log_entry",
-        "not log_path.is_file()",
-    ):
-        if required not in scaffold_text:
-            fail(f"scaffold_project.py must create {required}")
-    if 'project_dir / "agent-guidance.md"' in scaffold_text:
-        fail("scaffold_project.py must not create docs/agent-guidance.md")
     validate_scaffold_behavior(scaffold_script)
 
     engineering_text = (
