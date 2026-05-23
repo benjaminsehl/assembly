@@ -1,13 +1,13 @@
 # Project Status: Assembly
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 Current phase: proposal
 
 ## Phase Verdict
 
 - Current phase: proposal
 - Why: Assembly now installs and loads as a working Codex plugin, but the 1.0 product promise, target user, success criteria, and release gate still need explicit alignment.
-- Evidence: `assembly:next` was confirmed active in a fresh Codex exec session; the plugin is installed under `~/.codex/plugins/cache/assembly/assembly/0.8.0`; validators pass; repo has been renamed to `benjaminsehl/assembly`.
+- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` is clean at merge commit `210b3fd`; `codex plugin marketplace upgrade assembly` installed Assembly `0.8.1` under `~/.codex/plugins/cache/assembly/assembly/0.8.1`; validators passed before merge; repo has been renamed to `benjaminsehl/assembly`.
 - Structure decision: agent-only operating files now belong under `.agents/`, with root `AGENTS.md` as the visible entrypoint and `reference/` reserved for raw source material.
 - Next gate: 1.0 proposal accepted by the user.
 
@@ -21,6 +21,8 @@ Current phase: proposal
 - Candidate wedge: install Assembly, scaffold a repo, say `next`, and have Codex orient to phase, missing context, and the next useful workflow without guessing.
 - Primary user: Sai building real projects with Codex.
 - Secondary user: people who want a compact Codex-native product-building workflow instead of a pile of overlapping skills.
+- Default stance: optimize 1.0 as Sai's personal stack first, while keeping the public plugin installable, documented, and conflict-aware enough that another serious builder could adopt it.
+- Recommended proof path: Assembly self-hosts the workflow, CFO proves a greenfield/restart setup, and Hyper remains the richer retrofit proof or release stretch.
 
 ## Open Questions
 
@@ -34,4 +36,4 @@ Current phase: proposal
 
 ## Next Concrete Action
 
-Discuss `docs/product/discovery-1-0.md` and decide the 1.0 wedge, proof projects, and release criteria before writing a 1.0 spec.
+Review and accept or revise the 1.0 default stance in `docs/product/discovery-1-0.md`; once accepted, write the 1.0 spec.

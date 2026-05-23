@@ -1,6 +1,6 @@
 # Product Discovery: Assembly 1.0
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 ## Idea In User-Problem Language
 
@@ -33,6 +33,22 @@ Install Assembly, scaffold a repo, say `next`, and have Codex:
 - ask one clear question only when needed,
 - update status when project-doc edits are in scope,
 - for material GitHub-backed changes, commit, push, open a descriptive draft PR, explain why/principles/approach, self-review, simplify, and mark ready only after verification.
+
+## Recommended 1.0 Stance
+
+Assembly 1.0 should optimize for "Sai's personal stack that works beautifully" first, with public-plugin confidence as a constraint rather than the main audience.
+
+That means:
+
+- Personal reliability beats broad marketplace polish.
+- Public usability still matters enough to keep installation, migration, conflict audits, privacy notes, and docs clean.
+- The future app-factory vision should stay visible, but 1.0 should prove the control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
+
+## Recommended Proof Path
+
+- Required: Assembly self-hosts its own workflow and proves `next` can guide this repo from proposal to release.
+- Required: CFO proves the greenfield/restart project setup because it is a good moment to install the project trail cleanly.
+- Stretch: Hyper proves retrofit behavior against a messy, high-context real app without forcing risky migration all at once.
 
 ## Lovable Product Moment
 
@@ -74,9 +90,9 @@ Riskiest viability assumption: other builders will adopt a project-doc workflow 
 
 ## Evidence Needed Before 1.0
 
-- Fresh install and upgrade works from `benjaminsehl/assembly`.
-- Fresh Codex session sees `assembly:next`.
-- Assembly itself uses root `docs/` and status successfully.
+- Fresh install and upgrade works from `benjaminsehl/assembly`. Current evidence: `codex plugin marketplace upgrade assembly` installed `0.8.1` locally on 2026-05-23.
+- Fresh Codex session sees `assembly:next`. Current evidence: `assembly:next` was confirmed active before PR #1 merged; after the `0.8.1` upgrade, new sessions should refresh to the upgraded cache.
+- Assembly itself uses root `docs/` and status successfully. Current evidence: `docs/status.md` now records post-merge status and next-gate routing.
 - Scaffolded projects separate durable docs, agent-only `.agents/` context, and raw `reference/` material.
 - At least one real external project, ideally Hyper or CFO, gets a useful Assembly retrofit.
 - `next` behaves well in at least proposal, build, and release-like states.
@@ -96,4 +112,4 @@ Riskiest viability assumption: other builders will adopt a project-doc workflow 
 
 ## Recommended Next Step
 
-Align on whether 1.0 should optimize for "personal stack that works beautifully for Sai" or "public plugin others can confidently install." Then write a 1.0 spec.
+Accept or revise the recommended 1.0 stance: personal stack first, public installability as a quality bar, Assembly plus CFO as required proof, Hyper as the retrofit stretch. Then write a 1.0 spec.
