@@ -20,7 +20,7 @@ def slugify(value: str) -> str:
 
 def rel(path: Path, root: Path) -> str:
     try:
-        return str(path.relative_to(root))
+        return path.relative_to(root).as_posix()
     except ValueError:
         return str(path)
 

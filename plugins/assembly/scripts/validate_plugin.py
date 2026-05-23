@@ -365,6 +365,10 @@ def run_scaffold(scaffold_script: Path, root: Path, *args: str) -> dict:
         fail(f"scaffold_project.py returned invalid JSON: {exc}")
 
 
+def reported_paths(result: dict, key: str) -> set[str]:
+    return {str(value).replace("\\", "/") for value in result.get(key, [])}
+
+
 def validate_scaffold_behavior(scaffold_script: Path) -> None:
     with tempfile.TemporaryDirectory(prefix="assembly-scaffold-") as temp_dir:
         root = Path(temp_dir) / "project"
@@ -381,7 +385,7 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
         ):
             if not (root / required).is_file():
                 fail(f"scaffold_project.py did not create {required}")
-            if required not in result.get("created", []):
+            if required not in reported_paths(result, "created"):
                 fail(f"scaffold_project.py did not report created file {required}")
         if (root / "docs" / "agent-guidance.md").exists():
             fail("scaffold_project.py created deprecated docs/agent-guidance.md")
@@ -418,12 +422,12 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
         for path, marker in preserved.items():
             if marker not in (root / path).read_text(encoding="utf-8"):
                 fail(f"force scaffold overwrote protected file {path}")
-            if path not in forced.get("skipped", []):
+            if path not in reported_paths(forced, "skipped"):
                 fail(f"force scaffold did not report protected skip for {path}")
         log_text = (root / ".agents" / "log.md").read_text(encoding="utf-8")
         if "CUSTOM LOG LINE" not in log_text or "force-refreshed" not in log_text:
             fail("force scaffold did not append to .agents/log.md")
-        if ".agents/log.md" not in forced.get("updated", []):
+        if ".agents/log.md" not in reported_paths(forced, "updated"):
             fail("force scaffold did not report .agents/log.md as updated")
         if not (root / "docs" / "projects" / "child" / "status.md").is_file():
             fail("force scaffold did not create child project status.md")
@@ -433,7 +437,7 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
         log_dir_result = run_scaffold(scaffold_script, log_dir_root, "--name", "Log Dir")
         if not (log_dir_root / ".agents" / "log.md").is_dir():
             fail("scaffold_project.py overwrote non-file .agents/log.md path")
-        if ".agents/log.md" not in log_dir_result.get("skipped", []):
+        if ".agents/log.md" not in reported_paths(log_dir_result, "skipped"):
             fail("scaffold_project.py did not report non-file .agents/log.md as skipped")
 
 
