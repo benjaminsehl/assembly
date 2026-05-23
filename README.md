@@ -107,7 +107,7 @@ Why this shape:
 5. Choose the matching lifecycle skill for the current phase.
 6. If prerequisites are missing, warn once and recommend the right double-back skill.
 7. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
-8. For material changes in GitHub-backed repos, use `gh` to create a draft PR, run self-review and code simplification, then mark the PR ready when verification passes.
+8. For material changes in GitHub-backed repos, use `gh` to create a draft PR, run self-review and code simplification, then ask before marking the PR ready.
 
 ## GitHub Handoff
 

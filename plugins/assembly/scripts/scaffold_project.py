@@ -350,6 +350,13 @@ def append_log_entry(
     force: bool,
     result: dict[str, list[str]],
 ) -> None:
+    if not log_path.is_file():
+        result["skipped"].append(rel(log_path, root))
+        result.setdefault("manual_merge", []).append(
+            ".agents/log.md exists but is not a file; preserved and not updated. Replace it with a file to enable scaffold log entries."
+        )
+        return
+
     today = date.today().isoformat()
     mode = "force-refreshed" if force else "scaffolded"
     entry = (

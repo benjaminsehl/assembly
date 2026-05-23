@@ -16,6 +16,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
 - `references/project-phases.md`: phase gates, required evidence, and recommended skills.
 - `references/agent-operating-protocol.md`: unclear prompts, skipped prerequisites, and safety boundaries.
 - `references/workflows/project-lifecycle.md`: status orientation, repair, retro, and learning modes.
+- `references/workflows/qa-and-release.md`: PR readiness and ask-first ready-for-review gates.
 
 ## Workflow
 
@@ -28,7 +29,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
    - Prototype gaps: use `prototype`.
    - Build gaps: use `spec`, `plan`, `build`, `test`, `review`, or `code-simplify` as the next unfinished gate requires.
    - Release gaps: use `qa`, `review`, or `ship`.
-   - GitHub handoff gaps: commit, push, draft PR, self-review, code-simplify, or mark ready as the unfinished gate requires.
+   - GitHub handoff gaps: commit, push, draft PR, self-review, code-simplify, or ask before ready-for-review as the unfinished gate requires. Never run `gh pr ready` without explicit user authorization.
 6. If multiple plausible next steps exist, ask one concise verification question instead of choosing arbitrarily.
 7. If the user asks to skip missing prerequisites, warn once, name the skipped gate and risk, then proceed only when the user insists and no hard safety boundary applies.
 8. End by naming the action taken, evidence used, status/docs updated or intentionally left unchanged, and the next expected gate.
@@ -39,6 +40,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
 - The response explains why this action is next instead of merely saying it was inferred.
 - Ambiguous forks produce a concise question.
 - Stale or missing status triggers repair behavior before continuation.
+- Ready-for-review transitions require explicit user authorization.
 - Skipped gates are recorded in the response and in `docs/status.md` when project-doc edits are in scope.
 
 ## Stop Conditions
