@@ -12,3 +12,4 @@ Append meaningful agent handoff events, skipped gates, recovery notes, and proje
 
 - Merged PR #1 into `main` at `210b3fd`, upgraded the local marketplace install to Assembly `0.8.1`, and repaired `docs/status.md` to reflect the post-merge proposal state.
 - Used `next` to route into proposal-phase product discovery; recorded the recommended 1.0 stance as personal-stack-first with public installability as a quality bar.
+- Recorded the product decision that Assembly 1.0 should finish the Codex plugin first; Claude support is not a near-term priority; Hermes orchestration is the post-1.0 north star.

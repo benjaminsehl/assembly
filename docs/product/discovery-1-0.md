@@ -36,19 +36,32 @@ Install Assembly, scaffold a repo, say `next`, and have Codex:
 
 ## Recommended 1.0 Stance
 
-Assembly 1.0 should optimize for "Sai's personal stack that works beautifully" first, with public-plugin confidence as a constraint rather than the main audience.
+Assembly 1.0 should optimize for "Sai's personal Codex stack that works beautifully" first, with public-plugin confidence as a constraint rather than the main audience.
 
 That means:
 
 - Personal reliability beats broad marketplace polish.
 - Public usability still matters enough to keep installation, migration, conflict audits, privacy notes, and docs clean.
-- The future app-factory vision should stay visible, but 1.0 should prove the control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
+- Claude Code support is not a meaningful near-term goal.
+- The future app-factory vision should stay visible through Hermes orchestration, but 1.0 should prove the Codex control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
 
 ## Recommended Proof Path
 
 - Required: Assembly self-hosts its own workflow and proves `next` can guide this repo from proposal to release.
 - Required: CFO proves the greenfield/restart project setup because it is a good moment to install the project trail cleanly.
 - Stretch: Hyper proves retrofit behavior against a messy, high-context real app without forcing risky migration all at once.
+
+## Post-1.0 North Star
+
+Hermes becomes the roadmap and product operator that can orchestrate scoped Codex sessions through Assembly.
+
+The intended split:
+
+- Hermes owns roadmap state, prioritization, scheduling, and cross-project continuity.
+- Assembly owns the project protocol: status, phases, gates, docs, and handoff rules.
+- Codex owns focused implementation sessions inside clean branches or worktrees.
+
+The smallest useful future proof is not "support every agent runtime." It is: Hermes can inspect an Assembly project, choose the next scoped task, launch or instruct Codex to execute it, and require a PR-based handoff.
 
 ## Lovable Product Moment
 
@@ -60,6 +73,7 @@ The user returns after days away, types `next`, and Codex says what phase the pr
 - GStack-style sprint roles: useful product/company methodology, but too broad and Claude/runtime-specific for this pass.
 - Built-in Codex plugins: strong execution tools, but not a lifecycle owner.
 - Manual `AGENTS.md` instructions: helpful, but too passive without status and phase artifacts.
+- Claude Code adapter: plausible someday, but not important enough to compete with finishing the Codex plugin and proving Hermes orchestration.
 
 ## Founder Critique
 
@@ -109,7 +123,8 @@ Riskiest viability assumption: other builders will adopt a project-doc workflow 
 - Validators cover manifest, marketplace layout, skill graph, references, and conflict audit.
 - README gives a clear user guide from install to first project to ongoing use.
 - 1.0 has a release checklist, smoke-test evidence, and a short retro from real project use.
+- The docs explicitly state that Claude compatibility is out of scope for 1.0 and Hermes orchestration is the next strategic horizon.
 
 ## Recommended Next Step
 
-Accept or revise the recommended 1.0 stance: personal stack first, public installability as a quality bar, Assembly plus CFO as required proof, Hyper as the retrofit stretch. Then write a 1.0 spec.
+Write a 1.0 spec for the Codex plugin, with Hermes orchestration captured as the next strategic horizon rather than a 1.0 dependency.
