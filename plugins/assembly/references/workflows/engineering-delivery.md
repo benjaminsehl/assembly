@@ -30,7 +30,10 @@ Use this reference from `spec`, `plan`, `build`, `test`, `review`, and `code-sim
 
 ## Build
 
-- Implement one planned slice at a time.
+- Treat an empty or minimal `build` prompt as permission to infer and execute the next unambiguous build-track gate from project evidence.
+- Follow the engineering spine when no target is named: repair/spec requirements, plan tasks, implement one slice, test, review, simplify, then prepare GitHub handoff.
+- Ask before inventing missing product or design decisions. Keep moving when the missing step is mechanical and recoverable from existing docs.
+- Implement one planned slice at a time when a plan exists.
 - Write or identify the target test first for behavior changes when practical.
 - Make the smallest complete change.
 - Keep unrelated cleanup out of scope.

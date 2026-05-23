@@ -1,6 +1,6 @@
 {
   "name": "assembly",
-  "version": "0.8.1",
+  "version": "0.8.3",
   "description": "Assembly is a compact personal product-building stack for Codex, spanning contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
   "author": {
     "name": "Sai",
@@ -45,6 +45,7 @@
       "Use project-status to scaffold this project.",
       "Use project-status to tell me what phase we are in."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#000000",
+    "composerIcon": "./assets/assembly-small.svg"
   }
 }
