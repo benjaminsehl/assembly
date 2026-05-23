@@ -13,10 +13,14 @@ Use this reference from `product-discovery` and `prototype`. It keeps product le
 ## Discovery
 
 - Restate the idea as a user problem.
-- Identify target user, painful moment, current workaround, urgency, and desired outcome.
+- Default to interview mode for raw ideas, fuzzy directions, and short prompts.
+- Ask a focused batch of high-leverage questions before judging the product unless the user explicitly asks the agent to decide.
+- Identify target user, painful moment, current workaround, urgency, desired outcome, constraints, distribution path, and success evidence.
+- Use delegated mode only when the user asks for recommendations or the project docs already provide enough evidence. Label assumptions clearly.
 - Name alternatives and why they are insufficient.
 - Pick a narrow wedge that can teach something real.
 - Define evidence needed before build.
+- Keep open questions visible; do not bury missing product choices inside confident recommendations.
 
 ## Founder Critique
 

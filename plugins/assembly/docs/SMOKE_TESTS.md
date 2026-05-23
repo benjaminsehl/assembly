@@ -24,11 +24,13 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 | `project-status` | "Use project-status to tell me what phase this project is in." | Phase verdict with evidence, missing artifacts, next gate, next skills, and one action. |
 | `project-status` | "Use project-status to scaffold a project called Habit Coach." | Creates `docs/`, `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/`, `reference/`, and reports skipped files or manual `AGENTS.md` merge. |
 | `project-status` | "Use project-status to get this stale project back on track." | Conformity verdict, status update or skip reason, recovery plan, and next action. |
-| `product-discovery` | "Use product-discovery on an app that summarizes my meetings." | Discovery brief with pain, wedge, alternatives, founder/business/design risks, and evidence needed. |
+| `product-discovery` | "Use product-discovery on an app that summarizes my meetings." | Interview-first response with high-leverage questions before making product calls, unless the prompt delegates decisions. |
+| `product-discovery` | "Use product-discovery and make the calls for an app that summarizes my meetings." | Delegated discovery brief with labeled assumptions, pain, wedge, alternatives, founder/business/design risks, and evidence needed. |
 | `prototype` | "Use prototype to explore three onboarding directions before build." | Prototype question, throwaway artifact, inspection path, and verdict. |
 | `spec` | "Use spec to define a tiny CLI that reverses lines from stdin." | Spec with assumptions, commands, boundaries, and success criteria. |
 | `plan` | "Use plan on the approved spec and create implementation tasks." | Task list with dependencies, acceptance criteria, and verification steps. |
 | `build` | "Use build to implement the first task." | One slice implemented with changed files and verification. |
+| `build` | "Use build." | Reads project trail, infers the first unambiguous engineering gate, then specs, plans, implements, tests, reviews, simplifies, or opens draft PR as appropriate. |
 | `build` | "Use build, then push this up." | Focused commit, pushed topic branch, descriptive draft PR created with `gh`, and why/principles/approach/verification in the PR body. |
 | `build` | "Use build to address the unresolved PR review comments on PR #1." | Thread-aware comment read, traceable fixes, pushed update, replies and resolution only when explicitly requested. |
 | `test` | "Use test to prove blank input returns blank output." | Failing or targeted test evidence, then passing result. |
@@ -44,7 +46,8 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 - [ ] `project-status` handles scaffold, status, and repair without separate `new-project` or `introspect` skills.
 - [ ] Scaffolds keep agent-only operating files under `.agents/` and do not create `docs/agent-guidance.md`.
 - [ ] Force-scaffolding a subproject preserves existing `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md`, and appends to `.agents/log.md`.
-- [ ] `product-discovery` handles founder, business, and design-plan lenses without separate review skills.
+- [ ] `product-discovery` is interview-first and makes product calls only when delegated or strongly supported by project evidence.
+- [ ] Empty or minimal `build` prompts infer and execute the first unambiguous build-track gate instead of stopping for a named task.
 - [ ] Public skills load references conditionally and do not name deleted support skills as dependencies.
 - [ ] `plugins/assembly/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
 - [ ] Missing phase prerequisites produce a warning and double-back skill recommendation.

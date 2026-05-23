@@ -24,6 +24,11 @@ Every public skill must not:
 - Put agent-only operating files in `docs/` when the scaffold can use `.agents/`.
 - Continue into a different lifecycle phase unless the user asked for that phase.
 
+Default interaction rules:
+
+- `product-discovery` is interview-first. It should ask high-leverage questions before making product calls unless the user explicitly delegates the decision or project evidence is already strong.
+- `build` is execution-first. If invoked with an empty or minimal prompt, it should infer the first unambiguous build-track gate from project evidence and proceed through the engineering spine instead of stopping for a named task.
+
 If a prompt is unclear, state the inferred task, current phase, and recommended next skill, then ask a concise verification question before acting.
 
 ## Public Skill Surface
@@ -48,7 +53,7 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 - `next` is the continuation gateway. It reads project state, uses `project-status` repair behavior when state is stale, and proceeds only when the next normal action is specific and evidence-backed.
 - `project-status` is the project gateway. It covers new project scaffolding, phase status, stale docs, recovery plans, retro capture, and durable project learning.
 - `product-discovery` is the product gateway. It covers raw ideas, founder critique, business-model pressure tests, and planned UX critique before specs.
-- The engineering spine is `spec` -> `plan` -> `build` -> `test` -> `review` -> `code-simplify` -> `ship`.
+- The engineering spine is `spec` -> `plan` -> `build` -> `test` -> `review` -> `code-simplify` -> `ship`. `build` may drive the pre-ship portion of this spine when the user clearly invokes build and the next gate is evidence-backed.
 - The default GitHub handoff is descriptive draft PR first, then ready-for-review only after verification, self-review, code simplification, and explicit user authorization.
 - PR review feedback is handled through thread-aware reads, traceable fixes, pushed updates, and replies/resolution only when the user explicitly asks for those GitHub write actions.
 - `prototype` and `qa` stay public because they are frequent tangible-work moments that do not fit cleanly into spec/build/release commands.
@@ -58,10 +63,11 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 - `next`: "Next", "Continue", "Do the next thing", "Do the next normal thing."
 - `project-status`: "What phase are we in?", "Scaffold this project", "Get this project back on track", "What should we do next?"
 - `product-discovery`: "I have an idea", "Pressure-test this", "Is this viable?", "Do a founder/business/design critique."
+- `product-discovery`: "Ask me questions about this idea before deciding what to build."
 - `prototype`: "Build a throwaway prototype", "Can we feel this before committing?"
 - `spec`: "Write the spec", "Define this before building."
 - `plan`: "Break this into tasks", "Plan the approved spec."
-- `build`: "Implement the next task", "Continue from task 3."
+- `build`: "Build", "Use build", "Implement the next task", "Continue from task 3."
 - `test`: "Prove this bug", "Write tests", "Verify this behavior."
 - `qa`: "Test this app like a user", "Find product bugs."
 - `review`: "Review this diff/PR/branch."
