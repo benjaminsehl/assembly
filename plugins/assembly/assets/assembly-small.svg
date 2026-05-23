@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Assembly">
   <path
-    d="M9 31 32 11l23 20M17 29v26h30V29M28 55V42h8v13"
-    fill="none"
-    stroke="#000"
-    stroke-width="7"
-    stroke-linecap="square"
-    stroke-linejoin="miter"
+    d="M18 56V31L32 13l14 18v25Z"
+    fill="#000"
   />
 </svg>
