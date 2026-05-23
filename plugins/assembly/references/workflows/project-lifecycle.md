@@ -20,7 +20,7 @@ Use this mode when project docs are missing, the user is restarting a project, o
 - Use `scripts/scaffold_project.py` for deterministic scaffolds.
 - Never overwrite an existing `AGENTS.md`; report that `templates/AGENTS.md` must be merged manually.
 - Keep `AGENTS.md` as the root entrypoint and put copied operating protocol in `.agents/AGENT-GUIDANCE.md`.
-- Preserve existing `.agents/AGENT-GUIDANCE.md` and append to `.agents/log.md`, even when force-refreshing scaffold docs.
+- Preserve existing `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md`, and append to `.agents/log.md`, even when force-refreshing scaffold docs.
 - Fill known proposal context: product vision, principles, outcomes, assumptions, what good looks like, risks, non-goals, and next skills.
 - Save unknowns as open questions instead of pretending alignment exists.
 

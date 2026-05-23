@@ -411,6 +411,10 @@ def main() -> int:
     files = template_files(project_name, project_dir, root, protocol_text)
     agent_guidance_path = root / ".agents" / "AGENT-GUIDANCE.md"
     agent_guidance_exists = agent_guidance_path.exists()
+    agent_notes_readme_path = root / ".agents" / "notes" / "README.md"
+    agent_notes_readme_exists = agent_notes_readme_path.exists()
+    reference_readme_path = root / "reference" / "README.md"
+    reference_readme_exists = reference_readme_path.exists()
     log_path = root / ".agents" / "log.md"
     log_exists = log_path.exists()
     if log_exists:
@@ -422,7 +426,14 @@ def main() -> int:
         files[agents_path] = agents_template
 
     result = write_files(
-        files, root, args.force, protected_paths={agent_guidance_path}
+        files,
+        root,
+        args.force,
+        protected_paths={
+            agent_guidance_path,
+            agent_notes_readme_path,
+            reference_readme_path,
+        },
     )
     if log_exists and (args.force or result["created"]):
         append_log_entry(
@@ -440,6 +451,14 @@ def main() -> int:
     if agent_guidance_exists:
         result.setdefault("manual_merge", []).append(
             ".agents/AGENT-GUIDANCE.md already exists; preserved to avoid overwriting project-specific agent instructions."
+        )
+    if agent_notes_readme_exists:
+        result.setdefault("manual_merge", []).append(
+            ".agents/notes/README.md already exists; preserved to avoid overwriting project-specific agent notes guidance."
+        )
+    if reference_readme_exists:
+        result.setdefault("manual_merge", []).append(
+            "reference/README.md already exists; preserved to avoid overwriting project-specific reference guidance."
         )
     if agents_exists:
         result["skipped"].append("AGENTS.md")
