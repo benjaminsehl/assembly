@@ -43,6 +43,7 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 - [ ] `next` dispatches to the next evidence-backed action and does not guess when status is ambiguous.
 - [ ] `project-status` handles scaffold, status, and repair without separate `new-project` or `introspect` skills.
 - [ ] Scaffolds keep agent-only operating files under `.agents/` and do not create `docs/agent-guidance.md`.
+- [ ] Force-scaffolding a subproject preserves existing `.agents/AGENT-GUIDANCE.md` and appends to `.agents/log.md`.
 - [ ] `product-discovery` handles founder, business, and design-plan lenses without separate review skills.
 - [ ] Public skills load references conditionally and do not name deleted support skills as dependencies.
 - [ ] `plugins/assembly/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.

@@ -281,6 +281,8 @@ def validate_support_files() -> None:
         ".agents/log.md",
         ".agents/notes/",
         "reference/",
+        "append-only",
+        "protected once it exists",
     ):
         if required not in project_structure_text:
             fail(f"project-kernel-structure.md must document scaffold path: {required}")
@@ -303,6 +305,8 @@ def validate_support_files() -> None:
         '.agents" / "log.md"',
         '.agents" / "notes"',
         '"reference" / "README.md"',
+        "protected_paths={agent_guidance_path}",
+        "append_log_entry",
     ):
         if required not in scaffold_text:
             fail(f"scaffold_project.py must create {required}")

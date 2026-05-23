@@ -119,6 +119,8 @@ This creates `AGENTS.md` only when it does not already exist. Existing project i
 
 The scaffold also creates `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/README.md`, and `reference/README.md` when absent.
 
+`.agents/AGENT-GUIDANCE.md` is protected once it exists so child-project force scaffolds cannot overwrite repo-level agent instructions. `.agents/log.md` is append-only; scaffold runs append a new entry instead of rewriting prior handoff history, even with `--force`.
+
 Subproject:
 
 ```bash
@@ -139,4 +141,4 @@ python3 scripts/scaffold_project.py \
   --slug evals
 ```
 
-The script skips existing files by default. Use `--force` only when intentionally regenerating scaffold files.
+The script skips existing files by default. Use `--force` only when intentionally regenerating scaffold files. `--force` still preserves `.agents/AGENT-GUIDANCE.md` and appends to `.agents/log.md` rather than overwriting it.

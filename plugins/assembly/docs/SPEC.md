@@ -61,6 +61,7 @@ Validation must ensure:
 - Install docs explain existing skill conflicts and replacement guidance.
 - GitHub handoff guidance explains `gh` usage, draft PRs, existing-PR updates, blocked-handoff fallback, self-review, code simplification, PR review feedback, and ask-first ready-for-review gates.
 - Scaffolds create `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/`, and `reference/` while avoiding `docs/agent-guidance.md`.
+- Scaffold force mode preserves `.agents/AGENT-GUIDANCE.md` and appends to `.agents/log.md` instead of overwriting agent instructions or handoff history.
 - References over 100 lines include a `## Contents` section.
 
 ## Boundaries
