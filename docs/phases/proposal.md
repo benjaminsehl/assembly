@@ -1,0 +1,47 @@
+# Proposal Phase
+
+## What Becomes 10x Better
+
+A user can return to any substantial project, say `next`, and Codex will know the phase, missing context, correct skill, and next useful action from the local project trail.
+
+## What Good Looks Like
+
+Assembly 1.0 feels like a reliable personal project operating system for Codex: lightweight enough to use daily, structured enough to prevent skipped thinking, and proven on real projects.
+
+## Desired Outcomes
+
+- `next` works as the default continuation phrase in fresh Codex sessions.
+- Project scaffolding creates a useful root `docs/` trail without overwriting existing instructions.
+- `project-status` can diagnose phase, missing prerequisites, and recovery plan from real repo artifacts.
+- Product, engineering, QA, and business lenses are available without overwhelming the active skill surface.
+- Material GitHub-backed work ends in a descriptive draft PR that explains why, first principles, and approach, then becomes ready-for-review only after verification, self-review, and simplification.
+- Installation, migration, validation, and troubleshooting docs are accurate enough for a cold user.
+- 1.0 is proven against at least one real project and ideally three: Assembly, Hyper, and CFO.
+
+## Assumptions
+
+- The primary user will tolerate a small amount of project documentation if it makes agents materially better.
+- A compact skill surface with references is easier for Codex to use than many overlapping triggerable skills.
+- Natural-language invocation is good enough; slash commands are not required for 1.0.
+- The strongest near-term value is personal reliability, not broad marketplace polish.
+
+## Principles
+
+- Optimize for agents first, humans second.
+- Keep workflow gates useful, not ceremonial.
+- Preserve Chesterton's fence: record why decisions exist before future agents change them.
+- Make skipped prerequisites visible instead of blocking all momentum.
+- Prefer a few durable entry skills over many clever skills.
+
+## Risks
+
+- The workflow could become too heavy and slow down building.
+- `next` could feel magical but brittle if project status is stale or ambiguous.
+- GitHub handoff could become noisy if agents create PRs for tiny changes or include unrelated files.
+- Plugin installation and session refresh behavior may remain rough.
+- Public users may have skill conflicts or different project conventions.
+- 1.0 could overfit Sai's current workflow before enough real project use.
+
+## Decision Gate
+
+Proposal is ready to leave this phase when the user accepts the 1.0 wedge, proof projects, success criteria, and non-goals.

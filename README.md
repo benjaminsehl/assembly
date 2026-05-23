@@ -69,8 +69,11 @@ The root project workspace is `docs/`. Subprojects live under `docs/projects/<sl
 ```text
 my-app/
 |-- AGENTS.md
+|-- .agents/
+|   |-- AGENT-GUIDANCE.md
+|   |-- log.md
+|   `-- notes/
 |-- docs/
-|   |-- agent-guidance.md
 |   |-- status.md
 |   |-- phases/
 |   |-- product/
@@ -82,11 +85,14 @@ my-app/
 |   |-- qa/
 |   |-- release/
 |   `-- projects/
+|-- reference/
 `-- src/
 ```
 
 Why this shape:
 
+- Agent-only operating material is tucked under `.agents/`, with `AGENTS.md` kept as the top-level entrypoint.
+- Instruction-like project files use uppercase names, such as `AGENT-GUIDANCE.md`; records like `log.md` and `notes/` stay lowercase.
 - Agents get one obvious place to start: `docs/status.md`.
 - Project reasoning is centralized instead of scattered across package folders.
 - Subprojects still get their own paper trail.
@@ -101,8 +107,22 @@ Why this shape:
 5. Choose the matching lifecycle skill for the current phase.
 6. If prerequisites are missing, warn once and recommend the right double-back skill.
 7. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
+8. For material changes in GitHub-backed repos, use `gh` to create a draft PR, run self-review and code simplification, then ask before marking the PR ready.
 
-The canonical agent protocol lives in [references/agent-operating-protocol.md](plugins/assembly/references/agent-operating-protocol.md). New projects receive a copy at `docs/agent-guidance.md`.
+## GitHub Handoff
+
+Assembly expects agents to leave real work reviewable:
+
+- Commit focused changes on a topic branch.
+- Push the branch.
+- Open or update a descriptive draft PR with `gh`.
+- Explain why the PR exists, the first principles behind the change, and how the agent approached it.
+- Run `review` and `code-simplify` before asking to mark ready.
+- Mark the PR ready with `gh pr ready` only after verification, self-review, simplification, and explicit user authorization.
+- When addressing PR comments, inspect unresolved review threads, implement traceable fixes, push updates, and reply/resolve threads only when the user asks for that GitHub write action.
+- Do not merge, deploy, or create non-draft PRs without explicit direction.
+
+The canonical agent protocol lives in [references/agent-operating-protocol.md](plugins/assembly/references/agent-operating-protocol.md). New projects receive a copy at `.agents/AGENT-GUIDANCE.md`.
 
 ## Scaffolding
 

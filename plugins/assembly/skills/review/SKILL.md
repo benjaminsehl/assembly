@@ -19,7 +19,7 @@ Review current changes with a bug-first posture. Findings come before summaries,
 ## Workflow
 
 1. State that the `review` workflow is active and identify the scope: working tree, staged diff, commits, or PR.
-2. Inspect the diff and relevant surrounding code before judging.
+2. Inspect the diff and relevant surrounding code before judging; for GitHub PRs, use `gh` to read PR metadata, checks, and review context.
 3. Review correctness, readability, architecture, tests, and maintainability.
 4. Apply the security checklist when the change touches input, auth, data storage, secrets, dependencies, network, or external integrations.
 5. Apply the performance checklist when the change touches hot paths, rendering, queries, loops, bundles, concurrency, or resource usage.
@@ -31,6 +31,7 @@ Review current changes with a bug-first posture. Findings come before summaries,
 - Findings include file and line references when code is accessible.
 - Severity is clear: Critical, Important, Suggestion, or Nit.
 - Missing tests and unrun checks are called out.
+- For PR review, PR state and check status are named when available.
 - If no issues are found, remaining risk is still stated.
 
 ## Stop Conditions

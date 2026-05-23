@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -253,12 +255,53 @@ def validate_support_files() -> None:
     readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     if "de-duplicate" not in readme_text or "lifecycle" not in readme_text:
         fail("README.md must include lifecycle de-duplication guidance")
+    for required in (
+        "ask before marking the PR ready",
+        "explicit user authorization",
+        "unresolved review threads",
+    ):
+        if required not in readme_text:
+            fail(f"README.md must document GitHub handoff behavior: {required}")
+    forbidden_readme_patterns = (
+        r"then mark the PR ready when verification passes",
+        r"mark the PR ready when verification passes",
+    )
+    for pattern in forbidden_readme_patterns:
+        if re.search(pattern, readme_text, flags=re.IGNORECASE):
+            fail("README.md must not suggest marking PRs ready without explicit authorization")
+
+    command_contract_text = (PLUGIN_ROOT / "docs" / "COMMAND_CONTRACT.md").read_text(encoding="utf-8")
+    for required in (
+        "ask before ready-for-review",
+        "PR review feedback",
+        "explicit user authorization",
+    ):
+        if required not in command_contract_text:
+            fail(f"docs/COMMAND_CONTRACT.md must document GitHub handoff behavior: {required}")
 
     template_text = (PLUGIN_ROOT / "templates" / "AGENTS.md").read_text(encoding="utf-8")
     if "Assembly" not in template_text or "lifecycle" not in template_text:
         fail("templates/AGENTS.md must identify Assembly as lifecycle owner")
+    if ".agents/AGENT-GUIDANCE.md" not in template_text:
+        fail("templates/AGENTS.md must point to .agents/AGENT-GUIDANCE.md")
 
-    agents_dir = PLUGIN_ROOT / "agents"
+    project_structure_text = (PLUGIN_ROOT / "references" / "project-kernel-structure.md").read_text(encoding="utf-8")
+    for required in (
+        ".agents/AGENT-GUIDANCE.md",
+        ".agents/log.md",
+        ".agents/notes/",
+        "reference/",
+        "append-only",
+        "protected once they exist",
+        ".agents/notes/README.md",
+        "reference/README.md",
+    ):
+        if required not in project_structure_text:
+            fail(f"project-kernel-structure.md must document scaffold path: {required}")
+
+    agents_dir = PLUGIN_ROOT / ".agents" / "personas"
+    if not (agents_dir / "README.md").is_file():
+        fail("Missing required persona docs: .agents/personas/README.md")
     missing_personas = sorted(
         name for name in REQUIRED_PERSONAS if not (agents_dir / name).is_file()
     )
@@ -268,11 +311,134 @@ def validate_support_files() -> None:
     scaffold_script = PLUGIN_ROOT / "scripts" / "scaffold_project.py"
     if not scaffold_script.is_file():
         fail("Missing required scaffold script: scripts/scaffold_project.py")
+    validate_scaffold_behavior(scaffold_script)
+
+    engineering_text = (
+        PLUGIN_ROOT / "references" / "workflows" / "engineering-delivery.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "PR Review Feedback",
+        "git switch <topic-branch> || git switch -c <topic-branch>",
+        "gh pr edit",
+        "handoff is blocked",
+        "explicit user authorization",
+        "Reply to review threads and mark them resolved only when the user explicitly asks",
+    ):
+        if required not in engineering_text:
+            fail(f"engineering-delivery.md must document GitHub handoff behavior: {required}")
+
+    build_text = (PLUGIN_ROOT / "skills" / "build" / "SKILL.md").read_text(encoding="utf-8")
+    if "handoff is blocked" not in build_text:
+        fail("build skill must document blocked GitHub handoff fallback")
+
+    next_text = (PLUGIN_ROOT / "skills" / "next" / "SKILL.md").read_text(encoding="utf-8")
+    for required in (
+        "references/workflows/qa-and-release.md",
+        "Never run `gh pr ready` without explicit user authorization",
+        "Ready-for-review transitions require explicit user authorization",
+    ):
+        if required not in next_text:
+            fail(f"next skill must require explicit ready-for-review authorization: {required}")
+
+    qa_release_text = (
+        PLUGIN_ROOT / "references" / "workflows" / "qa-and-release.md"
+    ).read_text(encoding="utf-8")
+    if "Ask before marking ready" not in qa_release_text or "explicitly authorizes" not in qa_release_text:
+        fail("qa-and-release.md must require explicit authorization before gh pr ready")
 
     if not (PLUGIN_ROOT / "AGENTS.md").is_file():
         fail("Missing required plugin agent guidance: AGENTS.md")
     if not (PLUGIN_ROOT / "templates" / "AGENTS.md").is_file():
         fail("Missing required downstream agent template: templates/AGENTS.md")
+
+
+def run_scaffold(scaffold_script: Path, root: Path, *args: str) -> dict:
+    completed = subprocess.run(
+        [sys.executable, str(scaffold_script), "--root", str(root), *args],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        return json.loads(completed.stdout)
+    except json.JSONDecodeError as exc:
+        fail(f"scaffold_project.py returned invalid JSON: {exc}")
+
+
+def reported_paths(result: dict, key: str) -> set[str]:
+    return {str(value).replace("\\", "/") for value in result.get(key, [])}
+
+
+def validate_scaffold_behavior(scaffold_script: Path) -> None:
+    with tempfile.TemporaryDirectory(prefix="assembly-scaffold-") as temp_dir:
+        root = Path(temp_dir) / "project"
+        root.mkdir()
+
+        result = run_scaffold(scaffold_script, root, "--name", "Root Project")
+        for required in (
+            "AGENTS.md",
+            ".agents/AGENT-GUIDANCE.md",
+            ".agents/log.md",
+            ".agents/notes/README.md",
+            "reference/README.md",
+            "docs/status.md",
+        ):
+            if not (root / required).is_file():
+                fail(f"scaffold_project.py did not create {required}")
+            if required not in reported_paths(result, "created"):
+                fail(f"scaffold_project.py did not report created file {required}")
+        if (root / "docs" / "agent-guidance.md").exists():
+            fail("scaffold_project.py created deprecated docs/agent-guidance.md")
+
+        (root / ".agents" / "AGENT-GUIDANCE.md").write_text(
+            "# Custom Guidance\n\nKeep me.\n", encoding="utf-8"
+        )
+        (root / ".agents" / "notes" / "README.md").write_text(
+            "# Custom Notes Readme\n\nKeep notes.\n", encoding="utf-8"
+        )
+        (root / "reference" / "README.md").write_text(
+            "# Custom Reference Readme\n\nKeep reference.\n", encoding="utf-8"
+        )
+        (root / ".agents" / "log.md").write_text(
+            "# Agent Log\n\nCUSTOM LOG LINE\n", encoding="utf-8"
+        )
+
+        forced = run_scaffold(
+            scaffold_script,
+            root,
+            "--parent",
+            "docs",
+            "--name",
+            "Child Project",
+            "--slug",
+            "child",
+            "--force",
+        )
+        preserved = {
+            ".agents/AGENT-GUIDANCE.md": "Keep me.",
+            ".agents/notes/README.md": "Keep notes.",
+            "reference/README.md": "Keep reference.",
+        }
+        for path, marker in preserved.items():
+            if marker not in (root / path).read_text(encoding="utf-8"):
+                fail(f"force scaffold overwrote protected file {path}")
+            if path not in reported_paths(forced, "skipped"):
+                fail(f"force scaffold did not report protected skip for {path}")
+        log_text = (root / ".agents" / "log.md").read_text(encoding="utf-8")
+        if "CUSTOM LOG LINE" not in log_text or "force-refreshed" not in log_text:
+            fail("force scaffold did not append to .agents/log.md")
+        if ".agents/log.md" not in reported_paths(forced, "updated"):
+            fail("force scaffold did not report .agents/log.md as updated")
+        if not (root / "docs" / "projects" / "child" / "status.md").is_file():
+            fail("force scaffold did not create child project status.md")
+
+        log_dir_root = Path(temp_dir) / "log-dir-project"
+        (log_dir_root / ".agents" / "log.md").mkdir(parents=True)
+        log_dir_result = run_scaffold(scaffold_script, log_dir_root, "--name", "Log Dir")
+        if not (log_dir_root / ".agents" / "log.md").is_dir():
+            fail("scaffold_project.py overwrote non-file .agents/log.md path")
+        if ".agents/log.md" not in reported_paths(log_dir_result, "skipped"):
+            fail("scaffold_project.py did not report non-file .agents/log.md as skipped")
 
 
 def main() -> int:

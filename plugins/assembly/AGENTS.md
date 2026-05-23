@@ -27,6 +27,7 @@ When working on this repo, follow the same protocol the plugin teaches:
 
 - Keep entry skills thin.
 - Put detailed guidance in `references/` or `templates/`.
+- Keep agent-only support prompts under `.agents/`; leave `AGENTS.md` as the visible instruction entrypoint.
 - Do not overwrite downstream `AGENTS.md` files in scaffold behavior.
 - Keep validators current when adding required files.
 

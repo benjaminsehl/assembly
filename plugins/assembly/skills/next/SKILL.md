@@ -16,11 +16,12 @@ Choose and perform the next normal workflow step without guessing. Use project d
 - `references/project-phases.md`: phase gates, required evidence, and recommended skills.
 - `references/agent-operating-protocol.md`: unclear prompts, skipped prerequisites, and safety boundaries.
 - `references/workflows/project-lifecycle.md`: status orientation, repair, retro, and learning modes.
+- `references/workflows/qa-and-release.md`: PR readiness and ask-first ready-for-review gates.
 
 ## Workflow
 
 1. State that `next` is active and identify the repo plus project or subproject.
-2. Read `AGENTS.md`, root `docs/status.md`, nearest subproject `status.md`, and any task/spec/plan file explicitly named by status.
+2. Read `AGENTS.md`, root `docs/status.md`, nearest subproject `status.md`, `.agents/log.md` when present, and any task/spec/plan file explicitly named by status.
 3. Determine the active phase, last completed gate, missing required evidence, and whether the next step is safe to infer.
 4. If status is stale, contradictory, or missing, perform the `project-status` repair behavior first: audit the project trail, update `docs/status.md` when project-doc edits are in scope, and report the recovery path.
 5. If the next step is clear and low-risk, load and follow that public skill's workflow before running the step:
@@ -28,6 +29,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
    - Prototype gaps: use `prototype`.
    - Build gaps: use `spec`, `plan`, `build`, `test`, `review`, or `code-simplify` as the next unfinished gate requires.
    - Release gaps: use `qa`, `review`, or `ship`.
+   - GitHub handoff gaps: commit, push, draft PR, self-review, code-simplify, or ask before ready-for-review as the unfinished gate requires. Never run `gh pr ready` without explicit user authorization.
 6. If multiple plausible next steps exist, ask one concise verification question instead of choosing arbitrarily.
 7. If the user asks to skip missing prerequisites, warn once, name the skipped gate and risk, then proceed only when the user insists and no hard safety boundary applies.
 8. End by naming the action taken, evidence used, status/docs updated or intentionally left unchanged, and the next expected gate.
@@ -38,6 +40,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
 - The response explains why this action is next instead of merely saying it was inferred.
 - Ambiguous forks produce a concise question.
 - Stale or missing status triggers repair behavior before continuation.
+- Ready-for-review transitions require explicit user authorization.
 - Skipped gates are recorded in the response and in `docs/status.md` when project-doc edits are in scope.
 
 ## Stop Conditions

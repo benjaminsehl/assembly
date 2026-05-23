@@ -11,6 +11,7 @@ Every public skill must:
 - Load the smallest relevant context and reference files.
 - Produce evidence, not vibes.
 - Warn when the user asks to skip missing phase prerequisites, recommend the right double-back skill, and record skipped gates if the user insists.
+- For material changes in a GitHub-backed repo, preserve a PR handoff path: focused commit, pushed branch, descriptive draft PR, self-review, simplification pass, final verification, then ask before ready-for-review.
 - Stop and ask when the next step would cross an `Ask first` boundary in `docs/SPEC.md`.
 
 Every public skill must not:
@@ -18,7 +19,9 @@ Every public skill must not:
 - Invoke deleted support skills by name as dependencies.
 - Invent project commands that are not in the target repo.
 - Mark work complete without verification evidence.
+- Leave material GitHub-backed work as only an uncommitted local diff unless the user explicitly asked for local-only work or handoff is blocked.
 - Overwrite an existing `AGENTS.md` while scaffolding.
+- Put agent-only operating files in `docs/` when the scaffold can use `.agents/`.
 - Continue into a different lifecycle phase unless the user asked for that phase.
 
 If a prompt is unclear, state the inferred task, current phase, and recommended next skill, then ask a concise verification question before acting.
@@ -46,6 +49,8 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 - `project-status` is the project gateway. It covers new project scaffolding, phase status, stale docs, recovery plans, retro capture, and durable project learning.
 - `product-discovery` is the product gateway. It covers raw ideas, founder critique, business-model pressure tests, and planned UX critique before specs.
 - The engineering spine is `spec` -> `plan` -> `build` -> `test` -> `review` -> `code-simplify` -> `ship`.
+- The default GitHub handoff is descriptive draft PR first, then ready-for-review only after verification, self-review, code simplification, and explicit user authorization.
+- PR review feedback is handled through thread-aware reads, traceable fixes, pushed updates, and replies/resolution only when the user explicitly asks for those GitHub write actions.
 - `prototype` and `qa` stay public because they are frequent tangible-work moments that do not fit cleanly into spec/build/release commands.
 
 ## Trigger Examples

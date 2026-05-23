@@ -24,13 +24,15 @@ Implement exactly one planned slice at a time, keeping the codebase working and 
 6. If tests, build, or runtime checks fail, isolate the root cause before changing approach.
 7. Run targeted verification and the broadest practical regression check.
 8. Update the task status only after verification passes or skipped checks are explained.
-9. Stage, commit, and push only when the user asked for publishing or the repo workflow requires it.
+9. For material changes in a GitHub-backed repo, follow the GitHub handoff from `references/workflows/engineering-delivery.md`: focused commit, push a topic branch, and open or update a descriptive draft PR unless the user asked for local-only work or handoff is blocked.
 
 ## Verification
 
 - Changed files are named.
 - Tests or checks run are reported with results.
 - The task acceptance criteria are satisfied.
+- GitHub-backed work is committed, pushed, and linked to a descriptive draft PR when handoff is in scope and not blocked.
+- Blocked handoff names the failed command or missing access, completed local work, verification status, and next recovery step.
 - Any skipped verification has a concrete reason.
 
 ## Stop Conditions

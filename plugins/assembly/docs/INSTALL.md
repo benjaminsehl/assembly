@@ -106,3 +106,12 @@ python3 plugins/assembly/scripts/scaffold_project.py \
 ```
 
 If `AGENTS.md` already exists, the scaffold reports a manual merge notice instead of overwriting it. Review `plugins/assembly/templates/AGENTS.md` and merge the phase-aware protocol into the existing project instructions by hand.
+
+The scaffold keeps agent-only operating material out of `docs/`:
+
+- Root `AGENTS.md` stays as the visible entrypoint.
+- `.agents/AGENT-GUIDANCE.md` receives the reusable operating protocol.
+- `.agents/log.md` and `.agents/notes/` hold agent handoff context.
+- `reference/` holds raw source material that should stay close to the project.
+
+`--force` refreshes scaffold docs but still preserves existing `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md`, and appends to `.agents/log.md` instead of overwriting agent instructions, support guidance, or handoff history.

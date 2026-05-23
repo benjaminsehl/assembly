@@ -20,7 +20,7 @@ def slugify(value: str) -> str:
 
 def rel(path: Path, root: Path) -> str:
     try:
-        return str(path.relative_to(root))
+        return path.relative_to(root).as_posix()
     except ValueError:
         return str(path)
 
@@ -56,6 +56,7 @@ def template_files(
 ) -> dict[Path, str]:
     today = date.today().isoformat()
     status_path = rel(project_dir / "status.md", root)
+    agent_guidance_path = rel(root / ".agents" / "AGENT-GUIDANCE.md", root)
 
     return {
         project_dir / "README.md": f"""# {project_name}
@@ -69,7 +70,7 @@ Start here:
 - Decisions: `decisions/`
 - Product vision: `product/vision.md`
 - Tech design: `tech-design/`
-- Agent guidance: `agent-guidance.md`
+- Agent guidance: top-level `AGENTS.md` and `{agent_guidance_path}`
 - Child projects: `projects/`
 """,
         project_dir / "status.md": f"""# Project Status: {project_name}
@@ -95,7 +96,27 @@ Current phase: proposal
 - What does good look like at release?
 - Which assumptions are riskiest?
 """,
-        project_dir / "agent-guidance.md": protocol_text,
+        root / ".agents" / "AGENT-GUIDANCE.md": protocol_text,
+        root / ".agents" / "log.md": f"""# Agent Log
+
+Append meaningful agent handoff events, skipped gates, recovery notes, and project-operation changes here.
+
+## {today}
+
+- Project workspace scaffolded for `{project_name}`.
+""",
+        root / ".agents" / "notes" / "README.md": """# Agent Notes
+
+Use dated notes for temporary agent working context, open loops, and handoff breadcrumbs.
+
+Promote durable product, technical, or decision context into `docs/`. Keep source material in `reference/`.
+""",
+        root / "reference" / "README.md": """# Reference
+
+Store raw source material, imports, screenshots, transcripts, datasets, vendor docs, and other evidence that should remain close to the project but should not be rewritten as project documentation.
+
+When a reference changes a decision, summarize the durable conclusion in `docs/decisions/`, `docs/research/`, or the relevant phase file.
+""",
         project_dir / "phases" / "proposal.md": """# Proposal Phase
 
 ## What Becomes 10x Better
@@ -301,19 +322,51 @@ Create a child project here when the work needs its own proposal, prototype, bui
     }
 
 
-def write_files(files: dict[Path, str], root: Path, force: bool) -> dict[str, list[str]]:
+def write_files(
+    files: dict[Path, str],
+    root: Path,
+    force: bool,
+    protected_paths: set[Path],
+) -> dict[str, list[str]]:
     created: list[str] = []
     skipped: list[str] = []
 
     for path, content in files.items():
         path.parent.mkdir(parents=True, exist_ok=True)
-        if path.exists() and not force:
+        if path.exists() and (not force or path in protected_paths):
             skipped.append(rel(path, root))
             continue
         path.write_text(content, encoding="utf-8")
         created.append(rel(path, root))
 
     return {"created": created, "skipped": skipped}
+
+
+def append_log_entry(
+    log_path: Path,
+    root: Path,
+    project_name: str,
+    project_dir: Path,
+    force: bool,
+    result: dict[str, list[str]],
+) -> None:
+    if not log_path.is_file():
+        result["skipped"].append(rel(log_path, root))
+        result.setdefault("manual_merge", []).append(
+            ".agents/log.md exists but is not a file; preserved and not updated. Replace it with a file to enable scaffold log entries."
+        )
+        return
+
+    today = date.today().isoformat()
+    mode = "force-refreshed" if force else "scaffolded"
+    entry = (
+        f"\n## {today}\n\n"
+        f"- Project workspace {mode} for `{project_name}` at `{rel(project_dir, root)}`.\n"
+    )
+    text = log_path.read_text(encoding="utf-8")
+    separator = "" if text.endswith("\n") else "\n"
+    log_path.write_text(f"{text}{separator}{entry}", encoding="utf-8")
+    result.setdefault("updated", []).append(rel(log_path, root))
 
 
 def main() -> int:
@@ -363,21 +416,63 @@ def main() -> int:
         project_dir = root / "docs"
 
     files = template_files(project_name, project_dir, root, protocol_text)
+    agent_guidance_path = root / ".agents" / "AGENT-GUIDANCE.md"
+    agent_guidance_exists = agent_guidance_path.exists()
+    agent_notes_readme_path = root / ".agents" / "notes" / "README.md"
+    agent_notes_readme_exists = agent_notes_readme_path.exists()
+    reference_readme_path = root / "reference" / "README.md"
+    reference_readme_exists = reference_readme_path.exists()
+    log_path = root / ".agents" / "log.md"
+    log_exists = log_path.exists()
+    if log_exists:
+        files.pop(log_path, None)
+
     agents_path = root / "AGENTS.md"
     agents_exists = agents_path.exists()
     if not agents_exists:
         files[agents_path] = agents_template
 
-    result: dict[str, object] = write_files(
-        files, root, args.force
+    result = write_files(
+        files,
+        root,
+        args.force,
+        protected_paths={
+            agent_guidance_path,
+            agent_notes_readme_path,
+            reference_readme_path,
+        },
     )
+    if log_exists and (args.force or result["created"]):
+        append_log_entry(
+            log_path,
+            root,
+            project_name,
+            project_dir,
+            args.force,
+            result,
+        )
+    elif log_exists:
+        result["skipped"].append(rel(log_path, root))
     result["project_dir"] = rel(project_dir, root)
     result["name"] = project_name
+    if agent_guidance_exists:
+        result.setdefault("manual_merge", []).append(
+            ".agents/AGENT-GUIDANCE.md already exists; preserved to avoid overwriting project-specific agent instructions."
+        )
+    if agent_notes_readme_exists:
+        result.setdefault("manual_merge", []).append(
+            ".agents/notes/README.md already exists; preserved to avoid overwriting project-specific agent notes guidance."
+        )
+    if reference_readme_exists:
+        result.setdefault("manual_merge", []).append(
+            "reference/README.md already exists; preserved to avoid overwriting project-specific reference guidance."
+        )
     if agents_exists:
         result["skipped"].append("AGENTS.md")
-        result["manual_merge"] = [
-            "AGENTS.md already exists; merge templates/AGENTS.md manually if needed."
-        ]
+        result.setdefault("manual_merge", []).extend([
+            "AGENTS.md already exists; merge templates/AGENTS.md manually if needed.",
+            ".agents/AGENT-GUIDANCE.md contains the reusable operating protocol unless it was also skipped.",
+        ])
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
