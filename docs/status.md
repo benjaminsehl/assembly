@@ -1,16 +1,16 @@
 # Project Status: Assembly
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 Current phase: proposal
 
 ## Phase Verdict
 
 - Current phase: proposal
-- Why: Assembly now installs and loads as a working Codex plugin, and the product direction is now clearer: finish the Codex plugin first, then pursue Hermes as the orchestrator. The remaining proposal work is turning that direction into a 1.0 spec and release gate.
-- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` is clean at merge commit `210b3fd`; `codex plugin marketplace upgrade assembly` installed Assembly `0.8.1` under `~/.codex/plugins/cache/assembly/assembly/0.8.1`; validators passed before merge; repo has been renamed to `benjaminsehl/assembly`.
+- Why: Assembly now installs and loads as a working Codex plugin, and the product direction is clear: finish the Codex plugin first, then pursue Hermes as the orchestrator. PR #2 is ready for review with the next batch of 1.0 proposal, skill-behavior, and icon updates; after that lands, the remaining proposal work is turning the direction into a 1.0 spec and release gate.
+- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` previously upgraded Assembly `0.8.1`; PR #2 is ready for review with Assembly `0.8.3`, interview-first `product-discovery`, execution-first empty `build`, Codex-first/Hermes-next decision docs, and the black outlined `⌂` composer icon.
 - Structure decision: agent-only operating files now belong under `.agents/`, with root `AGENTS.md` as the visible entrypoint and `reference/` reserved for raw source material.
 - Product decision: 1.0 is Codex-first; Claude support is not a near-term priority; Hermes orchestration is the post-1.0 strategic direction.
-- Next gate: 1.0 spec written and reviewed.
+- Next gate: merge PR #2 only with explicit user approval, upgrade the local plugin to `0.8.3`, then write and review the 1.0 spec.
 
 ## Next Recommended Skills
 
@@ -38,4 +38,4 @@ Current phase: proposal
 
 ## Next Concrete Action
 
-Write the Assembly 1.0 spec for a Codex-first plugin, with Hermes orchestration captured as the next strategic horizon.
+If the user approves the release boundary, merge PR #2 and upgrade the local plugin. Otherwise, write the Assembly 1.0 spec for a Codex-first plugin with Hermes orchestration captured as the next strategic horizon.
