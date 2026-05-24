@@ -1,21 +1,21 @@
 # Project Status: Assembly
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 Current phase: proposal
 
 ## Phase Verdict
 
 - Current phase: proposal
-- Why: Assembly now installs and loads as a working Codex plugin, and the product direction is now clearer: finish the Codex plugin first, then pursue Hermes as the orchestrator. The remaining proposal work is turning that direction into a 1.0 spec and release gate.
-- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` is clean at merge commit `210b3fd`; `codex plugin marketplace upgrade assembly` installed Assembly `0.8.1` under `~/.codex/plugins/cache/assembly/assembly/0.8.1`; validators passed before merge; repo has been renamed to `benjaminsehl/assembly`.
+- Why: Assembly now installs and loads as a working Codex plugin, and the product direction is clear: finish the Codex plugin first, then pursue Hermes as the orchestrator. PR #2 landed the next batch of 1.0 proposal, skill-behavior, and icon updates; the current work is turning that direction into a 1.0 spec and release gate.
+- Evidence: PR #1 merged the project-workflow foundation into `main`; PR #2 merged as `15cb36a`; local `main` is synced with `origin/main`; `codex plugin marketplace upgrade assembly` reports the local marketplace install is already up to date; Assembly `0.8.3` is installed under `~/.codex/plugins/cache/assembly/assembly/0.8.3`; `docs/specs/assembly-1-0.md` drafts the 1.0 behavior spec.
 - Structure decision: agent-only operating files now belong under `.agents/`, with root `AGENTS.md` as the visible entrypoint and `reference/` reserved for raw source material.
 - Product decision: 1.0 is Codex-first; Claude support is not a near-term priority; Hermes orchestration is the post-1.0 strategic direction.
-- Next gate: 1.0 spec written and reviewed.
+- Next gate: review and accept or revise `docs/specs/assembly-1-0.md`.
 
 ## Next Recommended Skills
 
-- `product-discovery`
 - `spec`
+- `plan`
 
 ## Current 1.0 Direction
 
@@ -38,4 +38,4 @@ Current phase: proposal
 
 ## Next Concrete Action
 
-Write the Assembly 1.0 spec for a Codex-first plugin, with Hermes orchestration captured as the next strategic horizon.
+Review `docs/specs/assembly-1-0.md`; once accepted, use `plan` to break 1.0 into implementation and proof tasks.
