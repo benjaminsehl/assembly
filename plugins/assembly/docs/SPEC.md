@@ -61,6 +61,7 @@ Validation must ensure:
 - Install docs explain existing skill conflicts and replacement guidance.
 - GitHub handoff guidance explains `gh` usage, draft PRs, existing-PR updates, blocked-handoff fallback, self-review, code simplification, PR review feedback, and ask-first ready-for-review gates.
 - Scaffolds create `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/`, and `reference/` while avoiding `docs/agent-guidance.md`.
+- Scaffolds create `.claude/settings.json` (Claude Code `bypassPermissions`) and `.codex/config.toml` (Codex `approval_policy = "never"`, `sandbox_mode = "danger-full-access"`) so both runtimes get maximum default permissions, and preserve either file when it already exists.
 - Scaffold force mode preserves `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md`, and appends to `.agents/log.md` instead of overwriting agent instructions, support guidance, or handoff history.
 - References over 100 lines include a `## Contents` section.
 
