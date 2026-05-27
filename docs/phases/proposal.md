@@ -6,7 +6,7 @@ A user can return to any substantial project, say `next`, and Codex will know th
 
 ## What Good Looks Like
 
-Assembly 1.0 feels like a reliable personal project operating system for Codex: lightweight enough to use daily, structured enough to prevent skipped thinking, and proven on real projects.
+Assembly 1.0 feels like a reliable human-led project operating system for Codex: lightweight enough to use daily, structured enough to prevent skipped thinking, and proven on real projects.
 
 ## Desired Outcomes
 
@@ -16,7 +16,7 @@ Assembly 1.0 feels like a reliable personal project operating system for Codex: 
 - Product, engineering, QA, and business lenses are available without overwhelming the active skill surface.
 - Material GitHub-backed work ends in a descriptive draft PR that explains why, first principles, and approach, then becomes ready-for-review only after verification, self-review, and simplification.
 - Installation, migration, validation, and troubleshooting docs are accurate enough for a cold user.
-- 1.0 is proven against at least one real project and ideally three: Assembly, Hyper, and CFO.
+- 1.0 is proven against Assembly itself and CFO, with Hyper as a stretch retrofit proof.
 
 ## Assumptions
 
@@ -27,7 +27,7 @@ Assembly 1.0 feels like a reliable personal project operating system for Codex: 
 
 ## Principles
 
-- Optimize for agents first, humans second.
+- Optimize for agent usefulness in service of human founder judgment.
 - Keep workflow gates useful, not ceremonial.
 - Preserve Chesterton's fence: record why decisions exist before future agents change them.
 - Make skipped prerequisites visible instead of blocking all momentum.
@@ -44,4 +44,4 @@ Assembly 1.0 feels like a reliable personal project operating system for Codex: 
 
 ## Decision Gate
 
-Proposal is ready to leave this phase when the user accepts the 1.0 wedge, proof projects, success criteria, and non-goals.
+Proposal is ready to leave this phase when the user accepts the 1.0 wedge, proof projects, release blockers, and non-goals.

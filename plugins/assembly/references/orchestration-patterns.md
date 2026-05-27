@@ -1,12 +1,13 @@
 # Orchestration Patterns
 
-Reference catalog of agent orchestration patterns this repo endorses, plus anti-patterns to avoid. Read this before adding a new slash command that coordinates multiple personas, or before introducing a new persona that "wraps" existing ones.
+Reference catalog of agent orchestration patterns this repo endorses, plus anti-patterns to avoid. Read this before adding a new entry skill, future Hermes workflow, or persona that coordinates multiple specialists.
 
-The governing rule: **the user (or a slash command) is the orchestrator. Personas do not invoke other personas.** Skills are mandatory hops inside a persona's workflow.
+The 1.0 governing rule: **the user and current Codex session are the orchestrator. Personas do not invoke other personas.** Future Hermes orchestration may coordinate Codex sessions, but it must preserve explicit ownership, approval gates, and evidence-backed handoff.
 
 ## Contents
 
 - Endorsed patterns
+- Codex-first mapping
 - Claude Code mapping
 - Agent Teams
 - Anti-patterns
@@ -35,21 +36,21 @@ user → code-reviewer → report → user
 
 ---
 
-### 2. Single-persona slash command
+### 2. Single-persona entry skill
 
-A slash command that wraps one persona with the project's skills. Saves the user from re-explaining the workflow every time.
+An entry skill that wraps one perspective with the project's references. Saves the user from re-explaining the workflow every time.
 
 ```
-/review -> code-reviewer (with review workflow) -> report
+review -> code-reviewer lens (with review workflow) -> report
 ```
 
 **Use when:** the same single-persona invocation happens repeatedly with the same setup.
 
-**Examples in this repo:** `/review`, `/test`, `/code-simplify`.
+**Examples in this repo:** `review`, `test`, `code-simplify`.
 
-**Cost:** same as direct invocation. The slash command is just a saved prompt.
+**Cost:** same as direct invocation. The entry skill is just a saved workflow.
 
-**Anti-signal:** if the slash command's body is mostly "decide which persona to call," delete it and let the user call the persona directly.
+**Anti-signal:** if the skill body is mostly "decide which persona to call," simplify it or make it a reference behind an existing entrypoint.
 
 ---
 
@@ -59,7 +60,7 @@ Multiple personas operate on the same input concurrently, each producing an inde
 
 ```
                     ┌─→ code-reviewer    ─┐
-/ship → fan out  ───┼─→ security-auditor ─┤→ merge → go/no-go + rollback
+ship  → fan out  ───┼─→ security-auditor ─┤→ merge → go/no-go + rollback
                     └─→ test-engineer    ─┘
 ```
 
@@ -69,7 +70,7 @@ Multiple personas operate on the same input concurrently, each producing an inde
 - The merge step is small enough to stay in the main context
 - Wall-clock latency matters
 
-**Examples in this repo:** `/ship`.
+**Examples in this repo:** `ship`.
 
 **Cost:** N parallel sub-agent contexts + one merge turn. Higher than direct invocation, but faster wall-clock and produces better reports because each sub-agent stays focused on its single perspective.
 
@@ -83,12 +84,12 @@ If any answer is "no," fall back to direct invocation or a single-persona comman
 
 ---
 
-### 4. Sequential pipeline as user-driven slash commands
+### 4. Sequential pipeline as user-driven skills
 
-The user runs slash commands in a defined order, carrying context (or commit history) between them. There is no orchestrator agent — the user IS the orchestrator.
+The user runs skills in a defined order, carrying context through the project trail, commits, and PRs. In Assembly 1.0, there is no separate orchestrator agent. The user and main Codex session hold the sequence.
 
 ```
-user runs:  /spec  →  /plan  →  /build  →  /test  →  /review  →  /ship
+user runs:  spec  ->  plan  ->  build  ->  test  ->  review  ->  ship
 ```
 
 **Use when:** the workflow has dependencies (each step needs the previous step's output) and human judgment between steps adds value.
@@ -97,7 +98,7 @@ user runs:  /spec  →  /plan  →  /build  →  /test  →  /review  →  /ship
 
 **Cost:** one sub-agent context per step. Free for the orchestration layer because there is no orchestrator agent.
 
-**Why not automate it:** an LLM "lifecycle orchestrator" would (a) lose nuance between steps because it has to summarize for hand-off, (b) skip the human checkpoints that catch wrong-direction work early, and (c) double the token cost via paraphrasing turns.
+**Why not fully automate it in 1.0:** a premature lifecycle orchestrator would lose nuance between steps, skip human checkpoints that catch wrong-direction work early, and spend extra context paraphrasing its own handoffs. Hermes should come later, after Assembly's local control loop is reliable.
 
 ---
 
@@ -122,9 +123,30 @@ main agent → research sub-agent (reads 50 files) → digest → main agent con
 
 ---
 
-## Claude Code compatibility
+## Codex-First Mapping
 
-This catalog is harness-agnostic, but most readers will run it on Claude Code. Here's how each pattern maps onto Claude Code's primitives — and where the platform enforces our rules for us.
+Assembly 1.0 maps orchestration into Codex-native public skills:
+
+- `next`: contextual dispatcher.
+- `project-status`: orientation, scaffold, and repair.
+- `product-discovery`: founder/product-director interview and product judgment support.
+- `prototype`, `spec`, `plan`, `build`, `test`, `qa`, `review`, `code-simplify`, `ship`: lifecycle gates.
+
+Use subagents for sidecar work when the task is bounded and does not need to own the same patch:
+
+- Context engineering audits.
+- Research digests.
+- Independent PR review.
+- QA/risk passes.
+- Release-readiness checks.
+
+Avoid multi-agent implementation when two agents would edit the same files or when the next step depends on tight coordination.
+
+## Claude Code Compatibility
+
+This section is future reference for adapter work. Assembly 1.0 is Codex-first; do not let Claude compatibility drive 1.0 behavior.
+
+Here's how each pattern maps onto Claude Code's primitives — and where the platform enforces our rules for us.
 
 ### Where personas live
 
@@ -142,7 +164,7 @@ Claude Code has two parallelism primitives. Pattern 3 (parallel fan-out with mer
 | Status | Stable | Experimental — requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` |
 | Cost | Lower | Higher — each teammate is a separate Claude instance |
 
-**The personas in this repo work in both modes.** When spawned as subagents (e.g. by `/ship`), they report findings to the main session. When spawned as teammates (`Spawn a teammate using the security-auditor agent type…`), they can challenge each other's findings directly. The persona definition is the same; only the spawning context changes.
+**The personas in this repo work in both modes.** When spawned as subagents for a `ship`-style pass, they report findings to the main session. When spawned as teammates (`Spawn a teammate using the security-auditor agent type...`), they can challenge each other's findings directly. The persona definition is the same; only the spawning context changes.
 
 One subtlety: the `skills` and `mcpServers` frontmatter fields in a persona are honored when it runs as a subagent but **ignored when it runs as a teammate** — teammates load skills and MCP servers from your project and user settings, the same as a regular session. If a persona depends on a specific skill or MCP server being loaded, configure it at the session level so it's available in both modes.
 
@@ -175,13 +197,13 @@ The fields that DO work in plugin agents are: `name`, `description`, `tools`, `d
 
 ### Spawning multiple subagents in parallel
 
-In Claude Code, parallel fan-out (Pattern 3) requires issuing **multiple Agent tool calls in a single assistant turn**. Sequential turns serialize execution. `/ship` calls this out explicitly. Any new orchestrator command should do the same.
+In Claude Code, parallel fan-out (Pattern 3) requires issuing **multiple Agent tool calls in a single assistant turn**. Sequential turns serialize execution. Any future adapter command should call this out explicitly.
 
 ---
 
 ## Worked example: Agent Teams for competing-hypothesis debugging
 
-This example shows when to reach for **Agent Teams** instead of `/ship`'s subagent fan-out. The two patterns look similar from a distance — both spawn the same three personas — but the value comes from a different place.
+This example shows when to reach for **Agent Teams** instead of `ship`-style subagent fan-out. The two patterns look similar from a distance — both spawn the same three personas — but the value comes from a different place.
 
 ### The scenario
 
@@ -194,19 +216,19 @@ Plausible root causes (mutually exclusive, all fit the symptoms):
 3. A missing index on a query that scales with cart size
 4. A flaky third-party API where the SDK retries silently before timing out
 
-A single agent will pick the first plausible theory and stop investigating. A `/ship`-style subagent fan-out would have each persona report independently — but their reports never meet, so nothing rules out the wrong theories.
+A single agent will pick the first plausible theory and stop investigating. A `ship`-style subagent fan-out would have each persona report independently — but their reports never meet, so nothing rules out the wrong theories.
 
 This is exactly the case the Agent Teams docs describe: *"With multiple independent investigators actively trying to disprove each other, the theory that survives is much more likely to be the actual root cause."*
 
-### Why this is *not* a `/ship` job
+### Why this is *not* a `ship` job
 
-| | `/ship` (subagents) | Agent Teams |
+| | `ship`-style subagents | Agent Teams |
 |--|--------------------|-------------|
 | Sub-agents see | The same diff, different lenses | A shared task list, each other's messages |
 | Output | Three independent reports → one merge | Adversarial debate → consensus root cause |
 | Right when | You want a verdict on a known artifact | You want to *find* the artifact among hypotheses |
 
-`/ship` is a verdict; Agent Teams is an investigation.
+`ship` is a verdict; Agent Teams is an investigation.
 
 ### Setup (one-time, per-environment)
 
@@ -270,17 +292,17 @@ Always cleanup through the lead, not a teammate (per the docs: teammates lack fu
 
 ### Cost expectation
 
-Three Sonnet teammates running for ~10–15 minutes of investigation costs noticeably more than the same three personas spawned as subagents by `/ship`. The justification is *quality of conclusion* — for production debugging where the wrong fix is expensive, the extra tokens are a bargain. For a routine PR review, stick with `/ship`.
+Three teammates running for ~10-15 minutes of investigation costs noticeably more than the same three personas spawned as independent review sidecars. The justification is *quality of conclusion* — for production debugging where the wrong fix is expensive, the extra tokens are a bargain. For a routine PR review, stick with Assembly's `ship` or `review` flow.
 
 ### Anti-pattern in this scenario
 
-Do **not** rebuild this as a `/debug` slash command that fans out subagents. Subagents can't message each other — you'd lose the adversarial debate that makes the pattern work. If a workflow keeps coming up, document the trigger prompt above as a snippet rather than wrapping it in a slash command that misuses subagents.
+Do **not** rebuild this as a `debug` entry skill that blindly fans out subagents. Subagents cannot message each other, so you would lose the adversarial debate that makes the pattern work. If a workflow keeps coming up, document the trigger prompt above as a snippet rather than wrapping it in a generic dispatcher that misuses subagents.
 
 ### When *not* to use Agent Teams
 
-- Production-bound verdict on a known diff → use `/ship` (subagents).
+- Production-bound verdict on a known diff → use `ship` or `review`.
 - One specialist perspective on one artifact → direct persona invocation.
-- Sequential lifecycle (spec → plan → build) → user-driven slash commands (Pattern 4).
+- Sequential lifecycle (spec -> plan -> build) → user-driven Assembly skills (Pattern 4).
 - Read-heavy research with a small digest → built-in `Explore` subagent.
 
 Reach for Agent Teams only when teammates **need** to challenge each other to produce the right answer.
@@ -294,16 +316,16 @@ Reach for Agent Teams only when teammates **need** to challenge each other to pr
 A persona whose job is to decide which other persona to call.
 
 ```
-/work → router-persona → "this needs a review" → code-reviewer → router (paraphrases) → user
+work -> router-persona -> "this needs a review" -> code-reviewer -> router (paraphrases) -> user
 ```
 
 **Why it fails:**
 - Pure routing layer with no domain value
 - Adds two paraphrasing hops → information loss + roughly 2× token cost
-- The user already knew they wanted a review; they could have called `/review` directly
-- Replicates the work that slash commands and intent mapping in `AGENTS.md` already do
+- The user already knew they wanted a review; they could have invoked `review` directly
+- Replicates the work that Assembly entry skills and intent mapping in `AGENTS.md` already do
 
-**What to do instead:** add or refine slash commands. Document intent → command mapping in `AGENTS.md`.
+**What to do instead:** add or refine Assembly entry skills and references. Document intent -> skill mapping in `AGENTS.md`.
 
 ---
 
@@ -317,13 +339,13 @@ A `code-reviewer` that internally invokes `security-auditor` when it sees auth c
 - Failure modes multiply (which persona's output format wins? whose rules apply?)
 - Hides cost from the user
 
-**What to do instead:** have the calling persona *recommend* a follow-up audit in its report. The user or a slash command runs the second pass.
+**What to do instead:** have the calling persona *recommend* a follow-up audit in its report. The user, `next`, or a named Assembly skill runs the second pass.
 
 ---
 
 ### C. Sequential orchestrator that paraphrases
 
-An agent that calls `/spec`, then `/plan`, then `/build`, etc. on the user's behalf.
+An agent that calls `spec`, then `plan`, then `build`, etc. on the user's behalf without preserving human checkpoints.
 
 **Why it fails:**
 - Loses the human checkpoints that catch wrong-direction work
@@ -331,20 +353,20 @@ An agent that calls `/spec`, then `/plan`, then `/build`, etc. on the user's beh
 - Doubles token cost: orchestrator turn + sub-agent turn for every step
 - Removes user agency at exactly the points where judgment matters most
 
-**What to do instead:** keep the user as the orchestrator. Document the recommended sequence in `README.md` and let users invoke it.
+**What to do instead:** keep the user and main Codex session as the orchestrator in 1.0. Let `next` continue only when the next step is evidence-backed and approval boundaries are intact.
 
 ---
 
 ### D. Deep persona trees
 
-`/ship` calls a `pre-ship-coordinator` that calls a `quality-coordinator` that calls `code-reviewer`.
+`ship` calls a `pre-ship-coordinator` that calls a `quality-coordinator` that calls `code-reviewer`.
 
 **Why it fails:**
 - Each layer adds latency and tokens with no decision value
 - Debugging becomes a multi-level investigation
 - The leaf personas lose context to multiple summarization steps
 
-**What to do instead:** keep the orchestration depth at most 1 (slash command → personas). The merge happens in the main agent.
+**What to do instead:** keep the orchestration depth at most 1 (entry skill -> sidecar reports). The merge happens in the main agent.
 
 ---
 
@@ -358,7 +380,7 @@ Is the work one perspective on one artifact?
 └── No  → Will the same composition repeat?
          ├── No  → Direct invocation, ad hoc. Stop.
          └── Yes → Are sub-tasks independent?
-                  ├── No  → Sequential slash commands run by user (Pattern 4).
+                  ├── No  → Sequential Assembly skills run by the user/main Codex session (Pattern 4).
                   └── Yes → Parallel fan-out with merge (Pattern 3).
                            Validate against the checklist above.
                            If any check fails → fall back to single-persona command (Pattern 2).

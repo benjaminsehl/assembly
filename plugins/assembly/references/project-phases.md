@@ -106,6 +106,7 @@ When asked what phase a project is in, answer with:
 - Current phase.
 - Evidence from files, commits, tests, plans, or notes.
 - Missing required artifacts.
+- Whether the project trail answers what is being built, why it matters, and what good looks like.
 - Next decision gate.
 - Next recommended skills.
 - One concrete next action.

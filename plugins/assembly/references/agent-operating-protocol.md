@@ -18,8 +18,9 @@ Use this protocol at the start of meaningful project work and whenever the user 
 1. Read `docs/status.md` if it exists.
 2. If the work is inside a subproject, read the nearest `docs/projects/**/status.md` that matches the requested area.
 3. Check `.agents/log.md` and relevant `.agents/notes/` when resuming agent work or diagnosing skipped gates.
-4. Check `docs/phases/`, `docs/product/`, `docs/decisions/`, `docs/specs/`, `docs/plans/`, and relevant child `projects/`.
+4. Check `docs/phases/`, `docs/product/`, `docs/decisions/`, `docs/specs/`, `docs/plans/`, `docs/tech-design/`, `docs/research/`, `docs/prototypes/`, `docs/qa/`, `docs/release/`, and relevant child `projects/`.
 5. State the current phase and the skill you are using when that materially affects the work.
+6. Before hardening product direction, planning, or building, confirm the trail answers what is being built, why it matters, and what good looks like.
 
 ## Phase Prerequisites
 

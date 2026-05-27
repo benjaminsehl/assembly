@@ -1,10 +1,10 @@
 # Product Discovery: Assembly 1.0
 
-Last updated: 2026-05-23
+Last updated: 2026-05-27
 
 ## Idea In User-Problem Language
 
-Builders using Codex need a reliable way to keep agents oriented across the full product lifecycle. The painful moment is not "I need another skill"; it is "I am back in this project and do not remember the state, and I do not trust the agent to know the right next move."
+Builders using Codex need a reliable way to keep agents oriented across the full product lifecycle. Assembly is the human-led toolkit for an eventual agentic app factory: the user stays founder/product director, while agents preserve context, ask clarifying questions, and execute scoped work. The painful moment is not "I need another skill"; it is "I am back in this project and do not remember the state, and I do not trust the agent to know the right next move."
 
 ## User And Painful Moment
 
@@ -28,11 +28,12 @@ Install Assembly, scaffold a repo, say `next`, and have Codex:
 
 - read the local project trail,
 - identify proposal, prototype, build, or release phase,
+- clarify what is being built, why it matters, and what good looks like when the project trail does not already answer those questions,
 - name missing prerequisites,
 - choose the right public skill,
 - ask one clear question only when needed,
 - update status when project-doc edits are in scope,
-- for material GitHub-backed changes, commit, push, open a descriptive draft PR, explain why/principles/approach, self-review, simplify, and mark ready only after verification.
+- for material GitHub-backed changes, commit, push, open a descriptive draft PR, explain why/principles/approach, self-review, simplify, and mark ready only after verification plus explicit user authorization.
 
 ## Recommended 1.0 Stance
 
@@ -79,7 +80,7 @@ The user returns after days away, types `next`, and Codex says what phase the pr
 
 Verdict: narrow, then prove.
 
-Assembly has a compelling personal wedge, but 1.0 should resist becoming a generic app factory too early. The ambitious version is an agentic app factory; the 1.0 version should prove the control loop that such a factory would need: project trail, phase awareness, next-step routing, and evidence-based gates.
+Assembly should name the app-factory ambition without pretending 1.0 delivers it. The 1.0 release proves the human-led Codex control loop that a future factory needs: project trail, phase awareness, clarifying questions, next-step routing, gates, and PR handoff. Hermes orchestration comes after that loop is trustworthy.
 
 ## Business Model Lens
 
@@ -104,8 +105,8 @@ Riskiest viability assumption: other builders will adopt a project-doc workflow 
 
 ## Evidence Needed Before 1.0
 
-- Fresh install and upgrade works from `benjaminsehl/assembly`. Current evidence: `codex plugin marketplace upgrade assembly` installed `0.8.1` locally on 2026-05-23.
-- Fresh Codex session sees `assembly:next`. Current evidence: `assembly:next` was confirmed active before PR #1 merged; after the `0.8.1` upgrade, new sessions should refresh to the upgraded cache.
+- Fresh install and upgrade works from `benjaminsehl/assembly`. Current evidence: `codex plugin marketplace upgrade assembly` confirmed the local marketplace install was current at `0.8.3` after PR #2.
+- Fresh Codex session sees `assembly:next`. Current evidence: `assembly:next` is available from the installed `0.8.3` bundle; this should be rechecked for the 1.0 release candidate.
 - Assembly itself uses root `docs/` and status successfully. Current evidence: `docs/status.md` now records post-merge status and next-gate routing.
 - Scaffolded projects separate durable docs, agent-only `.agents/` context, and raw `reference/` material.
 - At least one real external project, ideally Hyper or CFO, gets a useful Assembly retrofit.
@@ -119,7 +120,7 @@ Riskiest viability assumption: other builders will adopt a project-doc workflow 
 - `project-status` can scaffold and repair a project trail without overwriting existing `AGENTS.md`.
 - Scaffolds keep `AGENTS.md` at the root, agent-only context in `.agents/`, durable project reasoning in `docs/`, and raw source material in `reference/`.
 - `next` is reliable enough to be the default continuation command.
-- GitHub-backed work has a reliable PR handoff loop: descriptive draft PR first, ready only after verification, self-review, and simplification.
+- GitHub-backed work has a reliable PR handoff loop: descriptive draft PR first, ready only after verification, self-review, simplification, and explicit user authorization.
 - Validators cover manifest, marketplace layout, skill graph, references, and conflict audit.
 - README gives a clear user guide from install to first project to ongoing use.
 - 1.0 has a release checklist, smoke-test evidence, and a short retro from real project use.

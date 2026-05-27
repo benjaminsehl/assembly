@@ -336,9 +336,31 @@ def validate_support_files() -> None:
         "references/workflows/qa-and-release.md",
         "Never run `gh pr ready` without explicit user authorization",
         "Ready-for-review transitions require explicit user authorization",
+        "what is being built",
+        "why it matters",
+        "what good looks like",
     ):
         if required not in next_text:
             fail(f"next skill must require explicit ready-for-review authorization: {required}")
+
+    product_discovery_text = (
+        PLUGIN_ROOT / "skills" / "product-discovery" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "founder/product director",
+        "what is being built",
+        "why it matters",
+        "what good looks like",
+    ):
+        if required not in product_discovery_text:
+            fail(f"product-discovery must document interview-first founder behavior: {required}")
+
+    project_status_text = (
+        PLUGIN_ROOT / "skills" / "project-status" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    for required in ("tech design", "research", "what is being built", "why it matters", "what good looks like"):
+        if required not in project_status_text:
+            fail(f"project-status must inspect core project context: {required}")
 
     qa_release_text = (
         PLUGIN_ROOT / "references" / "workflows" / "qa-and-release.md"

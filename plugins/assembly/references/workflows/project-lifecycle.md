@@ -43,7 +43,7 @@ Check:
 - `docs/phases/`.
 - `docs/product/`.
 - `docs/decisions/`.
-- `docs/specs/` and `docs/plans/`.
+- `docs/specs/`, `docs/plans/`, `docs/tech-design/`, and `docs/research/`.
 - `docs/prototypes/`, `docs/qa/`, and `docs/release/`.
 - Open tasks, recent commits, issues, PRs, and local instructions.
 
@@ -52,12 +52,15 @@ Answer with:
 - Current phase and confidence.
 - Evidence.
 - Missing required artifacts.
+- Whether the trail answers what is being built, why it matters, and what good looks like.
 - Skipped gates or Chesterton's-fence risks.
 - Next gate.
 - Next skills.
 - One concrete next action.
 
 For `next`, continue past the status answer only when that one concrete action is unambiguous and inside the user's requested scope. If two or more actions are plausible, ask one concise verification question.
+
+If what/why/good is missing and the next action would harden product direction, recommend `product-discovery` or `spec` before build work.
 
 ## Repair And Introspection
 

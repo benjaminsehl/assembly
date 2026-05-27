@@ -14,6 +14,7 @@ SKILL_REFERENCES = {
         "references/project-phases.md",
         "references/agent-operating-protocol.md",
         "references/workflows/project-lifecycle.md",
+        "references/workflows/qa-and-release.md",
     ],
     "spec": [
         "references/workflows/engineering-delivery.md",
@@ -27,6 +28,8 @@ SKILL_REFERENCES = {
     "build": [
         "references/workflows/engineering-delivery.md",
         "references/testing-patterns.md",
+        "references/project-phases.md",
+        "references/agent-operating-protocol.md",
     ],
     "test": [
         "references/workflows/engineering-delivery.md",
@@ -110,6 +113,21 @@ def validate_graph() -> None:
 
         if len(text.splitlines()) > 120:
             fail(f"{entry} is too large; public skills should stay thin")
+
+    next_text = read_skill("next")
+    for phrase in ("what is being built", "why it matters", "what good looks like"):
+        if phrase not in next_text:
+            fail(f"next must check product intent completeness: {phrase}")
+
+    product_text = read_skill("product-discovery")
+    for phrase in ("founder/product director", "what is being built", "why it matters", "what good looks like"):
+        if phrase not in product_text:
+            fail(f"product-discovery must encode founder interview behavior: {phrase}")
+
+    status_text = read_skill("project-status")
+    for phrase in ("tech design", "research", "what is being built", "why it matters", "what good looks like"):
+        if phrase not in status_text:
+            fail(f"project-status must inspect/status core context: {phrase}")
 
 
 def validate_no_missing_orphans() -> None:

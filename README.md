@@ -1,8 +1,10 @@
 # Assembly
 
-Assembly is a compact personal product-building stack for Codex: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
+Assembly is a human-led Codex product-building toolkit for an eventual agentic app factory: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
 
 The plugin intentionally exposes a small public skill surface. Detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
+
+The human stays founder and product director. Assembly helps Codex ask the right questions, preserve why decisions were made, execute scoped work, and leave reviewable evidence instead of guessing or drifting into unchecked autonomy.
 
 ## Quick Start
 
@@ -62,6 +64,14 @@ If you already have personal lifecycle skills installed, treat this plugin as th
 | `code-simplify` | Behavior-preserving cleanup |
 | `ship` | Go/no-go release decision |
 
+## Current 1.0 Direction
+
+- [Assembly 1.0 spec](docs/specs/assembly-1-0.md)
+- [App-factory north star](docs/product/app-factory-north-star.md)
+- [1.0 release plan](docs/plans/2026-05-27-assembly-1-0-release-plan.md)
+- [Hermes orchestrator roadmap](docs/plans/2026-05-27-hermes-orchestrator-roadmap.md)
+- [Agentic orchestration research](docs/research/2026-05-27-agentic-orchestration-research.md)
+
 ## Project Docs Convention
 
 The root project workspace is `docs/`. Subprojects live under `docs/projects/<slug>/` and can nest recursively.
@@ -79,6 +89,7 @@ my-app/
 |   |-- product/
 |   |-- decisions/
 |   |-- tech-design/
+|   |-- research/
 |   |-- specs/
 |   |-- plans/
 |   |-- prototypes/

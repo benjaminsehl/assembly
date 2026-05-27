@@ -1,19 +1,21 @@
 # Spec: Assembly 1.0
 
-Last updated: 2026-05-24
+Last updated: 2026-05-27
 Status: draft for review
 
 ## Objective
 
-Assembly 1.0 should be a reliable personal Codex product-building stack.
+Assembly is a human-led toolkit for an agentic app factory.
 
-The core promise: install Assembly, scaffold or orient a repo, say `next`, and have Codex know the project phase, missing context, correct workflow, and next useful action from local evidence instead of guessing.
+In 1.0, it proves the Codex control loop: read the project trail, identify phase and missing context, clarify what is being built, why it matters, and what good looks like, choose the next safe workflow, and leave evidence-backed handoff.
 
-Assembly 1.0 is Codex-first. Claude compatibility is out of scope. Hermes orchestration is the next strategic horizon after the Codex workflow is stable.
+The user remains founder and product director. Agents help clarify intent, preserve reasoning, and execute scoped work; they do not silently take product authority.
+
+Assembly 1.0 is Codex-first. Claude compatibility is out of scope. Hermes orchestration is the post-1.0 strategic horizon after the Codex control loop is stable.
 
 ## User
 
-Primary user: Sai building real products with Codex.
+Primary user: Sai acting as founder/product director, using Codex to shape, specify, build, test, and ship real products while retaining product judgment.
 
 Secondary user: a serious builder who wants a compact Codex-native project operating system without maintaining a pile of overlapping lifecycle skills.
 
@@ -22,12 +24,14 @@ Secondary user: a serious builder who wants a compact Codex-native project opera
 - Personal reliability beats broad marketplace polish.
 - The public skill surface stays small.
 - `next` should be the normal continuation command.
+- Human judgment leads; agents accelerate, clarify, and preserve it.
 - Product judgment stays with the user unless explicitly delegated.
+- Agents should ask enough questions to understand what is being built, why it matters, and what good looks like before making durable product or implementation choices.
 - Build work should move when the next engineering gate is evidence-backed.
 - Every material workflow leaves evidence future agents can inspect.
 - GitHub-backed work should end in a reviewable PR handoff by default.
 - Workflow gates should prevent skipped thinking without becoming ceremony.
-- Hermes orchestration should stay visible as the post-1.0 path, but must not delay 1.0.
+- 1.0 proves the Codex control loop before Hermes orchestration.
 
 ## Scope
 
@@ -59,6 +63,8 @@ Assembly 1.0 includes:
   - `docs/decisions/`
   - `docs/specs/`
   - `docs/plans/`
+  - `docs/tech-design/`
+  - `docs/research/`
   - `docs/prototypes/`
   - `docs/qa/`
   - `docs/release/`
@@ -90,6 +96,8 @@ Assembly 1.0 includes:
 - Read `AGENTS.md`, `docs/status.md`, nearest subproject status, `.agents/log.md`, and referenced specs/plans when present.
 - Identify the active phase: proposal, prototype, build, or release.
 - Repair stale or missing status before proceeding when project-doc edits are in scope.
+- Check whether the project trail answers what is being built, why it matters, and what good looks like before dispatching into planning or building.
+- Ask the smallest useful set of concise questions when those answers are missing, keeping continuation lightweight instead of turning it into a survey.
 - Choose the next unambiguous action from evidence.
 - Ask one concise question when multiple plausible next actions exist.
 - Dispatch to the right public skill instead of doing vague continuation work.
@@ -110,6 +118,8 @@ Assembly 1.0 includes:
 `product-discovery` must:
 
 - Default to interview mode.
+- Treat the user as founder/product director, not a requirements oracle.
+- Clarify what, why, and what good looks like before recommending wedge, scope, or success criteria.
 - Ask high-leverage questions before making product calls when the idea is raw or fuzzy.
 - Use delegated mode only when the user explicitly asks the agent to decide, asks for recommendations, or project evidence is already strong.
 - Label assumptions clearly in delegated mode.
@@ -212,9 +222,9 @@ Stretch:
 
 - Hyper proves retrofit behavior against a high-context existing app.
 
-## Success Criteria
+## 1.0 Release Blockers
 
-Assembly 1.0 is ready when:
+Assembly 1.0 must not ship until:
 
 - A fresh Codex session can see and invoke `assembly:next`.
 - `codex plugin marketplace add benjaminsehl/assembly` works for a new install.
@@ -229,6 +239,25 @@ Assembly 1.0 is ready when:
 - Merge requires explicit user direction and a clean review-thread/check state or acknowledged risk.
 - Install, migration, conflict, and troubleshooting docs are accurate enough for a cold user.
 - The release has smoke-test evidence and a short retro.
+
+## Proof Evidence
+
+Required:
+
+- Assembly self-hosts this spec, release plan, QA evidence, and retro through its own project trail.
+- CFO proves greenfield/restart setup, including scaffold, status, `next`, and a reviewable handoff.
+
+Stretch:
+
+- Hyper proves retrofit behavior against a high-context existing app. Hyper increases confidence, but it should not block 1.0 if Assembly and CFO prove the control loop.
+
+## Deferred Aspirations
+
+- Hermes orchestration.
+- Hosted dashboards or app-factory UI.
+- Background automation, dream/desloppification loops, and multi-project scheduling.
+- Claude Code adapter generation or broad runtime portability.
+- Automatic merges, deploys, branch deletion, or release automation.
 
 ## Verification Plan
 
@@ -296,9 +325,9 @@ Never:
 - Leave material GitHub-backed work as only a local diff unless local-only was requested or handoff is blocked.
 - Call 1.0 ready without real-project evidence.
 
-## Open Questions
+## Resolved 1.0 Decisions
 
-- Should 1.0 include an automated installer or migration helper, or are docs plus conflict audit enough?
-- How much of dream/desloppification belongs in 1.0 references versus the Hermes orchestration roadmap?
-- Is Hyper required for 1.0, or should it remain a stretch proof after CFO?
-- What minimum smoke evidence should be captured in the release retro?
+- Automated installer or migration helper: not required for 1.0. Docs plus conflict audit are enough if the cold install/upgrade smoke tests pass.
+- Dream/desloppification: defer to the Hermes/app-factory roadmap. 1.0 may keep the concept visible only as future reference material.
+- Hyper proof: stretch, not required. CFO is the required external proof project after Assembly self-hosting.
+- Minimum release evidence: validator outputs, scaffold smoke results, behavior prompt notes, install/upgrade proof, GitHub handoff proof, and a short retro naming what worked, what felt brittle, and what Hermes should own next.

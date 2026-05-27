@@ -11,8 +11,9 @@ Every public skill must:
 - Load the smallest relevant context and reference files.
 - Produce evidence, not vibes.
 - Warn when the user asks to skip missing phase prerequisites, recommend the right double-back skill, and record skipped gates if the user insists.
+- Treat delegated product judgment as explicit. If the user has not asked the agent to make product calls and the project trail does not answer what, why, and what good looks like, ask concise clarifying questions before durable product or implementation decisions.
 - For material changes in a GitHub-backed repo, preserve a PR handoff path: focused commit, pushed branch, descriptive draft PR, self-review, simplification pass, final verification, then ask before ready-for-review.
-- Stop and ask when the next step would cross an `Ask first` boundary in `docs/SPEC.md`.
+- Stop and ask when the next step would cross an `Ask first` boundary in `plugins/assembly/docs/SPEC.md` or in the target repo's local project protocol.
 
 Every public skill must not:
 

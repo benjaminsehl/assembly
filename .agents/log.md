@@ -19,3 +19,10 @@ Append meaningful agent handoff events, skipped gates, recovery notes, and proje
 
 - Synced `main` after PR #2 merged as `15cb36a`, verified the local Assembly marketplace bundle is already upgraded to `0.8.3`, and started the 1.0 spec branch.
 - Drafted `docs/specs/assembly-1-0.md` as the Codex-first 1.0 behavior spec with Hermes orchestration captured as the post-1.0 horizon.
+
+## 2026-05-27
+
+- Used Assembly project-status/spec/plan/build flow to sharpen the 1.0 branch around a human-led agentic app factory vision.
+- Added the app-factory north star, frontier orchestration research synthesis, 1.0 release plan, Hermes post-1.0 roadmap, Hermes contract draft, smoke evidence template, release checklist, and CFO proof status.
+- Tightened `next`, `project-status`, and `product-discovery` so agents check what is being built, why it matters, and what good looks like before hardening product direction.
+- Updated validators so the skill bodies cannot drift away from the founder/product-director and product-intent completeness requirements.
