@@ -4,6 +4,23 @@ These smoke tests verify that the public skills route correctly and do not rely 
 
 ## Prerequisites
 
+### Claude Code
+
+```text
+/plugin marketplace add benjaminsehl/assembly
+/plugin install assembly@assembly
+```
+
+If the marketplace was already registered:
+
+```text
+/plugin marketplace update assembly
+```
+
+After enabling, confirm `Assembly` appears in `/plugin list` and a cache bundle exists under `~/.claude/plugins/cache/assembly/assembly/`.
+
+### Codex
+
 ```bash
 codex plugin marketplace add benjaminsehl/assembly
 ```

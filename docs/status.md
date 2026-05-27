@@ -1,16 +1,16 @@
 # Project Status: Assembly
 
-Last updated: 2026-05-23
+Last updated: 2026-05-27
 Current phase: proposal
 
 ## Phase Verdict
 
 - Current phase: proposal
-- Why: Assembly now installs and loads as a working Codex plugin, and the product direction is now clearer: finish the Codex plugin first, then pursue Hermes as the orchestrator. The remaining proposal work is turning that direction into a 1.0 spec and release gate.
-- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` is clean at merge commit `210b3fd`; `codex plugin marketplace upgrade assembly` installed Assembly `0.8.1` under `~/.codex/plugins/cache/assembly/assembly/0.8.1`; validators passed before merge; repo has been renamed to `benjaminsehl/assembly`.
+- Why: Assembly now installs and loads as a working Codex plugin, and the bundle has been extended with a Claude Code manifest and marketplace so the same skills work in both runtimes. The remaining proposal work is turning that direction into a 1.0 spec and release gate.
+- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` is clean at merge commit `210b3fd`; `codex plugin marketplace upgrade assembly` installed Assembly `0.8.1` under `~/.codex/plugins/cache/assembly/assembly/0.8.1`; validators passed before merge; repo has been renamed to `benjaminsehl/assembly`; dual-runtime support added on 2026-05-27 via `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and validator/audit-script updates.
 - Structure decision: agent-only operating files now belong under `.agents/`, with root `AGENTS.md` as the visible entrypoint and `reference/` reserved for raw source material.
-- Product decision: 1.0 is Codex-first; Claude support is not a near-term priority; Hermes orchestration is the post-1.0 strategic direction.
-- Next gate: 1.0 spec written and reviewed.
+- Product decision: the Codex-first stance from 2026-05-23 is now extended to dual-runtime; the same plugin bundle ships as both a Codex plugin and a Claude Code plugin, and 1.0 must pass install/smoke checks in both. See `docs/decisions/2026-05-27-dual-runtime-claude-code.md`.
+- Next gate: 1.0 spec written and reviewed, covering both runtimes.
 
 ## Next Recommended Skills
 
@@ -38,4 +38,4 @@ Current phase: proposal
 
 ## Next Concrete Action
 
-Write the Assembly 1.0 spec for a Codex-first plugin, with Hermes orchestration captured as the next strategic horizon.
+Write the Assembly 1.0 spec for the dual-runtime plugin (Codex + Claude Code), with Hermes orchestration captured as the next strategic horizon.

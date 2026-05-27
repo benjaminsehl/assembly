@@ -112,28 +112,28 @@ def parse_frontmatter(path: Path) -> tuple[dict[str, str], str]:
     return metadata, body
 
 
-def validate_manifest() -> None:
+def validate_codex_manifest() -> None:
     manifest_path = PLUGIN_ROOT / ".codex-plugin" / "plugin.json"
     manifest = load_json(manifest_path)
 
     if manifest.get("name") != PLUGIN_NAME:
-        fail("Manifest name must match the plugin folder name")
+        fail("Codex manifest name must match the plugin folder name")
     if manifest.get("skills") != "./skills/":
-        fail('Manifest must set "skills" to "./skills/"')
+        fail('Codex manifest must set "skills" to "./skills/"')
     if manifest.get("license") != "MIT":
-        fail('Public plugin manifest must set "license" to "MIT"')
+        fail('Codex plugin manifest must set "license" to "MIT"')
     if not (PLUGIN_ROOT / "LICENSE").is_file():
         fail("Public plugin bundle must include a LICENSE file")
 
     skills_dir = resolve_plugin_path(manifest["skills"])
     if not skills_dir.is_dir():
-        fail("Manifest skills path does not exist")
+        fail("Codex manifest skills path does not exist")
 
     for key in ("hooks", "mcpServers", "apps"):
         if key in manifest:
             target = resolve_plugin_path(str(manifest[key]))
             if not target.exists():
-                fail(f"Manifest {key} path does not exist: {manifest[key]}")
+                fail(f"Codex manifest {key} path does not exist: {manifest[key]}")
 
     prompts = manifest.get("interface", {}).get("defaultPrompt", [])
     if len(prompts) > 3:
@@ -143,32 +143,89 @@ def validate_manifest() -> None:
             fail(f"interface.defaultPrompt entry is over 128 characters: {prompt!r}")
 
 
-def validate_marketplace() -> None:
+def validate_claude_manifest() -> None:
+    manifest_path = PLUGIN_ROOT / ".claude-plugin" / "plugin.json"
+    manifest = load_json(manifest_path)
+
+    if manifest.get("name") != PLUGIN_NAME:
+        fail("Claude Code manifest name must match the plugin folder name")
+    if manifest.get("license") != "MIT":
+        fail('Claude Code plugin manifest must set "license" to "MIT"')
+    if not manifest.get("description"):
+        fail("Claude Code manifest must include a description")
+    if not manifest.get("version"):
+        fail("Claude Code manifest must declare a version so updates are intentional")
+
+    for key in ("skills", "commands", "agents"):
+        value = manifest.get(key)
+        if value is None:
+            continue
+        targets = value if isinstance(value, list) else [value]
+        for target in targets:
+            if not isinstance(target, str) or not target.startswith("./"):
+                fail(
+                    f"Claude Code manifest {key} entry must be a relative path starting with ./, got {target!r}"
+                )
+            if not resolve_plugin_path(target).exists():
+                fail(f"Claude Code manifest {key} path does not exist: {target}")
+
+
+def validate_codex_marketplace() -> None:
     path = REPO_ROOT / ".agents" / "plugins" / "marketplace.json"
     marketplace = load_json(path)
     if marketplace.get("name") != PLUGIN_NAME:
-        fail("Marketplace name must match the plugin name")
+        fail("Codex marketplace name must match the plugin name")
 
     entries = marketplace.get("plugins")
     if not isinstance(entries, list) or not entries:
-        fail("Marketplace must contain at least one plugin entry")
+        fail("Codex marketplace must contain at least one plugin entry")
 
     matching = [entry for entry in entries if entry.get("name") == PLUGIN_NAME]
     if len(matching) != 1:
-        fail(f"Marketplace must contain exactly one {PLUGIN_NAME} entry")
+        fail(f"Codex marketplace must contain exactly one {PLUGIN_NAME} entry")
 
     entry = matching[0]
     if entry.get("source", {}).get("source") != "local":
-        fail("Marketplace entry source must be local")
+        fail("Codex marketplace entry source must be local")
     expected_path = f"./plugins/{PLUGIN_NAME}"
     if entry.get("source", {}).get("path") != expected_path:
-        fail(f'Marketplace entry source.path must be "{expected_path}"')
+        fail(f'Codex marketplace entry source.path must be "{expected_path}"')
     if entry.get("policy", {}).get("installation") != "AVAILABLE":
-        fail("Marketplace installation policy must be AVAILABLE")
+        fail("Codex marketplace installation policy must be AVAILABLE")
     if entry.get("policy", {}).get("authentication") != "ON_INSTALL":
-        fail("Marketplace authentication policy must be ON_INSTALL")
+        fail("Codex marketplace authentication policy must be ON_INSTALL")
     if not entry.get("category"):
-        fail("Marketplace entry must include a category")
+        fail("Codex marketplace entry must include a category")
+
+
+def validate_claude_marketplace() -> None:
+    path = REPO_ROOT / ".claude-plugin" / "marketplace.json"
+    marketplace = load_json(path)
+
+    if marketplace.get("name") != PLUGIN_NAME:
+        fail("Claude Code marketplace name must match the plugin name")
+
+    owner = marketplace.get("owner")
+    if not isinstance(owner, dict) or not owner.get("name"):
+        fail("Claude Code marketplace must include owner.name")
+
+    entries = marketplace.get("plugins")
+    if not isinstance(entries, list) or not entries:
+        fail("Claude Code marketplace must contain at least one plugin entry")
+
+    matching = [entry for entry in entries if entry.get("name") == PLUGIN_NAME]
+    if len(matching) != 1:
+        fail(f"Claude Code marketplace must contain exactly one {PLUGIN_NAME} entry")
+
+    entry = matching[0]
+    source = entry.get("source")
+    expected_path = f"./plugins/{PLUGIN_NAME}"
+    if source != expected_path:
+        fail(
+            f'Claude Code marketplace entry source must be the relative path "{expected_path}"'
+        )
+    if not entry.get("category"):
+        fail("Claude Code marketplace entry must include a category")
 
 
 def validate_skill(path: Path) -> None:
@@ -251,10 +308,30 @@ def validate_support_files() -> None:
     ):
         if required not in install_text:
             fail(f"docs/INSTALL.md must document skill-conflict guidance: {required}")
+    for required in (
+        "Claude Code",
+        "Codex",
+        "/plugin marketplace add benjaminsehl/assembly",
+        "codex plugin marketplace add benjaminsehl/assembly",
+    ):
+        if required not in install_text:
+            fail(
+                f"docs/INSTALL.md must document dual-runtime install path: {required}"
+            )
 
     readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     if "de-duplicate" not in readme_text or "lifecycle" not in readme_text:
         fail("README.md must include lifecycle de-duplication guidance")
+    for required in (
+        "Claude Code",
+        "Codex",
+        "/plugin marketplace add benjaminsehl/assembly",
+        "codex plugin marketplace add benjaminsehl/assembly",
+    ):
+        if required not in readme_text:
+            fail(
+                f"README.md must document dual-runtime install path: {required}"
+            )
     for required in (
         "ask before marking the PR ready",
         "explicit user authorization",
@@ -442,7 +519,14 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
 
 
 def main() -> int:
-    checks = (validate_manifest, validate_marketplace, validate_skills, validate_support_files)
+    checks = (
+        validate_codex_manifest,
+        validate_claude_manifest,
+        validate_codex_marketplace,
+        validate_claude_marketplace,
+        validate_skills,
+        validate_support_files,
+    )
     try:
         for check in checks:
             check()
