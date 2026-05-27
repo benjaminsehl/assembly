@@ -1,6 +1,6 @@
 # Assembly
 
-This repo builds the reusable Codex plugin for phase-aware product development.
+This repo builds the reusable plugin for phase-aware product development. The bundle ships dual-target manifests at `.codex-plugin/plugin.json` (Codex) and `.claude-plugin/plugin.json` (Claude Code), backed by the same `skills/`, `references/`, `templates/`, and `scripts/` content.
 
 ## Start Here
 
