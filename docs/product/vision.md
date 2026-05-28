@@ -21,6 +21,6 @@ The long-term system is a factory only in the best sense: repeatable product jud
 ## Non-Goals
 
 - Replace specialized platform plugins such as GitHub, Browser, Cloudflare, iOS, macOS, or frontend builders.
-- Build Hermes orchestration, hosted dashboards, or a fully autonomous app factory before the human-led agent control loop is excellent.
+- Build the post-1.0 orchestrator, hosted dashboards, or a fully autonomous app factory before the human-led agent control loop is excellent.
 - Force all projects into heavyweight documentation before meaningful work can happen.
 - Treat product or business assumptions as proven without project evidence.

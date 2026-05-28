@@ -63,7 +63,7 @@ The eventual factory has four layers:
 1. Assembly protocol: skills, phase gates, project trail, and GitHub handoff.
 2. Project memory: docs, decisions, logs, notes, references, and status.
 3. Specialist agents: product, design, engineering, QA, release, research, and context-engineering roles.
-4. Hermes orchestration: a long-running coordinator that schedules and supervises Codex sessions against a roadmap.
+4. Post-1.0 orchestration: a long-running coordinator that schedules and supervises agent sessions against a roadmap.
 
 ## 1.0 Wedge
 
@@ -80,9 +80,9 @@ Success means:
 
 ## Post-1.0 Ambition
 
-After 1.0, Hermes can become the General Manager for a roadmap.
+After 1.0, a post-1.0 orchestrator can become the General Manager for a roadmap.
 
-Hermes should not be a blind autonomous builder. It should be a durable orchestration layer that:
+That orchestrator should not be a blind autonomous builder. It should be a durable orchestration layer that:
 
 - Maintains the roadmap.
 - Chooses which Assembly skill or Codex session is needed next.
@@ -96,5 +96,5 @@ Hermes should not be a blind autonomous builder. It should be a durable orchestr
 - Do not turn every project into ceremony.
 - Do not hide product assumptions.
 - Do not let agents silently choose founder-level tradeoffs.
-- Do not make Hermes responsible for product taste before Assembly's agent control loop is excellent.
+- Do not make the post-1.0 orchestrator responsible for product taste before Assembly's agent control loop is excellent.
 - Do not optimize for impressive autonomy at the expense of inspectability.

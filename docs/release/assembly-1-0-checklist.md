@@ -7,7 +7,7 @@ Status: draft
 
 - [ ] Founder accepts the 1.0 spec.
 - [ ] Founder accepts the app-factory north star.
-- [ ] 1.0 blockers are separated from post-1.0 Hermes work.
+- [ ] 1.0 blockers are separated from post-1.0 orchestrator work.
 - [ ] Product-discovery interview behavior is verified.
 - [ ] `next` behavior is verified on a real project trail.
 

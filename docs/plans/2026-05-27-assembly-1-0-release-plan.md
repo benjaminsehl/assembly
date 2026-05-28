@@ -9,7 +9,7 @@ Release Assembly 1.0 as a reliable dual-runtime project operating system (Codex 
 
 ## Release Principle
 
-1.0 should feel small, solid, and useful. It should not pretend to be Hermes yet.
+1.0 should feel small, solid, and useful. It should not pretend to be the post-1.0 orchestrator yet.
 
 ## Milestones
 
@@ -21,7 +21,7 @@ Tasks:
 
 - Align `docs/specs/assembly-1-0.md` with the human-led app factory vision.
 - Add app-factory north-star and research synthesis docs.
-- Define what is blocking for 1.0 versus deferred to Hermes.
+- Define what is blocking for 1.0 versus deferred to the post-1.0 orchestrator.
 - Update `docs/status.md` with the current gate and next skills.
 
 Exit evidence:
@@ -107,7 +107,7 @@ Exit evidence:
 
 ## Deferred Until After 1.0
 
-- Hermes orchestration implementation.
+- Post-1.0 orchestrator implementation.
 - Dream/desloppification automation.
 - Hosted dashboard.
 - Runtimes beyond Codex and Claude Code.

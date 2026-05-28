@@ -1,19 +1,19 @@
-# Roadmap: Hermes As Assembly Orchestrator
+# Roadmap: Post-1.0 Assembly Orchestrator
 
 Last updated: 2026-05-27
 Status: post-1.0 roadmap
 
 ## Thesis
 
-Hermes should orchestrate Assembly after Assembly's agent control loop is stable.
+A post-1.0 orchestrator should drive Assembly after Assembly's agent control loop is stable.
 
-The right shape is not a fully autonomous app factory. It is a General Manager that coordinates Codex sessions, project state, specialist reviews, and founder approval gates across a roadmap.
+The right shape is not a fully autonomous app factory. It is a General Manager that coordinates agent sessions, project state, specialist reviews, and founder approval gates across a roadmap.
 
 ## Stage 0: Assembly 1.0
 
 Goal: prove the local protocol.
 
-Hermes dependency:
+Orchestrator dependency:
 
 - Stable project scaffold.
 - Reliable `next`.
@@ -22,13 +22,13 @@ Hermes dependency:
 - GitHub handoff discipline.
 - Ask-first approval boundaries.
 
-## Stage 1: Hermes Contract Spike
+## Stage 1: Orchestrator Contract Spike
 
-Goal: define how Hermes reads and writes Assembly project state.
+Goal: define how the orchestrator reads and writes Assembly project state.
 
 Deliverables:
 
-- `docs/tech-design/hermes-assembly-contract.md`.
+- `docs/tech-design/post-1-0-orchestrator-contract.md`.
 - Structured status fields or frontmatter proposal.
 - Skill invocation contract.
 - Work assignment shape.
@@ -37,20 +37,20 @@ Deliverables:
 
 Questions:
 
-- Does Hermes call Codex directly, or prepare prompts for a human-triggered Codex session?
+- Does the orchestrator call an agent runtime directly, or prepare prompts for a human-triggered session?
 - Which status fields must be machine-readable?
-- How should Hermes detect stale or contradictory project state?
-- How does Hermes avoid overwriting founder/product judgment?
+- How should the orchestrator detect stale or contradictory project state?
+- How does the orchestrator avoid overwriting founder/product judgment?
 
-## Stage 2: Hermes Orchestrator Alpha
+## Stage 2: Orchestrator Alpha
 
-Goal: Hermes can manage one roadmap for one repo.
+Goal: the orchestrator can manage one roadmap for one repo.
 
 Capabilities:
 
 - Read Assembly status and plans.
-- Recommend the next Codex session.
-- Spawn or prepare one bounded Codex task at a time.
+- Recommend the next agent session.
+- Spawn or prepare one bounded agent task at a time.
 - Track whether the task produced evidence.
 - Pause for founder questions when product judgment is missing.
 - Escalate blocked PRs, checks, comments, or approvals.
@@ -63,7 +63,7 @@ Non-goals:
 
 ## Stage 3: Specialist Coordination
 
-Goal: Hermes can coordinate sidecar specialist work without losing ownership.
+Goal: the orchestrator can coordinate sidecar specialist work without losing ownership.
 
 Capabilities:
 
@@ -75,11 +75,11 @@ Capabilities:
 Quality bar:
 
 - Every specialist output must cite artifacts, commands, files, or PR state.
-- Hermes must know when a specialist result is advisory versus blocking.
+- The orchestrator must know when a specialist result is advisory versus blocking.
 
 ## Stage 4: App Factory Roadmap Execution
 
-Goal: Hermes can help run a portfolio of projects without replacing the founder.
+Goal: the orchestrator can help run a portfolio of projects without replacing the founder.
 
 Capabilities:
 
@@ -112,4 +112,4 @@ Constraints:
 
 ## First Next Step After 1.0
 
-Run a one-week Hermes contract spike. Do not build the orchestrator until the contract makes approval boundaries, evidence packets, and project-state reads boringly clear.
+Run a one-week orchestrator contract spike. Do not build the orchestrator until the contract makes approval boundaries, evidence packets, and project-state reads boringly clear.

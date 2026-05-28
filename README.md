@@ -86,7 +86,7 @@ If you already have personal lifecycle skills installed, treat this plugin as th
 - [Assembly 1.0 spec](docs/specs/assembly-1-0.md)
 - [App-factory north star](docs/product/app-factory-north-star.md)
 - [1.0 release plan](docs/plans/2026-05-27-assembly-1-0-release-plan.md)
-- [Hermes orchestrator roadmap](docs/plans/2026-05-27-hermes-orchestrator-roadmap.md)
+- [Post-1.0 orchestrator roadmap](docs/plans/2026-05-27-post-1-0-orchestrator-roadmap.md)
 - [Agentic orchestration research](docs/research/2026-05-27-agentic-orchestration-research.md)
 
 ## Project Docs Convention

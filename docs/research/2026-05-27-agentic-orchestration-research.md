@@ -16,7 +16,7 @@ Status: working synthesis
 
 The strongest production advice is to start with simple, inspectable workflows and add autonomy only where the task value justifies the complexity.
 
-Assembly should therefore treat `next`, phase gates, status repair, GitHub handoff, and project-local evidence as the core runtime. Hermes should come later as an orchestrator over these visible workflows, not as an opaque replacement for them.
+Assembly should therefore treat `next`, phase gates, status repair, GitHub handoff, and project-local evidence as the core runtime. A post-1.0 orchestrator should come later as a coordinator over these visible workflows, not as an opaque replacement for them.
 
 ## Implications For Assembly
 
@@ -62,19 +62,19 @@ Assembly should keep ask-first boundaries explicit and local:
 - Merge or deploy: ask first.
 - Unresolved comments/checks: stop or name the accepted risk.
 
-Future Hermes work should preserve those boundaries as typed guardrails, not just prose.
+Future orchestrator work should preserve those boundaries as typed guardrails, not just prose.
 
 ## Near-Term Roadmap Guidance
 
 1. Ship Assembly 1.0 as a dual-runtime plugin (Codex and Claude Code) and project protocol.
 2. Prove it on Assembly and CFO.
 3. Capture real smoke evidence in both runtimes.
-4. Define a Hermes contract around project status, skill invocation, work ownership, evidence, and approval boundaries.
-5. Build a Hermes alpha only after the agent control loop feels boringly reliable.
+4. Define a post-1.0 orchestrator contract around project status, skill invocation, work ownership, evidence, and approval boundaries.
+5. Build a post-1.0 orchestrator alpha only after the agent control loop feels boringly reliable.
 
 ## Open Questions
 
-- What structured format should Hermes use to represent phase state and next actions?
+- What structured format should the post-1.0 orchestrator use to represent phase state and next actions?
 - Should Assembly status remain pure markdown, or should it grow a small machine-readable frontmatter block?
-- What evidence should Hermes require before spawning another Codex session?
+- What evidence should the post-1.0 orchestrator require before spawning another agent session?
 - Which gates should always pause for founder input, even if a future orchestrator thinks the answer is obvious?

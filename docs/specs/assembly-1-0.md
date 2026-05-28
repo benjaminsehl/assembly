@@ -11,7 +11,7 @@ In 1.0, it proves the human-led control loop in both Codex and Claude Code: read
 
 The user remains founder and product director. Agents help clarify intent, preserve reasoning, and execute scoped work; they do not silently take product authority.
 
-Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs in both Codex and Claude Code, and must pass install and behavior smoke checks in both. Other agent runtimes (Pi, OpenCode, etc.) may be added later but stay out of 1.0 scope. Hermes orchestration is the post-1.0 strategic horizon after the agent control loop is stable.
+Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs in both Codex and Claude Code, and must pass install and behavior smoke checks in both. Other agent runtimes (Pi, OpenCode, etc.) may be added later but stay out of 1.0 scope. A post-1.0 orchestrator is the strategic horizon after the agent control loop is stable.
 
 ## User
 
@@ -31,7 +31,7 @@ Secondary user: a serious builder who wants a compact, runtime-agnostic project 
 - Every material workflow leaves evidence future agents can inspect.
 - GitHub-backed work should end in a reviewable PR handoff by default.
 - Workflow gates should prevent skipped thinking without becoming ceremony.
-- 1.0 proves the agent control loop before Hermes orchestration.
+- 1.0 proves the agent control loop before post-1.0 orchestration.
 
 ## Scope
 
@@ -79,7 +79,7 @@ Assembly 1.0 includes:
 ## Out Of Scope
 
 - Runtimes other than Codex and Claude Code.
-- Hermes orchestration implementation.
+- Post-1.0 orchestrator implementation.
 - Hosted dashboard, app-factory UI, or background automation.
 - Deployment automation.
 - Telemetry.
@@ -256,7 +256,7 @@ Stretch:
 
 ## Deferred Aspirations
 
-- Hermes orchestration.
+- Post-1.0 orchestration.
 - Hosted dashboards or app-factory UI.
 - Background automation, dream/desloppification loops, and multi-project scheduling.
 - Broad runtime portability beyond Codex and Claude Code.
@@ -332,6 +332,6 @@ Never:
 ## Resolved 1.0 Decisions
 
 - Automated installer or migration helper: not required for 1.0. Docs plus conflict audit are enough if the cold install/upgrade smoke tests pass.
-- Dream/desloppification: defer to the Hermes/app-factory roadmap. 1.0 may keep the concept visible only as future reference material.
+- Dream/desloppification: defer to the post-1.0 orchestrator / app-factory roadmap. 1.0 may keep the concept visible only as future reference material.
 - Hyper proof: stretch, not required. CFO is the required external proof project after Assembly self-hosting.
-- Minimum release evidence: validator outputs, scaffold smoke results, behavior prompt notes, install/upgrade proof, GitHub handoff proof, and a short retro naming what worked, what felt brittle, and what Hermes should own next.
+- Minimum release evidence: validator outputs, scaffold smoke results, behavior prompt notes, install/upgrade proof, GitHub handoff proof, and a short retro naming what worked, what felt brittle, and what the post-1.0 orchestrator should own next.

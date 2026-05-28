@@ -1,8 +1,8 @@
 # Orchestration Patterns
 
-Reference catalog of agent orchestration patterns this repo endorses, plus anti-patterns to avoid. Read this before adding a new entry skill, future Hermes workflow, or persona that coordinates multiple specialists.
+Reference catalog of agent orchestration patterns this repo endorses, plus anti-patterns to avoid. Read this before adding a new entry skill, future post-1.0 orchestrator workflow, or persona that coordinates multiple specialists.
 
-The 1.0 governing rule: **the user and current Codex session are the orchestrator. Personas do not invoke other personas.** Future Hermes orchestration may coordinate Codex sessions, but it must preserve explicit ownership, approval gates, and evidence-backed handoff.
+The 1.0 governing rule: **the user and current agent session are the orchestrator. Personas do not invoke other personas.** A future post-1.0 orchestrator may coordinate agent sessions, but it must preserve explicit ownership, approval gates, and evidence-backed handoff.
 
 ## Contents
 
@@ -98,7 +98,7 @@ user runs:  spec  ->  plan  ->  build  ->  test  ->  review  ->  ship
 
 **Cost:** one sub-agent context per step. Free for the orchestration layer because there is no orchestrator agent.
 
-**Why not fully automate it in 1.0:** a premature lifecycle orchestrator would lose nuance between steps, skip human checkpoints that catch wrong-direction work early, and spend extra context paraphrasing its own handoffs. Hermes should come later, after Assembly's local control loop is reliable.
+**Why not fully automate it in 1.0:** a premature lifecycle orchestrator would lose nuance between steps, skip human checkpoints that catch wrong-direction work early, and spend extra context paraphrasing its own handoffs. A post-1.0 orchestrator should come later, after Assembly's local control loop is reliable.
 
 ---
 
