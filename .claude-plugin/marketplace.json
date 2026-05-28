@@ -3,7 +3,7 @@
   "name": "assembly",
   "description": "Assembly: a human-led, dual-runtime product-building toolkit (Codex and Claude Code) for an eventual agentic app factory.",
   "owner": {
-    "name": "Sai",
+    "name": "Ben Sehl",
     "email": "benjaminsehl@users.noreply.github.com"
   },
   "plugins": [
