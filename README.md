@@ -146,7 +146,7 @@ Assembly expects agents to leave real work reviewable:
 - Open or update a descriptive draft PR with `gh`.
 - Explain why the PR exists, the first principles behind the change, and how the agent approached it.
 - Run `review` and `code-simplify` before asking to mark ready.
-- Mark the PR ready with `gh pr ready` only after verification, self-review, simplification, and explicit user authorization.
+- Mark the PR ready and merge automatically once product gates are clear (what / why / what good looks like / risks / rollback), verification is green, and review threads are clean. Ask when any of those are unmet, or when an always-ask floor item applies (money, credentials, external messaging, irreversible destructive ops).
 - When addressing PR comments, inspect unresolved review threads, implement traceable fixes, push updates, and reply/resolve threads only when the user asks for that GitHub write action.
 - Do not merge, deploy, or create non-draft PRs without explicit direction.
 

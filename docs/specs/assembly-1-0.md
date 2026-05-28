@@ -84,11 +84,44 @@ Assembly 1.0 includes:
 - Runtimes other than Codex and Claude Code.
 - Post-1.0 orchestrator implementation.
 - Hosted dashboard, app-factory UI, or background automation.
-- Deployment automation.
-- Telemetry.
-- Automatic branch deletion.
-- Automatic merging without explicit user direction.
-- Replacing specialized platform plugins such as GitHub, Browser, Cloudflare, iOS, macOS, or frontend builders.
+
+## Gating Model
+
+Assembly's gating is product-direction-first. Once the product gates are clear and verification is green, engineering execution proceeds without per-action approval all the way through deploy. The founder's time stays on direction, not on rubber-stamping engineering steps.
+
+### Product gates (must be clear before the rails open)
+
+Before agents proceed past discovery into build or release work, the project trail must answer:
+
+- What is being built.
+- Why it matters.
+- What good looks like.
+- Risks and non-goals.
+- Rollback or hold criteria (for any change that touches production behavior).
+
+When any of these is missing, agents ask in product-implication language and pause work until the trail answers.
+
+### Engineering rails (proceed without per-action approval once product gates pass)
+
+Once product gates are clear and verification is green, agents may:
+
+- Commit and push focused changes on a topic branch.
+- Open or update a descriptive draft PR.
+- Run self-review and code simplification.
+- Mark the PR ready-for-review.
+- Merge the PR.
+- Run the project's deploy path.
+- Delete merged branches as part of routine cleanup.
+
+### Always-ask floor (regardless of product-gate clarity)
+
+These actions require explicit founder approval even when product gates are clear:
+
+- Money movement, purchases, trades, account changes.
+- Credentials, secrets, or privacy-sensitive data.
+- External messaging (Slack, email, social, customer-facing).
+- Irreversible destructive operations: force-push to default branches, delete branches with unmerged work, drop tables or databases, delete production data.
+- Merging or deploying when verification is not green, review threads are unresolved with material correctness concerns, or product gates are not clear.
 
 ## Behavior Requirements
 
@@ -99,12 +132,12 @@ Assembly 1.0 includes:
 - Read `AGENTS.md`, `docs/status.md`, nearest subproject status, `.agents/log.md`, and referenced specs/plans when present.
 - Identify the active phase: proposal, prototype, build, or release.
 - Repair stale or missing status before proceeding when project-doc edits are in scope.
-- Check whether the project trail answers what is being built, why it matters, and what good looks like before dispatching into planning or building.
-- Ask the smallest useful set of concise questions when those answers are missing, keeping continuation lightweight instead of turning it into a survey.
+- Check whether the project trail answers the product gates (what / why / what good looks like / risks / rollback) before dispatching into planning, building, or release work.
+- Ask the smallest useful set of concise questions in product-implication language when product gates are missing, keeping continuation lightweight instead of turning it into a survey.
 - Choose the next unambiguous action from evidence.
 - Ask one concise question when multiple plausible next actions exist.
 - Dispatch to the right public skill instead of doing vague continuation work.
-- Treat GitHub merge, deploy, destructive operations, credentials, external messaging, money movement, and privacy-sensitive work as explicit approval boundaries.
+- Honor the always-ask floor regardless of product-gate clarity.
 
 ### `project-status`
 
@@ -123,7 +156,8 @@ Assembly 1.0 includes:
 - Default to interview mode.
 - Treat the user as founder/product director, not a requirements oracle.
 - Clarify what, why, and what good looks like before recommending wedge, scope, or success criteria.
-- Ask high-leverage questions before making product calls when the idea is raw or fuzzy.
+- Ask high-leverage questions in product-implication language before making product calls when the idea is raw or fuzzy.
+- Flag business, user, and viability concerns; do not decide them.
 - Use delegated mode only when the user explicitly asks the agent to decide, asks for recommendations, or project evidence is already strong.
 - Label assumptions clearly in delegated mode.
 - Cover user, painful moment, current workaround, urgency, desired outcome, wedge, constraints, distribution, success evidence, risks, and next skill.
@@ -148,21 +182,21 @@ For material changes in a GitHub-backed repo, Assembly must:
 - Inspect branch, remote, status, and existing PR state before committing.
 - Commit focused changes on a topic branch.
 - Push the branch.
-- Open or update a descriptive draft PR with `gh`.
+- Open or update a descriptive draft PR.
 - Explain why the PR exists, the first principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
 - Run self-review.
 - Run code simplification when reasonable.
-- Keep the PR draft until verification, self-review, and simplification are complete.
-- Ask before marking a draft PR ready.
-- Run `gh pr ready` only after explicit user authorization.
+- Mark the PR ready-for-review automatically when product gates are clear and verification is green; otherwise ask.
+- Merge automatically when product gates are clear, verification is green, and review-thread/check state is clean; otherwise ask.
+- Deploy automatically after merge when product gates are clear (including rollback criteria) and verification is green; otherwise ask.
+- Honor the always-ask floor: never merge / deploy / mark-ready when an item from the always-ask floor applies.
 
-Before merge, Assembly must:
+Before any merge or deploy proceeds (manual or automatic), Assembly must:
 
 - Check PR state, status checks, review decision, and unresolved review threads.
 - Address actionable unresolved comments or report why they are not actionable.
-- Keep the PR unmerged when there are failing checks, requested changes, unresolved blockers, or unresolved comments that materially affect correctness.
-- Merge only after explicit user direction.
-- If the user still asks to merge with accepted risk, name the unresolved risk before merging.
+- Block the action when there are failing checks, requested changes, unresolved blockers, or unresolved comments that materially affect correctness.
+- If the founder explicitly accepts a risk, name the unresolved risk before proceeding.
 
 ## Project Phase Requirements
 
@@ -243,8 +277,7 @@ Assembly 1.0 must not ship until:
 - `product-discovery` asks before deciding unless decisions are delegated.
 - `build` with an empty prompt infers and executes the next unambiguous build-track gate.
 - Material GitHub-backed work produces a descriptive draft PR.
-- Ready-for-review requires explicit user authorization.
-- Merge requires explicit user direction and a clean review-thread/check state or acknowledged risk.
+- The gating model is implemented: product gates open the engineering rails through merge and deploy; the always-ask floor (money, credentials, external messaging, irreversible destructive ops, ungated/unverified merges and deploys) is honored regardless of product-gate clarity.
 - Install, migration, conflict, and troubleshooting docs are accurate enough for a cold user.
 - The release has smoke-test evidence and a short retro.
 
@@ -265,7 +298,8 @@ Stretch:
 - Hosted dashboards or app-factory UI.
 - Background automation, dream/desloppification loops, and multi-project scheduling.
 - Broad runtime portability beyond Codex and Claude Code.
-- Automatic merges, deploys, branch deletion, or release automation.
+- Telemetry: no near-term plans, but not permanently excluded; revisit when there is a quality reason to add it, with explicit founder consent.
+- Absorbing platform-plugin behavior (GitHub, Browser, Cloudflare, iOS, macOS, frontend builders) into Assembly skills: 1.0 composes specialized plugins where they're effective; the boundary may evolve later based on whether those plugins stay current and reliable.
 
 ## Verification Plan
 
@@ -313,22 +347,22 @@ Always:
 - Prefer repo conventions over generic workflow.
 - Keep entry skills thin and references deep.
 - Preserve a local paper trail.
-- Use `gh` for GitHub PR metadata, comments, checks, and PR handoff.
+- Use the runtime's GitHub tooling for PR metadata, comments, checks, and PR handoff.
 - Report verification evidence.
 
-Ask first:
+Ask first (the always-ask floor; applies regardless of product-gate clarity):
 
-- Before merging PRs.
-- Before marking draft PRs ready.
-- Before deploys.
-- Before destructive operations.
+- Before money movement, purchases, trades, or account changes.
 - Before credential or privacy-sensitive work.
-- Before external messaging, purchases, trades, money movement, or account changes.
-- Before skipping missing product or release gates when risk materially changes.
+- Before external messaging (Slack, email, social, customer-facing).
+- Before irreversible destructive operations: force-push to default branches, delete branches with unmerged work, drop tables or databases, delete production data.
+- Before merging, deploying, or marking ready when product gates are not clear, verification is not green, or review threads have material unresolved correctness concerns.
+- Before skipping a missing product gate when risk materially changes.
 
 Never:
 
-- Merge with unresolved requested changes or material unresolved review comments unless the user explicitly accepts the risk.
+- Proceed past product gates with material gaps unfilled, except when the founder explicitly accepts a named risk.
+- Merge or deploy with unresolved requested changes or material unresolved review comments unless the founder explicitly accepts the risk.
 - Overwrite existing project instructions during scaffold.
 - Hide product assumptions behind confident recommendations.
 - Leave material GitHub-backed work as only a local diff unless local-only was requested or handoff is blocked.
