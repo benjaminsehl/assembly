@@ -339,14 +339,16 @@ def validate_support_files() -> None:
         "unresolved review threads",
     ):
         if required not in readme_text:
-            fail(f"README.md must document GitHub handoff behavior: {required}")
-    forbidden_readme_patterns = (
-        r"then mark the PR ready when verification passes",
-        r"mark the PR ready when verification passes",
-    )
-    for pattern in forbidden_readme_patterns:
-        if re.search(pattern, readme_text, flags=re.IGNORECASE):
-            fail("README.md must not suggest marking PRs ready without explicit authorization")
+            fail(
+                f"README.md must document the PR-ready gating model: {required}"
+            )
+    for required in (
+        "product gates",
+        "always-ask floor",
+        "review threads",
+    ):
+        if required not in readme_text:
+            fail(f"README.md must document the gating model: {required}")
 
     command_contract_text = (PLUGIN_ROOT / "docs" / "COMMAND_CONTRACT.md").read_text(encoding="utf-8")
     for required in (
@@ -399,34 +401,92 @@ def validate_support_files() -> None:
         PLUGIN_ROOT / "references" / "workflows" / "engineering-delivery.md"
     ).read_text(encoding="utf-8")
     for required in (
-        "PR Review Feedback",
         "git switch <topic-branch> || git switch -c <topic-branch>",
-        "gh pr edit",
-        "handoff is blocked",
-        "explicit user authorization",
-        "Reply to review threads and mark them resolved only when the user explicitly asks",
+        "Build is a router",
+        "characterization tests",
+        "mini-discovery",
+        "Fan out specialist",
     ):
         if required not in engineering_text:
-            fail(f"engineering-delivery.md must document GitHub handoff behavior: {required}")
+            fail(f"engineering-delivery.md must encode the locked skill behaviors: {required}")
+
+    spec_text = (PLUGIN_ROOT / "skills" / "spec" / "SKILL.md").read_text(encoding="utf-8")
+    if "mini-discovery" not in spec_text:
+        fail("spec skill must document mini-discovery requirement")
 
     build_text = (PLUGIN_ROOT / "skills" / "build" / "SKILL.md").read_text(encoding="utf-8")
-    if "handoff is blocked" not in build_text:
-        fail("build skill must document blocked GitHub handoff fallback")
+    for required in ("router, not a dispatcher", "What Build Does Not Do"):
+        if required not in build_text:
+            fail(f"build skill must encode router model: {required}")
+
+    test_text = (PLUGIN_ROOT / "skills" / "test" / "SKILL.md").read_text(encoding="utf-8")
+    if "characterization tests" not in test_text:
+        fail("test skill must require characterization tests for legacy code")
+
+    review_text = (PLUGIN_ROOT / "skills" / "review" / "SKILL.md").read_text(encoding="utf-8")
+    if "Fan out specialist" not in review_text:
+        fail("review skill must use parallel specialist fan-out")
+
+    ship_text = (PLUGIN_ROOT / "skills" / "ship" / "SKILL.md").read_text(encoding="utf-8")
+    for required in ("handoff is blocked", "binary", "GO", "NO-GO"):
+        if required not in ship_text:
+            fail(f"ship skill must encode binary release decision and blocked handoff: {required}")
 
     next_text = (PLUGIN_ROOT / "skills" / "next" / "SKILL.md").read_text(encoding="utf-8")
     for required in (
         "references/workflows/qa-and-release.md",
-        "Never run `gh pr ready` without explicit user authorization",
-        "Ready-for-review transitions require explicit user authorization",
+        "product gates",
+        "always-ask floor",
+        "product-implication language",
+        "What is being built",
+        "Why it matters",
+        "What good looks like",
+        "Rollback",
+        "2-3",
+        "scaffold the project",
     ):
         if required not in next_text:
-            fail(f"next skill must require explicit ready-for-review authorization: {required}")
+            fail(f"next skill must encode the gating model and founder calls: {required}")
+
+    product_discovery_text = (
+        PLUGIN_ROOT / "skills" / "product-discovery" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "founder/product director",
+        "what is being built",
+        "why it matters",
+        "what good looks like",
+        "product-implication language",
+        "Flag business, user, and viability concerns",
+        "docs/product/discovery-",
+        "risk-triggered",
+    ):
+        if required not in product_discovery_text:
+            fail(f"product-discovery must document interview-first founder behavior: {required}")
+
+    project_status_text = (
+        PLUGIN_ROOT / "skills" / "project-status" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    for required in ("tech design", "research", "what is being built", "why it matters", "what good looks like"):
+        if required not in project_status_text:
+            fail(f"project-status must inspect core project context: {required}")
 
     qa_release_text = (
         PLUGIN_ROOT / "references" / "workflows" / "qa-and-release.md"
     ).read_text(encoding="utf-8")
-    if "Ask before marking ready" not in qa_release_text or "explicitly authorizes" not in qa_release_text:
-        fail("qa-and-release.md must require explicit authorization before gh pr ready")
+    for required in (
+        "Ask before marking ready",
+        "explicitly authorizes",
+        "PR Review Feedback",
+        "GitHub Handoff",
+        "gh pr edit",
+        "handoff is blocked",
+        "Reply to review threads and mark them resolved only when the user explicitly asks",
+        "binary",
+        "traffic state",
+    ):
+        if required not in qa_release_text:
+            fail(f"qa-and-release.md must encode ship-owned handoff and locked decisions: {required}")
 
     if not (PLUGIN_ROOT / "AGENTS.md").is_file():
         fail("Missing required plugin agent guidance: AGENTS.md")

@@ -1,8 +1,10 @@
 # Assembly
 
-Assembly is a compact personal product-building stack: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
+Assembly is a human-led product-building toolkit for an eventual agentic app factory: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
 
 The plugin ships as both a Codex plugin and a Claude Code plugin from the same bundle at `plugins/assembly/`. It intentionally exposes a small public skill surface; detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
+
+The human stays founder and product director. Assembly helps agents ask the right questions, preserve why decisions were made, execute scoped work, and leave reviewable evidence instead of guessing or drifting into unchecked autonomy.
 
 ## Quick Start
 
@@ -80,6 +82,14 @@ If you already have personal lifecycle skills installed, treat this plugin as th
 | `code-simplify` | Behavior-preserving cleanup |
 | `ship` | Go/no-go release decision |
 
+## Current 1.0 Direction
+
+- [Assembly 1.0 spec](docs/specs/assembly-1-0.md)
+- [App-factory north star](docs/product/app-factory-north-star.md)
+- [1.0 release plan](docs/plans/2026-05-27-assembly-1-0-release-plan.md)
+- [Post-1.0 orchestrator roadmap](docs/plans/2026-05-27-post-1-0-orchestrator-roadmap.md)
+- [Agentic orchestration research](docs/research/2026-05-27-agentic-orchestration-research.md)
+
 ## Project Docs Convention
 
 The root project workspace is `docs/`. Subprojects live under `docs/projects/<slug>/` and can nest recursively.
@@ -101,6 +111,7 @@ my-app/
 |   |-- product/
 |   |-- decisions/
 |   |-- tech-design/
+|   |-- research/
 |   |-- specs/
 |   |-- plans/
 |   |-- prototypes/
@@ -135,12 +146,11 @@ Why this shape:
 
 Assembly expects agents to leave real work reviewable:
 
-- Commit focused changes on a topic branch.
-- Push the branch.
-- Open or update a descriptive draft PR with `gh`.
+- `build` commits focused changes on a topic branch and pushes.
+- `ship` opens or updates a descriptive draft PR (with `gh` or the GitHub MCP tools).
 - Explain why the PR exists, the first principles behind the change, and how the agent approached it.
 - Run `review` and `code-simplify` before asking to mark ready.
-- Mark the PR ready with `gh pr ready` only after verification, self-review, simplification, and explicit user authorization.
+- Always ask before marking the PR ready. Promote to ready only after explicit user authorization, with product gates clear (what / why / what good looks like / risks / rollback), verification green, review/simplification complete, and no always-ask floor item triggered (money, credentials, external messaging, irreversible destructive ops).
 - When addressing PR comments, inspect unresolved review threads, implement traceable fixes, push updates, and reply/resolve threads only when the user asks for that GitHub write action.
 - Do not merge, deploy, or create non-draft PRs without explicit direction.
 

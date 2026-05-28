@@ -55,7 +55,7 @@ git diff --check
 
 Validation must ensure:
 
-- Only the 12 public skills are triggerable from this plugin.
+- Only the 13 public skills are triggerable from this plugin.
 - Public skills have concise descriptions, required sections, and direct reference links.
 - Public skills do not list deleted support skills as dependencies.
 - Required references, templates, personas, and scaffold scripts exist.

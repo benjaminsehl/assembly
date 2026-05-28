@@ -6,36 +6,34 @@ Current phase: proposal
 ## Phase Verdict
 
 - Current phase: proposal
-- Why: Assembly now installs and loads as a working Codex plugin, and the bundle has been extended with a Claude Code manifest and marketplace so the same skills work in both runtimes. The remaining proposal work is turning that direction into a 1.0 spec and release gate.
-- Evidence: PR #1 merged the project-workflow foundation into `main`; local `main` is clean at merge commit `210b3fd`; `codex plugin marketplace upgrade assembly` installed Assembly `0.8.1` under `~/.codex/plugins/cache/assembly/assembly/0.8.1`; validators passed before merge; repo has been renamed to `benjaminsehl/assembly`; dual-runtime support added on 2026-05-27 via `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and validator/audit-script updates.
+- Why: Assembly now installs and loads as a working plugin in both Codex and Claude Code, and the product direction is sharper: Assembly 1.0 proves the human-led control loop for an eventual agentic app factory across both runtimes; a post-1.0 orchestrator becomes the next step only after the loop is reliable.
+- Evidence: PR #1 merged the project-workflow foundation into `main`; PR #2 merged as `15cb36a`; PR #4 added dual-runtime support via `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and validator/audit-script updates; Assembly `0.8.3` is installed under `~/.codex/plugins/cache/assembly/assembly/0.8.3`; `docs/specs/assembly-1-0.md` defines the 1.0 behavior spec; `docs/product/app-factory-north-star.md`, `docs/research/2026-05-27-agentic-orchestration-research.md`, `docs/plans/2026-05-27-assembly-1-0-release-plan.md`, and `docs/plans/2026-05-27-post-1-0-orchestrator-roadmap.md` now capture the north star, research synthesis, release path, and post-1.0 roadmap.
 - Structure decision: agent-only operating files now belong under `.agents/`, with root `AGENTS.md` as the visible entrypoint and `reference/` reserved for raw source material.
-- Product decision: the Codex-first stance from 2026-05-23 is now extended to dual-runtime; the same plugin bundle ships as both a Codex plugin and a Claude Code plugin, and 1.0 must pass install/smoke checks in both. See `docs/decisions/2026-05-27-dual-runtime-claude-code.md`.
-- Next gate: 1.0 spec written and reviewed, covering both runtimes.
+- Product decision: 1.0 ships as a dual-runtime plugin (Codex + Claude Code) from the same bundle and must pass install/smoke checks in both runtimes; post-1.0 orchestration is the next strategic direction. See `docs/decisions/2026-05-27-dual-runtime-claude-code.md`.
+- Product-intent completeness: what is being built, why it matters, and what good looks like are now explicit in the spec and north-star docs.
+- Next gate: founder review/acceptance of `docs/specs/assembly-1-0.md`, then `plan` for release-candidate implementation and proof tasks.
 
 ## Next Recommended Skills
 
-- `product-discovery`
 - `spec`
+- `plan`
 
 ## Current 1.0 Direction
 
-- Candidate wedge: install Assembly, scaffold a repo, say `next`, and have Codex orient to phase, missing context, and the next useful workflow without guessing.
-- Primary user: Sai building real projects with Codex.
+- Candidate wedge: install Assembly, scaffold a repo, say `next`, and have Codex orient to phase, missing context, and the next useful workflow without guessing or silently taking product authority.
+- Primary user: Ben acting as founder/product director while agents help clarify, execute, verify, and preserve the project trail.
 - Secondary user: people who want a compact Codex-native product-building workflow instead of a pile of overlapping skills.
-- Default stance: optimize 1.0 as Sai's personal stack first, while keeping the public plugin installable, documented, and conflict-aware enough that another serious builder could adopt it.
+- Default stance: optimize 1.0 as Ben's personal stack first, built in public so other builders can adopt it if they want; they are not the audience 1.0 is designed around.
 - Recommended proof path: Assembly self-hosts the workflow, CFO proves a greenfield/restart setup, and Hyper remains the richer retrofit proof or release stretch.
-- Post-1.0 north star: Hermes orchestrates scoped Codex sessions using Assembly's project trail, phase gates, and GitHub handoff loop.
+- Post-1.0 north star: a post-1.0 orchestrator coordinates scoped agent sessions using Assembly's project trail, phase gates, and GitHub handoff loop.
 - Latest usage feedback: `product-discovery` should interview before deciding unless delegated; empty or minimal `build` prompts should infer and execute the first unambiguous build-track gate.
 
-## Open Questions
+## 1.0 Open Questions
 
-- What exact behavior should count as success for `next` across proposal, prototype, build, and release phases?
-- How much project-paper-trail scaffolding is helpful before it becomes ceremony?
-- Should Assembly always default to draft PR handoff for material GitHub-backed changes, with local-only as the exception?
-- Should 1.0 include only skills/docs/scripts, or also a more automated installer/migration helper?
-- How much of the future dream/desloppification workflow belongs in `.agents/` versus lifecycle references?
-- What is the smallest Hermes orchestration spike that proves the post-1.0 direction without delaying 1.0?
+- Founder acceptance: is the 1.0 spec and north-star framing right?
+- CFO proof scope: how much should the proof mutate `/Users/sai/cfo` versus inspect and report first?
+- Release-candidate timing: should Hyper retrofit stay stretch, or become blocking after CFO?
 
 ## Next Concrete Action
 
-Write the Assembly 1.0 spec for the dual-runtime plugin (Codex + Claude Code), with Hermes orchestration captured as the next strategic horizon.
+Review `docs/specs/assembly-1-0.md` and `docs/product/app-factory-north-star.md`; once accepted, use `plan` to turn `docs/plans/2026-05-27-assembly-1-0-release-plan.md` into implementation and proof tasks. Plugin version is now `0.9.0` (testing pass before 1.0).

@@ -40,7 +40,7 @@ If that cost surface ever grows beyond bounded, the right move is to retire one 
 
 - 1.0 must pass install and smoke checks in both Codex and Claude Code.
 - User-facing docs (README, INSTALL, SMOKE_TESTS, PRIVACY, TERMS, SPEC) describe both runtimes; the bundle and its skills remain runtime-neutral.
-- Hermes orchestration remains the post-1.0 north star and is independent of this change.
+- Post-1.0 orchestration remains the next strategic direction and is independent of this change.
 - Skill bodies must not embed runtime-specific behaviour. If a skill needs to talk about runtime differences, do it in a `references/` doc, not in the public skill body.
 
 ## Out of Scope
