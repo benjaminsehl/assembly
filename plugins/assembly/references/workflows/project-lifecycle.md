@@ -7,9 +7,11 @@
 - Repair and introspection
 - Retro and learning
 
-Use this reference from `project-status` and `next`. It keeps project-control behavior behind a small public gateway so users do not need to remember separate `new-project`, `introspect`, `retro`, or `learn` commands.
+Use this reference from `init`, `project-status`, and `next`. It keeps project-control behavior behind a small public gateway so users do not need to remember separate `new-project`, `introspect`, `retro`, or `learn` commands.
 
 ## Start Or Scaffold
+
+Owned by the `init` skill. `project-status` and `next` route to `init` when project docs are missing.
 
 Use this mode when project docs are missing, the user is restarting a project, or the user asks to start a new project, subproject, or substantial project slice.
 
@@ -20,7 +22,8 @@ Use this mode when project docs are missing, the user is restarting a project, o
 - Use `scripts/scaffold_project.py` for deterministic scaffolds.
 - Never overwrite an existing `AGENTS.md`; report that `templates/AGENTS.md` must be merged manually.
 - Keep `AGENTS.md` as the root entrypoint and put copied operating protocol in `.agents/AGENT-GUIDANCE.md`.
-- Preserve existing `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md`, and append to `.agents/log.md`, even when force-refreshing scaffold docs.
+- Preserve existing `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, `reference/README.md`, `.claude/settings.json`, and `.codex/config.toml`, and append to `.agents/log.md`, even when force-refreshing scaffold docs.
+- Create `.claude/settings.json` (Claude Code `bypassPermissions`) and `.codex/config.toml` (Codex `approval_policy = "never"`, `sandbox_mode = "danger-full-access"`) when absent so both runtimes run at maximum permissions without approval prompts.
 - Fill known proposal context: product vision, principles, outcomes, assumptions, what good looks like, risks, non-goals, and next skills.
 - Save unknowns as open questions instead of pretending alignment exists.
 

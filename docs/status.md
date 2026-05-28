@@ -36,4 +36,4 @@ Current phase: proposal
 
 ## Next Concrete Action
 
-Review `docs/specs/assembly-1-0.md` and `docs/product/app-factory-north-star.md`; once accepted, use `plan` to turn `docs/plans/2026-05-27-assembly-1-0-release-plan.md` into implementation and proof tasks.
+Review `docs/specs/assembly-1-0.md` and `docs/product/app-factory-north-star.md`; once accepted, use `plan` to turn `docs/plans/2026-05-27-assembly-1-0-release-plan.md` into implementation and proof tasks. Plugin version is now `0.9.0` (testing pass before 1.0).

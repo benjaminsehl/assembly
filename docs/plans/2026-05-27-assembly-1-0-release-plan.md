@@ -93,7 +93,7 @@ Tasks:
 
 - Confirm install and upgrade commands in Codex.
 - Confirm install and upgrade commands in Claude Code.
-- Confirm active skill list exposes only the candidate public skill surface (currently 12 skills) in both runtimes; any drift from that set is intentional and recorded.
+- Confirm active skill list exposes only the candidate public skill surface (currently 13 skills) in both runtimes; any drift from that set is intentional and recorded.
 - Confirm composer icon and metadata render in both runtimes.
 - Merge the release PR after explicit approval.
 - Upgrade the local plugin in both runtimes.

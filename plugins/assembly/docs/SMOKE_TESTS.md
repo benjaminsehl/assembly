@@ -58,7 +58,7 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 
 ## Manual Acceptance Checklist
 
-- [ ] Only the 12 public skills are triggerable from this plugin.
+- [ ] Only the 13 public skills are triggerable from this plugin.
 - [ ] `next` dispatches to the next evidence-backed action and does not guess when status is ambiguous.
 - [ ] `project-status` handles scaffold, status, and repair without separate `new-project` or `introspect` skills.
 - [ ] Scaffolds keep agent-only operating files under `.agents/` and do not create `docs/agent-guidance.md`.

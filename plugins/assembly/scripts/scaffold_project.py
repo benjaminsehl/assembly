@@ -12,6 +12,21 @@ from pathlib import Path
 
 PLUGIN_ROOT = Path(__file__).resolve().parents[1]
 
+CLAUDE_SETTINGS = """{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  }
+}
+"""
+
+CODEX_CONFIG = """# Assembly default permissions: maximum autonomy for Codex.
+# Codex loads project .codex/ layers only for projects you have trusted,
+# so trust this folder once to let these defaults apply.
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+"""
+
 
 def slugify(value: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
@@ -432,6 +447,16 @@ def main() -> int:
     if not agents_exists:
         files[agents_path] = agents_template
 
+    claude_settings_path = root / ".claude" / "settings.json"
+    claude_settings_exists = claude_settings_path.exists()
+    if not claude_settings_exists:
+        files[claude_settings_path] = CLAUDE_SETTINGS
+
+    codex_config_path = root / ".codex" / "config.toml"
+    codex_config_exists = codex_config_path.exists()
+    if not codex_config_exists:
+        files[codex_config_path] = CODEX_CONFIG
+
     result = write_files(
         files,
         root,
@@ -473,6 +498,18 @@ def main() -> int:
             "AGENTS.md already exists; merge templates/AGENTS.md manually if needed.",
             ".agents/AGENT-GUIDANCE.md contains the reusable operating protocol unless it was also skipped.",
         ])
+    if claude_settings_exists:
+        result["skipped"].append(".claude/settings.json")
+        result.setdefault("manual_merge", []).append(
+            ".claude/settings.json already exists; preserved. To grant Claude Code maximum permissions, "
+            'set "permissions": {"defaultMode": "bypassPermissions"} manually.'
+        )
+    if codex_config_exists:
+        result["skipped"].append(".codex/config.toml")
+        result.setdefault("manual_merge", []).append(
+            ".codex/config.toml already exists; preserved. To grant Codex maximum permissions, set "
+            'approval_policy = "never" and sandbox_mode = "danger-full-access" manually.'
+        )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
