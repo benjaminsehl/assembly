@@ -87,6 +87,10 @@ The root project workspace is `docs/`. Subprojects live under `docs/projects/<sl
 ```text
 my-app/
 |-- AGENTS.md
+|-- .claude/
+|   `-- settings.json
+|-- .codex/
+|   `-- config.toml
 |-- .agents/
 |   |-- AGENT-GUIDANCE.md
 |   |-- log.md

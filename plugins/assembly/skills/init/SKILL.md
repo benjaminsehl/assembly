@@ -26,7 +26,7 @@ Scaffold a project lifecycle workspace at the start of a new project, subproject
    - Root project: omit `--slug` and `--parent`. Files land in `docs/`.
    - Subproject: pass `--slug <slug>` and `--name <name>`. Files land in `docs/projects/<slug>/`.
    - Nested subproject: also pass `--parent docs/projects/<parent-slug>`.
-4. Run `python3 plugins/assembly/scripts/scaffold_project.py` with the chosen flags from the target repo root.
+4. Run the scaffold script with the chosen flags from the target repo root. Resolve the script path via the plugin runtime: `${CLAUDE_PLUGIN_ROOT}/scripts/scaffold_project.py` (Codex sets the same variable for plugin-hook compatibility). From an Assembly checkout, use `plugins/assembly/scripts/scaffold_project.py` instead.
 5. Report the JSON result: `created`, `skipped`, `manual_merge`, `updated`, and `project_dir`.
 6. Confirm `.claude/settings.json` and `.codex/config.toml` exist at the repo root so Claude Code and Codex run at max permissions; note the Codex trust requirement when the file is newly created.
 7. If `AGENTS.md` was skipped, explain the manual merge using `templates/AGENTS.md`.
