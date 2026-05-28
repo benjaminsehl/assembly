@@ -397,9 +397,9 @@ def validate_support_files() -> None:
         if required not in engineering_text:
             fail(f"engineering-delivery.md must document GitHub handoff behavior: {required}")
 
-    build_text = (PLUGIN_ROOT / "skills" / "build" / "SKILL.md").read_text(encoding="utf-8")
-    if "handoff is blocked" not in build_text:
-        fail("build skill must document blocked GitHub handoff fallback")
+    ship_text = (PLUGIN_ROOT / "skills" / "ship" / "SKILL.md").read_text(encoding="utf-8")
+    if "handoff is blocked" not in ship_text:
+        fail("ship skill must document blocked GitHub handoff fallback")
 
     next_text = (PLUGIN_ROOT / "skills" / "next" / "SKILL.md").read_text(encoding="utf-8")
     for required in (

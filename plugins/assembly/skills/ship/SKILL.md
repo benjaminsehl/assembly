@@ -26,10 +26,11 @@ Decide whether a change is ready to release. The decision is binary: `GO` or `NO
    - Live traffic (real users, real data): blocker by default. Require forward + reverse SQL, staging dry-run, locking analysis under concurrent writes, backfill plan, and a named owner who will watch the rollout. Missing any → NO-GO.
 5. If no PR exists for the topic branch, open it now. Ask the founder whether to open as draft or ready. PR description uses product-impact framing: what user capability ships, not what files changed.
 6. If a draft PR exists and the founder requests promotion to ready: confirm review is complete, simplification pass is done, verification is green, and the founder has explicitly authorized the ready transition.
-7. Produce a single binary decision:
+7. If GitHub handoff is blocked (gh CLI failure, no remote, missing access, network error), do not silently swallow it. Name the failed command, what work is completed locally, current verification status, and the next recovery step. The decision becomes NO-GO until handoff is unblocked or the founder explicitly accepts a local-only release.
+8. Produce a single binary decision:
    - `GO`: verification green, blockers cleared, rollback trigger and procedure named, residual risks acknowledged, product-impact statement included.
    - `NO-GO`: blockers listed, recommended fixes named, next path to GO stated.
-8. Do not run retro. Ship is pre-release only.
+9. Do not run retro. Ship is pre-release only.
 
 ## Verification
 

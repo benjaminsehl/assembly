@@ -45,7 +45,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
 
 ## Gating Model
 
-- Product gates (what / why / what good looks like / risks / rollback) open the engineering rails. Once those gates are clear and verification is green, the engineering sequence continues through `build` → `ship`. `ship` is the only skill that opens PRs or promotes them to ready, and it asks before doing either.
+- Product gates — what is being built, why it matters, what good looks like, risks, and rollback — open the engineering rails. Once those gates are clear and verification is green, the engineering sequence continues through `build` → `ship`. `ship` is the only skill that opens PRs or promotes them to ready, and it asks before doing either.
 - Always-ask floor (regardless of product-gate clarity): money movement, credentials, privacy-sensitive data, external messaging, irreversible destructive operations (force-push to default branch, delete branches with unmerged work, drop tables, delete production data), and merge/deploy/ready transitions when verification is not green or material review concerns are unresolved.
 
 ## Verification
