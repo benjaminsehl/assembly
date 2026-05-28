@@ -5,7 +5,7 @@ Status: post-1.0 roadmap
 
 ## Thesis
 
-Hermes should orchestrate Assembly after Assembly's Codex control loop is stable.
+Hermes should orchestrate Assembly after Assembly's agent control loop is stable.
 
 The right shape is not a fully autonomous app factory. It is a General Manager that coordinates Codex sessions, project state, specialist reviews, and founder approval gates across a roadmap.
 

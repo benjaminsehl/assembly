@@ -2,15 +2,15 @@
 
 ## What Becomes 10x Better
 
-A user can return to any substantial project, say `next`, and Codex will know the phase, missing context, correct skill, and next useful action from the local project trail.
+A user can return to any substantial project, say `next`, and the agent will know the phase, missing context, correct skill, and next useful action from the local project trail.
 
 ## What Good Looks Like
 
-Assembly 1.0 feels like a reliable human-led project operating system for Codex: lightweight enough to use daily, structured enough to prevent skipped thinking, and proven on real projects.
+Assembly 1.0 feels like a reliable human-led project operating system for agents: lightweight enough to use daily, structured enough to prevent skipped thinking, and proven on real projects.
 
 ## Desired Outcomes
 
-- `next` works as the default continuation phrase in fresh Codex sessions.
+- `next` works as the default continuation phrase in fresh agent sessions.
 - Project scaffolding creates a useful root `docs/` trail without overwriting existing instructions.
 - `project-status` can diagnose phase, missing prerequisites, and recovery plan from real repo artifacts.
 - Product, engineering, QA, and business lenses are available without overwhelming the active skill surface.
@@ -21,7 +21,7 @@ Assembly 1.0 feels like a reliable human-led project operating system for Codex:
 ## Assumptions
 
 - The primary user will tolerate a small amount of project documentation if it makes agents materially better.
-- A compact skill surface with references is easier for Codex to use than many overlapping triggerable skills.
+- A compact skill surface with references is easier for agents to use than many overlapping triggerable skills.
 - Natural-language invocation is good enough; slash commands are not required for 1.0.
 - The strongest near-term value is personal reliability, not broad marketplace polish.
 

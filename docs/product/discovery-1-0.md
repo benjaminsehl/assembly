@@ -44,7 +44,7 @@ That means:
 - Personal reliability beats broad marketplace polish.
 - Public usability still matters enough to keep installation, migration, conflict audits, privacy notes, and docs clean.
 - The same plugin bundle ships and behaves in both Codex and Claude Code; broader runtime portability is not a near-term goal.
-- The future app-factory vision should stay visible through Hermes orchestration, but 1.0 should prove the dual-runtime control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
+- The future app-factory vision should stay visible through Hermes orchestration, but 1.0 should prove the agent control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
 
 ## Recommended Proof Path
 
@@ -80,7 +80,7 @@ The user returns after days away, types `next`, and Codex says what phase the pr
 
 Verdict: narrow, then prove.
 
-Assembly should name the app-factory ambition without pretending 1.0 delivers it. The 1.0 release proves the human-led Codex control loop that a future factory needs: project trail, phase awareness, clarifying questions, next-step routing, gates, and PR handoff. Hermes orchestration comes after that loop is trustworthy.
+Assembly should name the app-factory ambition without pretending 1.0 delivers it. The 1.0 release proves the human-led agent control loop that a future factory needs: project trail, phase awareness, clarifying questions, next-step routing, gates, and PR handoff. Hermes orchestration comes after that loop is trustworthy.
 
 ## Business Model Lens
 

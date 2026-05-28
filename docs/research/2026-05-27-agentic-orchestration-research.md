@@ -70,7 +70,7 @@ Future Hermes work should preserve those boundaries as typed guardrails, not jus
 2. Prove it on Assembly and CFO.
 3. Capture real smoke evidence in both runtimes.
 4. Define a Hermes contract around project status, skill invocation, work ownership, evidence, and approval boundaries.
-5. Build a Hermes alpha only after the dual-runtime control loop feels boringly reliable.
+5. Build a Hermes alpha only after the agent control loop feels boringly reliable.
 
 ## Open Questions
 

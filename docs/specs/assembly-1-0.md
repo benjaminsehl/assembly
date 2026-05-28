@@ -11,7 +11,7 @@ In 1.0, it proves the human-led control loop in both Codex and Claude Code: read
 
 The user remains founder and product director. Agents help clarify intent, preserve reasoning, and execute scoped work; they do not silently take product authority.
 
-Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs in both Codex and Claude Code, and must pass install and behavior smoke checks in both. Broader runtime portability stays out of scope. Hermes orchestration is the post-1.0 strategic horizon after the dual-runtime control loop is stable.
+Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs in both Codex and Claude Code, and must pass install and behavior smoke checks in both. Other agent runtimes (Pi, OpenCode, etc.) may be added later but stay out of 1.0 scope. Hermes orchestration is the post-1.0 strategic horizon after the agent control loop is stable.
 
 ## User
 
@@ -31,7 +31,7 @@ Secondary user: a serious builder who wants a compact, runtime-agnostic project 
 - Every material workflow leaves evidence future agents can inspect.
 - GitHub-backed work should end in a reviewable PR handoff by default.
 - Workflow gates should prevent skipped thinking without becoming ceremony.
-- 1.0 proves the dual-runtime control loop before Hermes orchestration.
+- 1.0 proves the agent control loop before Hermes orchestration.
 
 ## Scope
 
