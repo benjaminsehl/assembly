@@ -20,6 +20,7 @@ REPO_ROOT = (
 PLUGIN_NAME = PLUGIN_ROOT.name
 PUBLIC_SKILLS = {
     "next",
+    "init",
     "spec",
     "plan",
     "build",

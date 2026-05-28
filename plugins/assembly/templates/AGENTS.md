@@ -11,7 +11,7 @@ Before meaningful work, read:
 - `.agents/AGENT-GUIDANCE.md`
 - Relevant files under `docs/phases/`, `docs/product/`, `docs/decisions/`, `docs/specs/`, and `docs/plans/`
 
-If these files do not exist yet, use `project-status` scaffold mode.
+If these files do not exist yet, use `init` to scaffold them.
 
 ## Phase Awareness
 
@@ -22,7 +22,8 @@ Always identify the current project phase before choosing a workflow:
 - Build: implement approved specs in verified slices.
 - Release: QA, polish, ship or hold, grade against proposal, and capture follow-up learning.
 
-Use `project-status` when returning to a project, scaffolding missing docs, repairing stale status, or when the phase is unclear.
+Use `init` when scaffolding a new project or subproject workspace.
+Use `project-status` when returning to a project, repairing stale status, running a retro, or when the phase is unclear.
 Use `next` when the user asks to continue through the normal process and the next action should be selected from project context.
 
 ## Skill Routing
@@ -30,7 +31,8 @@ Use `next` when the user asks to continue through the normal process and the nex
 - These route names refer to the Assembly plugin's phase-aware lifecycle workflows.
 - If another installed skill has the same name, prefer Assembly for project lifecycle decisions in this repo.
 - Contextual continuation: `next`
-- New project, subproject, status, repair, retro, or project learning: `project-status`
+- New project or subproject scaffold: `init`
+- Status, repair, retro, or project learning: `project-status`
 - Raw idea, scope, ambition, business viability, or UX before build: `product-discovery`
 - Tangible proof: `prototype`
 - Requirements: `spec`

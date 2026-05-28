@@ -11,7 +11,8 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 | Public skill | Job | Key references |
 | --- | --- | --- |
 | `next` | Continue through the normal process by choosing the next evidence-backed action | `project-phases`, `agent-operating-protocol`, `workflows/project-lifecycle` |
-| `project-status` | Project gateway for status, scaffold, repair, retro, and next-skill routing | `project-phases`, `project-kernel-structure`, `agent-operating-protocol`, `workflows/project-lifecycle` |
+| `init` | Scaffold a project or subproject workspace via `scripts/scaffold_project.py`, including default Claude Code and Codex permission config | `project-kernel-structure`, `workflows/project-lifecycle`, `project-phases`, `agent-operating-protocol` |
+| `project-status` | Project gateway for status, repair, retro, and next-skill routing (delegates scaffold to `init`) | `project-phases`, `project-kernel-structure`, `agent-operating-protocol`, `workflows/project-lifecycle` |
 | `product-discovery` | Product gateway for ideas, founder critique, business viability, and design-plan critique | `product-discovery-checklist`, `business-model-checklist`, `design-quality-checklist`, `workflows/product-strategy` |
 | `prototype` | Create tangible throwaway evidence before production build | `workflows/product-strategy`, `project-phases` |
 | `spec` | Define what to build before coding | `workflows/engineering-delivery`, `project-phases` |
