@@ -8,42 +8,46 @@
 - Test
 - Review
 - Code simplify
-- PR review feedback
-- GitHub handoff
+- Branch push
 
-Use this reference from `spec`, `plan`, `build`, `test`, `review`, and `code-simplify`.
+Use this reference from `spec`, `plan`, `build`, `test`, `review`, and `code-simplify`. PR opening, review feedback, and ready promotion live in `qa-and-release.md` — `ship` owns every GitHub conversation step from PR open onward.
 
 ## Spec
 
-- Define objective, users, constraints, commands, boundaries, success criteria, and open questions.
-- Surface assumptions before treating the spec as final.
+- Run mini-discovery before drafting (max 4 questions per round, focused on user, pain, wedge). Always fire, even when the spec is being repaired or invoked via routing from `build`.
+- Tier the spec by signal density: lightweight when fresh discovery exists; full when signals are thin.
+- Surface assumptions, non-goals, and open questions before treating the spec as final.
 - Save the spec using the repo convention, usually `SPEC.md` or `docs/SPEC.md`.
-- Stop at review before planning unless the user asks to continue.
+- Stop at founder review. Do not auto-continue into planning.
 
 ## Plan
 
 - Start from an approved spec or equivalent requirements.
-- Break work into vertical slices with acceptance criteria and verification.
-- Name dependencies and checkpoints.
-- Save plan and todo files using the repo convention.
-- Stop before implementation unless the user asks to continue.
+- Write each task with a thin contract: acceptance criteria, verification, files touched, dependencies.
+- Add checkpoints after meaningful phases.
+- If the plan crosses 5 tasks, flag for founder sign-off before saving.
+- Re-enter `plan` mid-stream when `build` surfaces evidence that contradicts the plan: name the contradicting evidence, revise affected tasks, update plan docs, continue.
+- Stop at founder review before implementation.
 
 ## Build
 
-- Treat an empty or minimal `build` prompt as permission to infer and execute the next unambiguous build-track gate from project evidence.
-- Follow the engineering spine when no target is named: repair/spec requirements, plan tasks, implement one slice, test, review, simplify, then prepare GitHub handoff.
-- Ask before inventing missing product or design decisions. Keep moving when the missing step is mechanical and recoverable from existing docs.
-- Implement one planned slice at a time when a plan exists.
-- Write or identify the target test first for behavior changes when practical.
-- Make the smallest complete change.
-- Keep unrelated cleanup out of scope.
+Build is a router, not a dispatcher. It implements code for an approved task and routes to other skills at phase boundaries.
+
+- Treat an empty or minimal `build` prompt as permission to identify the next implementable task from project evidence, not to execute every phase.
+- Route — do not execute — when a phase is missing: spec missing → invoke `spec` (mini-discovery still fires); plan missing → invoke `plan`; multiple plausible tasks → present 2-3 candidates with evidence and ask the founder.
+- Before modifying tested legacy code, write or identify characterization tests covering current behavior. Required, not "where practical."
+- For new behavior, write the failing/targeted test before implementation.
+- Make the smallest complete change. Keep unrelated cleanup out of scope.
 - Run targeted verification and the broadest practical regression check.
-- Update task status only after verification passes or skipped checks are explained.
-- For material repo changes with a GitHub remote, prepare a PR handoff unless the user says local-only.
+- Re-enter `plan` mid-task when contradicting evidence is structural (wrong assumption, hidden dependency, simpler path discovered) rather than a local bug. Do not silently work around stale tasks.
+- After implementation, route — do not auto-run — for downstream phases: recommend `test` if behavior is unverified, `review` if verified-unreviewed, `code-simplify` after review when safe.
+- For material changes in a GitHub-backed repo, commit on a topic branch and push. Do not open PRs — that is `ship`'s job.
 
 ## Test
 
-- For bugs, prove the bug with a failing test before fixing when practical.
+- Classify coverage tier by criticality: critical path (money movement, auth, data integrity, irreversible operations) → full coverage including characterization for adjacent legacy paths; standard feature → targeted unit + happy path + worst plausible failure; internal/utility → targeted unit only.
+- Before modifying tested legacy code inside critical-path or standard-feature surfaces, write characterization tests that lock current behavior.
+- For bugs, prove the bug with a failing test before fixing (Prove-It).
 - For new behavior, write tests that describe the intended outcome.
 - Use browser/runtime verification for UI behavior.
 - Report targeted and broader check results separately.
@@ -51,10 +55,10 @@ Use this reference from `spec`, `plan`, `build`, `test`, `review`, and `code-sim
 ## Review
 
 - Inspect the diff plus relevant surrounding code.
-- Use `gh` for PR metadata, changed files, checks, and review-thread context when the scope is a GitHub PR.
-- Lead with findings ordered by severity.
-- Include file and line references for concrete issues.
-- Apply security, performance, and accessibility checklists only when their triggers apply.
+- For PRs, use GitHub MCP tools for PR metadata, changed files, checks, and review-thread context.
+- Fan out specialist reviewers in parallel by default: correctness, architecture, security, performance, tests. Skip a specialist when the diff demonstrably does not touch its surface; name what was skipped and why.
+- Lead with findings ordered by severity. Include file and line references for concrete issues.
+- Surface findings only. Do not auto-apply fixes — the founder picks which findings to address. Run `code-simplify` separately when invoked.
 - If there are no findings, say so and name residual risk.
 
 ## Code Simplify
@@ -65,34 +69,16 @@ Use this reference from `spec`, `plan`, `build`, `test`, `review`, and `code-sim
 - Verify after each meaningful step.
 - Abandon simplifications that cannot be proved safe.
 
-## PR Review Feedback
+## Branch Push
 
-Use this when the user asks to address GitHub PR comments, requested changes, or unresolved review threads.
+Use this for material changes in a git repo with a GitHub remote, run from `build` before handing off to `ship`.
 
-- Resolve the PR from local branch context or the provided PR URL/number.
-- Fetch thread-aware review state with `gh api graphql` or a helper that preserves review-thread IDs, resolution state, outdated state, file paths, and line anchors.
-- Cluster actionable comments by behavior or file; separate fixes from questions, duplicates, stale threads, and non-actionable notes.
-- Implement fixes traceably, keeping each change tied to the feedback it addresses.
-- If a comment needs explanation rather than code, reply with the reasoning instead of forcing a code change.
-- Commit and push fixes to the PR branch when handoff is in scope.
-- Reply to review threads and mark them resolved only when the user explicitly asks for that GitHub write action.
-- Leave ambiguous or conflicting feedback unresolved and explain the tradeoff.
-
-## GitHub Handoff
-
-Use this for material changes in a git repo with a GitHub remote.
-
-- Inspect branch, remote, status, and whether a PR already exists before committing.
-- Keep commits focused and do not include unrelated user changes.
+- Inspect branch, remote, and status before committing.
+- Keep commits focused; do not include unrelated user changes.
 - Prefer a topic branch over committing directly to `main`.
-- Use a branch switch pattern that works for both existing and new branches.
-- Stage intentionally, commit with a clear message, and push with `git`.
-- Use `gh` to open a draft PR when none exists, or `gh pr edit` to update the existing PR for the branch.
-- Write a descriptive PR body that explains why the PR exists, the first principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
-- Leave the PR as draft until verification passes and the agent has run its own `review` and `code-simplify` pass.
-- After fixes and final verification, ask before marking a draft PR ready. Run `gh pr ready` only after explicit user authorization.
-- If GitHub handoff is blocked by missing auth, no writable remote, branch protection, network failure, or unavailable `gh`, do not loop. Report the blocker, the completed local work, verification status, and the exact next command or credential/access step needed.
-- Do not merge, deploy, delete branches, or create non-draft PRs without explicit user direction.
+- Use a switch pattern that works for both existing and new branches.
+- Stage intentionally, commit with a clear message, and push.
+- If push is blocked (missing auth, no writable remote, network failure), do not loop. Report the failed command, completed local work, verification status, and the exact next recovery step.
 
 Suggested command flow:
 
@@ -103,24 +89,6 @@ git switch <topic-branch> || git switch -c <topic-branch>
 git add <intentional-files>
 git commit -m "<focused message>"
 git push -u origin HEAD
-gh pr view --json number,url,isDraft,headRefName || gh pr create --draft --title "<title>" --body-file <body-file>
-gh pr edit --title "<title>" --body-file <body-file>
-gh pr view --json url,state,isDraft,headRefName
 ```
 
-After verification, self-review, and simplification gates pass:
-
-```bash
-# Ask the user first. Run only after explicit authorization:
-gh pr ready <pr-number>
-```
-
-Draft PR body shape:
-
-- Why this PR exists.
-- First principles or product/engineering principles behind the change.
-- How the agent approached the work.
-- What changed.
-- Verification.
-- Risks and tradeoffs.
-- Follow-up.
+Build stops after the branch is pushed. PR creation, review feedback, and ready promotion live in `ship` — see `qa-and-release.md`.

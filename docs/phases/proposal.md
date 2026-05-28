@@ -40,7 +40,7 @@ Assembly 1.0 feels like a reliable human-led project operating system for agents
 - GitHub handoff could become noisy if agents create PRs for tiny changes or include unrelated files.
 - Plugin installation and session refresh behavior may remain rough.
 - Public users may have skill conflicts or different project conventions.
-- 1.0 could overfit Sai's current workflow before enough real project use.
+- 1.0 could overfit Ben's current workflow before enough real project use.
 
 ## Decision Gate
 

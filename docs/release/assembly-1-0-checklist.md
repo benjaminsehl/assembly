@@ -16,7 +16,7 @@ Status: draft
 - [ ] Codex manifest (`.codex-plugin/plugin.json`) name, version, description, and icon are correct.
 - [ ] Claude Code manifest (`.claude-plugin/plugin.json`) name, version, description, and icon are correct.
 - [ ] Marketplace metadata (`.claude-plugin/marketplace.json`) is correct.
-- [ ] Only the 12 intended public skills are exposed in both runtimes.
+- [ ] Only the candidate public skill surface (currently 12 skills) is exposed in both runtimes; any drift from that set is intentional and recorded.
 - [ ] Skill graph validates.
 - [ ] Plugin shape validates.
 - [ ] Local conflict audit runs.
@@ -35,8 +35,10 @@ Status: draft
 - [ ] `next` asks one concise question when multiple next actions are plausible.
 - [ ] `build` with a minimal prompt infers the next unambiguous build-track gate.
 - [ ] GitHub handoff creates or updates a descriptive draft PR.
-- [ ] Ready-for-review requires explicit user authorization.
-- [ ] Merge requires explicit user direction and clean review-thread/check state or acknowledged risk.
+- [ ] Ready-for-review always asks before proceeding. Promotion requires explicit founder authorization with product gates clear, verification green, and review/simplification complete.
+- [ ] Merge always asks before proceeding. Confirms product gates, verification, and review-thread/check state before requesting authorization.
+- [ ] Deploy always asks before proceeding. Confirms rollback criteria and post-merge verification before requesting authorization.
+- [ ] Always-ask floor is honored regardless of product-gate clarity: money, credentials, external messaging, irreversible destructive ops.
 
 ## Proof Gate
 

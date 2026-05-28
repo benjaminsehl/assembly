@@ -40,7 +40,7 @@ Tasks:
 - Verify `product-discovery` interviews by default in both runtimes.
 - Verify minimal `build` prompts infer the next build-track gate in both runtimes.
 - Verify GitHub handoff creates or updates descriptive draft PRs in both runtimes.
-- Verify ready-for-review, merge, deploy, and privacy-sensitive actions remain ask-first boundaries in both runtimes.
+- Verify ready-for-review, merge, deploy, and privacy-sensitive actions remain ask-first boundaries in both runtimes. `ship` always asks before opening PRs or promoting to ready, regardless of product-gate clarity. The always-ask floor (money, credentials, external messaging, irreversible destructive ops) is honored on top.
 
 Exit evidence:
 
@@ -93,7 +93,7 @@ Tasks:
 
 - Confirm install and upgrade commands in Codex.
 - Confirm install and upgrade commands in Claude Code.
-- Confirm active skill list exposes only the intended 12 public skills in both runtimes.
+- Confirm active skill list exposes only the candidate public skill surface (currently 12 skills) in both runtimes; any drift from that set is intentional and recorded.
 - Confirm composer icon and metadata render in both runtimes.
 - Merge the release PR after explicit approval.
 - Upgrade the local plugin in both runtimes.

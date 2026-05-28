@@ -2,25 +2,32 @@
 
 ## User
 
-Primary: Sai acting as founder/product director, using agents across product, design, engineering, QA, and business decisions while retaining final product judgment.
+Primary: Ben acting as founder/product director, using agents across product, design, engineering, QA, and release work while retaining final product judgment.
 
-Secondary: builders who want agents to follow a coherent project lifecycle without manually juggling overlapping skills.
+Assembly is built in public. Other builders who want a coherent agentic product-building lifecycle are free to adopt it, but they are not the audience 1.0 is designed around.
 
 ## Painful Moment
 
-The user comes back to a project after time away, or starts with a fuzzy idea, and the agent either guesses, skips prerequisite thinking, forgets why choices were made, or uses the wrong skill.
+A cluster, not a single moment:
+
+- Coming back to a project after time away and the agent has no idea where things are.
+- Starting a fuzzy idea and the agent immediately produces work without clarifying direction.
+- Agents asking too many low-value questions, or asking in engineering-implementation language when product-implication framing would be clearer.
+- Agents asking the wrong questions — missing the product, user, or viability lens entirely.
+- Agents doing work before checking product direction, then producing output that has to be thrown away.
 
 ## Promise
 
-Assembly is the local protocol for a human-led agentic app factory: agents can answer where the project is, what matters, what is missing, and what should happen next from evidence in the repo.
+Ben stays in product language the whole time. Agents do the execution — discovery, specs, plans, code, tests, reviews, QA, release evidence — and ask concise questions in product-implication terms when direction is missing.
 
-Assembly keeps the human in the founder and product-director seat. Agents ask enough questions to clarify what is being built, why it matters, and what good looks like; then they execute scoped work through visible gates, reviewable artifacts, and explicit approval boundaries.
+Quality stays extremely high through effective public skills, careful context engineering, and correct delegation to specialized subagents.
 
-The long-term system is a factory only in the best sense: repeatable product judgment, high-quality engineering, careful QA, viable business thinking, and durable learning. It is not unchecked autonomy.
+Vision coherence stays high across multiple sessions and multiple agents: project memory, status, decisions, and phase gates persist between sessions, so the next agent picks up from evidence instead of from guesswork.
 
 ## Non-Goals
 
 - Replace specialized platform plugins such as GitHub, Browser, Cloudflare, iOS, macOS, or frontend builders.
-- Build the post-1.0 orchestrator, hosted dashboards, or a fully autonomous app factory before the human-led agent control loop is excellent.
+- Build the post-1.0 orchestrator, hosted dashboards, or fully autonomous execution before the human-led agent control loop is excellent.
 - Force all projects into heavyweight documentation before meaningful work can happen.
 - Treat product or business assumptions as proven without project evidence.
+- Optimize 1.0 for adoption by builders other than Ben.
