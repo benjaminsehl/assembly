@@ -15,7 +15,7 @@ Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs i
 
 ## User
 
-Primary user: Sai acting as founder/product director, using Codex or Claude Code to shape, specify, build, test, and ship real products while retaining product judgment.
+Primary user: Ben acting as founder/product director, using agents in Codex and Claude Code to shape, specify, build, test, and ship real products while retaining product judgment.
 
 Secondary user: a serious builder who wants a compact, runtime-agnostic project operating system without maintaining a pile of overlapping lifecycle skills.
 

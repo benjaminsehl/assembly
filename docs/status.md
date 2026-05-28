@@ -21,9 +21,9 @@ Current phase: proposal
 ## Current 1.0 Direction
 
 - Candidate wedge: install Assembly, scaffold a repo, say `next`, and have Codex orient to phase, missing context, and the next useful workflow without guessing or silently taking product authority.
-- Primary user: Sai acting as founder/product director while Codex helps clarify, execute, verify, and preserve the project trail.
+- Primary user: Ben acting as founder/product director while agents help clarify, execute, verify, and preserve the project trail.
 - Secondary user: people who want a compact Codex-native product-building workflow instead of a pile of overlapping skills.
-- Default stance: optimize 1.0 as Sai's personal stack first, while keeping the public plugin installable, documented, and conflict-aware enough that another serious builder could adopt it.
+- Default stance: optimize 1.0 as Ben's personal stack first, built in public so other builders can adopt it if they want; they are not the audience 1.0 is designed around.
 - Recommended proof path: Assembly self-hosts the workflow, CFO proves a greenfield/restart setup, and Hyper remains the richer retrofit proof or release stretch.
 - Post-1.0 north star: a post-1.0 orchestrator coordinates scoped agent sessions using Assembly's project trail, phase gates, and GitHub handoff loop.
 - Latest usage feedback: `product-discovery` should interview before deciding unless delegated; empty or minimal `build` prompts should infer and execute the first unambiguous build-track gate.
