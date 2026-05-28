@@ -18,7 +18,7 @@ No GStack, Matt Pocock, or agent-kernel code is vendored.
 
 ## Current Adaptation
 
-Codex does not expose Claude-style `.claude/commands/*.md` as the plugin primitive. This repo therefore implements natural-language lifecycle workflows as Codex skills.
+The plugin implements lifecycle workflows as agent skills (`skills/<name>/SKILL.md`) rather than as flat `.claude/commands/*.md` shortcuts. The skill format is portable: Claude Code loads it directly, and Codex loads the same files via its own plugin manifest. The dual-target bundle keeps one source of truth for the skill bodies while exposing runtime-appropriate metadata in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json`.
 
 Earlier versions vendored many underlying workflow skills as triggerable skill directories. Version `0.7.0` intentionally shrinks the public surface and moves detailed workflow guidance into references to reduce context load and avoid collisions with users' existing skills. Version `0.7.1` adds `next` as a small continuation dispatcher without expanding the support-skill surface.
 

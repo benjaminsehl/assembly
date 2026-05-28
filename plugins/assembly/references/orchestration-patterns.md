@@ -150,7 +150,7 @@ Here's how each pattern maps onto Claude Code's primitives — and where the pla
 
 ### Where personas live
 
-Plugin support personas live in `.agents/personas/` so they stay out of the public skill surface. This Codex plugin does not expose them as triggerable skills; use them only when a harness or explicit user request supports parallel specialist review.
+Plugin support personas live in `.agents/personas/` so they stay out of the public skill surface. This plugin does not expose them as triggerable skills; use them only when a harness or explicit user request supports parallel specialist review.
 
 ### Subagents vs. Agent Teams
 

@@ -88,4 +88,4 @@ Use this mode after a release, paused project, or meaningful work period.
 - Grade the result against proposal outcomes, principles, and what good looks like.
 - Capture user, product, engineering, and business lessons.
 - Recommend durable documentation updates.
-- Do not edit global Codex memory unless the user explicitly asks for a memory update.
+- Do not edit global agent memory unless the user explicitly asks for a memory update.

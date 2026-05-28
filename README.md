@@ -1,12 +1,29 @@
 # Assembly
 
-Assembly is a human-led Codex product-building toolkit for an eventual agentic app factory: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
+Assembly is a human-led product-building toolkit for an eventual agentic app factory: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
 
-The plugin intentionally exposes a small public skill surface. Detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
+The plugin ships as both a Codex plugin and a Claude Code plugin from the same bundle at `plugins/assembly/`. It intentionally exposes a small public skill surface; detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
 
 The human stays founder and product director. Assembly helps Codex ask the right questions, preserve why decisions were made, execute scoped work, and leave reviewable evidence instead of guessing or drifting into unchecked autonomy.
 
 ## Quick Start
+
+### Claude Code
+
+Add the marketplace, then install the plugin:
+
+```bash
+/plugin marketplace add benjaminsehl/assembly
+/plugin install assembly@assembly
+```
+
+If the marketplace is already registered:
+
+```bash
+/plugin marketplace update assembly
+```
+
+### Codex
 
 Register the public marketplace:
 

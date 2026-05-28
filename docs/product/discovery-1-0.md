@@ -43,8 +43,8 @@ That means:
 
 - Personal reliability beats broad marketplace polish.
 - Public usability still matters enough to keep installation, migration, conflict audits, privacy notes, and docs clean.
-- Claude Code support is not a meaningful near-term goal.
-- The future app-factory vision should stay visible through Hermes orchestration, but 1.0 should prove the Codex control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
+- The same plugin bundle ships and behaves in both Codex and Claude Code; broader runtime portability is not a near-term goal.
+- The future app-factory vision should stay visible through Hermes orchestration, but 1.0 should prove the dual-runtime control loop first: status, phase, next action, gates, GitHub handoff, and recovery.
 
 ## Recommended Proof Path
 
@@ -74,7 +74,7 @@ The user returns after days away, types `next`, and Codex says what phase the pr
 - GStack-style sprint roles: useful product/company methodology, but too broad and Claude/runtime-specific for this pass.
 - Built-in Codex plugins: strong execution tools, but not a lifecycle owner.
 - Manual `AGENTS.md` instructions: helpful, but too passive without status and phase artifacts.
-- Claude Code adapter: plausible someday, but not important enough to compete with finishing the Codex plugin and proving Hermes orchestration.
+- Broader runtime portability beyond Codex and Claude Code: plausible someday, but not important enough to compete with finishing the dual-runtime plugin and proving Hermes orchestration.
 
 ## Founder Critique
 
@@ -124,8 +124,8 @@ Riskiest viability assumption: other builders will adopt a project-doc workflow 
 - Validators cover manifest, marketplace layout, skill graph, references, and conflict audit.
 - README gives a clear user guide from install to first project to ongoing use.
 - 1.0 has a release checklist, smoke-test evidence, and a short retro from real project use.
-- The docs explicitly state that Claude compatibility is out of scope for 1.0 and Hermes orchestration is the next strategic horizon.
+- The docs explicitly state that 1.0 ships as a dual-runtime plugin for Codex and Claude Code, and Hermes orchestration is the next strategic horizon.
 
 ## Recommended Next Step
 
-Write a 1.0 spec for the Codex plugin, with Hermes orchestration captured as the next strategic horizon rather than a 1.0 dependency.
+Write a 1.0 spec for the dual-runtime plugin (Codex and Claude Code), with Hermes orchestration captured as the next strategic horizon rather than a 1.0 dependency.

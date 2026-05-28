@@ -67,7 +67,7 @@ The eventual factory has four layers:
 
 ## 1.0 Wedge
 
-Assembly 1.0 proves only the first two layers and enough specialist coordination to be useful inside Codex.
+Assembly 1.0 proves only the first two layers and enough specialist coordination to be useful inside Codex and Claude Code from the same plugin bundle.
 
 Success means:
 
@@ -96,5 +96,5 @@ Hermes should not be a blind autonomous builder. It should be a durable orchestr
 - Do not turn every project into ceremony.
 - Do not hide product assumptions.
 - Do not let agents silently choose founder-level tradeoffs.
-- Do not make Hermes responsible for product taste before Assembly's Codex loop is excellent.
+- Do not make Hermes responsible for product taste before Assembly's dual-runtime control loop is excellent.
 - Do not optimize for impressive autonomy at the expense of inspectability.

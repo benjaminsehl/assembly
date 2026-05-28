@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "assembly",
+  "displayName": "Assembly",
+  "version": "0.8.3",
+  "description": "Assembly is a compact personal product-building stack: contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
+  "author": {
+    "name": "Sai",
+    "email": "benjaminsehl@users.noreply.github.com",
+    "url": "https://github.com/benjaminsehl"
+  },
+  "homepage": "https://github.com/benjaminsehl/assembly",
+  "repository": "https://github.com/benjaminsehl/assembly",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "product-development",
+    "software-engineering",
+    "startup",
+    "design",
+    "business-model",
+    "project-lifecycle",
+    "project-status",
+    "next",
+    "prototype",
+    "app-factory",
+    "agents-md",
+    "workflow"
+  ]
+}
