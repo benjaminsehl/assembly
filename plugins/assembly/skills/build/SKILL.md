@@ -30,12 +30,13 @@ Implement the next planned task. Build is a router, not a dispatcher: it execute
 6. For new behavior changes, write or identify the failing/targeted test before implementation.
 7. Make the smallest complete change that satisfies the acceptance criteria.
 8. If tests, build, or runtime checks fail, isolate the root cause before changing approach.
-9. Run targeted verification and the broadest practical regression check.
-10. After implementation, route — do not auto-run — for downstream phases:
+9. If implementation surfaces evidence that contradicts the plan structurally (wrong assumption, hidden dependency, simpler path discovered) — not just a local bug — stop and re-enter `plan` rather than working around stale tasks.
+10. Run targeted verification and the broadest practical regression check.
+11. After implementation, route — do not auto-run — for downstream phases:
     - Behavior unverified → recommend `test`.
     - Verified but unreviewed → recommend `review`, then `code-simplify` when safe.
-    - Material change ready for backup → commit on the topic branch and push (no PR). Tell the founder the branch is pushed and `ship` will open the PR when they're ready.
-11. Update task/status docs after verification passes or skipped checks are explained.
+    - Material change ready for backup → commit on the topic branch and push (no PR). Tell the founder the branch is pushed and `ship` will open the PR when the founder is ready. If push itself fails (no remote, network error, missing access), name the failed command and the local state — do not silently move on.
+12. Update task/status docs after verification passes or skipped checks are explained.
 
 ## What Build Does Not Do
 

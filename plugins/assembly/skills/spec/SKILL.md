@@ -19,7 +19,7 @@ Define what should be built before coding starts. Surface user pain, clarify suc
 
 1. State that the `spec` workflow is active and summarize the user goal in one or two sentences.
 2. Read existing project docs, commands, and prior specs when a repo already exists.
-3. Run mini-discovery before drafting: ask at most 5 questions framed around user, pain, and wedge. Always fire — even when the spec is being repaired or invoked from inside `build`. Use the explicit options-list pattern when surfacing alternatives.
+3. Run mini-discovery before drafting: ask at most 4 questions per round (one or two rounds is fine) framed around user, pain, and wedge. Always fire — even when the spec is being repaired or invoked via routing from `build`. Use the explicit options-list pattern when surfacing alternatives.
 4. Decide signal density:
    - Fresh discovery exists in `docs/discovery/` or a recent spec → lightweight spec (objective, success criteria, scope, open questions).
    - Thin or stale signals → full spec (objective, users, pain, wedge, stack, commands, structure, style, testing, boundaries, success criteria, open questions).

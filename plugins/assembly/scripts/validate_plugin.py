@@ -387,19 +387,36 @@ def validate_support_files() -> None:
         PLUGIN_ROOT / "references" / "workflows" / "engineering-delivery.md"
     ).read_text(encoding="utf-8")
     for required in (
-        "PR Review Feedback",
         "git switch <topic-branch> || git switch -c <topic-branch>",
-        "gh pr edit",
-        "handoff is blocked",
-        "explicit user authorization",
-        "Reply to review threads and mark them resolved only when the user explicitly asks",
+        "Build is a router",
+        "characterization tests",
+        "mini-discovery",
+        "Fan out specialist",
     ):
         if required not in engineering_text:
-            fail(f"engineering-delivery.md must document GitHub handoff behavior: {required}")
+            fail(f"engineering-delivery.md must encode the locked skill behaviors: {required}")
+
+    spec_text = (PLUGIN_ROOT / "skills" / "spec" / "SKILL.md").read_text(encoding="utf-8")
+    if "mini-discovery" not in spec_text:
+        fail("spec skill must document mini-discovery requirement")
+
+    build_text = (PLUGIN_ROOT / "skills" / "build" / "SKILL.md").read_text(encoding="utf-8")
+    for required in ("router, not a dispatcher", "What Build Does Not Do"):
+        if required not in build_text:
+            fail(f"build skill must encode router model: {required}")
+
+    test_text = (PLUGIN_ROOT / "skills" / "test" / "SKILL.md").read_text(encoding="utf-8")
+    if "characterization tests" not in test_text:
+        fail("test skill must require characterization tests for legacy code")
+
+    review_text = (PLUGIN_ROOT / "skills" / "review" / "SKILL.md").read_text(encoding="utf-8")
+    if "Fan out specialist" not in review_text:
+        fail("review skill must use parallel specialist fan-out")
 
     ship_text = (PLUGIN_ROOT / "skills" / "ship" / "SKILL.md").read_text(encoding="utf-8")
-    if "handoff is blocked" not in ship_text:
-        fail("ship skill must document blocked GitHub handoff fallback")
+    for required in ("handoff is blocked", "binary", "GO", "NO-GO"):
+        if required not in ship_text:
+            fail(f"ship skill must encode binary release decision and blocked handoff: {required}")
 
     next_text = (PLUGIN_ROOT / "skills" / "next" / "SKILL.md").read_text(encoding="utf-8")
     for required in (
@@ -443,8 +460,19 @@ def validate_support_files() -> None:
     qa_release_text = (
         PLUGIN_ROOT / "references" / "workflows" / "qa-and-release.md"
     ).read_text(encoding="utf-8")
-    if "Ask before marking ready" not in qa_release_text or "explicitly authorizes" not in qa_release_text:
-        fail("qa-and-release.md must require explicit authorization before gh pr ready")
+    for required in (
+        "Ask before marking ready",
+        "explicitly authorizes",
+        "PR Review Feedback",
+        "GitHub Handoff",
+        "gh pr edit",
+        "handoff is blocked",
+        "Reply to review threads and mark them resolved only when the user explicitly asks",
+        "binary",
+        "traffic state",
+    ):
+        if required not in qa_release_text:
+            fail(f"qa-and-release.md must encode ship-owned handoff and locked decisions: {required}")
 
     if not (PLUGIN_ROOT / "AGENTS.md").is_file():
         fail("Missing required plugin agent guidance: AGENTS.md")
