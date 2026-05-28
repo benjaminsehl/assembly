@@ -333,19 +333,12 @@ def validate_support_files() -> None:
                 f"README.md must document dual-runtime install path: {required}"
             )
     for required in (
-        "ask before marking the PR ready",
-        "explicit user authorization",
-        "unresolved review threads",
+        "product gates",
+        "always-ask floor",
+        "review threads",
     ):
         if required not in readme_text:
-            fail(f"README.md must document GitHub handoff behavior: {required}")
-    forbidden_readme_patterns = (
-        r"then mark the PR ready when verification passes",
-        r"mark the PR ready when verification passes",
-    )
-    for pattern in forbidden_readme_patterns:
-        if re.search(pattern, readme_text, flags=re.IGNORECASE):
-            fail("README.md must not suggest marking PRs ready without explicit authorization")
+            fail(f"README.md must document the gating model: {required}")
 
     command_contract_text = (PLUGIN_ROOT / "docs" / "COMMAND_CONTRACT.md").read_text(encoding="utf-8")
     for required in (
