@@ -134,7 +134,7 @@ Riskiest viability assumption for the open-source surface: other builders will o
 
 ## Candidate 1.0 Release Criteria
 
-- Public plugin installs as `assembly` and exposes only the 12 intended public skills.
+- Public plugin installs as `assembly` and exposes only the candidate public skill surface (currently 12 skills), with any drift recorded.
 - `project-status` can scaffold and repair a project trail without overwriting existing `AGENTS.md`.
 - Scaffolds keep `AGENTS.md` at the root, agent-only context in `.agents/`, durable project reasoning in `docs/`, and raw source material in `reference/`.
 - `next` is reliable enough to be the default continuation command.

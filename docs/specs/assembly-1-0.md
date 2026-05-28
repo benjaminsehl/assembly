@@ -5,11 +5,11 @@ Status: draft for review
 
 ## Objective
 
-Assembly is a human-led toolkit for an agentic app factory.
+Assembly is the per-project operating system for human-led, agent-executed product building.
 
 In 1.0, it proves the human-led control loop in both Codex and Claude Code: read the project trail, identify phase and missing context, clarify what is being built, why it matters, and what good looks like, choose the next safe workflow, and leave evidence-backed handoff.
 
-The user remains founder and product director. Agents help clarify intent, preserve reasoning, and execute scoped work; they do not silently take product authority.
+The user remains founder and product director. Agents help clarify intent in product-implication language (not engineering detail), preserve reasoning, and execute scoped work; they do not silently take product authority, and they flag business, user, and viability concerns rather than deciding them.
 
 Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs in both Codex and Claude Code, and must pass install and behavior smoke checks in both. Other agent runtimes (Pi, OpenCode, etc.) may be added later but stay out of 1.0 scope. A post-1.0 orchestrator is the strategic horizon after the agent control loop is stable.
 
@@ -17,18 +17,21 @@ Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs i
 
 Primary user: Ben acting as founder/product director, using agents in Codex and Claude Code to shape, specify, build, test, and ship real products while retaining product judgment.
 
-Secondary user: a serious builder who wants a compact, runtime-agnostic project operating system without maintaining a pile of overlapping lifecycle skills.
+Assembly is built in public. Other builders who want a coherent agentic product-building lifecycle are free to adopt it, but they are not the audience 1.0 is designed around.
 
 ## Product Principles
 
 - Personal reliability beats broad marketplace polish.
 - The public skill surface stays small.
+- The skill surface and skill-behavior contracts are means to high agent execution quality, not ends in themselves. Revise the surface, the spine, or the defaults when evidence shows a different shape produces better-quality agent output, better context engineering, or better subagent delegation.
 - `next` should be the normal continuation command.
 - Human judgment leads; agents accelerate, clarify, and preserve it.
 - Product judgment stays with the user unless explicitly delegated.
+- Agents ask in product-implication language, never in engineering-implementation detail when a product framing is possible.
+- Agents flag business, user, and viability concerns for founder judgment; they do not decide them.
 - Agents should ask enough questions to understand what is being built, why it matters, and what good looks like before making durable product or implementation choices.
 - Build work should move when the next engineering gate is evidence-backed.
-- Every material workflow leaves evidence future agents can inspect.
+- Every material workflow leaves evidence future agents can inspect, so vision coherence stays high across multiple sessions and multiple agents.
 - GitHub-backed work should end in a reviewable PR handoff by default.
 - Workflow gates should prevent skipped thinking without becoming ceremony.
 - 1.0 proves the agent control loop before post-1.0 orchestration.
@@ -38,7 +41,7 @@ Secondary user: a serious builder who wants a compact, runtime-agnostic project 
 Assembly 1.0 includes:
 
 - A dual-runtime plugin named `assembly` that installs and runs in both Codex and Claude Code from the same bundle at `plugins/assembly/`.
-- Exactly 12 public skills:
+- A small public skill surface, sized for high agent execution quality. The 1.0 candidate set is these 12 skills, subject to revision based on quality evidence:
   - `next`
   - `project-status`
   - `product-discovery`
@@ -130,10 +133,12 @@ Assembly 1.0 includes:
 `build` must:
 
 - Treat empty or minimal prompts such as `Use build` as permission to infer the first unambiguous build-track gate from project evidence.
-- Follow the engineering spine when no task is named: spec repair, plan, implementation, test, review, code-simplify, GitHub handoff.
-- Ask before inventing missing product or design decisions.
+- Default to the engineering spine when no task is named: spec repair, plan, implementation, test, review, code-simplify, GitHub handoff.
+- Vary from the default spine when project evidence and agent quality outcomes warrant a shorter or reordered shape (e.g., spec and plan already exist and are sufficient — jump to implementation).
+- Ask before inventing missing product or design decisions; questions are in product-implication language, not engineering detail.
 - Keep moving when the missing step is mechanical and recoverable from existing docs.
 - Implement one slice at a time.
+- Delegate to specialized subagents when the work shape calls for it.
 - Run targeted verification and the broadest practical regression check.
 
 ### GitHub Handoff
@@ -232,7 +237,7 @@ Assembly 1.0 must not ship until:
 - `codex plugin marketplace upgrade assembly` picks up the latest version.
 - `/plugin marketplace add benjaminsehl/assembly` followed by `/plugin install assembly@assembly` works for a new Claude Code install.
 - `/plugin marketplace update assembly` picks up the latest version in Claude Code.
-- The plugin exposes only the 12 intended public skills.
+- The plugin exposes only the candidate public skill surface (currently 12 skills); any drift from that set is intentional and recorded.
 - `next` is reliable enough to use as the default continuation command.
 - `project-status` can scaffold and repair a project trail without overwriting existing instructions.
 - `product-discovery` asks before deciding unless decisions are delegated.

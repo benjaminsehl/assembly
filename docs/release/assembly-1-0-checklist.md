@@ -16,7 +16,7 @@ Status: draft
 - [ ] Codex manifest (`.codex-plugin/plugin.json`) name, version, description, and icon are correct.
 - [ ] Claude Code manifest (`.claude-plugin/plugin.json`) name, version, description, and icon are correct.
 - [ ] Marketplace metadata (`.claude-plugin/marketplace.json`) is correct.
-- [ ] Only the 12 intended public skills are exposed in both runtimes.
+- [ ] Only the candidate public skill surface (currently 12 skills) is exposed in both runtimes; any drift from that set is intentional and recorded.
 - [ ] Skill graph validates.
 - [ ] Plugin shape validates.
 - [ ] Local conflict audit runs.
