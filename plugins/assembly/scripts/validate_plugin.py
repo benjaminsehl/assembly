@@ -425,6 +425,10 @@ def validate_support_files() -> None:
         "what is being built",
         "why it matters",
         "what good looks like",
+        "product-implication language",
+        "Flag business, user, and viability concerns",
+        "docs/product/discovery-",
+        "risk-triggered",
     ):
         if required not in product_discovery_text:
             fail(f"product-discovery must document interview-first founder behavior: {required}")
