@@ -333,6 +333,15 @@ def validate_support_files() -> None:
                 f"README.md must document dual-runtime install path: {required}"
             )
     for required in (
+        "ask before marking the PR ready",
+        "explicit user authorization",
+        "unresolved review threads",
+    ):
+        if required not in readme_text:
+            fail(
+                f"README.md must document the PR-ready gating model: {required}"
+            )
+    for required in (
         "product gates",
         "always-ask floor",
         "review threads",

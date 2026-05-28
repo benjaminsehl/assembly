@@ -141,12 +141,11 @@ Why this shape:
 
 Assembly expects agents to leave real work reviewable:
 
-- Commit focused changes on a topic branch.
-- Push the branch.
-- Open or update a descriptive draft PR with `gh`.
+- `build` commits focused changes on a topic branch and pushes.
+- `ship` opens or updates a descriptive draft PR (with `gh` or the GitHub MCP tools).
 - Explain why the PR exists, the first principles behind the change, and how the agent approached it.
 - Run `review` and `code-simplify` before asking to mark ready.
-- Mark the PR ready and merge automatically once product gates are clear (what / why / what good looks like / risks / rollback), verification is green, and review threads are clean. Ask when any of those are unmet, or when an always-ask floor item applies (money, credentials, external messaging, irreversible destructive ops).
+- Always ask before marking the PR ready. Promote to ready only after explicit user authorization, with product gates clear (what / why / what good looks like / risks / rollback), verification green, review/simplification complete, and no always-ask floor item triggered (money, credentials, external messaging, irreversible destructive ops).
 - When addressing PR comments, inspect unresolved review threads, implement traceable fixes, push updates, and reply/resolve threads only when the user asks for that GitHub write action.
 - Do not merge, deploy, or create non-draft PRs without explicit direction.
 

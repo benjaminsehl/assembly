@@ -39,7 +39,7 @@ Install Assembly, scaffold a repo, and stay in product language. The agent shoul
 - choose the right public skill,
 - delegate to specialized subagents when the work calls for it,
 - update status when project-doc edits are in scope,
-- for material GitHub-backed changes, commit, push, open a descriptive draft PR, explain why/principles/approach, self-review, simplify, and proceed through ready / merge / deploy automatically once product gates and verification are clear (asking when they're not, or when an always-ask floor item applies),
+- for material GitHub-backed changes, `build` commits and pushes the topic branch; `ship` opens the descriptive draft PR (asking founder for draft vs ready), runs self-review and simplification, and always asks before promoting to ready, merging, or deploying — honoring the always-ask floor on top,
 - preserve enough evidence and decision context that the next session and the next agent stay coherent with the project vision.
 
 Two everyday surfaces of the wedge:
@@ -138,7 +138,7 @@ Riskiest viability assumption for the open-source surface: other builders will o
 - `project-status` can scaffold and repair a project trail without overwriting existing `AGENTS.md`.
 - Scaffolds keep `AGENTS.md` at the root, agent-only context in `.agents/`, durable project reasoning in `docs/`, and raw source material in `reference/`.
 - `next` is reliable enough to be the default continuation command.
-- GitHub-backed work has a reliable PR handoff loop: descriptive draft PR first; ready, merge, and deploy proceed automatically when product gates are clear and verification is green; otherwise the agent asks. The always-ask floor is honored regardless of product-gate clarity.
+- GitHub-backed work has a reliable PR handoff loop: `build` commits and pushes; `ship` opens the descriptive draft PR and always asks before promoting to ready, merging, or deploying. The always-ask floor is honored on top, regardless of product-gate clarity.
 - Validators cover manifest, marketplace layout, skill graph, references, and conflict audit.
 - README gives a clear user guide from install to first project to ongoing use.
 - 1.0 has a release checklist, smoke-test evidence, and a short retro from real project use.

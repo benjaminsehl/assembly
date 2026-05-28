@@ -87,7 +87,7 @@ Assembly 1.0 includes:
 
 ## Gating Model
 
-Assembly's gating is product-direction-first. Once the product gates are clear and verification is green, engineering execution proceeds without per-action approval all the way through deploy. The founder's time stays on direction, not on rubber-stamping engineering steps.
+Assembly's gating is product-direction-first. Once the product gates are clear and verification is green, engineering execution proceeds without per-action approval up to (and including) pushing the topic branch. PR opening, ready promotion, merge, and deploy are ship-owned and always ask before proceeding. The founder's time stays on direction and on the ship gate.
 
 ### Product gates (must be clear before the rails open)
 
@@ -103,15 +103,20 @@ When any of these is missing, agents ask in product-implication language and pau
 
 ### Engineering rails (proceed without per-action approval once product gates pass)
 
-Once product gates are clear and verification is green, agents may:
+Once product gates are clear and verification is green, `build` may:
 
 - Commit and push focused changes on a topic branch.
-- Open or update a descriptive draft PR.
 - Run self-review and code simplification.
-- Mark the PR ready-for-review.
-- Merge the PR.
-- Run the project's deploy path.
-- Delete merged branches as part of routine cleanup.
+
+### Ship gate (always asks)
+
+Regardless of product-gate clarity, `ship` asks before:
+
+- Opening a PR (draft or ready, founder picks).
+- Marking a draft PR ready-for-review.
+- Merging the PR.
+- Running the project's deploy path.
+- Deleting merged branches.
 
 ### Always-ask floor (regardless of product-gate clarity)
 
@@ -186,12 +191,12 @@ For material changes in a GitHub-backed repo, Assembly must:
 - Explain why the PR exists, the first principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
 - Run self-review.
 - Run code simplification when reasonable.
-- Mark the PR ready-for-review automatically when product gates are clear and verification is green; otherwise ask.
-- Merge automatically when product gates are clear, verification is green, and review-thread/check state is clean; otherwise ask.
-- Deploy automatically after merge when product gates are clear (including rollback criteria) and verification is green; otherwise ask.
-- Honor the always-ask floor: never merge / deploy / mark-ready when an item from the always-ask floor applies.
+- Always ask before marking the PR ready-for-review. Promote to ready only with explicit founder authorization, with product gates clear (what / why / what good looks like / risks / rollback), verification green, review/simplification complete, and no always-ask floor item triggered.
+- Always ask before merging. Confirm product gates, verification, and review-thread/check state before requesting merge authorization.
+- Always ask before deploying. Confirm rollback criteria and post-merge verification before requesting deploy authorization.
+- Honor the always-ask floor on top: money, credentials, external messaging, irreversible destructive ops.
 
-Before any merge or deploy proceeds (manual or automatic), Assembly must:
+Before any merge or deploy proceeds, Assembly must:
 
 - Check PR state, status checks, review decision, and unresolved review threads.
 - Address actionable unresolved comments or report why they are not actionable.
@@ -277,7 +282,7 @@ Assembly 1.0 must not ship until:
 - `product-discovery` asks before deciding unless decisions are delegated.
 - `build` with an empty prompt infers and executes the next unambiguous build-track gate.
 - Material GitHub-backed work produces a descriptive draft PR.
-- The gating model is implemented: product gates open the engineering rails through merge and deploy; the always-ask floor (money, credentials, external messaging, irreversible destructive ops, ungated/unverified merges and deploys) is honored regardless of product-gate clarity.
+- The gating model is implemented: product gates open the engineering rails up through push; the ship gate always asks before opening PRs, promoting to ready, merging, or deploying; the always-ask floor (money, credentials, external messaging, irreversible destructive ops) is honored regardless of product-gate clarity.
 - Install, migration, conflict, and troubleshooting docs are accurate enough for a cold user.
 - The release has smoke-test evidence and a short retro.
 
@@ -300,6 +305,7 @@ Stretch:
 - Broad runtime portability beyond Codex and Claude Code.
 - Telemetry: no near-term plans, but not permanently excluded; revisit when there is a quality reason to add it, with explicit founder consent.
 - Absorbing platform-plugin behavior (GitHub, Browser, Cloudflare, iOS, macOS, frontend builders) into Assembly skills: 1.0 composes specialized plugins where they're effective; the boundary may evolve later based on whether those plugins stay current and reliable.
+- Automatic merges, deploys, branch deletion, or release automation. With the locked decisions, `ship` always asks before opening PRs or promoting to ready; auto-merge and auto-deploy are not in scope for 1.0.
 
 ## Verification Plan
 

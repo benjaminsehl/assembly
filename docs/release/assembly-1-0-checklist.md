@@ -35,9 +35,9 @@ Status: draft
 - [ ] `next` asks one concise question when multiple next actions are plausible.
 - [ ] `build` with a minimal prompt infers the next unambiguous build-track gate.
 - [ ] GitHub handoff creates or updates a descriptive draft PR.
-- [ ] Ready-for-review proceeds automatically when product gates are clear and verification is green; otherwise asks.
-- [ ] Merge proceeds automatically when product gates are clear, verification is green, and review-thread/check state is clean; otherwise asks.
-- [ ] Deploy proceeds automatically after merge when product gates are clear (including rollback criteria) and verification is green; otherwise asks.
+- [ ] Ready-for-review always asks before proceeding. Promotion requires explicit founder authorization with product gates clear, verification green, and review/simplification complete.
+- [ ] Merge always asks before proceeding. Confirms product gates, verification, and review-thread/check state before requesting authorization.
+- [ ] Deploy always asks before proceeding. Confirms rollback criteria and post-merge verification before requesting authorization.
 - [ ] Always-ask floor is honored regardless of product-gate clarity: money, credentials, external messaging, irreversible destructive ops.
 
 ## Proof Gate

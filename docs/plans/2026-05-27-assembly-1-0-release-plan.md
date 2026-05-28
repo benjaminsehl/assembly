@@ -40,7 +40,7 @@ Tasks:
 - Verify `product-discovery` interviews by default in both runtimes.
 - Verify minimal `build` prompts infer the next build-track gate in both runtimes.
 - Verify GitHub handoff creates or updates descriptive draft PRs in both runtimes.
-- Verify the gating model: product gates open the engineering rails through merge and deploy in both runtimes; the always-ask floor (money, credentials, external messaging, irreversible destructive ops, ungated/unverified merges and deploys) is honored regardless of product-gate clarity.
+- Verify ready-for-review, merge, deploy, and privacy-sensitive actions remain ask-first boundaries in both runtimes. `ship` always asks before opening PRs or promoting to ready, regardless of product-gate clarity. The always-ask floor (money, credentials, external messaging, irreversible destructive ops) is honored on top.
 
 Exit evidence:
 
