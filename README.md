@@ -4,7 +4,7 @@ Assembly is a human-led product-building toolkit for an eventual agentic app fac
 
 The plugin ships as both a Codex plugin and a Claude Code plugin from the same bundle at `plugins/assembly/`. It intentionally exposes a small public skill surface; detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
 
-The human stays founder and product director. Assembly helps Codex ask the right questions, preserve why decisions were made, execute scoped work, and leave reviewable evidence instead of guessing or drifting into unchecked autonomy.
+The human stays founder and product director. Assembly helps agents ask the right questions, preserve why decisions were made, execute scoped work, and leave reviewable evidence instead of guessing or drifting into unchecked autonomy.
 
 ## Quick Start
 

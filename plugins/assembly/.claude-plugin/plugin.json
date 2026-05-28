@@ -3,7 +3,7 @@
   "name": "assembly",
   "displayName": "Assembly",
   "version": "0.8.3",
-  "description": "Assembly is a compact personal product-building stack: contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
+  "description": "Assembly is a human-led product-building toolkit for an eventual agentic app factory, spanning contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
   "author": {
     "name": "Sai",
     "email": "benjaminsehl@users.noreply.github.com",
@@ -13,6 +13,8 @@
   "repository": "https://github.com/benjaminsehl/assembly",
   "license": "MIT",
   "keywords": [
+    "codex",
+    "claude-code",
     "agent-skills",
     "product-development",
     "software-engineering",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
   "name": "assembly",
-  "description": "Assembly: a compact personal product-building stack for Claude Code.",
+  "description": "Assembly: a human-led, dual-runtime product-building toolkit (Codex and Claude Code) for an eventual agentic app factory.",
   "owner": {
     "name": "Sai",
     "email": "benjaminsehl@users.noreply.github.com"
@@ -10,7 +10,7 @@
     {
       "name": "assembly",
       "source": "./plugins/assembly",
-      "description": "Phase-aware product-building workflows: contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
+      "description": "Human-led, phase-aware product-building workflows: contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
       "category": "Developer Tools",
       "keywords": [
         "agent-skills",
