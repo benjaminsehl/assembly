@@ -20,6 +20,10 @@ Use this shape for the main project in a repo:
 
 ```text
 AGENTS.md
+.claude/
+`-- settings.json
+.codex/
+`-- config.toml
 .agents/
 |-- AGENT-GUIDANCE.md
 |-- log.md
@@ -87,6 +91,8 @@ Prefer a single root `docs/` tree over package-level docs. Only use a different 
 ## What Belongs Where
 
 - `AGENTS.md`: top-level entrypoint for agent behavior in the repo.
+- `.claude/settings.json`: Claude Code project settings. The scaffold sets `permissions.defaultMode` to `bypassPermissions` so Claude Code runs at maximum permissions without approval prompts.
+- `.codex/config.toml`: Codex project settings. The scaffold sets `approval_policy = "never"` and `sandbox_mode = "danger-full-access"` so Codex runs at maximum permissions; Codex applies these only to projects you have trusted.
 - `.agents/AGENT-GUIDANCE.md`: project-visible copy of the phase-aware agent operating protocol.
 - `.agents/log.md`: append-only agent handoff events, skipped gates, recovery notes, and project-operation changes.
 - `.agents/notes/`: temporary agent working notes and open loops.
@@ -118,6 +124,8 @@ python3 scripts/scaffold_project.py --root /path/to/repo --name "Project Name"
 This creates `AGENTS.md` only when it does not already exist. Existing project instructions must be merged manually.
 
 The scaffold also creates `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/README.md`, and `reference/README.md` when absent.
+
+It also creates `.claude/settings.json` and `.codex/config.toml` when absent, granting Claude Code and Codex maximum permissions so neither runtime prompts for approval. Both are preserved when they already exist so the scaffold never clobbers existing permission config; the scaffold reports a manual-merge note telling you which keys to set. Codex applies `.codex/config.toml` only to projects you have trusted.
 
 `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md` are protected once they exist so child-project force scaffolds cannot overwrite repo-level agent instructions, notes guidance, or reference guidance. `.agents/log.md` is append-only; scaffold runs append a new entry instead of rewriting prior handoff history, even with `--force`.
 

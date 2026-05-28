@@ -23,7 +23,7 @@ Choose and perform the next normal workflow step without guessing. Use project d
 1. State that `next` is active and identify the repo plus project or subproject.
 2. Read `AGENTS.md`, root `docs/status.md`, nearest subproject `status.md`, `.agents/log.md` when present, and any task/spec/plan file explicitly named by status.
 3. Determine the active phase, last completed gate, missing required evidence, and whether the next step is safe to infer.
-4. If there is no Assembly project trail in this repo, do not stop and do not auto-scaffold. Ask the founder once whether to scaffold the project (one-question handoff). On confirmation, hand off to `project-status` for scaffolding and continue from the new trail.
+4. If there is no Assembly project trail in this repo, do not stop and do not auto-scaffold. Ask the founder once whether to scaffold the project (one-question handoff). On confirmation, hand off to `init` for scaffolding and continue from the new trail.
 5. If status is stale, contradictory, or missing, perform the `project-status` repair behavior first: audit the project trail, update `docs/status.md` when project-doc edits are in scope, and report the recovery path.
 6. Before dispatching into prototype, spec, plan, build, or release work, check whether the project trail answers the product gates:
    - What is being built (user capability, not code).

@@ -1,0 +1,5 @@
+# Assembly default permissions: maximum autonomy for Codex.
+# Codex loads project .codex/ layers only for projects you have trusted,
+# so trust this folder once to let these defaults apply.
+approval_policy = "never"
+sandbox_mode = "danger-full-access"

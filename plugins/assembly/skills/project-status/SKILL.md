@@ -1,6 +1,6 @@
 ---
 name: project-status
-description: Project orientation gateway. Use when returning to work, starting/scaffolding a project, checking phase, repairing stale status, or asking what to do next.
+description: Project orientation gateway. Use when returning to work, checking phase, repairing stale status, running a retro, or asking what to do next. For new project scaffolds, route to `init`.
 ---
 
 # Project Status
@@ -9,7 +9,7 @@ description: Project orientation gateway. Use when returning to work, starting/s
 
 Orient the project before work continues. Determine the active project or subproject, current phase, missing prerequisites, next gate, and next skill. Frame what shipped and what ships next in product-impact language.
 
-This is also the gateway for project start, scaffold, and repair. Do not route to separate `new-project` or `introspect` skills; use the references below.
+This is the gateway for status, repair, retro, and routing. For scaffolding a new project or subproject workspace, route to `init`. Do not route to separate `new-project` or `introspect` skills; use the references below.
 
 ## References
 
@@ -23,7 +23,7 @@ This is also the gateway for project start, scaffold, and repair. Do not route t
 
 1. State that `project-status` is active and identify the repo plus project or subproject.
 2. Inspect `docs/status.md`, nearest `docs/projects/**/status.md`, phase files, product docs, decisions, specs, plans, tech design, research, prototypes, QA/release notes, `.agents/log.md`, relevant `.agents/notes/`, `reference/`, open tasks, and recent commits.
-3. If project docs are missing and the founder is starting or restarting work, use scaffold mode from `references/workflows/project-lifecycle.md` and `scripts/scaffold_project.py`.
+3. If project docs are missing and the founder is starting or restarting work, recommend `init` and stop here; do not run the scaffold script from this skill.
 4. Classify the phase:
    - Proposal: outcomes, assumptions, principles, or success criteria are not aligned.
    - Prototype: direction needs tangible proof before production build.

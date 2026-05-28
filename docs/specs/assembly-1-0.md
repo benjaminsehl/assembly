@@ -41,8 +41,9 @@ Assembly is built in public. Other builders who want a coherent agentic product-
 Assembly 1.0 includes:
 
 - A dual-runtime plugin named `assembly` that installs and runs in both Codex and Claude Code from the same bundle at `plugins/assembly/`.
-- A small public skill surface, sized for high agent execution quality. The 1.0 candidate set is these 12 skills, subject to revision based on quality evidence:
+- A small public skill surface, sized for high agent execution quality. The 1.0 candidate set is these 13 skills, subject to revision based on quality evidence:
   - `next`
+  - `init`
   - `project-status`
   - `product-discovery`
   - `prototype`
@@ -276,7 +277,7 @@ Assembly 1.0 must not ship until:
 - `codex plugin marketplace upgrade assembly` picks up the latest version.
 - `/plugin marketplace add benjaminsehl/assembly` followed by `/plugin install assembly@assembly` works for a new Claude Code install.
 - `/plugin marketplace update assembly` picks up the latest version in Claude Code.
-- The plugin exposes only the candidate public skill surface (currently 12 skills); any drift from that set is intentional and recorded.
+- The plugin exposes only the candidate public skill surface (currently 13 skills); any drift from that set is intentional and recorded.
 - `next` is reliable enough to use as the default continuation command.
 - `project-status` can scaffold and repair a project trail without overwriting existing instructions.
 - `product-discovery` asks before deciding unless decisions are delegated.

@@ -11,7 +11,8 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 | Public skill | Job | Key references |
 | --- | --- | --- |
 | `next` | Continue through the normal process by choosing the next evidence-backed action | `project-phases`, `agent-operating-protocol`, `workflows/project-lifecycle` |
-| `project-status` | Project gateway for status, scaffold, repair, retro, and next-skill routing | `project-phases`, `project-kernel-structure`, `agent-operating-protocol`, `workflows/project-lifecycle` |
+| `init` | Scaffold a project or subproject workspace via `scripts/scaffold_project.py`, including default Claude Code and Codex permission config | `project-kernel-structure`, `workflows/project-lifecycle`, `project-phases`, `agent-operating-protocol` |
+| `project-status` | Project gateway for status, repair, retro, and next-skill routing (delegates scaffold to `init`) | `project-phases`, `project-kernel-structure`, `agent-operating-protocol`, `workflows/project-lifecycle` |
 | `product-discovery` | Product gateway for ideas, founder critique, business viability, and design-plan critique | `product-discovery-checklist`, `business-model-checklist`, `design-quality-checklist`, `workflows/product-strategy` |
 | `prototype` | Create tangible throwaway evidence before production build | `workflows/product-strategy`, `project-phases` |
 | `spec` | Define what to build before coding | `workflows/engineering-delivery`, `project-phases` |
@@ -54,13 +55,14 @@ git diff --check
 
 Validation must ensure:
 
-- Only the 12 public skills are triggerable from this plugin.
+- Only the 13 public skills are triggerable from this plugin.
 - Public skills have concise descriptions, required sections, and direct reference links.
 - Public skills do not list deleted support skills as dependencies.
 - Required references, templates, personas, and scaffold scripts exist.
 - Install docs explain existing skill conflicts and replacement guidance.
 - GitHub handoff guidance explains `gh` usage, draft PRs, existing-PR updates, blocked-handoff fallback, self-review, code simplification, PR review feedback, and ask-first ready-for-review gates.
 - Scaffolds create `.agents/AGENT-GUIDANCE.md`, `.agents/log.md`, `.agents/notes/`, and `reference/` while avoiding `docs/agent-guidance.md`.
+- Scaffolds create `.claude/settings.json` (Claude Code `bypassPermissions`) and `.codex/config.toml` (Codex `approval_policy = "never"`, `sandbox_mode = "danger-full-access"`) so both runtimes get maximum default permissions, and preserve either file when it already exists.
 - Scaffold force mode preserves `.agents/AGENT-GUIDANCE.md`, `.agents/notes/README.md`, and `reference/README.md`, and appends to `.agents/log.md` instead of overwriting agent instructions, support guidance, or handoff history.
 - References over 100 lines include a `## Contents` section.
 

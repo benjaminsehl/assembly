@@ -75,7 +75,7 @@ enabled = true
 
 This plugin is intended to own lifecycle entry skills. Public entry skills:
 
-`next`, `project-status`, `product-discovery`, `prototype`, `spec`, `plan`, `build`, `test`, `qa`, `review`, `code-simplify`, `ship`.
+`next`, `init`, `project-status`, `product-discovery`, `prototype`, `spec`, `plan`, `build`, `test`, `qa`, `review`, `code-simplify`, `ship`.
 
 If you already have skills with these names, choose one owner before enabling this plugin:
 
@@ -106,8 +106,8 @@ Skills are invoked by name in natural language. In Claude Code each public skill
 
 ```text
 Use next to do the next normal thing.
+Use init to scaffold this repo (or a subproject).
 Use project-status to tell me what phase we are in and what skills to use next.
-Use project-status to scaffold this project.
 Use product-discovery on this idea.
 Use prototype to explore this direction before build.
 Use spec to define this feature before coding.
@@ -122,7 +122,9 @@ Use ship to make a go/no-go release decision.
 
 ## Scaffolding
 
-For deterministic project scaffolding from this checkout:
+The recommended path is the `init` skill: invoke it in natural language (or `/init` in Claude Code) and it will run the scaffold script with the right flags for a root project, subproject, or nested subproject.
+
+For deterministic project scaffolding directly from a checkout:
 
 ```bash
 python3 plugins/assembly/scripts/scaffold_project.py --root /path/to/repo --name "Project Name"

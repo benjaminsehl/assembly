@@ -20,6 +20,7 @@ REPO_ROOT = (
 PLUGIN_NAME = PLUGIN_ROOT.name
 PUBLIC_SKILLS = {
     "next",
+    "init",
     "spec",
     "plan",
     "build",
@@ -374,6 +375,10 @@ def validate_support_files() -> None:
         "protected once they exist",
         ".agents/notes/README.md",
         "reference/README.md",
+        ".claude/settings.json",
+        ".codex/config.toml",
+        "bypassPermissions",
+        "danger-full-access",
     ):
         if required not in project_structure_text:
             fail(f"project-kernel-structure.md must document scaffold path: {required}")
@@ -519,6 +524,8 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
             ".agents/notes/README.md",
             "reference/README.md",
             "docs/status.md",
+            ".claude/settings.json",
+            ".codex/config.toml",
         ):
             if not (root / required).is_file():
                 fail(f"scaffold_project.py did not create {required}")
@@ -526,6 +533,15 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
                 fail(f"scaffold_project.py did not report created file {required}")
         if (root / "docs" / "agent-guidance.md").exists():
             fail("scaffold_project.py created deprecated docs/agent-guidance.md")
+
+        claude_settings = json.loads(
+            (root / ".claude" / "settings.json").read_text(encoding="utf-8")
+        )
+        if claude_settings.get("permissions", {}).get("defaultMode") != "bypassPermissions":
+            fail("scaffold_project.py must grant Claude Code bypassPermissions by default")
+        codex_config = (root / ".codex" / "config.toml").read_text(encoding="utf-8")
+        if 'approval_policy = "never"' not in codex_config or 'sandbox_mode = "danger-full-access"' not in codex_config:
+            fail("scaffold_project.py must grant Codex maximum permissions by default")
 
         (root / ".agents" / "AGENT-GUIDANCE.md").write_text(
             "# Custom Guidance\n\nKeep me.\n", encoding="utf-8"
@@ -538,6 +554,13 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
         )
         (root / ".agents" / "log.md").write_text(
             "# Agent Log\n\nCUSTOM LOG LINE\n", encoding="utf-8"
+        )
+        (root / ".claude" / "settings.json").write_text(
+            '{"permissions": {"defaultMode": "default"}, "custom": "keep"}\n',
+            encoding="utf-8",
+        )
+        (root / ".codex" / "config.toml").write_text(
+            "# CUSTOM CODEX CONFIG\napproval_policy = \"untrusted\"\n", encoding="utf-8"
         )
 
         forced = run_scaffold(
@@ -561,6 +584,15 @@ def validate_scaffold_behavior(scaffold_script: Path) -> None:
                 fail(f"force scaffold overwrote protected file {path}")
             if path not in reported_paths(forced, "skipped"):
                 fail(f"force scaffold did not report protected skip for {path}")
+        for path, marker in (
+            (".claude/settings.json", '"custom": "keep"'),
+            (".codex/config.toml", "CUSTOM CODEX CONFIG"),
+        ):
+            if marker not in (root / path).read_text(encoding="utf-8"):
+                fail(f"force scaffold overwrote existing permission config {path}")
+            if path not in reported_paths(forced, "skipped"):
+                fail(f"force scaffold did not report preserved permission config {path}")
+
         log_text = (root / ".agents" / "log.md").read_text(encoding="utf-8")
         if "CUSTOM LOG LINE" not in log_text or "force-refreshed" not in log_text:
             fail("force scaffold did not append to .agents/log.md")
