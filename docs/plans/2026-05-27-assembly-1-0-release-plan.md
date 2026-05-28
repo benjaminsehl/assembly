@@ -5,11 +5,11 @@ Status: draft
 
 ## Goal
 
-Release Assembly 1.0 as a reliable Codex-first project operating system for a human-led agentic app factory.
+Release Assembly 1.0 as a reliable dual-runtime project operating system (Codex and Claude Code) for a human-led agentic app factory.
 
 ## Release Principle
 
-1.0 should feel small, solid, and useful. It should not pretend to be Hermes yet.
+1.0 should feel small, solid, and useful. It should not pretend to be the post-1.0 orchestrator yet.
 
 ## Milestones
 
@@ -21,7 +21,7 @@ Tasks:
 
 - Align `docs/specs/assembly-1-0.md` with the human-led app factory vision.
 - Add app-factory north-star and research synthesis docs.
-- Define what is blocking for 1.0 versus deferred to Hermes.
+- Define what is blocking for 1.0 versus deferred to the post-1.0 orchestrator.
 - Update `docs/status.md` with the current gate and next skills.
 
 Exit evidence:
@@ -30,22 +30,22 @@ Exit evidence:
 - Roadmap separates 1.0 from post-1.0.
 - Status points to the right next action.
 
-### 2. Codex Control Loop Release Candidate
+### 2. Dual-Runtime Control Loop Release Candidate
 
-Outcome: the plugin behavior matches the 1.0 spec.
+Outcome: the plugin behavior matches the 1.0 spec in both Codex and Claude Code.
 
 Tasks:
 
-- Verify `next` uses project status, phase gates, and clarification behavior.
-- Verify `product-discovery` interviews by default.
-- Verify minimal `build` prompts infer the next build-track gate.
-- Verify GitHub handoff creates or updates descriptive draft PRs.
-- Verify ready-for-review, merge, deploy, and privacy-sensitive actions remain ask-first boundaries.
+- Verify `next` uses project status, phase gates, and clarification behavior in both runtimes.
+- Verify `product-discovery` interviews by default in both runtimes.
+- Verify minimal `build` prompts infer the next build-track gate in both runtimes.
+- Verify GitHub handoff creates or updates descriptive draft PRs in both runtimes.
+- Verify ready-for-review, merge, deploy, and privacy-sensitive actions remain ask-first boundaries in both runtimes.
 
 Exit evidence:
 
 - Validator output.
-- Smoke prompt notes.
+- Smoke prompt notes for Codex and Claude Code.
 - One PR handoff using Assembly's own flow.
 
 ### 3. Assembly Self-Host Proof
@@ -87,15 +87,16 @@ Exit evidence:
 
 ### 5. Release
 
-Outcome: Assembly 1.0 is public, installable, and locally upgraded.
+Outcome: Assembly 1.0 is public, installable, and locally upgraded in both Codex and Claude Code.
 
 Tasks:
 
-- Confirm install and upgrade commands.
-- Confirm active skill list exposes only the intended 12 public skills.
-- Confirm composer icon and metadata render.
+- Confirm install and upgrade commands in Codex.
+- Confirm install and upgrade commands in Claude Code.
+- Confirm active skill list exposes only the intended 12 public skills in both runtimes.
+- Confirm composer icon and metadata render in both runtimes.
 - Merge the release PR after explicit approval.
-- Upgrade the local plugin.
+- Upgrade the local plugin in both runtimes.
 - Record release retro.
 
 Exit evidence:
@@ -106,10 +107,10 @@ Exit evidence:
 
 ## Deferred Until After 1.0
 
-- Hermes orchestration implementation.
+- Post-1.0 orchestrator implementation.
 - Dream/desloppification automation.
 - Hosted dashboard.
-- Claude adapter.
+- Runtimes beyond Codex and Claude Code.
 - Automatic deploy/merge/branch cleanup.
 - Background roadmap execution.
 

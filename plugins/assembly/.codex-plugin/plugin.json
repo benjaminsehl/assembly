@@ -1,7 +1,7 @@
 {
   "name": "assembly",
   "version": "0.8.3",
-  "description": "Assembly is a human-led Codex product-building toolkit for an eventual agentic app factory, spanning contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
+  "description": "Assembly is a human-led product-building toolkit for an eventual agentic app factory, spanning contextual next steps, project status, product discovery, prototypes, engineering delivery, QA, review, and launch.",
   "author": {
     "name": "Sai",
     "email": "benjaminsehl@users.noreply.github.com",
@@ -12,6 +12,7 @@
   "license": "MIT",
   "keywords": [
     "codex",
+    "claude-code",
     "agent-skills",
     "product-development",
     "software-engineering",
@@ -29,8 +30,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Assembly",
-    "shortDescription": "Human-led Codex workflows for lovable, viable, well-engineered apps.",
-    "longDescription": "Assembly is a Codex-native product-building toolkit for an eventual agentic app factory. It keeps the human in the founder/product-director seat while Codex follows a deliberately small public skill surface: contextual next action, project status/scaffold/repair, product discovery, prototypes, specs, planning, implementation, tests, QA, review, simplification, and ship decisions. Detailed guidance lives in references so agents load only the context they need.",
+    "shortDescription": "Human-led workflows for lovable, viable, well-engineered apps.",
+    "longDescription": "Assembly is a dual-runtime product-building toolkit (Codex and Claude Code) for an eventual agentic app factory. It keeps the human in the founder/product-director seat while agents follow a deliberately small public skill surface: contextual next action, project status/scaffold/repair, product discovery, prototypes, specs, planning, implementation, tests, QA, review, simplification, and ship decisions. Detailed guidance lives in references so agents load only the context they need.",
     "developerName": "Sai",
     "category": "Developer Tools",
     "capabilities": [

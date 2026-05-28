@@ -2,9 +2,9 @@
 
 ## Objective
 
-Build a compact Codex plugin that acts as a personal product-building stack. It should help future agents continue to the next contextual step, orient a project, shape product direction, prototype, specify, plan, build, test, QA, review, simplify, and ship with evidence.
+Build a compact agent plugin that acts as a personal product-building stack. It ships dual-target manifests so the same bundle works in both Codex and Claude Code, and should help future agents continue to the next contextual step, orient a project, shape product direction, prototype, specify, plan, build, test, QA, review, simplify, and ship with evidence.
 
-The public surface is intentionally small. Detailed workflow knowledge lives in `references/` so Codex can load it only when needed and avoid conflicts with users' existing skills.
+The public surface is intentionally small. Detailed workflow knowledge lives in `references/` so agents load it only when needed and avoid conflicts with users' existing skills.
 
 ## Public Skill Surface
 
@@ -23,7 +23,7 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 | `code-simplify` | Reduce complexity without changing behavior | `workflows/engineering-delivery`, `testing-patterns` |
 | `ship` | Produce a go/no-go launch decision | `workflows/qa-and-release`, release checklists |
 
-Success means a future Codex session can invoke one of these skills by name, load only the necessary references, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
+Success means a future agent session in either Codex or Claude Code can invoke one of these skills by name, load only the necessary references, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
 
 For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, draft PR, self-review, simplification pass, verification evidence, and ready-for-review only after those gates pass and the user explicitly authorizes it.
 

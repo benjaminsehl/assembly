@@ -1,5 +1,7 @@
 # Implementation Plan: Assembly Plugin
 
+> **Historical record.** This plan documents the original Codex-first build with completed checkpoints; Codex-specific phrasing below reflects the state at the time of each task. The bundle has since gained a Claude Code manifest (`.claude-plugin/plugin.json`) and marketplace catalog so the same skills, references, and scripts work in both runtimes. See [SOURCE_NOTES.md](SOURCE_NOTES.md) and [INSTALL.md](INSTALL.md) for the current adaptation.
+
 ## Overview
 
 Build the plugin in careful layers: first lock the command contract, then add validation, then add the engineering entry skills, then vendor or adapt the underlying skills, then add the product/business/design layer and run smoke tests in a throwaway project. The command layer is load-bearing, so every phase should leave us with a reviewable artifact and a clear verification checkpoint.

@@ -7,18 +7,20 @@ Status: draft
 
 - [ ] Founder accepts the 1.0 spec.
 - [ ] Founder accepts the app-factory north star.
-- [ ] 1.0 blockers are separated from post-1.0 Hermes work.
+- [ ] 1.0 blockers are separated from post-1.0 orchestrator work.
 - [ ] Product-discovery interview behavior is verified.
 - [ ] `next` behavior is verified on a real project trail.
 
 ## Plugin Gate
 
-- [ ] Manifest name, version, description, and icon are correct.
-- [ ] Only the 12 intended public skills are exposed.
+- [ ] Codex manifest (`.codex-plugin/plugin.json`) name, version, description, and icon are correct.
+- [ ] Claude Code manifest (`.claude-plugin/plugin.json`) name, version, description, and icon are correct.
+- [ ] Marketplace metadata (`.claude-plugin/marketplace.json`) is correct.
+- [ ] Only the 12 intended public skills are exposed in both runtimes.
 - [ ] Skill graph validates.
 - [ ] Plugin shape validates.
 - [ ] Local conflict audit runs.
-- [ ] Install and upgrade docs are accurate.
+- [ ] Install and upgrade docs are accurate for both Codex and Claude Code.
 
 ## Project Scaffold Gate
 
@@ -49,9 +51,11 @@ Status: draft
 - [ ] Version is bumped.
 - [ ] Release PR is approved.
 - [ ] PR is merged after explicit founder approval.
-- [ ] Local plugin is upgraded.
-- [ ] Fresh session confirms Assembly skills are visible.
-- [ ] `Use next` works in the installed plugin.
+- [ ] Local Codex plugin is upgraded.
+- [ ] Local Claude Code plugin is upgraded.
+- [ ] Fresh Codex session confirms Assembly skills are visible.
+- [ ] Fresh Claude Code session confirms Assembly skills are visible.
+- [ ] `Use next` works in the installed plugin in both runtimes.
 
 ## Current Verdict
 

@@ -40,15 +40,22 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    plugin_cache_roots = [
+    codex_cache_roots = [
         root
         for root in sorted((Path.home() / ".codex" / "plugins" / "cache").glob("*/*/*/skills"))
+        if root.parts[-4:-2] != ("assembly", "assembly")
+    ]
+    claude_cache_roots = [
+        root
+        for root in sorted((Path.home() / ".claude" / "plugins" / "cache").glob("*/*/*/skills"))
         if root.parts[-4:-2] != ("assembly", "assembly")
     ]
     roots = [
         Path.home() / ".agents" / "skills",
         Path.home() / ".codex" / "skills",
-        *plugin_cache_roots,
+        Path.home() / ".claude" / "skills",
+        *codex_cache_roots,
+        *claude_cache_roots,
         *(args.root or []),
     ]
 

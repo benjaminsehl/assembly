@@ -1,10 +1,37 @@
 # Install and Use
 
-This plugin can be registered with Codex as a public GitHub marketplace or local marketplace. It is intended to replace loose lifecycle skills with one coherent product-building stack.
+This plugin ships dual-target manifests so a single bundle works as both a Codex plugin and a Claude Code plugin. It is intended to replace loose lifecycle skills with one coherent product-building stack.
 
-The repository root is the marketplace. The installable plugin bundle lives at `plugins/assembly/`, matching Codex's `./plugins/<plugin-name>` marketplace layout.
+The repository root is the marketplace. The installable plugin bundle lives at `plugins/assembly/`, matching both Codex's `./plugins/<plugin-name>` layout and Claude Code's marketplace layout. The bundle carries two manifest files in sibling metadata directories:
+
+- `plugins/assembly/.codex-plugin/plugin.json` — Codex manifest.
+- `plugins/assembly/.claude-plugin/plugin.json` — Claude Code manifest.
+
+The marketplace catalogs are also dual:
+
+- `.agents/plugins/marketplace.json` — Codex marketplace catalog.
+- `.claude-plugin/marketplace.json` — Claude Code marketplace catalog.
 
 ## Register the Marketplace
+
+### Claude Code
+
+From inside Claude Code:
+
+```text
+/plugin marketplace add benjaminsehl/assembly
+/plugin install assembly@assembly
+```
+
+If the marketplace is already registered and you want to pull updates:
+
+```text
+/plugin marketplace update assembly
+```
+
+For a local checkout, point the marketplace command at the repo path instead of the GitHub slug.
+
+### Codex
 
 From this local checkout:
 
@@ -28,6 +55,12 @@ codex plugin marketplace add benjaminsehl/assembly
 ```
 
 ## Enable the Plugin
+
+### Claude Code
+
+`/plugin install assembly@assembly` enables the plugin in the current scope (defaults to user). Restart the session if the skill list does not refresh automatically.
+
+### Codex
 
 Enable `Assembly` from the plugin picker after adding the marketplace, then restart Codex so the skill list refreshes.
 
@@ -60,8 +93,8 @@ python3 plugins/assembly/scripts/audit_skill_conflicts.py
 
 Suggested migration:
 
-1. Register and enable `assembly`.
-2. Restart Codex and confirm the public entry skills appear.
+1. Register and enable `assembly` in your agent runtime.
+2. Restart the runtime and confirm the public entry skills appear.
 3. In a throwaway repo, run `Use next...`, `Use project-status...`, and `Use spec...`.
 4. Disable, remove, or rename older lifecycle skills that collide with this plugin's entry names.
 5. Keep specialized non-overlapping skills.
@@ -69,7 +102,7 @@ Suggested migration:
 
 ## Invocation Pattern
 
-Codex does not need Claude-style slash commands. Use the public skill names in natural language:
+Skills are invoked by name in natural language. In Claude Code each public skill is also available as a `/<name>` slash command; in Codex use the natural-language form. Either way, the workflows are the same:
 
 ```text
 Use next to do the next normal thing.

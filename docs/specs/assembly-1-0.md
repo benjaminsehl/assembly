@@ -7,17 +7,17 @@ Status: draft for review
 
 Assembly is a human-led toolkit for an agentic app factory.
 
-In 1.0, it proves the Codex control loop: read the project trail, identify phase and missing context, clarify what is being built, why it matters, and what good looks like, choose the next safe workflow, and leave evidence-backed handoff.
+In 1.0, it proves the human-led control loop in both Codex and Claude Code: read the project trail, identify phase and missing context, clarify what is being built, why it matters, and what good looks like, choose the next safe workflow, and leave evidence-backed handoff.
 
 The user remains founder and product director. Agents help clarify intent, preserve reasoning, and execute scoped work; they do not silently take product authority.
 
-Assembly 1.0 is Codex-first. Claude compatibility is out of scope. Hermes orchestration is the post-1.0 strategic horizon after the Codex control loop is stable.
+Assembly 1.0 ships as a dual-runtime plugin: the same bundle installs and runs in both Codex and Claude Code, and must pass install and behavior smoke checks in both. Other agent runtimes (Pi, OpenCode, etc.) may be added later but stay out of 1.0 scope. A post-1.0 orchestrator is the strategic horizon after the agent control loop is stable.
 
 ## User
 
-Primary user: Sai acting as founder/product director, using Codex to shape, specify, build, test, and ship real products while retaining product judgment.
+Primary user: Sai acting as founder/product director, using Codex or Claude Code to shape, specify, build, test, and ship real products while retaining product judgment.
 
-Secondary user: a serious builder who wants a compact Codex-native project operating system without maintaining a pile of overlapping lifecycle skills.
+Secondary user: a serious builder who wants a compact, runtime-agnostic project operating system without maintaining a pile of overlapping lifecycle skills.
 
 ## Product Principles
 
@@ -31,13 +31,13 @@ Secondary user: a serious builder who wants a compact Codex-native project opera
 - Every material workflow leaves evidence future agents can inspect.
 - GitHub-backed work should end in a reviewable PR handoff by default.
 - Workflow gates should prevent skipped thinking without becoming ceremony.
-- 1.0 proves the Codex control loop before Hermes orchestration.
+- 1.0 proves the agent control loop before post-1.0 orchestration.
 
 ## Scope
 
 Assembly 1.0 includes:
 
-- A Codex plugin named `assembly`.
+- A dual-runtime plugin named `assembly` that installs and runs in both Codex and Claude Code from the same bundle at `plugins/assembly/`.
 - Exactly 12 public skills:
   - `next`
   - `project-status`
@@ -71,15 +71,15 @@ Assembly 1.0 includes:
   - `docs/projects/`
   - `reference/`
 - Subproject scaffolding under `docs/projects/<slug>/`.
-- A black composer icon and plugin metadata that render cleanly in Codex.
+- A black composer icon and plugin metadata that render cleanly in both Codex and Claude Code.
 - Validation scripts for plugin shape, skill graph, local skill conflicts, and scaffold behavior.
 - User docs for install, upgrade, migration from old lifecycle skills, and everyday workflow.
 - GitHub handoff rules for draft PRs, review, simplification, ready-for-review, review comments, and merge gates.
 
 ## Out Of Scope
 
-- Claude Code adapter generation.
-- Hermes orchestration implementation.
+- Runtimes other than Codex and Claude Code.
+- Post-1.0 orchestrator implementation.
 - Hosted dashboard, app-factory UI, or background automation.
 - Deployment automation.
 - Telemetry.
@@ -227,8 +227,11 @@ Stretch:
 Assembly 1.0 must not ship until:
 
 - A fresh Codex session can see and invoke `assembly:next`.
+- A fresh Claude Code session can see and invoke `assembly:next` after `/plugin install assembly@assembly`.
 - `codex plugin marketplace add benjaminsehl/assembly` works for a new install.
 - `codex plugin marketplace upgrade assembly` picks up the latest version.
+- `/plugin marketplace add benjaminsehl/assembly` followed by `/plugin install assembly@assembly` works for a new Claude Code install.
+- `/plugin marketplace update assembly` picks up the latest version in Claude Code.
 - The plugin exposes only the 12 intended public skills.
 - `next` is reliable enough to use as the default continuation command.
 - `project-status` can scaffold and repair a project trail without overwriting existing instructions.
@@ -253,10 +256,10 @@ Stretch:
 
 ## Deferred Aspirations
 
-- Hermes orchestration.
+- Post-1.0 orchestration.
 - Hosted dashboards or app-factory UI.
 - Background automation, dream/desloppification loops, and multi-project scheduling.
-- Claude Code adapter generation or broad runtime portability.
+- Broad runtime portability beyond Codex and Claude Code.
 - Automatic merges, deploys, branch deletion, or release automation.
 
 ## Verification Plan
@@ -292,9 +295,10 @@ Behavior smoke prompts:
 
 Install smoke tests:
 
-- Install from the public marketplace root.
-- Upgrade from an older installed version.
-- Confirm the composer icon and plugin metadata are visible after refresh or new session.
+- Install from the public marketplace root in Codex.
+- Install from the public marketplace in Claude Code via `/plugin marketplace add` and `/plugin install`.
+- Upgrade from an older installed version in both runtimes.
+- Confirm the composer icon and plugin metadata are visible after refresh or new session in both runtimes.
 - Confirm old conflicting lifecycle skills are reported by the conflict audit.
 
 ## Boundaries
@@ -328,6 +332,6 @@ Never:
 ## Resolved 1.0 Decisions
 
 - Automated installer or migration helper: not required for 1.0. Docs plus conflict audit are enough if the cold install/upgrade smoke tests pass.
-- Dream/desloppification: defer to the Hermes/app-factory roadmap. 1.0 may keep the concept visible only as future reference material.
+- Dream/desloppification: defer to the post-1.0 orchestrator / app-factory roadmap. 1.0 may keep the concept visible only as future reference material.
 - Hyper proof: stretch, not required. CFO is the required external proof project after Assembly self-hosting.
-- Minimum release evidence: validator outputs, scaffold smoke results, behavior prompt notes, install/upgrade proof, GitHub handoff proof, and a short retro naming what worked, what felt brittle, and what Hermes should own next.
+- Minimum release evidence: validator outputs, scaffold smoke results, behavior prompt notes, install/upgrade proof, GitHub handoff proof, and a short retro naming what worked, what felt brittle, and what the post-1.0 orchestrator should own next.
