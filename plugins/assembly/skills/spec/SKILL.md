@@ -7,33 +7,38 @@ description: Use when defining a project, feature, or significant change before 
 
 ## Purpose
 
-Define what should be built before coding starts. Surface assumptions, clarify success criteria, and save a spec that future planning and build work can trust.
+Define what should be built before coding starts. Surface user pain, clarify success criteria, and save a spec future planning and build can trust. The founder owns every product decision; the agent surfaces options and gathers evidence.
 
 ## References
 
 - `references/workflows/engineering-delivery.md`: spec mode and acceptance criteria.
-- `references/product-discovery-checklist.md`: use when product intent is still fuzzy.
+- `references/product-discovery-checklist.md`: discovery framing — user, pain, wedge.
 - `references/project-phases.md`: proposal-to-build phase gate.
 
 ## Workflow
 
 1. State that the `spec` workflow is active and summarize the user goal in one or two sentences.
-2. Read existing project docs and commands when a repo already exists.
-3. Surface assumptions before treating the spec as final.
-4. If the ask is still fuzzy, clarify the objective, users, constraints, and tradeoffs before drafting.
-5. Write a spec covering objective, stack, commands, structure, style, testing, boundaries, success criteria, and open questions.
-6. Save the spec as `SPEC.md` or `docs/SPEC.md`, following the target repo's conventions.
-7. Stop at a human review gate unless the user explicitly asks to continue into planning.
+2. Read existing project docs, commands, and prior specs when a repo already exists.
+3. Run mini-discovery before drafting: ask at most 5 questions framed around user, pain, and wedge. Always fire — even when the spec is being repaired or invoked from inside `build`. Use the explicit options-list pattern when surfacing alternatives.
+4. Decide signal density:
+   - Fresh discovery exists in `docs/discovery/` or a recent spec → lightweight spec (objective, success criteria, scope, open questions).
+   - Thin or stale signals → full spec (objective, users, pain, wedge, stack, commands, structure, style, testing, boundaries, success criteria, open questions).
+5. Surface assumptions and explicit non-goals before treating the spec as final.
+6. Save the spec as `SPEC.md`, `docs/SPEC.md`, or `docs/projects/<slice>/spec.md`, following the target repo's conventions.
+7. Stop at a founder review gate. Do not auto-continue into planning.
 
 ## Verification
 
 - The spec file exists.
-- Assumptions and open questions are visible.
+- Mini-discovery questions and founder answers are captured in the spec.
+- Assumptions, non-goals, and open questions are visible.
 - Success criteria are specific enough to test.
 - Boundaries include always, ask first, and never categories.
+- Signal density (lightweight vs full) is named with reasoning.
 
 ## Stop Conditions
 
-- Success cannot be defined from the current information.
-- Major assumptions would be risky to make without user review.
+- Success cannot be defined from the current information after mini-discovery.
+- Major assumptions would be risky to make without founder review.
 - The request conflicts with repository or safety boundaries.
+- Mini-discovery surfaces a product gap too large for inline questions — route to `product-discovery` instead.
