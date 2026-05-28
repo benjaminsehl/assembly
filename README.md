@@ -46,8 +46,8 @@ Then invoke public skills in natural language:
 
 ```text
 Use next to do the next normal thing.
+Use init to scaffold this repo (or a subproject).
 Use project-status to tell me what phase we are in and what skills to use next.
-Use project-status to scaffold this project.
 Use product-discovery on this idea.
 Use prototype before we build this direction.
 Use spec to define this feature before coding.
@@ -60,14 +60,15 @@ Use code-simplify on the changed files.
 Use ship to decide whether this is ready.
 ```
 
-If you already have personal lifecycle skills installed, treat this plugin as the owner of that surface. Keep specialized platform skills, but de-duplicate older lifecycle skills named `next`, `spec`, `plan`, `build`, `test`, `review`, `ship`, `qa`, `prototype`, `product-discovery`, or `project-status`.
+If you already have personal lifecycle skills installed, treat this plugin as the owner of that surface. Keep specialized platform skills, but de-duplicate older lifecycle skills named `next`, `init`, `spec`, `plan`, `build`, `test`, `review`, `ship`, `qa`, `prototype`, `product-discovery`, or `project-status`.
 
 ## Public Skills
 
 | Skill | Job |
 | --- | --- |
 | `next` | Contextual continuation: inspect project state, choose the next normal action, and proceed when unambiguous |
-| `project-status` | Project gateway for status, scaffolding, repair, retro, and next-skill routing |
+| `init` | Scaffold a project or subproject workspace, including default Claude Code and Codex permission config |
+| `project-status` | Project gateway for status, repair, retro, and next-skill routing (delegates scaffold to `init`) |
 | `product-discovery` | Product gateway for raw ideas, founder critique, business viability, and design-plan pressure tests |
 | `prototype` | Tangible proof before production build |
 | `spec` | Requirements before coding |
@@ -86,6 +87,10 @@ The root project workspace is `docs/`. Subprojects live under `docs/projects/<sl
 ```text
 my-app/
 |-- AGENTS.md
+|-- .claude/
+|   `-- settings.json
+|-- .codex/
+|   `-- config.toml
 |-- .agents/
 |   |-- AGENT-GUIDANCE.md
 |   |-- log.md

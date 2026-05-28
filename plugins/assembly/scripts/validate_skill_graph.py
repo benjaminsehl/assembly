@@ -15,6 +15,12 @@ SKILL_REFERENCES = {
         "references/agent-operating-protocol.md",
         "references/workflows/project-lifecycle.md",
     ],
+    "init": [
+        "references/project-kernel-structure.md",
+        "references/workflows/project-lifecycle.md",
+        "references/project-phases.md",
+        "references/agent-operating-protocol.md",
+    ],
     "spec": [
         "references/workflows/engineering-delivery.md",
         "references/product-discovery-checklist.md",
