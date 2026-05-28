@@ -404,14 +404,18 @@ def validate_support_files() -> None:
     next_text = (PLUGIN_ROOT / "skills" / "next" / "SKILL.md").read_text(encoding="utf-8")
     for required in (
         "references/workflows/qa-and-release.md",
-        "Never run `gh pr ready` without explicit user authorization",
-        "Ready-for-review transitions require explicit user authorization",
-        "what is being built",
-        "why it matters",
-        "what good looks like",
+        "product gates",
+        "always-ask floor",
+        "product-implication language",
+        "What is being built",
+        "Why it matters",
+        "What good looks like",
+        "Rollback",
+        "2-3",
+        "scaffold the project",
     ):
         if required not in next_text:
-            fail(f"next skill must require explicit ready-for-review authorization: {required}")
+            fail(f"next skill must encode the gating model and founder calls: {required}")
 
     product_discovery_text = (
         PLUGIN_ROOT / "skills" / "product-discovery" / "SKILL.md"
