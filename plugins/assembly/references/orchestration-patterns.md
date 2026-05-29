@@ -193,7 +193,7 @@ Don't redefine these. Layer your specialist personas (code-reviewer, security-au
 
 Plugin subagents do **not** support the `hooks`, `mcpServers`, or `permissionMode` frontmatter fields — these are silently ignored. If a future persona needs any of those, the user must copy the file into `.claude/agents/` or `~/.claude/agents/` instead.
 
-The fields that DO work in plugin agents are: `name`, `description`, `tools`, `disallowedTools`, `model`, `maxTurns`, `skills`, `memory`, `background`, `effort`, `isolation`, `color`, `initialPrompt`. Use `model` per-persona to tune cost against depth. The shipped defaults are Sonnet for `code-reviewer` and `test-engineer` and Opus for `security-auditor`; drop a persona to Haiku for cheap read-only scans, or raise it when the perspective warrants more depth.
+The fields that DO work in plugin agents are: `name`, `description`, `tools`, `disallowedTools`, `model`, `maxTurns`, `skills`, `memory`, `background`, `effort`, and `isolation`. Use `model` per-persona to tune cost against depth. The shipped defaults are Sonnet for `code-reviewer` and `test-engineer` and Opus for `security-auditor`; drop a persona to Haiku for cheap read-only scans, or raise it when the perspective warrants more depth.
 
 ### Spawning multiple subagents in parallel
 

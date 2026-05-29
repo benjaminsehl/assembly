@@ -39,22 +39,31 @@ friction **only** at the irreversible boundaries.
 
 It re-prompts on:
 
-| Class | Examples |
+| Class | Examples (incl. flag-split, long-form, and refspec variants) |
 | --- | --- |
-| PR merge / ready / non-draft create / release | `gh pr merge`, `gh pr ready`, `gh pr create` (without `--draft`), `gh release create` |
-| Force / main / delete pushes | `git push --force`, `git push … main`, `git push --delete` |
-| Branch & history destruction | `git branch -D`, `git reset --hard`, `git clean -f…` |
-| Deploy / publish | `wrangler deploy`, `vercel … --prod`, `netlify deploy`, `npm/pnpm/yarn/bun publish` |
-| Destructive filesystem | `rm -rf` |
+| PR merge / ready / non-draft create / release | `gh pr merge`, `gh api …/pulls/N/merge`, `gh pr ready`, `gh pr create` (without `--draft`), `gh release create` |
+| Force / main / delete pushes | `git push --force` / `--force-with-lease` / `--mirror` / `+main`, `git push … main` / `HEAD:main`, `git push --delete`, including with `git -C <path>` / `git -c …` prefixes |
+| Branch, history & working-tree destruction | `git branch -D` / `--delete`, `git reset --hard`, `git clean -f…` / `--force`, `git checkout .`, `git restore .` |
+| Deploy / publish | `wrangler deploy` / `wrangler pages deploy`, `vercel … --prod`, `netlify deploy`, `npm/pnpm/yarn/bun publish` |
+| Infrastructure / catastrophic | `terraform apply/destroy`, `kubectl delete`, `aws s3 rm --recursive`, `dd`, `mkfs`, `rm -rf` (any flag order) |
 
-Anything else passes through untouched (a normal `git push` of a topic branch, for
-example, is not flagged — that is the standard Assembly build handoff).
+Anything else passes through untouched (a normal `git push` of a topic branch, a
+`git restore --staged`, a `git clean -n` dry run, `gh pr create --draft`, and
+`npm install`/`run` are not flagged — those are routine).
 
-**Limits.** It only sees shell commands. Money movement, credential use, and
-external messaging that happen through other tools are not detectable here; those
-stay governed by the protocol and Claude Code's own tool-level permission prompts.
-It biases toward asking, so it may occasionally ask about a benign command — a
-single keystroke approves.
+**Limits.** It matches a flat command string, so it is defense in depth, not a
+sandbox. It cannot see:
+
+- Actions behind shell **aliases** or **script wrappers** (`npm run deploy`,
+  `make ship`) — the dangerous verb is hidden from the matcher.
+- A push to a protected branch when that branch is the **current checkout**
+  (`git push` with no explicit ref).
+- **Money, credential, or external-messaging** actions that are not shell commands
+  — those stay governed by the protocol and Claude Code's own tool-level prompts.
+
+It fails **closed** (asks) if it cannot evaluate a command, and biases toward
+asking, so it may occasionally ask about a benign command — a single keystroke
+approves. Extend the command classes by editing `ask-first-guard.sh`.
 
 ## Design constraints
 
