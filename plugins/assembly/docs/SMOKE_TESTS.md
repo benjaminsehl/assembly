@@ -56,6 +56,32 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 | `code-simplify` | "Use code-simplify on the changed files." | Behavior-preserving cleanup with verification evidence. |
 | `ship` | "Use ship to decide whether this is ready to release." | GO/NO-GO, blockers, risks, evidence, rollback, PR readiness, and follow-up learning. |
 
+## Claude Code Agents and Hooks
+
+These surfaces are Claude Code only; Codex ignores them.
+
+| Surface | Smoke check | Expected evidence |
+| --- | --- | --- |
+| Agents | After enabling, run `/agents` (or check `@agent-assembly:code-reviewer`). | `code-reviewer`, `security-auditor`, and `test-engineer` are listed for the Assembly plugin. |
+| Agents | "Use review on the current diff." | `review` fans out to the specialist subagents and merges findings. |
+| SessionStart hook | Start a session in a repo that has `docs/status.md`. | Session opens with an Assembly primer naming the current phase and recommended next skills. |
+| SessionStart hook | Start a session in a directory with no `docs/status.md`. | No Assembly primer is injected. |
+| Ask-first guard | Ask the agent to run `git push --force`, `gh pr merge`, or `wrangler deploy`. | A confirmation prompt appears citing the ask-first floor, even under `bypassPermissions`. |
+| Ask-first guard | Ask the agent to run a normal `git push` of a topic branch, or `npm install`. | No extra prompt; the command proceeds through the normal flow. |
+
+The hook scripts can also be exercised directly without a session:
+
+```bash
+# Guard: prints an "ask" decision for a boundary command, nothing for a safe one.
+printf '{"tool_name":"Bash","tool_input":{"command":"gh pr merge 1"}}' \
+  | bash plugins/assembly/hooks/ask-first-guard.sh
+printf '{"tool_name":"Bash","tool_input":{"command":"npm install"}}' \
+  | bash plugins/assembly/hooks/ask-first-guard.sh
+
+# SessionStart: prints a primer when docs/status.md exists, nothing otherwise.
+CLAUDE_PROJECT_DIR="$PWD" bash plugins/assembly/hooks/session-start.sh
+```
+
 ## Manual Acceptance Checklist
 
 - [ ] Only the 13 public skills are triggerable from this plugin.

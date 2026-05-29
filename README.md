@@ -82,6 +82,15 @@ If you already have personal lifecycle skills installed, treat this plugin as th
 | `code-simplify` | Behavior-preserving cleanup |
 | `ship` | Go/no-go release decision |
 
+## Claude Code Enhancements
+
+On Claude Code (not Codex), Assembly ships two additive surfaces beyond the shared skills. They degrade to nothing on Codex, which keeps the portable skill surface and its own approval policy.
+
+- **Specialist subagents** — `code-reviewer`, `security-auditor`, and `test-engineer`, declared in `plugins/assembly/.claude-plugin/plugin.json` and defined in [`.agents/personas/`](plugins/assembly/.agents/personas/). `review` and `ship` fan out to them in parallel; each can run on a per-persona model.
+- **Hooks** ([`plugins/assembly/hooks/`](plugins/assembly/hooks/)):
+  - A **SessionStart primer** orients each session to `docs/status.md`, the current phase, and the recommended next skills — silent outside Assembly projects.
+  - An **ask-first PreToolUse guard** re-prompts before merges, deploys, force/main/delete pushes, publishes, and destructive shell ops — the runtime counterpart to the always-ask floor, so the scaffold's maximum default permissions stay safe.
+
 ## Current 1.0 Direction
 
 - [Assembly 1.0 spec](docs/specs/assembly-1-0.md)
