@@ -87,7 +87,7 @@ Use this for opening, updating, promoting, and merging PRs. `build` pushes the b
 - Promote to ready and merge autonomously once verification passes, reviewer sub-agents are satisfied, and no open product/UX decision or always-ask floor item remains.
 - Read the `Traffic state:` field in `docs/status.md` before deploying. When `pre-live`, deploy autonomously and name the risk. When `live`, ask the founder GO/NO-GO before deploying to users.
 - If GitHub handoff is blocked by missing auth, no writable remote, branch protection, network failure, or unavailable tooling, do not loop. Report the blocker, the completed local work, verification status, and the exact next command, credential, or access step needed.
-- Always-ask floor (any traffic state): never force-push the default branch, delete branches with unmerged work, move money, use credentials externally, or send external messages without explicit founder direction.
+- Always-ask floor (any traffic state): the full floor in `references/agent-operating-protocol.md` is authoritative and applies in the handoff path too — including privacy-sensitive data, dropping tables or deleting production data, money movement, credential use, external messaging, and deploying to users when traffic state is `live`. In the GitHub path specifically, never force-push the default branch or delete branches with unmerged work without explicit founder direction.
 
 ## Post-Release Learning
 
