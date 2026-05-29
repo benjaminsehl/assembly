@@ -38,15 +38,16 @@ Choose and perform the next normal workflow step without guessing. Use project d
    - Prototype gaps: use `prototype`.
    - Build gaps: use `spec`, `plan`, `build`, `test`, `review`, or `code-simplify` as the next unfinished gate requires.
    - Release gaps: use `qa`, `review`, or `ship`.
-   - GitHub handoff gaps: `build` commits and pushes the branch; `ship` opens the PR and (with explicit founder authorization) promotes to ready. Honor the always-ask floor regardless of product-gate clarity.
+   - GitHub handoff gaps: `build` commits and pushes the branch; `ship` opens the PR, decides draft vs ready, runs reviewer sub-agents, merges, and (when `pre-live`) deploys — autonomously. Honor the always-ask floor regardless of traffic state, and ask the founder before deploying when traffic state is `live`.
 8. If multiple plausible next steps exist, do not pick arbitrarily and do not ask a single narrow question. Use the explicit options-list pattern: 2-3 highest-leverage candidates, each with its evidence, asking the founder to pick.
 9. If the founder asks to skip a missing prerequisite, warn once, name the skipped gate and the product risk it would have caught, then proceed only when the founder insists and no always-ask floor item applies.
 10. End by naming the action taken (framed as user-facing capability where applicable), evidence used, status/docs updated or intentionally left unchanged, and the next expected gate.
 
 ## Gating Model
 
-- Product gates — what is being built, why it matters, what good looks like, risks, and rollback — open the engineering rails. Once those gates are clear and verification is green, the engineering sequence continues through `build` → `ship`. `ship` is the only skill that opens PRs or promotes them to ready, and it asks before doing either.
-- Always-ask floor (regardless of product-gate clarity): money movement, credentials, privacy-sensitive data, external messaging, irreversible destructive operations (force-push to default branch, delete branches with unmerged work, drop tables, delete production data), and merge/deploy/ready transitions when verification is not green or material review concerns are unresolved.
+- Two axes decide escalation. Axis 1 — decision type: product/UX decisions always go to the founder in product-implication language; engineering decisions run autonomously, validated by reviewer sub-agents. Axis 2 — traffic state (`docs/status.md` `Traffic state:` field, founder-set, default `pre-live`).
+- Product gates — what is being built, why it matters, what good looks like, risks, and rollback — open the engineering rails. Once those gates are clear and verification is green, the engineering sequence continues through `build` → `ship` without per-action approval. `ship` opens PRs, decides draft vs ready, runs reviewer sub-agents, merges, and deploys — asking the founder only at the deploy gate when traffic state is `live`.
+- Always-ask floor (any traffic state): money movement, credentials, privacy-sensitive data, external messaging, irreversible destructive operations (force-push to default branch, delete branches with unmerged work, drop tables, delete production data), deploying to users when traffic state is `live`, and merge/deploy when verification is not green or reviewer sub-agents flag unresolved material concerns.
 
 ## Verification
 

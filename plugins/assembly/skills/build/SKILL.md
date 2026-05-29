@@ -35,7 +35,7 @@ Implement the next planned task. Build is a router, not a dispatcher: it execute
 11. After implementation, route — do not auto-run — for downstream phases:
     - Behavior unverified → recommend `test`.
     - Verified but unreviewed → recommend `review`, then `code-simplify` when safe.
-    - Material change ready for backup → commit on the topic branch and push (no PR). Tell the founder the branch is pushed and `ship` will open the PR when the founder is ready. If push itself fails (no remote, network error, missing access), name the failed command and the local state — do not silently move on.
+    - Material change ready for backup → commit on the topic branch and push (no PR). `ship` opens the PR, runs reviewer sub-agents, merges, and deploys autonomously per traffic state — `build` does not wait for founder approval to hand off. If push itself fails (no remote, network error, missing access), name the failed command and the local state — do not silently move on.
 12. Update task/status docs after verification passes or skipped checks are explained.
 
 ## What Build Does Not Do

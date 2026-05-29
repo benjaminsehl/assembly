@@ -7,7 +7,12 @@ description: Use when deciding whether a change is ready to release; produces a 
 
 ## Purpose
 
-Decide whether a change is ready to release. The decision is binary: `GO` or `NO-GO`. A `GO` requires verification evidence and a rollback plan. Ship also owns GitHub conversation: it opens the PR (draft or ready, founder picks) for branches `build` has pushed.
+Decide whether a change is ready to release. The decision is binary: `GO` or `NO-GO`. A `GO` requires verification evidence and a rollback plan. Ship owns GitHub conversation: it opens the PR for branches `build` has pushed, decides draft vs ready, runs reviewer sub-agents, merges, and deploys.
+
+How far a `GO` carries itself depends on traffic state (read `Traffic state:` in `docs/status.md`; absent or unknown means `pre-live`):
+
+- `pre-live`: a `GO` proceeds autonomously through merge and deploy. No founder check-in unless a product/UX decision is open or an always-ask floor item is involved.
+- `live`: a `GO` proceeds autonomously through merge, then asks the founder before deploying to users. The deploy gate is a single product-impact question, not an engineering one.
 
 ## References
 
@@ -24,13 +29,17 @@ Decide whether a change is ready to release. The decision is binary: `GO` or `NO
 4. Apply the migration gate, tiered by traffic state:
    - Pre-live (no production traffic, no real users): reckless migrations are acceptable — drop tables, rename columns, no reverse SQL needed. Name the risk and proceed.
    - Live traffic (real users, real data): blocker by default. Require forward + reverse SQL, staging dry-run, locking analysis under concurrent writes, backfill plan, and a named owner who will watch the rollout. Missing any → NO-GO.
-5. If no PR exists for the topic branch, open it now. Ask the founder whether to open as draft or ready. PR description uses product-impact framing: what user capability ships, not what files changed.
-6. If a draft PR exists and the founder requests promotion to ready: confirm review is complete, simplification pass is done, verification is green, and the founder has explicitly authorized the ready transition.
-7. If GitHub handoff is blocked (gh CLI failure, no remote, missing access, network error), do not silently swallow it. Name the failed command, what work is completed locally, current verification status, and the next recovery step. The decision becomes NO-GO until handoff is unblocked or the founder explicitly accepts a local-only release.
+5. If no PR exists for the topic branch, open it now and decide draft vs ready as an engineering call — do not ask the founder. PR description uses product-impact framing: what user capability ships, not what files changed.
+6. Promote draft to ready autonomously once reviewer sub-agents are satisfied, simplification has run, and verification is green. The ready transition is an engineering call, not a founder approval.
+7. If GitHub handoff is blocked (gh CLI failure, no remote, missing access, network error), do not silently swallow it. Name the failed command, what work is completed locally, current verification status, and the next recovery step. The decision becomes NO-GO until handoff is unblocked.
 8. Produce a single binary decision:
-   - `GO`: verification green, blockers cleared, rollback trigger and procedure named, residual risks acknowledged, product-impact statement included.
+   - `GO`: verification green, blockers cleared, reviewer sub-agents satisfied, rollback trigger and procedure named, residual risks acknowledged, product-impact statement included.
    - `NO-GO`: blockers listed, recommended fixes named, next path to GO stated.
-9. Do not run retro. Ship is pre-release only.
+9. Carry a `GO` to completion by traffic state:
+   - `pre-live`: merge and deploy autonomously. Report what shipped.
+   - `live`: merge autonomously, then ask the founder GO/NO-GO before deploying to users, leading with the user-facing impact and the rollback plan.
+   - Escalate mid-flow only if a blocker turns out to be a product/UX decision (raise it in product-implication language) or an always-ask floor item appears.
+10. Do not run retro. Ship is pre-release only.
 
 ## Verification
 
@@ -40,7 +49,8 @@ Decide whether a change is ready to release. The decision is binary: `GO` or `NO
 - Migration gate is applied with explicit traffic-state classification.
 - Blockers are separated from recommended fixes.
 - Rollback trigger conditions and procedure are present for live-traffic releases.
-- PR state is named; draft PRs are marked ready only with explicit founder authorization.
+- PR state is named; draft-vs-ready and merge are decided autonomously by traffic state, not by founder approval.
+- Traffic state is named, and the deploy step matches it: autonomous when `pre-live`, founder GO/NO-GO when `live`.
 - PR description uses product-impact framing (what ships for users, not what code changed).
 - Any accepted risk is explicit.
 
@@ -48,6 +58,8 @@ Decide whether a change is ready to release. The decision is binary: `GO` or `NO
 
 - The rollback path is unknown for a live-traffic change.
 - Critical security, data-loss, migration, or compliance risk is unresolved.
-- Required verification is unavailable and the founder has not accepted the risk.
+- Required verification is unavailable.
 - A live-traffic migration is missing forward/reverse SQL, staging dry-run, locking analysis, backfill plan, or named owner.
+- Traffic state is `live` and the next step is deploy — ask the founder GO/NO-GO.
+- A blocker is actually a product/UX decision — raise it to the founder in product-implication language.
 - Multiple shippable slices exist and choosing among them would be arbitrary.

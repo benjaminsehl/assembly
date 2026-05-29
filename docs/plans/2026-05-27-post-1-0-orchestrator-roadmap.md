@@ -57,7 +57,7 @@ Capabilities:
 
 Non-goals:
 
-- No autonomous merge or deploy.
+- No autonomous merge or deploy **when traffic state is `live`** — deploy to real users is a founder GO/NO-GO. Pre-live, the agent control loop already merges and deploys autonomously (see `docs/decisions/2026-05-29-autonomy-escalation-model.md`), and the orchestrator inherits that.
 - No multi-repo scheduling.
 - No background code rewriting.
 

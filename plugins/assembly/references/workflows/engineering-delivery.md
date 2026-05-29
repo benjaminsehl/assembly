@@ -58,7 +58,7 @@ Build is a router, not a dispatcher. It implements code for an approved task and
 - For PRs, use GitHub MCP tools for PR metadata, changed files, checks, and review-thread context.
 - Fan out specialist reviewers in parallel by default: correctness, architecture, security, performance, tests. Skip a specialist when the diff demonstrably does not touch its surface; name what was skipped and why.
 - Lead with findings ordered by severity. Include file and line references for concrete issues.
-- Surface findings only. Do not auto-apply fixes — the founder picks which findings to address. Run `code-simplify` separately when invoked.
+- `review` itself surfaces findings; the agent then resolves engineering findings autonomously (via `build` or `code-simplify`) as part of the delivery loop. Escalate a finding to the founder only when it is a product/UX tradeoff, in product-implication language.
 - If there are no findings, say so and name residual risk.
 
 ## Code Simplify

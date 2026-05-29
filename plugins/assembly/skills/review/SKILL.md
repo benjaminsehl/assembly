@@ -28,7 +28,7 @@ Review current changes with a bug-first posture. Findings come before summaries,
    - Test reviewer: coverage gaps, brittle tests, missing characterization for legacy paths.
 4. Skip a specialist when the diff demonstrably does not touch its surface (e.g., no UI → skip accessibility). Name what was skipped and why.
 5. Merge findings, ordered by severity.
-6. Surface findings only. Do not auto-apply fixes. The founder picks which findings to address; `code-simplify` runs separately when invoked.
+6. `review` surfaces findings; the agent then resolves engineering findings autonomously via `build` or `code-simplify`. Escalate a finding to the founder only when it is a product/UX tradeoff, in product-implication language.
 7. Include open questions, test gaps, and residual risk after findings.
 
 ## Verification
