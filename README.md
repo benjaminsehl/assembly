@@ -1,10 +1,10 @@
 # Assembly
 
-Assembly is a human-led product-building toolkit for an eventual agentic app factory: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
+Assembly is a founder-led product-building toolkit for an eventual agentic app factory: contextual next steps, project orientation, product discovery, prototypes, specs, plans, implementation, tests, QA, review, simplification, and release decisions.
 
 The plugin ships as both a Codex plugin and a Claude Code plugin from the same bundle at `plugins/assembly/`. It intentionally exposes a small public skill surface; detailed guidance lives in the plugin bundle's `references/` directory so agents load it only when needed.
 
-The human stays founder and product director. Assembly helps agents ask the right questions, preserve why decisions were made, execute scoped work, and leave reviewable evidence instead of guessing or drifting into unchecked autonomy.
+The founder stays product director. Assembly reserves founder attention for product/UX decisions — framed in user-facing terms — and runs engineering autonomously, validating it with reviewer sub-agents instead of per-PR approval. How far that autonomy reaches is set by the project's traffic state (see [Autonomy Model](#autonomy-model)).
 
 ## Quick Start
 
@@ -140,19 +140,28 @@ Why this shape:
 5. Choose the matching lifecycle skill for the current phase.
 6. If prerequisites are missing, warn once and recommend the right double-back skill.
 7. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
-8. For material changes in GitHub-backed repos, use `gh` to create a draft PR, run self-review and code simplification, then ask before marking the PR ready.
+8. For material changes in GitHub-backed repos, open a PR, run reviewer sub-agents and `code-simplify`, then promote to ready autonomously and merge per the traffic state — escalating only product/UX decisions and the live-traffic merge gate.
+
+## Autonomy Model
+
+Assembly decides what to escalate on two axes, not on phase ceremony:
+
+- **Decision type.** Product and UX decisions — what gets built and why, user-facing behavior, copy, flow, scope cuts that change the experience, naming, pricing — always go to the founder in product-implication language. Engineering decisions run autonomously and are validated by reviewer sub-agents (`code-reviewer`, `security-auditor`, `test-engineer`), not by founder approval. Whether to open a draft PR, promote it to ready, or merge an engineering-only change is an engineering call, not an interruption.
+- **Traffic state.** `docs/status.md` carries a founder-set `Traffic state:` field (default `pre-live`). When `pre-live`, the agent runs the whole roadmap — multiple PRs, merges, and deploys — with no per-action check-in, as long as no product/UX decision is open. When `live`, opening PRs and review stay autonomous and merging to the default branch becomes a founder GO/NO-GO; deploy then follows the approved merge. (A release branch can later move this gate; until then, merge to the default branch is the live gate.)
+
+The **always-ask floor** holds in any traffic state: money movement, credential use, external messaging, privacy-sensitive data, irreversible destructive operations, and merging to the default branch when live.
 
 ## GitHub Handoff
 
-Assembly expects agents to leave real work reviewable:
+Assembly expects agents to leave real work reviewable, and to carry it forward without waiting on engineering approvals:
 
 - `build` commits focused changes on a topic branch and pushes.
-- `ship` opens or updates a descriptive draft PR (with `gh` or the GitHub MCP tools).
+- `ship` opens or updates a descriptive PR (with `gh` or the GitHub MCP tools), deciding draft vs ready as an engineering call.
 - Explain why the PR exists, the first principles behind the change, and how the agent approached it.
-- Run `review` and `code-simplify` before asking to mark ready.
-- Always ask before marking the PR ready. Promote to ready only after explicit user authorization, with product gates clear (what / why / what good looks like / risks / rollback), verification green, review/simplification complete, and no always-ask floor item triggered (money, credentials, external messaging, irreversible destructive ops).
-- When addressing PR comments, inspect unresolved review threads, implement traceable fixes, push updates, and reply/resolve threads only when the user asks for that GitHub write action.
-- Do not merge, deploy, or create non-draft PRs without explicit direction.
+- Run `review` (reviewer sub-agent fan-out) and `code-simplify`, then promote to ready autonomously once verification is green and reviewers are satisfied.
+- Merge and deploy autonomously when `pre-live`; when `live`, ask the founder GO/NO-GO before merging to the default branch, then let deploy follow the approved merge.
+- When addressing PR comments, inspect review threads, implement traceable fixes, push updates, and reply/resolve threads as part of the engineering loop — escalating only threads that raise a product/UX decision.
+- Honor the always-ask floor regardless of traffic state.
 
 The canonical agent protocol lives in [references/agent-operating-protocol.md](plugins/assembly/references/agent-operating-protocol.md). New projects receive a copy at `.agents/AGENT-GUIDANCE.md`.
 

@@ -44,48 +44,50 @@ Output blockers, important fixes, quick wins, and one next action.
   - Live traffic (real users, real data): blocker by default. Require forward + reverse SQL, staging dry-run, locking analysis under concurrent writes, backfill plan, and a named owner who watches the rollout. Missing any → NO-GO.
 - Separate blockers from accepted risks and nice-to-have fixes.
 - Name rollback triggers and rollback procedure for live-traffic releases.
-- For GitHub-backed work, confirm PR state, CI/check status, and review status. If no PR exists, open one — ask the founder whether to open as draft or ready.
+- For GitHub-backed work, confirm PR state, CI/check status, and reviewer-sub-agent findings. If no PR exists, open one and decide draft vs ready as an engineering call — do not ask the founder.
 - Use product-impact framing for the PR description: what user capability ships, not what files changed.
+- Carry the decision to completion by traffic state: when `pre-live`, merge and deploy autonomously; when `live`, ask the founder GO/NO-GO before merging to the default branch, then let deploy follow the approved merge.
 - Do not run retro. Ship is pre-release only.
 
 ## PR Readiness
 
-Use this before marking a draft PR ready for review.
+Use this on the way to merge. Draft-vs-ready and the ready promotion are engineering calls the agent makes — they do not require founder approval.
 
 - Confirm the branch is pushed and the PR exists.
 - Confirm targeted and broad verification has passed or clearly document accepted gaps.
-- Run `review` against the final diff or PR.
+- Run `review` against the final diff or PR, fanning out reviewer sub-agents.
 - Run `code-simplify` on the changed files when simplification risk is reasonable.
 - Fix important findings and rerun relevant checks.
 - Update the PR body with final summary, verification, risk, and follow-up.
 - Confirm the PR body explains why the work matters, the principles behind the change, and how the agent approached it.
-- Ask before marking ready. Promote a draft PR to ready only after self-review and simplification have run and the user explicitly authorizes the ready-for-review transition.
-- Keep the PR draft if unresolved blockers, failing checks, missing verification, or user-requested hold remain.
+- Promote the PR to ready autonomously once reviewer sub-agents are satisfied, simplification has run, and verification is green.
+- Keep the PR draft if unresolved blockers, failing checks, or missing verification remain — or if an open product/UX decision is waiting on the founder.
 
 ## PR Review Feedback
 
-Use this when the user asks to address GitHub PR comments, requested changes, or unresolved review threads.
+Use this to address GitHub PR comments, requested changes, or unresolved review threads, whether from reviewer sub-agents or human reviewers.
 
 - Resolve the PR from local branch context or the provided PR URL/number.
 - Fetch thread-aware review state using GitHub MCP tools (or `gh api graphql` in CLI environments) — preserve review-thread IDs, resolution state, outdated state, file paths, and line anchors.
 - Cluster actionable comments by behavior or file; separate fixes from questions, duplicates, stale threads, and non-actionable notes.
 - Implement fixes traceably, keeping each change tied to the feedback it addresses.
 - If a comment needs explanation rather than code, reply with the reasoning instead of forcing a code change.
-- Commit and push fixes to the PR branch when handoff is in scope.
-- Reply to review threads and mark them resolved only when the user explicitly asks for that GitHub write action.
-- Leave ambiguous or conflicting feedback unresolved and explain the tradeoff.
+- Commit and push fixes to the PR branch.
+- Reply to and resolve review threads autonomously as part of the engineering loop — this is collaboration on the change, not external messaging.
+- Escalate to the founder only when a comment raises a product/UX decision; surface it in product-implication language and leave the thread open until answered.
+- Leave ambiguous or conflicting engineering feedback unresolved and explain the tradeoff.
 
 ## GitHub Handoff
 
-Use this for opening, updating, and promoting PRs. `build` pushes the branch; `ship` handles every GitHub conversation step from PR open onward.
+Use this for opening, updating, promoting, and merging PRs. `build` pushes the branch; `ship` handles every GitHub conversation step from PR open onward, autonomously, gated only by traffic state and the always-ask floor.
 
 - Check whether a PR already exists for the topic branch before opening one.
-- Use the GitHub MCP `create_pull_request` (or `gh pr edit` in CLI environments) to open a draft PR when none exists, or to update an existing PR for the branch.
+- Use the GitHub MCP `create_pull_request` (or `gh pr edit` in CLI environments) to open a PR when none exists, or to update an existing PR for the branch. Decide draft vs ready as an engineering call.
 - Write a descriptive PR body using product-impact framing: what user capability ships, not what files changed. Cover: why this PR exists, the principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
-- Leave the PR as draft until verification passes, blockers are clear, and review/simplification have run.
-- Ask before marking a draft PR ready. Promote to ready only after explicit user authorization.
+- Promote to ready autonomously once verification passes, reviewer sub-agents are satisfied, and no open product/UX decision remains.
+- Read the `Traffic state:` field in `docs/status.md` before merging. When `pre-live`, merge and deploy autonomously and name the risk. When `live`, ask the founder GO/NO-GO before merging to the default branch; deploy then follows the approved merge.
 - If GitHub handoff is blocked by missing auth, no writable remote, branch protection, network failure, or unavailable tooling, do not loop. Report the blocker, the completed local work, verification status, and the exact next command, credential, or access step needed.
-- Do not merge, deploy, delete branches, or create non-draft PRs without explicit user direction.
+- Always-ask floor (any traffic state): the full floor in `references/agent-operating-protocol.md` is authoritative and applies in the handoff path too — including privacy-sensitive data, dropping tables or deleting production data, money movement, credential use, external messaging, and merging to the default branch when traffic state is `live`. In the GitHub path specifically, never force-push the default branch or delete branches with unmerged work without explicit founder direction.
 
 ## Post-Release Learning
 

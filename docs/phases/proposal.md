@@ -14,7 +14,7 @@ Assembly 1.0 feels like a reliable human-led project operating system for agents
 - Project scaffolding creates a useful root `docs/` trail without overwriting existing instructions.
 - `project-status` can diagnose phase, missing prerequisites, and recovery plan from real repo artifacts.
 - Product, engineering, QA, and business lenses are available without overwhelming the active skill surface.
-- Material GitHub-backed work ends in a descriptive draft PR that explains why, first principles, and approach, then becomes ready-for-review only after verification, self-review, and simplification.
+- Material GitHub-backed work ends in a descriptive PR that explains why, first principles, and approach; the agent decides draft vs ready and promotes to ready autonomously once reviewer sub-agents are satisfied and verification is green; it merges and deploys autonomously when `pre-live`, escalating only product/UX decisions and (when `live`) the merge-to-default-branch gate.
 - Installation, migration, validation, and troubleshooting docs are accurate enough for a cold user.
 - 1.0 is proven against Assembly itself and CFO, with Hyper as a stretch retrofit proof.
 

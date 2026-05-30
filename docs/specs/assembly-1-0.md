@@ -88,7 +88,10 @@ Assembly 1.0 includes:
 
 ## Gating Model
 
-Assembly's gating is product-direction-first. Once the product gates are clear and verification is green, engineering execution proceeds without per-action approval up to (and including) pushing the topic branch. PR opening, ready promotion, merge, and deploy are ship-owned and always ask before proceeding. The founder's time stays on direction and on the ship gate.
+Assembly's gating turns on two axes, not on phase ceremony. The founder's attention is reserved for product/UX decisions and, once there is live traffic, the merge-to-default-branch gate. Everything else the agent decides autonomously and validates with reviewer sub-agents.
+
+- Axis 1 — decision type: product/UX decisions always escalate to the founder in product-implication language; engineering decisions run autonomously, validated by reviewer sub-agents rather than founder approval.
+- Axis 2 — traffic state (`docs/status.md` `Traffic state:` field, founder-set, default `pre-live`): `pre-live` means full autonomy through the roadmap — open PRs (draft or ready, agent's call), run reviewer sub-agents, merge, and deploy — with no per-action approval, as long as no product/UX decision is open and no always-ask floor item is involved. `live` keeps opening, reviewing, and readying PRs autonomous and makes merging to the default branch a founder GO/NO-GO, with deploy following the approved merge.
 
 ### Product gates (must be clear before the rails open)
 
@@ -104,30 +107,29 @@ When any of these is missing, agents ask in product-implication language and pau
 
 ### Engineering rails (proceed without per-action approval once product gates pass)
 
-Once product gates are clear and verification is green, `build` may:
+Once product gates are clear and verification is green, the agent autonomously, with reviewer sub-agents standing in for founder approval:
 
-- Commit and push focused changes on a topic branch.
-- Run self-review and code simplification.
+- Commits and pushes focused changes on a topic branch.
+- Runs self-review and code simplification.
+- Opens the PR and decides draft vs ready.
+- Fans out `code-reviewer`, `security-auditor`, and `test-engineer` sub-agents and resolves their findings.
+- Merges the PR when traffic state is `pre-live`, verification is green, and reviewer sub-agents are satisfied.
+- Deploys when traffic state is `pre-live`, or from a founder-approved merge when `live`.
 
-### Ship gate (always asks)
+### Merge gate (asks only when `live`)
 
-Regardless of product-gate clarity, `ship` asks before:
+When traffic state is `live`, `ship` produces a GO/NO-GO and asks the founder before merging to the default branch. The agent prepares the decision (verification, residual risk, rollback trigger and procedure) so the founder answers a single product-impact question, not an engineering one. Deploy follows the approved merge. When `pre-live`, merge and deploy proceed autonomously with the risk named. (A release branch may later move this gate; until then, merge to the default branch is the live gate.)
 
-- Opening a PR (draft or ready, founder picks).
-- Marking a draft PR ready-for-review.
-- Merging the PR.
-- Running the project's deploy path.
-- Deleting merged branches.
+### Always-ask floor (any traffic state)
 
-### Always-ask floor (regardless of product-gate clarity)
-
-These actions require explicit founder approval even when product gates are clear:
+These actions require explicit founder approval regardless of traffic state or product-gate clarity:
 
 - Money movement, purchases, trades, account changes.
 - Credentials, secrets, or privacy-sensitive data.
 - External messaging (Slack, email, social, customer-facing).
 - Irreversible destructive operations: force-push to default branches, delete branches with unmerged work, drop tables or databases, delete production data.
-- Merging or deploying when verification is not green, review threads are unresolved with material correctness concerns, or product gates are not clear.
+- Merging to the default branch when traffic state is `live`.
+- Merging or deploying when verification is not green or reviewer sub-agents flag unresolved material correctness concerns.
 
 ## Behavior Requirements
 
@@ -188,21 +190,20 @@ For material changes in a GitHub-backed repo, Assembly must:
 - Inspect branch, remote, status, and existing PR state before committing.
 - Commit focused changes on a topic branch.
 - Push the branch.
-- Open or update a descriptive draft PR.
+- Open or update a descriptive PR, deciding draft vs ready as an engineering call.
 - Explain why the PR exists, the first principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
-- Run self-review.
-- Run code simplification when reasonable.
-- Always ask before marking the PR ready-for-review. Promote to ready only with explicit founder authorization, with product gates clear (what / why / what good looks like / risks / rollback), verification green, review/simplification complete, and no always-ask floor item triggered.
-- Always ask before merging. Confirm product gates, verification, and review-thread/check state before requesting merge authorization.
-- Always ask before deploying. Confirm rollback criteria and post-merge verification before requesting deploy authorization.
-- Honor the always-ask floor on top: money, credentials, external messaging, irreversible destructive ops.
+- Run self-review and code simplification when reasonable.
+- Fan out reviewer sub-agents and address their findings autonomously; promote draft to ready without asking.
+- Merge autonomously when `pre-live`; when `live`, prepare the GO/NO-GO and ask the founder before merging to the default branch — across as many PRs as the roadmap needs.
+- Deploy autonomously when `pre-live`, and from a founder-approved merge when `live`.
+- Honor the always-ask floor on top: money, credentials, external messaging, irreversible destructive ops, and merging to the default branch when `live`.
 
 Before any merge or deploy proceeds, Assembly must:
 
-- Check PR state, status checks, review decision, and unresolved review threads.
-- Address actionable unresolved comments or report why they are not actionable.
-- Block the action when there are failing checks, requested changes, unresolved blockers, or unresolved comments that materially affect correctness.
-- If the founder explicitly accepts a risk, name the unresolved risk before proceeding.
+- Check PR state, status checks, review decision, and reviewer-sub-agent findings.
+- Address actionable findings or report why they are not actionable.
+- Block the action when there are failing checks, unresolved blockers, or reviewer findings that materially affect correctness.
+- Escalate to the founder only when a blocker is actually a product/UX decision, or when traffic state is `live` and the action is merging to the default branch.
 
 ## Project Phase Requirements
 

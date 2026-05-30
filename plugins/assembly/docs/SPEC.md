@@ -26,7 +26,7 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 
 Success means a future agent session in either Codex or Claude Code can invoke one of these skills by name, load only the necessary references, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
 
-For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, draft PR, self-review, simplification pass, verification evidence, and ready-for-review only after those gates pass and the user explicitly authorizes it.
+For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, a PR, self-review, simplification pass, and verification evidence. Opening the PR, choosing draft vs ready, and promoting to ready are engineering calls the agent makes autonomously, validated by reviewer sub-agents rather than founder approval. The founder's attention is reserved for product/UX decisions and, when traffic state is `live`, the merge-to-default-branch gate.
 
 ## Project Phase Model
 
@@ -75,13 +75,21 @@ Always:
 - Put detailed guidance in `references/`.
 - Preserve a decision paper trail.
 - Validate before calling the plugin install-ready.
-- Use draft PRs for material GitHub-backed work unless the user asks for local-only changes.
+- Leave material GitHub-backed work in a reviewable PR unless the user asks for local-only changes.
+- Escalate product/UX decisions to the founder in product-implication language; decide engineering autonomously and validate it with reviewer sub-agents.
+- Read the `Traffic state:` field in `docs/status.md` before merging, deploying, or shipping; treat absent or unknown as `pre-live`.
 
-Ask first:
+Autonomy by traffic state:
+
+- `pre-live` (default): with no open product/UX decision and no always-ask floor item, run the roadmap end to end — open PRs (draft or ready, agent's call), run reviewer sub-agents, merge, and deploy — without per-action approval.
+- `live`: opening PRs, reviewing, and readying stay autonomous; merging to the default branch is a founder GO/NO-GO, and deploy follows the approved merge.
+
+Always-ask floor (any traffic state):
 
 - Before overwriting existing `AGENTS.md`.
 - Before destructive operations, external messaging, money movement, credential use, or privacy-sensitive work.
-- Before merging PRs, deploying, deleting branches, or creating non-draft public review surfaces.
+- Before irreversible destructive git operations (force-push to default branch, deleting branches with unmerged work).
+- Before merging to the default branch when traffic state is `live`.
 - Before skipping phase gates when risk materially changes.
 
 Never:

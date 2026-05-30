@@ -92,12 +92,17 @@ Start here:
 
 Last updated: {today}
 Current phase: proposal
+Traffic state: pre-live
 
 ## Phase Verdict
 
 - Current phase: proposal
 - Why: initial scaffold created; proposal outcomes and assumptions still need alignment.
 - Next gate: proposal accepted by the user.
+
+## Autonomy
+
+- Traffic state: pre-live (no real users yet). The agent runs the roadmap autonomously — PRs, merges, deploys — escalating only product/UX decisions and always-ask floor items. Set `Traffic state: live` once real users depend on this; merging to the default branch then becomes a founder GO/NO-GO (deploy follows the approved merge).
 
 ## Next Recommended Skills
 

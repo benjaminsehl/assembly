@@ -11,9 +11,9 @@ Every public skill must:
 - Load the smallest relevant context and reference files.
 - Produce evidence, not vibes.
 - Warn when the user asks to skip missing phase prerequisites, recommend the right double-back skill, and record skipped gates if the user insists.
-- Treat delegated product judgment as explicit. If the user has not asked the agent to make product calls and the project trail does not answer what, why, and what good looks like, ask concise clarifying questions before durable product or implementation decisions.
-- For material changes in a GitHub-backed repo, preserve a PR handoff path: focused commit, pushed branch, descriptive draft PR, self-review, simplification pass, final verification, then ask before ready-for-review.
-- Stop and ask when the next step would cross an `Ask first` boundary in `plugins/assembly/docs/SPEC.md` or in the target repo's local project protocol.
+- Treat product judgment as the founder's. Product/UX decisions — what is being built, why, what good looks like, and user-facing tradeoffs — always escalate in product-implication language. Engineering decisions run autonomously, validated by reviewer sub-agents.
+- For material changes in a GitHub-backed repo, preserve a PR handoff path: focused commit, pushed branch, descriptive PR, self-review, simplification pass, final verification. Opening the PR, choosing draft vs ready, promoting to ready, and merging are engineering calls — proceed autonomously per the project's `Traffic state:` (default `pre-live`).
+- Stop and ask when the next step would cross an `Ask first` boundary in `plugins/assembly/docs/SPEC.md` or in the target repo's local project protocol, or when traffic state is `live` and the next step is deploy.
 
 Every public skill must not:
 
@@ -55,8 +55,8 @@ If a prompt is unclear, state the inferred task, current phase, and recommended 
 - `project-status` is the project gateway. It covers new project scaffolding, phase status, stale docs, recovery plans, retro capture, and durable project learning.
 - `product-discovery` is the product gateway. It covers raw ideas, founder critique, business-model pressure tests, and planned UX critique before specs.
 - The engineering spine is `spec` -> `plan` -> `build` -> `test` -> `review` -> `code-simplify` -> `ship`. `build` may drive the pre-ship portion of this spine when the user clearly invokes build and the next gate is evidence-backed.
-- The default GitHub handoff is descriptive draft PR first, then ready-for-review only after verification, self-review, code simplification, and explicit user authorization.
-- PR review feedback is handled through thread-aware reads, traceable fixes, pushed updates, and replies/resolution only when the user explicitly asks for those GitHub write actions.
+- The default GitHub handoff is a descriptive PR that the agent opens, reviews via reviewer sub-agents, promotes to ready, and merges autonomously. Deploy is autonomous when `pre-live` and a founder GO/NO-GO when `live`.
+- PR review feedback is handled through thread-aware reads, traceable fixes, pushed updates, and autonomous replies/resolution as part of the engineering loop — escalating only threads that raise a product/UX decision.
 - `prototype` and `qa` stay public because they are frequent tangible-work moments that do not fit cleanly into spec/build/release commands.
 
 ## Trigger Examples

@@ -42,6 +42,17 @@ Use `next` when the user asks to continue through the normal process and the nex
 - Quality pass: `review` or `code-simplify`
 - Release decision: `ship`
 
+## Autonomy And Escalation
+
+Reserve founder attention for product and UX decisions; run engineering autonomously.
+
+- Product/UX decisions — what gets built and why, user-facing behavior, copy, flow, scope cuts that change the experience, naming, pricing — always escalate to the founder in product-implication language (user scenarios, not engineering detail).
+- Engineering decisions are the agent's call, validated by reviewer sub-agents (`code-reviewer`, `security-auditor`, `test-engineer`), not by founder approval. Opening a PR, choosing draft vs ready, and merging engineering-only changes are not interruptions.
+- Traffic state lives in `docs/status.md` (`Traffic state:`, founder-set, default `pre-live`). When `pre-live`, run the whole roadmap — PRs, merges, deploys — autonomously. When `live`, keep opening and reviewing PRs autonomous and ask the founder GO/NO-GO before merging to the default branch; deploy follows the approved merge.
+- Always-ask floor (any traffic state): money, credentials, external messaging, privacy-sensitive data, irreversible destructive operations, and merging to the default branch when live.
+
+Full detail is in `.agents/AGENT-GUIDANCE.md`.
+
 ## Unclear Prompts
 
 If the prompt is unclear, state what you think the user wants, name the current phase, recommend the next skill, and verify before acting.

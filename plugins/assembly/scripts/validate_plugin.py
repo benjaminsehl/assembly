@@ -334,27 +334,28 @@ def validate_support_files() -> None:
                 f"README.md must document dual-runtime install path: {required}"
             )
     for required in (
-        "ask before marking the PR ready",
-        "explicit user authorization",
-        "unresolved review threads",
+        "Autonomy Model",
+        "traffic state",
+        "pre-live",
+        "reviewer sub-agents",
     ):
         if required not in readme_text:
             fail(
-                f"README.md must document the PR-ready gating model: {required}"
+                f"README.md must document the traffic-state autonomy model: {required}"
             )
     for required in (
-        "product gates",
         "always-ask floor",
         "review threads",
+        "product-implication language",
     ):
         if required not in readme_text:
-            fail(f"README.md must document the gating model: {required}")
+            fail(f"README.md must document the escalation model: {required}")
 
     command_contract_text = (PLUGIN_ROOT / "docs" / "COMMAND_CONTRACT.md").read_text(encoding="utf-8")
     for required in (
-        "ask before ready-for-review",
+        "traffic state",
         "PR review feedback",
-        "explicit user authorization",
+        "reviewer sub-agents",
     ):
         if required not in command_contract_text:
             fail(f"docs/COMMAND_CONTRACT.md must document GitHub handoff behavior: {required}")
@@ -438,6 +439,8 @@ def validate_support_files() -> None:
         "product gates",
         "always-ask floor",
         "product-implication language",
+        "traffic state",
+        "reviewer sub-agents",
         "What is being built",
         "Why it matters",
         "What good looks like",
@@ -475,13 +478,12 @@ def validate_support_files() -> None:
         PLUGIN_ROOT / "references" / "workflows" / "qa-and-release.md"
     ).read_text(encoding="utf-8")
     for required in (
-        "Ask before marking ready",
-        "explicitly authorizes",
+        "reviewer sub-agents",
+        "pre-live",
         "PR Review Feedback",
         "GitHub Handoff",
         "gh pr edit",
         "handoff is blocked",
-        "Reply to review threads and mark them resolved only when the user explicitly asks",
         "binary",
         "traffic state",
     ):

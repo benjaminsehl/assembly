@@ -1,7 +1,13 @@
 # Project Status: Assembly
 
-Last updated: 2026-05-27
+Last updated: 2026-05-29
 Current phase: proposal
+Traffic state: pre-live
+
+## Autonomy
+
+- Traffic state: pre-live. Assembly is not yet depended on by real users, so agents run the roadmap autonomously — open PRs, run reviewer sub-agents, merge, and (where a deploy path exists) deploy — escalating only product/UX decisions and always-ask floor items. Flip to `live` when external builders depend on the published plugin and you want merging to the default branch to become a founder GO/NO-GO (deploy then follows the approved merge).
+- Escalation model defined in `docs/decisions/2026-05-29-autonomy-escalation-model.md` and `plugins/assembly/references/agent-operating-protocol.md`.
 
 ## Phase Verdict
 
