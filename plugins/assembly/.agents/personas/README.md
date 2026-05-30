@@ -104,12 +104,12 @@ Why this fails:
 
 The personas in this repo are designed to work as Claude Code subagents and as Agent Teams teammates without modification:
 
-- **As subagents:** auto-discovered when this plugin is enabled (no path config needed). Use the Agent tool with `subagent_type: code-reviewer` (or `security-auditor`, `test-engineer`). `/ship` is the canonical example.
+- **As subagents:** declared in the plugin's [`.claude-plugin/plugin.json`](../../.claude-plugin/plugin.json) `agents` array, which points at these files. (They live under `.agents/personas/`, not the default `agents/` directory, so the explicit declaration is what makes Claude Code load them — they are **not** auto-discovered from this path.) Once the plugin is enabled, invoke them with the Agent tool using `subagent_type: code-reviewer` (or `security-auditor`, `test-engineer`); `review` and `ship` fan out to them. Each declares a `model` (Sonnet for `code-reviewer` and `test-engineer`, Opus for `security-auditor`); change it per persona to tune cost.
 - **As Agent Teams teammates** (experimental, requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`): reference the same persona name when spawning a teammate. The persona's body is **appended to** the teammate's system prompt as additional instructions (not a replacement), so your persona text sits on top of the team-coordination instructions the lead installs (SendMessage, task-list tools, etc.).
 
 Subagents only report results back to the main agent. Agent Teams let teammates message each other directly. Use subagents when reports are enough; use Agent Teams when sub-agents need to challenge each other's findings (e.g. competing-hypothesis debugging). See [references/orchestration-patterns.md](../../references/orchestration-patterns.md) for the full mapping.
 
-Plugin agents do not support `hooks`, `mcpServers`, or `permissionMode` frontmatter — those fields are silently ignored. Avoid relying on them when authoring new personas here.
+Plugin agents do not support `hooks`, `mcpServers`, or `permissionMode` frontmatter — those fields are silently ignored. Avoid relying on them when authoring new personas here. (Plugin-level hooks are a separate surface and *are* supported — they live in [`hooks/hooks.json`](../../hooks/hooks.json), not in agent frontmatter.)
 
 ## Adding a new persona
 

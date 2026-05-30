@@ -150,7 +150,7 @@ Here's how each pattern maps onto Claude Code's primitives — and where the pla
 
 ### Where personas live
 
-Plugin support personas live in `.agents/personas/` so they stay out of the public skill surface. This plugin does not expose them as triggerable skills; use them only when a harness or explicit user request supports parallel specialist review.
+Plugin support personas live in `.agents/personas/` and are declared in `.claude-plugin/plugin.json`'s `agents` array, so Claude Code loads them as subagents. They stay out of the public *skill* surface — they are agents, not triggerable skills, so they never collide with a user's skill set. Use them when a harness or explicit user request supports specialist review; `review` and `ship` fan out to them.
 
 ### Subagents vs. Agent Teams
 
@@ -193,7 +193,7 @@ Don't redefine these. Layer your specialist personas (code-reviewer, security-au
 
 Plugin subagents do **not** support the `hooks`, `mcpServers`, or `permissionMode` frontmatter fields — these are silently ignored. If a future persona needs any of those, the user must copy the file into `.claude/agents/` or `~/.claude/agents/` instead.
 
-The fields that DO work in plugin agents are: `name`, `description`, `tools`, `disallowedTools`, `model`, `maxTurns`, `skills`, `memory`, `background`, `effort`, `isolation`, `color`, `initialPrompt`. Use `model` per-persona if you want to optimize cost (e.g. Haiku for `test-engineer` coverage scans, Sonnet for `code-reviewer`, Opus for `security-auditor`).
+The fields that DO work in plugin agents are: `name`, `description`, `tools`, `disallowedTools`, `model`, `maxTurns`, `skills`, `memory`, `background`, `effort`, and `isolation`. Use `model` per-persona to tune cost against depth. The shipped defaults are Sonnet for `code-reviewer` and `test-engineer` and Opus for `security-auditor`; drop a persona to Haiku for cheap read-only scans, or raise it when the perspective warrants more depth.
 
 ### Spawning multiple subagents in parallel
 
