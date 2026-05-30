@@ -12,7 +12,7 @@ Decide whether a change is ready to release. The decision is binary: `GO` or `NO
 How far a `GO` carries itself depends on traffic state (read `Traffic state:` in `docs/status.md`; absent or unknown means `pre-live`):
 
 - `pre-live`: a `GO` proceeds autonomously through merge and deploy. No founder check-in unless a product/UX decision is open or an always-ask floor item is involved.
-- `live`: a `GO` proceeds autonomously through merge, then asks the founder before deploying to users. The deploy gate is a single product-impact question, not an engineering one.
+- `live`: a `GO` carries autonomously up to a reviewed, ready PR, then asks the founder before merging to the default branch. The merge gate is a single product-impact question, not an engineering one; deploy follows the approved merge.
 
 ## References
 
@@ -37,7 +37,7 @@ How far a `GO` carries itself depends on traffic state (read `Traffic state:` in
    - `NO-GO`: blockers listed, recommended fixes named, next path to GO stated.
 9. Carry a `GO` to completion by traffic state:
    - `pre-live`: merge and deploy autonomously. Report what shipped.
-   - `live`: merge autonomously, then ask the founder GO/NO-GO before deploying to users, leading with the user-facing impact and the rollback plan.
+   - `live`: ask the founder GO/NO-GO before merging to the default branch, leading with the user-facing impact and the rollback plan; deploy follows the approved merge.
    - Escalate mid-flow only if a blocker turns out to be a product/UX decision (raise it in product-implication language) or an always-ask floor item appears.
 10. Do not run retro. Ship is pre-release only.
 
@@ -49,8 +49,8 @@ How far a `GO` carries itself depends on traffic state (read `Traffic state:` in
 - Migration gate is applied with explicit traffic-state classification.
 - Blockers are separated from recommended fixes.
 - Rollback trigger conditions and procedure are present for live-traffic releases.
-- PR state is named; draft-vs-ready and merge are decided autonomously by traffic state, not by founder approval.
-- Traffic state is named, and the deploy step matches it: autonomous when `pre-live`, founder GO/NO-GO when `live`.
+- PR state is named; draft-vs-ready is decided autonomously, and merge matches traffic state.
+- Traffic state is named, and the merge step matches it: autonomous when `pre-live`, founder GO/NO-GO when `live` (deploy follows the approved merge).
 - PR description uses product-impact framing (what ships for users, not what code changed).
 - Any accepted risk is explicit.
 
@@ -60,6 +60,6 @@ How far a `GO` carries itself depends on traffic state (read `Traffic state:` in
 - Critical security, data-loss, migration, or compliance risk is unresolved.
 - Required verification is unavailable.
 - A live-traffic migration is missing forward/reverse SQL, staging dry-run, locking analysis, backfill plan, or named owner.
-- Traffic state is `live` and the next step is deploy — ask the founder GO/NO-GO.
+- Traffic state is `live` and the next step is merging to the default branch — ask the founder GO/NO-GO.
 - A blocker is actually a product/UX decision — raise it to the founder in product-implication language.
 - Multiple shippable slices exist and choosing among them would be arbitrary.

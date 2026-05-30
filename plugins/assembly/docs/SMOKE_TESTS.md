@@ -69,8 +69,8 @@ After enabling and restarting Codex, confirm `Assembly` appears in the active pl
 - [ ] `plugins/assembly/scripts/audit_skill_conflicts.py` reports local overlapping lifecycle skills.
 - [ ] Missing phase prerequisites produce a warning and double-back skill recommendation.
 - [ ] Material GitHub-backed work uses `gh` for a descriptive PR handoff, deciding draft vs ready as an engineering call.
-- [ ] PRs are promoted to ready and merged autonomously once reviewer sub-agents are satisfied and verification is green — no founder approval required.
-- [ ] Deploy proceeds autonomously when `Traffic state: pre-live`; when `live`, the agent asks the founder GO/NO-GO before deploying to users.
+- [ ] PRs are promoted to ready autonomously once reviewer sub-agents are satisfied and verification is green — no founder approval required.
+- [ ] Merge and deploy proceed autonomously when `Traffic state: pre-live`; when `live`, the agent asks the founder GO/NO-GO before merging to the default branch, then deploy follows.
 - [ ] Existing PR branches use idempotent branch switching and `gh pr edit` rather than create-only flows.
 - [ ] Blocked GitHub handoff reports the blocker, local work, verification status, and recovery step instead of looping.
 - [ ] PR review comments are addressed with thread-aware reads, pushed fixes, and autonomous replies/resolution; only product/UX threads escalate to the founder.

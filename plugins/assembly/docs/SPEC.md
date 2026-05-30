@@ -26,7 +26,7 @@ The public surface is intentionally small. Detailed workflow knowledge lives in 
 
 Success means a future agent session in either Codex or Claude Code can invoke one of these skills by name, load only the necessary references, and produce consistent evidence across three lenses: users love it, engineering is excellent, and the business model is viable.
 
-For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, a PR, self-review, simplification pass, and verification evidence. Opening the PR, choosing draft vs ready, and promoting to ready are engineering calls the agent makes autonomously, validated by reviewer sub-agents rather than founder approval. The founder's attention is reserved for product/UX decisions and, when traffic state is `live`, the deploy gate.
+For GitHub-backed implementation work, success also means the agent leaves changes in a reviewable PR workflow: focused commits, pushed branch, a PR, self-review, simplification pass, and verification evidence. Opening the PR, choosing draft vs ready, and promoting to ready are engineering calls the agent makes autonomously, validated by reviewer sub-agents rather than founder approval. The founder's attention is reserved for product/UX decisions and, when traffic state is `live`, the merge-to-default-branch gate.
 
 ## Project Phase Model
 
@@ -82,14 +82,14 @@ Always:
 Autonomy by traffic state:
 
 - `pre-live` (default): with no open product/UX decision and no always-ask floor item, run the roadmap end to end — open PRs (draft or ready, agent's call), run reviewer sub-agents, merge, and deploy — without per-action approval.
-- `live`: everything up to and including merge stays autonomous; the deploy-to-users moment is a founder GO/NO-GO.
+- `live`: opening PRs, reviewing, and readying stay autonomous; merging to the default branch is a founder GO/NO-GO, and deploy follows the approved merge.
 
 Always-ask floor (any traffic state):
 
 - Before overwriting existing `AGENTS.md`.
 - Before destructive operations, external messaging, money movement, credential use, or privacy-sensitive work.
 - Before irreversible destructive git operations (force-push to default branch, deleting branches with unmerged work).
-- Before deploying to users when traffic state is `live`.
+- Before merging to the default branch when traffic state is `live`.
 - Before skipping phase gates when risk materially changes.
 
 Never:

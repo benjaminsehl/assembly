@@ -102,7 +102,7 @@ Traffic state: pre-live
 
 ## Autonomy
 
-- Traffic state: pre-live (no real users yet). The agent runs the roadmap autonomously — PRs, merges, deploys — escalating only product/UX decisions and always-ask floor items. Set `Traffic state: live` once real users depend on this; the deploy-to-users moment then becomes a founder GO/NO-GO.
+- Traffic state: pre-live (no real users yet). The agent runs the roadmap autonomously — PRs, merges, deploys — escalating only product/UX decisions and always-ask floor items. Set `Traffic state: live` once real users depend on this; merging to the default branch then becomes a founder GO/NO-GO (deploy follows the approved merge).
 
 ## Next Recommended Skills
 

@@ -88,10 +88,10 @@ Assembly 1.0 includes:
 
 ## Gating Model
 
-Assembly's gating turns on two axes, not on phase ceremony. The founder's attention is reserved for product/UX decisions and, once there is live traffic, the deploy gate. Everything else the agent decides autonomously and validates with reviewer sub-agents.
+Assembly's gating turns on two axes, not on phase ceremony. The founder's attention is reserved for product/UX decisions and, once there is live traffic, the merge-to-default-branch gate. Everything else the agent decides autonomously and validates with reviewer sub-agents.
 
 - Axis 1 — decision type: product/UX decisions always escalate to the founder in product-implication language; engineering decisions run autonomously, validated by reviewer sub-agents rather than founder approval.
-- Axis 2 — traffic state (`docs/status.md` `Traffic state:` field, founder-set, default `pre-live`): `pre-live` means full autonomy through the roadmap — open PRs (draft or ready, agent's call), run reviewer sub-agents, merge, and deploy — with no per-action approval, as long as no product/UX decision is open and no always-ask floor item is involved. `live` keeps everything up to and including merge autonomous and makes the deploy-to-users moment a founder GO/NO-GO.
+- Axis 2 — traffic state (`docs/status.md` `Traffic state:` field, founder-set, default `pre-live`): `pre-live` means full autonomy through the roadmap — open PRs (draft or ready, agent's call), run reviewer sub-agents, merge, and deploy — with no per-action approval, as long as no product/UX decision is open and no always-ask floor item is involved. `live` keeps opening, reviewing, and readying PRs autonomous and makes merging to the default branch a founder GO/NO-GO, with deploy following the approved merge.
 
 ### Product gates (must be clear before the rails open)
 
@@ -113,12 +113,12 @@ Once product gates are clear and verification is green, the agent autonomously, 
 - Runs self-review and code simplification.
 - Opens the PR and decides draft vs ready.
 - Fans out `code-reviewer`, `security-auditor`, and `test-engineer` sub-agents and resolves their findings.
-- Merges the PR when verification is green and reviewer sub-agents are satisfied.
-- Deploys when traffic state is `pre-live`.
+- Merges the PR when traffic state is `pre-live`, verification is green, and reviewer sub-agents are satisfied.
+- Deploys when traffic state is `pre-live`, or from a founder-approved merge when `live`.
 
-### Deploy gate (asks only when `live`)
+### Merge gate (asks only when `live`)
 
-When traffic state is `live`, `ship` produces a GO/NO-GO and asks the founder before deploying to users. The agent prepares the decision (verification, residual risk, rollback trigger and procedure) so the founder answers a single product-impact question, not an engineering one. When `pre-live`, deploy proceeds autonomously with the risk named.
+When traffic state is `live`, `ship` produces a GO/NO-GO and asks the founder before merging to the default branch. The agent prepares the decision (verification, residual risk, rollback trigger and procedure) so the founder answers a single product-impact question, not an engineering one. Deploy follows the approved merge. When `pre-live`, merge and deploy proceed autonomously with the risk named. (A release branch may later move this gate; until then, merge to the default branch is the live gate.)
 
 ### Always-ask floor (any traffic state)
 
@@ -128,7 +128,7 @@ These actions require explicit founder approval regardless of traffic state or p
 - Credentials, secrets, or privacy-sensitive data.
 - External messaging (Slack, email, social, customer-facing).
 - Irreversible destructive operations: force-push to default branches, delete branches with unmerged work, drop tables or databases, delete production data.
-- Deploying to users when traffic state is `live`.
+- Merging to the default branch when traffic state is `live`.
 - Merging or deploying when verification is not green or reviewer sub-agents flag unresolved material correctness concerns.
 
 ## Behavior Requirements
@@ -194,16 +194,16 @@ For material changes in a GitHub-backed repo, Assembly must:
 - Explain why the PR exists, the first principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
 - Run self-review and code simplification when reasonable.
 - Fan out reviewer sub-agents and address their findings autonomously; promote draft to ready without asking.
-- Merge autonomously once verification is green and reviewer sub-agents are satisfied — across as many PRs as the roadmap needs.
-- Deploy autonomously when traffic state is `pre-live`; when `live`, prepare the GO/NO-GO and ask the founder before deploying to users.
-- Honor the always-ask floor on top: money, credentials, external messaging, irreversible destructive ops, and live-traffic deploy.
+- Merge autonomously when `pre-live`; when `live`, prepare the GO/NO-GO and ask the founder before merging to the default branch — across as many PRs as the roadmap needs.
+- Deploy autonomously when `pre-live`, and from a founder-approved merge when `live`.
+- Honor the always-ask floor on top: money, credentials, external messaging, irreversible destructive ops, and merging to the default branch when `live`.
 
 Before any merge or deploy proceeds, Assembly must:
 
 - Check PR state, status checks, review decision, and reviewer-sub-agent findings.
 - Address actionable findings or report why they are not actionable.
 - Block the action when there are failing checks, unresolved blockers, or reviewer findings that materially affect correctness.
-- Escalate to the founder only when a blocker is actually a product/UX decision, or when traffic state is `live` and the action is deploy.
+- Escalate to the founder only when a blocker is actually a product/UX decision, or when traffic state is `live` and the action is merging to the default branch.
 
 ## Project Phase Requirements
 

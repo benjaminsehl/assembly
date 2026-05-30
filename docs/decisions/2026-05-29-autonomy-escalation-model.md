@@ -22,11 +22,11 @@ Escalation turns on two axes, not on phase ceremony.
 `docs/status.md` carries a `Traffic state:` field. Only the founder sets it; the agent never silently flips it. Absent or unknown means `pre-live`.
 
 - `pre-live`: with no open product/UX decision and no always-ask floor item, the agent runs the whole roadmap autonomously — open PRs, run reviewer sub-agents, merge to the default branch, and deploy — across as many PRs as the roadmap needs, with no per-action approval.
-- `live`: everything up to and including merge stays autonomous. The deploy-to-users moment becomes a founder GO/NO-GO; the agent prepares the decision (verification, residual risk, rollback) so the founder answers one product-impact question.
+- `live`: opening, reviewing, and readying PRs stay autonomous. Merging to the default branch becomes a founder GO/NO-GO; the agent prepares the decision (verification, residual risk, rollback) so the founder answers one product-impact question. Deploy follows the approved merge.
 
 ### Always-ask floor (any traffic state)
 
-Money movement, credential/secret use, external messaging on the founder's behalf, privacy-sensitive data, irreversible destructive operations (force-push to default branch, deleting branches with unmerged work, dropping tables, deleting production data), live-traffic deploy, and anything the target repo's local protocol marks ask-first.
+Money movement, credential/secret use, external messaging on the founder's behalf, privacy-sensitive data, irreversible destructive operations (force-push to default branch, deleting branches with unmerged work, dropping tables, deleting production data), merging to the default branch when `live`, and anything the target repo's local protocol marks ask-first.
 
 ## Founder Inputs
 
@@ -34,15 +34,15 @@ This model encodes three founder choices made on 2026-05-29:
 
 1. Traffic state is founder-declared in `docs/status.md` (the agent does not infer or auto-flip it).
 2. Pre-launch autonomy includes deploy, not just merge.
-3. Under live traffic, the founder re-enters only at the deploy-to-users moment; merging stays autonomous.
+3. Under live traffic, the founder re-enters at the merge-to-default-branch gate; deploy follows the approved merge. (This refines the initial "re-enter only at deploy" answer: because a project may auto-deploy on merge, merge is the point where a change becomes part of the live product, so the live gate sits at merge. A release branch may later move the gate again; until a project adopts one, merge to the default branch is the live gate.)
 
 ## Why This Extends Rather Than Reverses
 
-The prior model already had the right primitives — traffic-state tiering (in the migration gate), specialist reviewer fan-out, and a "ask in product-implication language" principle. This decision re-centers the model on those primitives instead of on PR-ceremony approvals. The safety floor is preserved in full; what changes is that engineering handoff (draft/ready/merge) and pre-live deploy are no longer founder interruptions, and the deploy gate is scoped to live traffic.
+The prior model already had the right primitives — traffic-state tiering (in the migration gate), specialist reviewer fan-out, and a "ask in product-implication language" principle. This decision re-centers the model on those primitives instead of on PR-ceremony approvals. The safety floor is preserved in full; what changes is that engineering handoff (draft/ready, plus merge and deploy when `pre-live`) is no longer a founder interruption, and the live gate sits at merge to the default branch.
 
 ## Implications
 
-- `ship` opens PRs, decides draft vs ready, runs reviewer sub-agents, merges, and deploys autonomously — asking the founder only at the live-traffic deploy gate.
+- `ship` opens PRs, decides draft vs ready, runs reviewer sub-agents, merges, and deploys autonomously — asking the founder only at the live-traffic merge gate (deploy follows the approved merge).
 - Reviewer sub-agents are the validation that previously came from founder PR review.
 - Scaffolded projects start `pre-live` and carry the `Traffic state:` field in `docs/status.md`.
 - The post-1.0 orchestrator inherits this traffic-state model: its "no autonomous merge/deploy" non-goal is scoped to live traffic, not pre-live.

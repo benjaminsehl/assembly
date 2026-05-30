@@ -46,7 +46,7 @@ Output blockers, important fixes, quick wins, and one next action.
 - Name rollback triggers and rollback procedure for live-traffic releases.
 - For GitHub-backed work, confirm PR state, CI/check status, and reviewer-sub-agent findings. If no PR exists, open one and decide draft vs ready as an engineering call — do not ask the founder.
 - Use product-impact framing for the PR description: what user capability ships, not what files changed.
-- Carry the decision to completion by traffic state: when `pre-live`, merge and deploy autonomously; when `live`, merge autonomously and ask the founder GO/NO-GO before deploying to users.
+- Carry the decision to completion by traffic state: when `pre-live`, merge and deploy autonomously; when `live`, ask the founder GO/NO-GO before merging to the default branch, then let deploy follow the approved merge.
 - Do not run retro. Ship is pre-release only.
 
 ## PR Readiness
@@ -84,10 +84,10 @@ Use this for opening, updating, promoting, and merging PRs. `build` pushes the b
 - Check whether a PR already exists for the topic branch before opening one.
 - Use the GitHub MCP `create_pull_request` (or `gh pr edit` in CLI environments) to open a PR when none exists, or to update an existing PR for the branch. Decide draft vs ready as an engineering call.
 - Write a descriptive PR body using product-impact framing: what user capability ships, not what files changed. Cover: why this PR exists, the principles behind the change, how the agent approached it, what changed, verification, risks, and follow-up.
-- Promote to ready and merge autonomously once verification passes, reviewer sub-agents are satisfied, and no open product/UX decision or always-ask floor item remains.
-- Read the `Traffic state:` field in `docs/status.md` before deploying. When `pre-live`, deploy autonomously and name the risk. When `live`, ask the founder GO/NO-GO before deploying to users.
+- Promote to ready autonomously once verification passes, reviewer sub-agents are satisfied, and no open product/UX decision remains.
+- Read the `Traffic state:` field in `docs/status.md` before merging. When `pre-live`, merge and deploy autonomously and name the risk. When `live`, ask the founder GO/NO-GO before merging to the default branch; deploy then follows the approved merge.
 - If GitHub handoff is blocked by missing auth, no writable remote, branch protection, network failure, or unavailable tooling, do not loop. Report the blocker, the completed local work, verification status, and the exact next command, credential, or access step needed.
-- Always-ask floor (any traffic state): the full floor in `references/agent-operating-protocol.md` is authoritative and applies in the handoff path too — including privacy-sensitive data, dropping tables or deleting production data, money movement, credential use, external messaging, and deploying to users when traffic state is `live`. In the GitHub path specifically, never force-push the default branch or delete branches with unmerged work without explicit founder direction.
+- Always-ask floor (any traffic state): the full floor in `references/agent-operating-protocol.md` is authoritative and applies in the handoff path too — including privacy-sensitive data, dropping tables or deleting production data, money movement, credential use, external messaging, and merging to the default branch when traffic state is `live`. In the GitHub path specifically, never force-push the default branch or delete branches with unmerged work without explicit founder direction.
 
 ## Post-Release Learning
 

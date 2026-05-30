@@ -35,10 +35,10 @@ Status: draft
 - [ ] `next` asks one concise question when multiple next actions are plausible.
 - [ ] `build` with a minimal prompt infers the next unambiguous build-track gate.
 - [ ] GitHub handoff creates or updates a descriptive PR, deciding draft vs ready as an engineering call.
-- [ ] Ready-for-review and merge proceed autonomously once reviewer sub-agents are satisfied, verification is green, and no open product/UX decision remains — no founder approval required.
-- [ ] Deploy proceeds autonomously when `Traffic state: pre-live`; when `live`, the agent prepares a GO/NO-GO and asks the founder before deploying to users.
+- [ ] Ready-for-review proceeds autonomously once reviewer sub-agents are satisfied, verification is green, and no open product/UX decision remains — no founder approval required.
+- [ ] Merge and deploy proceed autonomously when `Traffic state: pre-live`; when `live`, the agent prepares a GO/NO-GO and asks the founder before merging to the default branch, then deploy follows.
 - [ ] Product/UX decisions are escalated to the founder in product-implication language and pause progress until answered.
-- [ ] Always-ask floor is honored regardless of traffic state: money, credentials, external messaging, privacy-sensitive data, irreversible destructive ops, and live-traffic deploy.
+- [ ] Always-ask floor is honored regardless of traffic state: money, credentials, external messaging, privacy-sensitive data, irreversible destructive ops, and merging to the default branch when live.
 
 ## Proof Gate
 

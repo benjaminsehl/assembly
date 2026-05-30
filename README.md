@@ -140,16 +140,16 @@ Why this shape:
 5. Choose the matching lifecycle skill for the current phase.
 6. If prerequisites are missing, warn once and recommend the right double-back skill.
 7. If the user insists, proceed while naming the skipped gate and risk unless a hard safety boundary applies.
-8. For material changes in GitHub-backed repos, open a PR, run reviewer sub-agents and `code-simplify`, then promote to ready and merge autonomously per the traffic state — escalating only product/UX decisions and the live-traffic deploy gate.
+8. For material changes in GitHub-backed repos, open a PR, run reviewer sub-agents and `code-simplify`, then promote to ready autonomously and merge per the traffic state — escalating only product/UX decisions and the live-traffic merge gate.
 
 ## Autonomy Model
 
 Assembly decides what to escalate on two axes, not on phase ceremony:
 
 - **Decision type.** Product and UX decisions — what gets built and why, user-facing behavior, copy, flow, scope cuts that change the experience, naming, pricing — always go to the founder in product-implication language. Engineering decisions run autonomously and are validated by reviewer sub-agents (`code-reviewer`, `security-auditor`, `test-engineer`), not by founder approval. Whether to open a draft PR, promote it to ready, or merge an engineering-only change is an engineering call, not an interruption.
-- **Traffic state.** `docs/status.md` carries a founder-set `Traffic state:` field (default `pre-live`). When `pre-live`, the agent runs the whole roadmap — multiple PRs, merges, and deploys — with no per-action check-in, as long as no product/UX decision is open. When `live`, everything up to and including merge stays autonomous and the deploy-to-users moment becomes a founder GO/NO-GO.
+- **Traffic state.** `docs/status.md` carries a founder-set `Traffic state:` field (default `pre-live`). When `pre-live`, the agent runs the whole roadmap — multiple PRs, merges, and deploys — with no per-action check-in, as long as no product/UX decision is open. When `live`, opening PRs and review stay autonomous and merging to the default branch becomes a founder GO/NO-GO; deploy then follows the approved merge. (A release branch can later move this gate; until then, merge to the default branch is the live gate.)
 
-The **always-ask floor** holds in any traffic state: money movement, credential use, external messaging, privacy-sensitive data, irreversible destructive operations, and live-traffic deploy.
+The **always-ask floor** holds in any traffic state: money movement, credential use, external messaging, privacy-sensitive data, irreversible destructive operations, and merging to the default branch when live.
 
 ## GitHub Handoff
 
@@ -158,8 +158,8 @@ Assembly expects agents to leave real work reviewable, and to carry it forward w
 - `build` commits focused changes on a topic branch and pushes.
 - `ship` opens or updates a descriptive PR (with `gh` or the GitHub MCP tools), deciding draft vs ready as an engineering call.
 - Explain why the PR exists, the first principles behind the change, and how the agent approached it.
-- Run `review` (reviewer sub-agent fan-out) and `code-simplify`, then promote to ready and merge autonomously once verification is green and reviewers are satisfied.
-- Deploy autonomously when `pre-live`; when `live`, ask the founder GO/NO-GO before deploying to users.
+- Run `review` (reviewer sub-agent fan-out) and `code-simplify`, then promote to ready autonomously once verification is green and reviewers are satisfied.
+- Merge and deploy autonomously when `pre-live`; when `live`, ask the founder GO/NO-GO before merging to the default branch, then let deploy follow the approved merge.
 - When addressing PR comments, inspect review threads, implement traceable fixes, push updates, and reply/resolve threads as part of the engineering loop — escalating only threads that raise a product/UX decision.
 - Honor the always-ask floor regardless of traffic state.
 

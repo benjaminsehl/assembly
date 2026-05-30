@@ -40,7 +40,7 @@ Assembly optimizes for the founder's attention. Two axes decide when to act auto
 `docs/status.md` carries a `Traffic state:` field. Only the founder sets it; the agent never silently flips it. Absent or unknown means `pre-live`.
 
 - `pre-live` — no real users, no production traffic. When no product/UX decision is open and no always-ask floor item is involved, the agent runs the whole roadmap autonomously: write code, open PRs (its own call on draft vs ready), run reviewer sub-agents, merge to the default branch, and deploy — across as many PRs as the roadmap needs, without per-action check-ins.
-- `live` — real users and real traffic. Everything up to and including merge stays autonomous. The deploy-to-users moment becomes a founder GO/NO-GO: the agent prepares the release decision (verification, risk, rollback) and asks at the deploy gate only.
+- `live` — real users and real traffic. Everything up to merge stays autonomous (write code, open PRs, run reviewer sub-agents). Merging to the default branch becomes a founder GO/NO-GO: the agent prepares the release decision (verification, risk, rollback) and asks before merging; deploy then follows the approved merge.
 
 ### Always-ask floor (any traffic state)
 
@@ -51,7 +51,7 @@ These never run autonomously regardless of traffic state or product-gate clarity
 - External messaging or communication on the founder's behalf.
 - Privacy-sensitive data handling.
 - Irreversible destructive operations: force-push to the default branch, deleting branches with unmerged work, dropping tables, deleting production data.
-- Deploying to users when traffic state is `live`.
+- Merging to the default branch when traffic state is `live`.
 - Anything the target repo's local protocol explicitly marks ask-first.
 
 ### What is no longer an interruption
@@ -59,8 +59,8 @@ These never run autonomously regardless of traffic state or product-gate clarity
 Do not stop to ask about these — they are engineering calls the agent owns:
 
 - Opening a draft PR, choosing draft vs ready, or promoting a PR to ready.
-- Merging engineering-only PRs (always when `pre-live`; up to merge when `live`).
-- Deploying when `pre-live`.
+- Merging engineering-only PRs when `pre-live`; opening, reviewing, and readying them (but not merging) when `live`.
+- Deploying when `pre-live`, and deploying from a founder-approved merge when `live`.
 - Per-action engineering approvals or phase-ceremony confirmations.
 
 ## Phase Prerequisites
